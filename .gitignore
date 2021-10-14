@@ -1,3 +1,9 @@
+# Custom ignores
+
+# commitizen
+.cz.yaml
+.pre-commit-config.yaml
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
