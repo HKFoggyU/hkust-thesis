@@ -1,0 +1,48 @@
+\documentclass{article}
+%\documentclass[12pt, convert={density=300, imagemagick, convertexe=convert}, crop=true, preview=false]{standalone}
+
+\usepackage{geometry,graphicx,svg}
+\usepackage{fontspec}
+%\setmainfont{TeX Gyre Termes}
+\setmonofont{Ubuntu Mono}
+
+%\geometry{papersize={200mm, 100mm}}
+\geometry{paperwidth=5in, paperheight=2.5in, top=0in, bottom=0in, left=0in, right=0in}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\begin{center}
+
+\begin{minipage}[c][2.5in][c]{5.0in}
+\begin{center} 
+
+\begin{minipage}[c][2.3in][c]{1.4in}
+ \raggedright
+ \includesvg[width=\linewidth]{redbird-raw}
+\end{minipage}\hspace{-0.5in}%
+%
+\begin{minipage}[c][2.3in][c]{3.8in}
+ \vspace{0.2in}
+ %\hspace{-1.0in}
+ %\centering
+ \begin{flushright}
+ \begin{minipage}[c][1.2in][c]{3.6in}
+  \input{logo-text}
+ \end{minipage}
+
+ %\vspace{0.1in}
+ %\hspace{-1.0in}
+ \begin{minipage}[c][0.6in][c]{3.4in}
+  \hfill\includesvg[width=0.2\linewidth]{qrcode2github}
+ \end{minipage}
+ \end{flushright}
+\end{minipage}
+
+\end{center}
+
+\end{minipage}
+
+\end{center}
+
+\end{document}
