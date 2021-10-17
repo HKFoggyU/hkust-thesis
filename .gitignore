@@ -1,5 +1,7 @@
 # Custom ignores
 
+temp/
+
 # commitizen
 .cz.yaml
 .pre-commit-config.yaml
