@@ -10,8 +10,9 @@
 *.tif*
 *.bmp
 *.raw
-*.ps
+*.psd
 *.ai
+svg-inkscape/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

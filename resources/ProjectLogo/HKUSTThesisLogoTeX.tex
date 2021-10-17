@@ -1,10 +1,10 @@
 \documentclass{article}
-%\documentclass[12pt, convert={density=300, imagemagick, convertexe=convert}, crop=true, preview=false]{standalone}
 
-\usepackage{geometry,graphicx,svg}
+\usepackage{geometry,graphicx,svg,xcolor}
 \usepackage{fontspec}
 %\setmainfont{TeX Gyre Termes}
-\setmonofont{Ubuntu Mono}
+%\setmonofont{Ubuntu Mono}
+\setmonofont[Path = /usr/share/fonts/nerd-fonts/]{Ubuntu Mono Nerd Font Complete Mono.ttf}
 
 %\geometry{papersize={200mm, 100mm}}
 \geometry{paperwidth=5in, paperheight=2.5in, top=0in, bottom=0in, left=0in, right=0in}
@@ -27,16 +27,17 @@
  %\hspace{-1.0in}
  %\centering
  \begin{flushright}
- \begin{minipage}[c][1.2in][c]{3.6in}
-  \input{logo-text}
- \end{minipage}
+  \begin{minipage}[c][1.2in][c]{3.6in}
+   \input{logo-text}
+  \end{minipage}
+ \end{flushright}
 
- %\vspace{0.1in}
+ \vspace{-0.2in}
  %\hspace{-1.0in}
- \begin{minipage}[c][0.6in][c]{3.4in}
+ \centering
+ \begin{minipage}[c][0.6in][c]{3.6in}
   \hfill\includesvg[width=0.2\linewidth]{qrcode2github}
  \end{minipage}
- \end{flushright}
 \end{minipage}
 
 \end{center}

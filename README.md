@@ -1,4 +1,4 @@
 # hkust-thesis
-HKUST LaTeX Thesis Template
+HKUST Thesis Template --- LaTeX3 implementation
 
 Under construction...
