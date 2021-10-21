@@ -1,0 +1,1288 @@
+% \iffalse meta-comment
+% !TeX program  = XeLaTeX
+% !TeX encoding = UTF-8
+%
+% Copyright (C) 2021 
+% by <HKFoggyU> @ GitHub
+% 
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    https://www.latex-project.org/lppl.txt
+%
+% -----------------------------------------------------------------------
+%
+% The development version of the template can be found at
+%
+%    https://github.com/HKFoggyU/hkust-thesis
+%
+% for those people who are interested.
+%
+%<*internal>
+\iffalse
+%</internal>
+%
+%<*internal>
+\fi
+\begingroup
+  \def\NameOfLaTeXe{LaTeX2e}
+\expandafter\endgroup\ifx\NameOfLaTeXe\fmtname\else
+\csname fi\endcsname
+%</internal>
+%
+%<*install>
+\input l3docstrip.tex
+\keepsilent
+\askforoverwritefalse
+
+\preamble
+
+Copyright (C) 2021 
+by <HKFoggyU> @ GitHub
+
+This file may be distributed and/or modified under the conditions of
+the LaTeX Project Public License, either version 1.3 of this license
+or (at your option) any later version.  The latest version of this
+license is in:
+
+   http://www.latex-project.org/lppl.txt
+
+and version 1.3 or later is part of all distributions of LaTeX version
+2005/12/01 or later.
+
+To produce the documentation run the original source files ending with `.dtx'
+through XeTeX.
+    
+\endpreamble
+
+\generate{
+  \usedir{tex/latex/hkustthesis}
+    \file{\jobname.cls}        {\from{\jobname.dtx}{class}}
+%</install>
+%<*internal>
+  \usedir{source/latex/hkustthesis}
+    \file{\jobname.ins}        {\from{\jobname.dtx}{install}}
+%</internal>
+%<*install>
+}
+
+\obeyspaces
+\Msg{**************************************************************}
+\Msg{*                                                            *}
+\Msg{* To finish the installation you have to move the following  *}
+\Msg{* files into a directory searched by TeX:                    *}
+\Msg{*                                                            *}
+\Msg{* The recommended directory is TDS:tex/latex/hkustthesis     *}
+\Msg{*                                                            *}
+\Msg{*     hkustthesis.cls                                        *}
+\Msg{*     hkustthesis.ins                                        *}
+\Msg{*                                                            *}
+\Msg{* To produce the documentation, run the file hkustthesis.dtx *}
+\Msg{* through XeLaTeX.                                           *}
+\Msg{*                                                            *}
+\Msg{* Happy TeXing!                                              *}
+\Msg{*                                                            *}
+\Msg{**************************************************************}
+
+\endbatchfile
+%</install>
+%
+%<*internal>
+\fi
+%</internal>
+%
+%<class>\NeedsTeXFormat{LaTeX2e}
+%<class>\RequirePackage{expl3}
+%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.1 2021-10-21 00:00:00 +0800  HKFoggyU$
+%<class>  { Thesis template for HKUST }
+%<class>\ProvidesExplClass{hkustthesis}
+%<class>{\ExplFileDate}{\ExplFileVersion}{\ExplFileDescription}
+%
+%<*driver>
+\ProvidesFile{hkustthesis.dtx}
+\documentclass[12pt]{ctxdoc}
+\usepackage{listings,xcolor,tabularray}
+\setlist[1]{labelindent=0.5em}
+\UseTblrLibrary{booktabs,siunitx,diagbox}
+\DefTblrTemplate{caption-tag}{default}{Table~\hspace{0.25em}\thetable}
+\SetTblrStyle{caption-tag}{font=\bfseries}
+\DefTblrTemplate{caption-sep}{default}{\quad}
+\definecolor{hkustblue}{RGB}{0, 51, 102}
+\definecolor{hkustgold}{RGB}{153, 102, 0}
+\definecolor{hkustred}{RGB}{237, 27, 47}
+\definecolor{hkustgray}{RGB}{204, 204, 204}
+\definecolor{hkustviolet}{RGB}{124, 35, 72}
+\definecolor{hkustyellow}{RGB}{255, 212, 0}
+\begin{document}
+  \DocInput{hkustthesis.dtx}  
+  %\PrintChanges
+  %\PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \title{\color{hkustblue}{The \textsc{HkustThesis} class\\ A \hologo{LaTeX}\textcolor{hkustred}{3} template}}
+% 
+% \author{HKFoggyU
+% \thanks{GitHub: \href{HKFoggyU}{https://github.com/HKFoggyU/hkust-thesis/}}}
+%
+% \date{v0.1 \\ Released 2021-10-21}
+%
+% \changes{v0.1}{2021/10/21}{Start development based on \textsc{NjuThesis} class}
+%
+% \maketitle
+%
+% \def\abstractname{Abstract}
+% \begin{abstract}
+% The \textsc{HkustThesis} class is intended for 
+% typesetting dissertations with \hologo{LaTeX} for MPhil and PhD students in
+% The Hong Kong University of Science and Technology (HKUST).
+% \end{abstract}
+%
+% \vspace{2cm}
+% \def\abstractname{Statement}
+% \begin{abstract}
+% This template is not officially related with HKUST.
+% This template takes absolutely no responsibilty for any inconsistencies compared with the requirements by HKUST or department.
+%
+% This template is under development. Bugs or inconsistencies may happen. Issues and PRs are welcomed.
+% \end{abstract}
+%
+% \clearpage
+%
+% \setcounter{tocdepth}{4}
+% \tableofcontents
+% \clearpage
+%
+% \EnableDocumentation
+%^^A \DisableDocumentation
+% 
+% \begin{documentation}
+%
+% \section{使用方法}
+%
+% \subsection{File tree}
+%
+% \cls{hkustthesis} should have the following file tree:
+%
+% \begin{ctexexam}
+%   \documentclass[<options>]{hkustthesis}
+%   \hkustsetup { info = {<info>} }
+%   \graphicspath{{figure/}}
+%   \addbibresource{hkustthesis.bib}
+%   \begin{document}
+%   \maketitle
+%   <abstract>
+%   <preface>
+%   \tableofcontents
+%   \listoffigures
+%   \listoftables
+%   \mainmatter
+%   <text>
+%   \printbibliography[heading=bibintoc,title=References]
+%   <acknowledgements>
+%   \appendix
+%   <appendix>
+%   \end{document}
+% \end{ctexexam}
+%
+% \end{documentation}
+%
+% \newpage
+%
+% \begin{implementation}
+%
+% \section{Implementation}
+%
+% |@@| 在 \pkg{l3docstrip} 中表示名空间，在删除注释生成格式文件时会被等号后的字段替换，譬如在本模板\pkg{hkustthesis}中 |@@=hkust|。
+% 尖括号包裹的|<*class>||</class>|用来指定某段代码属于哪个文件。
+%
+%    \begin{macrocode}
+%<@@=hkust>
+%<*class>
+%    \end{macrocode}
+%
+% \subsection{定义常量}
+%
+% \begin{macro}{\@@_define_name:nn}
+% 用来定义默认名称的辅助函数。
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_define_name:nn #1#2
+  { \tl_const:cn { c_@@_name_ #1 _tl } {#2} }
+%    \end{macrocode}
+% \end{macro}
+%
+% 默认名称。注意空格是忽略掉的。
+%    \begin{macrocode}
+\clist_map_inline:nn
+  {
+    { pdf_creator } { LaTeX~with~hkustthesis~class },
+  }
+  { \@@_define_name:nn #1 }
+\clist_map_inline:nn
+  {
+    { keywords } { Keywords:~ },
+  }
+  { \@@_define_name:nn #1 }
+%    \end{macrocode}
+%
+% \subsection{模板选项}
+%
+% 用于配置模板选项的宏包。
+%    \begin{macrocode}
+\RequirePackage{xparse,xtemplate,l3keys2e}
+%    \end{macrocode}
+%
+% \begin{variable}{\l_@@_info_degree_tl,\l_@@_info_type_tl}
+% 用于存储学位名称的变量，注意宏的命名，\verb|l|代表局部变量，\verb|g|代表全局变量
+%    \begin{macrocode}
+\tl_new:N \l_@@_info_degree_tl
+\tl_new:N \l_@@_info_type_tl
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}{\g_@@_latin_fontset_tl}
+% 用于存储所使用字体名称的全局变量
+%    \begin{macrocode}
+\tl_new:N \g_@@_latin_fontset_tl
+%    \end{macrocode}
+% \end{variable}
+%
+% 学位信息的设置
+%    \begin{macrocode}
+\keys_define:nn { hkust }
+{
+%    \end{macrocode}
+%
+% \begin{macro}{customlatinfont}
+% 定义字体选项
+%    \begin{macrocode}
+  customlatinfont   .choices:nn   =
+  { gyre, macos, windows, none }
+  { \tl_set_eq:NN \g_@@_latin_fontset_tl \l_keys_choice_tl },  
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ProcessKeysOptions}
+% 在定义完全部设置以后从tex文件导言区输入参数
+%    \begin{macrocode}
+\ProcessKeysOptions { hkust }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Personal Information}
+% Input author's personal information
+%    \begin{macrocode}
+\keys_define:nn { hkust }
+{
+  info.meta:nn = { hkust / info } { #1 }
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\keys_define:nn { hkust / info }
+{
+%    \end{macrocode}
+%
+% \begin{macro}{info/degree}
+% Degree: <PhD> or MPhil
+%    \begin{macrocode}
+  degree.tl_set:N = \l_@@_info_degree_tl,
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{info/type}
+% Thesis Type: <thesis> or design
+%    \begin{macrocode}
+  type.tl_set:N = \l_@@_info_type_tl,
+%    \end{macrocode}
+% \end{macro}
+%% \begin{macro}{info/title}
+% Thesis title
+%    \begin{macrocode}
+  title             .tl_set:N = \l_@@_info_title_tl,
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{info/keywords}
+% Keywords
+%    \begin{macrocode}
+keywords         .clist_set:N = \l_@@_info_keywords_clist,
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{info/grade,info/student-id,info/author}
+% 年级、学号、姓名
+%    \begin{macrocode}
+  grade             .tl_set:N = \l_@@_info_grade_tl,
+  student-id        .tl_set:N = \l_@@_info_id_tl,
+  author            .tl_set:N = \l_@@_info_author_tl,
+  city              .tl_set:N = \l_@@_info_city_tl,
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{info/school,info/department,info/major,info/field}
+% 院系、专业、方向。
+%    \begin{macrocode}
+  school            .tl_set:N = \l_@@_info_school_tl,
+  department        .tl_set:N = \l_@@_info_department_tl,
+  major             .tl_set:N = \l_@@_major_tl,
+  field             .tl_set:N = \l_@@_field_tl,
+%    \end{macrocode}
+% \end{macro}
+%  
+% \begin{macro}{info/supervisor,info/supervisor-title}
+% Supervisor
+%    \begin{macrocode}
+  supervisor        .tl_set:N = \l_@@_info_supervisor_tl,
+  supervisor-title  .tl_set:N = \l_@@_info_supervisor_title_tl,
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{info/co-supervisor,info/co-supervisor-title}
+% Co-Supervisor
+%    \begin{macrocode}
+  co-supervisor      .tl_set:N = \l_@@_info_co_supervisor_tl,
+  co-supervisor-title.tl_set:N = \l_@@_info_co_supervisor_title_tl,
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{info/submit-date,info/submit-date-long}
+  % 提交日期
+%    \begin{macrocode}
+  submit-date       .tl_set:N = \l_@@_submit_date_tl,
+  submit-date-long  .tl_set:N = \l_@@_submit_date_long_tl,
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{info/defend-date,info/chairman,info/depthead,info/reviewer}
+% 答辩 TODO: 用clist处理答辩委员会成员名称
+%    \begin{macrocode}
+  defend-date       .tl_set:N = \l_@@_defend_date_tl,
+  chairman          .tl_set:N = \l_@@_info_chairman_tl,
+  depthead          .tl_set:N = \l_@@_info_depthead_tl,
+  reviewer       .clist_set:N = \l_@@_info_reviewer_clist,
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\hkustsetup}
+% 定义用于设置个人信息的命令
+%    \begin{macrocode}
+\NewDocumentCommand \hkustsetup { m }
+{ \keys_set:nn { hkust } { #1 } }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{载入文档类}
+% 
+% 使用\pkg{book}文档类。
+%    \begin{macrocode}
+\LoadClass[a4paper,twoside,UTF8,
+%    \end{macrocode}
+% 关于行距，\hologo{LaTeX}默认1.2行距，word默认行距是1.3，要求1.5倍word行距，故
+% \[ 1.5\times\frac{1.3}{1.2} = 1.625\]
+% TODO: For HKUST, the "line space" is set to 1.0 for abstract, footnote and quotations.
+%    \begin{macrocode}
+%  linespread=1.625,
+  fontset=none,12pt]{book}
+%    \end{macrocode}
+%
+% \subsection{载入宏包}
+%
+% 载入各种宏包。
+% \pkg{emptypage}用于清除空白页的页码。
+%    \begin{macrocode}
+\RequirePackage
+{
+  geometry,
+  caption,
+  floatrow,
+  setspace,
+  lastpage,
+  emptypage,
+  fancyhdr,
+}
+\RequirePackage[explicit]{titlesec} % For typesetting titles of chap/sec/...
+\RequirePackage[titles]{tocloft}
+\RequirePackage[hyphens]{url} % generate better linebreaks in the url
+%    \end{macrocode}
+%
+% 用于特定学科的包。
+%    \begin{macrocode}
+\RequirePackage{siunitx}            % 用于书写单位符号
+\RequirePackage[version=4]{mhchem}  % 用于绘制分子式
+\RequirePackage{physics}            % Physics package
+\RequirePackage{braket}             % for Dirac notation
+%    \end{macrocode}
+%
+% 用于生成可以被插入书签的LaTeX logo
+% TODO: 使用hologo创建|latex{}|命令
+%    \begin{macrocode}
+\RequirePackage{hologo} 
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+% \RequirePackage{needspace} % prevent page break after sectioning
+% \RequirePackage{xspace} % Better print trailing whitespace
+%    \end{macrocode}
+%
+% \pkg{ulem} for underline with "\uline"
+%    \begin{macrocode}
+\RequirePackage{ulem}
+%    \end{macrocode}
+% \pkg{amsmath}必须在\pkg{unicode-math}前加载。
+% \pkg{unicode-math}指定了\hologo{XeTeX}和\hologo{LuaTeX}下所使用的数学字体。
+% 用于配置数学环境的\pkg{mathtools}会与\pkg{unicode-math}发生冲突，此处手动消除其警告。
+%    \begin{macrocode}
+\RequirePackage{amsmath,amsthm,mathtools,thmtools}
+\RequirePackage[
+    warnings-off={
+        mathtools-colon,
+        mathtools-overbracket}
+        ]{unicode-math}
+%    \end{macrocode}
+%
+% 配置图片、表格、代码、列表环境
+%    \begin{macrocode}
+\RequirePackage{graphicx,subcaption,wrapfig,tikz}
+\DeclareGraphicsExtensions{.pdf,.eps,.jpg,.png}
+\RequirePackage{booktabs,multirow,multicol,listings,enumitem}
+%    \end{macrocode}
+%
+% 必须以该顺序加载以下两个关于引用的包。
+%    \begin{macrocode}
+\RequirePackage[
+  hidelinks,
+  bookmarksnumbered=true,
+  psdextra=true,
+  unicode=true]{hyperref}
+\RequirePackage[capitalise,nameinlink,noabbrev]{cleveref}
+%    \end{macrocode}
+%
+% 生成 "Lorem ipsum"
+%    \begin{macrocode}
+\RequirePackage{blindtext} 
+%    \end{macrocode}
+%
+% \subsection{字体设置}
+%
+%    \begin{macrocode}
+\RequirePackage{fontspec} 
+%    \end{macrocode}
+%
+% \subsubsection{操作系统检测}
+%
+% \begin{variable}{\g_@@_load_system_fontset_bool}
+% 定义用于判断是否需要载入系统预装字体的变量。
+%    \begin{macrocode}
+\bool_new:N \g_@@_load_system_fontset_bool
+%    \end{macrocode}
+% \end{variable}
+%
+% 判断用户是否自定义了中英文字体。如果其中任意一种未被定义，
+% 则使用系统预装字体覆盖字体选项。
+%    \begin{macrocode}
+\tl_if_empty:NTF \g_@@_latin_fontset_tl
+  { \bool_gset_true:N \g_@@_load_system_fontset_bool }  
+  { }
+%    \end{macrocode}
+%
+% 进行系统检测。
+% 检测 Windows 的命令由\pkg{l3kernal}提供，
+% 检测 macOS 的命令 modified from \pkg{ctex}，
+% 以特定字体判断 macOS 系统。
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_if_platform_macos:TF
+  { \file_if_exist:nTF { /System/Library/Fonts/Menlo.ttc } }
+%    \end{macrocode}
+% 这两种情况外的系统被判断为 Linux，一律使用自由字体。
+%    \begin{macrocode}
+\bool_if:NT \g_@@_load_system_fontset_bool
+{
+  \sys_if_platform_windows:TF
+  {
+    \tl_set:Nn \g_@@_latin_fontset_tl { windows }
+  }
+  {
+    \@@_if_platform_macos:TF
+    {
+      \tl_set:Nn \g_@@_latin_fontset_tl { macos }
+    }
+    {
+      \tl_set:Nn \g_@@_latin_fontset_tl { gyre }
+    }
+  }
+}
+%    \end{macrocode}
+%
+% \subsubsection{定义英文字库}
+%
+% 接下来逐个定义所需要使用的字库。
+%
+% \begin{macro}{\@@_load_latin_font_windows:}
+% Windows 西文字体
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_load_latin_font_windows:
+{
+  \setmainfont{Times~New~Roman}
+  \setsansfont{Arial}
+  \setmonofont{Courier~New}[Scale=MatchLowercase]
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_load_latin_font_macos:}
+% macOS 西文字体。
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_load_latin_font_macos:
+{
+  \setmainfont{Times~New~Roman}
+  \setsansfont{Arial}
+  \setmonofont{Menlo}[Scale=MatchLowercase]
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_load_latin_font_gyre:}
+% 开源的 gyre 西文字体。
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_load_latin_font_gyre:
+{
+  \setmainfont{texgyretermes}[
+    Extension=.otf,
+    UprightFont=*-regular,
+    BoldFont=*-bold,
+    ItalicFont=*-italic,
+    BoldItalicFont=*-bolditalic]
+  \setsansfont{texgyreheros}[
+    Extension=.otf,
+    UprightFont=*-regular,
+    BoldFont=*-bold,
+    ItalicFont=*-italic,
+    BoldItalicFont=*-bolditalic]
+  \setmonofont{texgyrecursor}[
+    Extension=.otf,
+    UprightFont=*-regular,
+    BoldFont=*-bold,
+    ItalicFont=*-italic,
+    BoldItalicFont=*-bolditalic,
+    Scale=MatchLowercase,
+    Ligatures=CommonOff]
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsubsection{载入指定字库}
+%
+% 载入字体命令。
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_load_font:
+{
+  \use:c { @@_load_latin_font_ \g_@@_latin_fontset_tl : }
+}
+%    \end{macrocode}
+%
+% 载入设置的字体。
+%    \begin{macrocode}
+\@@_load_font:
+%    \end{macrocode}
+%
+% 设置数学字体 (XITS, 或者 \href{https://www.stixfonts.org}{STIX}, 与 Times New Roman 最为相近)
+%    \begin{macrocode}
+% \setmathfont{STIXTwoMath-Regular}[Extension = .otf]
+\setmathfont{XITSMath-Regular}[
+  BoldFont = XITSMath-Bold,
+  Extension = .otf]
+\setmathfont{latinmodern-math.otf}[range={cal,bb,frak}]
+%    \end{macrocode}
+%
+% \subsection{页面布局}
+%
+% \subsubsection{页边距}
+%
+% 使用\pkg{geometry}设置页边距。
+%    \begin{macrocode}
+\geometry{
+  vmargin    = 2.5 cm,
+  hmargin    = 2.5 cm,
+}
+%    \end{macrocode}
+%
+% \subsubsection{页眉页脚}
+% 
+%    \begin{macrocode}
+\fancypagestyle{hkustplain}{
+   \fancyhead{}               
+   \fancyfoot[C]{\thepage}
+}
+%    \end{macrocode}
+%
+% TODO: 研究生页眉页脚 
+%
+% 载入页眉页脚设置。此处\tn{flushbottom}是为了防止目录页出现underfull \tn{vbox}信息。
+%    \begin{macrocode}
+\tl_set:Nn \headrulewidth {0pt}
+\tl_set:Nn \footrulewidth {0pt}
+\AtBeginDocument{\pagestyle{hkustplain}\flushbottom}
+%    \end{macrocode}
+%
+% \subsection{章节标题格式}
+% 
+%    \begin{macrocode}
+\titleformat
+  {\chapter}
+  [display]
+  {\centering\fontsize{20pt}{24pt}\bfseries\selectfont}
+  {\MakeUppercase{\chaptertitlename}~\thechapter}
+  {10pt}
+  {\MakeUppercase{#1}}
+%    \end{macrocode}
+%
+% \subsection{目录格式}
+% 使用\pkg{tocloft}定制目录文字格式。
+%    \begin{macrocode}
+\cftsetpnumwidth{2em}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftchapdotsep}}
+\renewcommand{\cftchapdotsep}{\cftdotsep}
+\renewcommand{\cftchapfont}{\fontsize{12pt}{14pt}\bf\rmfamily\selectfont}
+\setlength{\cftsecindent}{2em}
+\setlength{\cftsubsecindent}{52pt}
+\setlength{\cftsubsecnumwidth}{2em}
+%    \end{macrocode}
+%
+% \begin{macro}{\tableofcontents}
+  % 重定义目录命令，修改标题格式并插入书签。
+%    \begin{macrocode}
+\renewcommand\tableofcontents{%
+  \cleardoublepage
+  \raggedbottom
+  \chapter*{\MakeUppercase{Table~of~Contents}}%
+  \addcontentsline{toc}{chapter}{Table~of~Contents}
+  \@starttoc{toc}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\listoffigures}
+% 重定义插图目录命令，修改标题格式并插入书签。
+%    \begin{macrocode}
+\renewcommand\listoffigures{%
+  \cleardoublepage
+  \chapter*{\MakeUppercase{List~of~Figures}}%
+  \addcontentsline{toc}{chapter}{List~of~Figures}
+  \@starttoc{lof}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\listoftables}
+% 重定义表格目录命令，修改标题格式并插入书签。
+%    \begin{macrocode}
+\renewcommand\listoftables{%
+  \cleardoublepage
+  \begingroup
+  \chapter*{\MakeUppercase{List~of~Tables}}%
+  \addcontentsline{toc}{chapter}{List~of~Tables}
+  \@starttoc{lot}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{前言致谢}
+% 
+% \begin{environment}{preface}
+% 单独制作的前言页。
+%    \begin{macrocode}
+\NewDocumentEnvironment{preface}{}
+{%
+  \chapter*{Preface}
+  \addcontentsline{toc}{chapter}{Preface}
+}{\cleardoublepage}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{environment}{acknowledgements}
+% 单独制作的致谢页。
+%    \begin{macrocode}
+\NewDocumentEnvironment{acknowledgements}{}
+{%
+  \chapter*{Acknowledgements}
+  \addcontentsline{toc}{chapter}{Acknowledgements}
+}{\cleardoublepage}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{macro}{\paperlist}
+% 发表文章目录与合作文章目录。
+%    \begin{macrocode}
+\NewDocumentCommand\paperlist { t* m }
+{  
+  \begin{refsection} 
+    \nocite{#2}
+    \IfBooleanTF {#1}
+    { \printbibliography[heading=subbibliography,title=Conference~Publications] }
+    { \printbibliography[heading=subbibliography,title=Journal~Publications] }
+  \end{refsection}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{参考文献}
+% 
+% biblatex设置
+%    \begin{macrocode}
+\RequirePackage[
+    style=ieee,
+    %style=numeric-comp,
+    %citestyle=authortitle-icomp,
+    % citestyle=numeric-comp,
+    %bibstyle=authoryear,
+    % bibstyle=numeric,
+    sorting=none,
+    %sorting=nyt,
+    %sortcites=true,
+    %autocite=footnote,
+    backend=biber, % Compile the bibliography with biber
+    hyperref=true,
+    backref=false,
+    citecounter=true,
+    pagetracker=true,
+    citetracker=true,
+    ibidtracker=context,
+    autopunct=true,
+    autocite=plain,
+    % gbpub=false,         % Uncomment if you do NOT want '[S.l. : s.n.]' 
+                           % in reference entries, GitHub Issue (#47)
+    % gbnamefmt=lowercase, % Uncomment if you do NOT want uppercase author 
+                           % names in reference entries, GitHub Issue (#23)
+]{biblatex}
+%    \end{macrocode}
+%
+% 忽略不需要的文献信息。
+%    \begin{macrocode}
+\AtEveryBibitem{
+    \clearfield{abstract}
+    \clearfield{issn}
+    \clearfield{isbn}
+    \clearfield{archivePrefix}
+    \clearfield{arxivId}
+    \clearfield{pmid}
+    \clearfield{eprint}
+    \ifentrytype{online}{}{\ifentrytype{misc}{}{\clearfield{url}}}
+    % \ifentrytype{book}{\clearfield{doi}}{}
+}
+%    \end{macrocode}
+%
+% \subsection{引用}
+% 
+% 修改标签名称。默认在名称后面添加空格，删除公式编号的括号
+%    \begin{macrocode}
+\crefdefaultlabelformat{#2#1#3\,}
+
+\crefname{figure}{图}{图}
+\crefname{table}{表}{表}
+% \crefname{equation}{公式}{公式}
+\crefformat{equation}{公式~#2#1#3~}
+
+\crefformat{chapter}{第#2#1#3章}
+\crefformat{section}{第~#2#1#3~节}
+\crefformat{subsection}{第~#2#1#3~小节}
+\crefformat{subsubsection}{第~#2#1#3~小节}
+\crefname{appendix}{附录}{附录}
+
+% \crefname{definition}{定义}{定义}
+% \crefname{axiom}{公理}{公理}
+% \crefname{property}{性质}{性质}
+% \crefname{proposition}{命题}{命题}
+% \crefname{lemma}{引理}{引理}
+% \crefname{corollary}{推论}{推论}
+% \crefname{remark}{注解}{注解}
+% \crefname{condition}{条件}{条件}
+% \crefname{conclusion}{结论}{结论}
+% \crefname{assumption}{假设}{假设}
+%    \end{macrocode}
+%
+% CHANGELOG: Get rid of all ctex packages
+% \pkg{hyperref} 
+%    \begin{macrocode}
+\cs_new_protected:Npx \@@_gadd_ltxhook:nn #1
+  { \hook_gput_code:nnn {#1} { \c_novalue_tl } }
+\cs_new_protected:Npn \@@_at_end_preamble:n
+  { \@@_gadd_ltxhook:nn { begindocument/before } }
+\@@_at_end_preamble:n
+{
+  \hypersetup
+    {
+      pdftitle    = \l_@@_info_title_tl,
+      pdfauthor   = \l_@@_info_author_tl,
+      pdfkeywords = \l_@@_info_keywords_clist,
+      pdfcreator  = \c_@@_name_pdf_creator_tl,
+      pdfsubject  = to~her,
+      pdfproducer = love
+    }
+}
+%    \end{macrocode}
+%
+% \subsection{图表浮动体}
+% 
+% \subsubsection{图片表格}
+% 
+% 图表位置调整
+%    \begin{macrocode}
+\floatsetup[figure]{ % Captions for figures
+    capposition=bottom,%
+    margins=centering,%
+    floatwidth=\textwidth%
+}
+\floatsetup[table]{ % Captions for tables
+    capposition=above,%
+    margins=centering,%
+    floatwidth=\textwidth%
+}
+%    \end{macrocode}
+% 
+% 图表标题样式
+%    \begin{macrocode}
+\DeclareCaptionFont{capfont}{\fontsize{12pt}{14pt}\bf\rmfamily\selectfont}
+\captionsetup{
+  font=small,%
+  labelfont=capfont,
+    textfont=capfont,
+    strut=no,%
+    hypcap=true, % Links point to the top of the figure
+    % indention=0pt, % Suppress indentation
+    % % parindent=0pt, % Suppress space between paragraphs
+    aboveskip=6pt, % Increase the space between the figure and the caption
+    belowskip=6pt, % Increase the space between the caption and the table
+}
+%    \end{macrocode}
+%
+% \subsubsection{代码}
+% 
+% 代码样式
+%    \begin{macrocode}
+\floatsetup[lstlisting]{ % Captions for lstlistings
+    capposition=above,%
+    margins=centering,%
+    floatwidth=\textwidth%
+}
+\lstset{
+    basicstyle=\ttfamily\linespread{1}\small\selectfont,
+    keywordstyle=\bfseries,% use bold style for keywords
+    commentstyle=\rmfamily\itshape,% use italic style for comments
+    stringstyle=\ttfamily,% 字符串风格
+    flexiblecolumns,% ?
+    numbers=left,% left-aligned numbering
+    showspaces=false,% hide markers for spaces
+    showstringspaces=false,
+    captionpos=t,% place the caption at the top
+    % frame=lrtb,% show all four sides of the frame
+    % linewidth=.8\textwidth,
+    % breakatwhitespace=true,
+    breaklines=true,
+    xleftmargin=2em,xrightmargin=2em,% set the width of the code environment
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\lstdefinestyle{LaTeX}{
+  language=TeX,
+  morekeywords={
+    begin, caption, label, mathrm, frac, 
+    toprule, midrule, bottomrule, includegraphics}
+}
+%    \end{macrocode}
+%
+% \subsubsection{列表}
+% 
+% 列表环境
+%    \begin{macrocode}
+\renewcommand{\labelitemi}{\tiny$\blacktriangleright$}
+\renewcommand{\labelitemii}{\textbullet}
+
+\setlist[itemize]{noitemsep}
+\setlist[enumerate]{noitemsep}
+\setlist[description]{noitemsep}
+%    \end{macrocode}
+% 
+% \subsection{定理环境}
+%
+% \begin{macro}{\mathbi}
+% Math bold italic letters
+%    \begin{macrocode}
+\NewDocumentCommand\mathbi{m}{\textbf{\em #1}}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\declaretheoremstyle[
+  %spaceabove=.5\thm@preskip,
+  %spacebelow=.5\thm@postskip,
+  headfont=\fontsize{12pt}{14pt}\bf\rmfamily\selectfont,%\scshape,
+  notefont=\fontsize{12pt}{14pt}\rmfamily\selectfont,% notebraces={ (}{)},
+  bodyfont=\fontsize{12pt}{14pt}\rmfamily\selectfont,
+  %headformat={\NAME\space\NUMBER\space\NOTE},
+  headpunct={},
+  %postheadspace={.5em plus .1em minus .1em},
+  %prefoothook={\hfill\qedsymbol}
+]{hkustthm}
+
+\theoremstyle{hkustthm}
+%    \end{macrocode}
+%
+% 修改证明环境标题 
+%    \begin{macrocode}
+\let\oldproofname=\proofname
+\renewcommand*{\proofname}
+  {\fontsize{12pt}{14pt}\rmfamily\selectfont{\oldproofname}} 
+%    \end{macrocode}
+%
+% 
+%    \begin{macrocode}
+\declaretheorem[
+    name=算法,
+    style=hkustthm,
+    refname={算法,算法},
+    Refname={算法,算法},
+    % numberwithin=section,
+]{algorithm}
+\declaretheorem[
+    name=假设,
+    style=hkustthm,
+    refname={假设,假设},
+    Refname={假设,假设},
+    % numberwithin=section,
+]{assumption}
+\declaretheorem[
+    name=公理,
+    style=hkustthm,
+    refname={公理,公理},
+    Refname={公理,公理},
+    % numberwithin=section,
+]{axiom}
+\declaretheorem[
+    name=结论,
+    style=hkustthm,
+    refname={结论,结论},
+    Refname={结论,结论},
+    % numberwithin=section,
+]{conclusion}
+\declaretheorem[
+    name=条件,
+    style=hkustthm,
+    refname={条件,条件},
+    Refname={条件,条件},
+    % numberwithin=section,
+]{condition}
+\declaretheorem[
+    name=推论,
+    style=hkustthm,
+    refname={推论,推论},
+    Refname={推论,推论},
+    % numberwithin=section,
+]{corollary}
+\declaretheorem[
+    name=定义,
+    style=hkustthm,
+    refname={定义,定义},
+    Refname={定义,定义},
+    % numberwithin=section,
+]{definition}
+\declaretheorem[
+        name=例,
+        style=hkustthm,
+        refname={例,例},
+        Refname={例,例},
+        % numberwithin=section,
+]{example}
+\declaretheorem[
+    name=引理,
+    style=hkustthm,
+    refname={引理,引理},
+    Refname={引理,引理},
+    % numberwithin=section,
+]{lemma}
+\declaretheorem[
+    name=性质,
+    style=hkustthm,
+    refname={性质,性质},
+    Refname={性质,性质},
+    % numberwithin=section,
+]{property}
+\declaretheorem[
+    name=命题,
+    style=hkustthm,
+    refname={命题,命题},
+    Refname={命题,命题},
+    % numberwithin=section,
+]{proposition}
+\declaretheorem[
+    name=注解,
+    style=hkustthm,
+    refname={注解,注解},
+    Refname={注解,注解},
+    % numberwithin=section,
+]{remark}
+\declaretheorem[
+    name=定理,
+    style=hkustthm,
+    refname={定理,定理},
+    Refname={定理,定理},
+    numberwithin=section,
+]{theorem}
+%    \end{macrocode}
+%
+% \subsection{封面}
+%
+% \subsubsection{内部命令}
+%
+% \begin{variable}{\l_@@_info_supervisor_title_name_tl,l_@@_info_co_supervisor_title_name_tl,\l_@@_info_supervisor_title_name_full_tl}
+% 用于存储导师姓名加职称的变量，旧版编译器不支持字符串中含有|\hspace{.5em}|这样的空白空间命令
+%    \begin{macrocode}
+\tl_new:N \l_@@_info_supervisor_title_name_tl
+\tl_new:N \l_@@_info_co_supervisor_title_name_tl
+\tl_new:N \l_@@_info_supervisor_title_name_full_tl
+%    \end{macrocode}
+% \end{variable}
+%
+% 拼合导师的职称和姓名。
+%    \begin{macrocode}
+\tl_set:Nn \l_@@_info_supervisor_title_name_tl
+{
+  \l_@@_info_supervisor_title_tl\ 
+  \l_@@_info_supervisor_tl
+}
+\tl_set:Nn \l_@@_info_co_supervisor_title_name_tl
+{
+  \l_@@_info_co_supervisor_title_tl\ 
+  \l_@@_info_co_supervisor_tl
+}
+% 拼合双导师的姓名和职称。
+\tl_set:Nn \l_@@_info_supervisor_title_name_full_tl
+{
+  \l_@@_info_supervisor_title_name_tl \
+  \l_@@_info_co_supervisor_title_name_tl
+}
+%    \end{macrocode}
+%
+% \begin{variable}{\l_@@_name_degree_tl}
+% 用于存储学位名称的变量
+%    \begin{macrocode}
+\tl_new:N \l_@@_name_degree_tl
+%    \end{macrocode}
+% \end{variable}
+%
+% 判断学位进行命令定义
+%    \begin{macrocode}
+\tl_const:Nn \l_@@_name_diploma_tl { RPG }
+% 研究生学位名称
+\str_if_eq:NNTF { \l_@@_info_degree_tl } { PhD }
+{ \tl_set:Nn \l_@@_name_degree_tl { Doctor~of~Philosophy } }
+{ \str_if_eq:NNTF { \l_@@_info_degree_tl } { MPhil }
+  {\tl_set:Nn \l_@@_name_degree_tl { Master~of~Philosophy } }
+  {\tl_set:Nn \l_@@_name_degree_tl { Degree~Unspported } }
+}
+%    \end{macrocode}
+%
+% \begin{macro}{\l_@@_name_diploma_tl}
+% Thesis paper or design
+%    \begin{macrocode}
+\str_if_eq:NNTF { \l_@@_info_type_tl } { thesis } 
+{ \tl_const:Nn \l_@@_info_type_tl_name 
+    { \l_@@_name_diploma_tl~thesis~paper } }
+{ \tl_const:Nn \l_@@_info_type_tl_name 
+    { \l_@@_name_diploma_tl~thesis~design }}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsubsection{绘制封面}
+% 
+% \begin{macro}{\@@_print_cover:}
+% Title page for thesis
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_print_cover:
+{
+  \thispagestyle{plain}
+  \begin{center}
+    \rmfamily\fontsize{12pt}{18pt}\selectfont\l_@@_info_title_tl \\
+    \setlength{\parskip}{18pt plus 1pt minus 1pt}
+    \phantom{1}\\
+    \phantom{2}\\
+    \phantom{3}\\
+    \phantom{4}\\
+    \phantom{5}\\
+    \rmfamily\fontsize{12pt}{18pt}\selectfont{by} \\
+    \phantom{1}\\
+    \rmfamily\fontsize{12pt}{14pt}\selectfont\l_@@_info_author_tl
+    \phantom{1}\\
+    \phantom{2}\\
+    \phantom{3}\\
+    \phantom{4}\\
+    \phantom{5}\\
+    \normalsize\rmfamily{%
+      A~Thesis~Submitted~to\\
+      The~Hong~Kong~University~of~Science~and~Technology\\
+      in~Partial~Fulfilment~of~the~Requirements~for\\
+      the~Degree~of~{\l_@@_name_degree_tl}\\
+      in~{\l_@@_major_tl}
+    }
+    \phantom{1}\\
+    \phantom{2}\\
+    \phantom{3}\\
+    \normalfont\normalsize\l_@@_submit_date_tl,~\l_@@_info_city_tl
+  \end{center}
+  \addcontentsline{toc}{chapter}{Title~Page}
+  \normalfont
+  \cleardoublepage
+}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\maketitle}
+% 重定义maketitle生成封面
+%    \begin{macrocode}
+\tl_set:Nn \maketitle {\@@_print_cover:}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{摘要绘制}
+%
+% \begin{macro}{\@@_print_keywords:}
+% Keywords
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_print_keywords:
+{
+  \par\vspace{2ex}
+  \bgroup
+    \noindent
+    \c_@@_name_keywords_tl
+    \clist_use:Nn \l_@@_info_keywords_clist {,~} 
+    \par
+  \egroup
+}
+%    \end{macrocode}
+% \end{macro}
+%   
+% \begin{macro}{\@@_print_abstractg:}
+% Output Abstract
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_print_abstractg:
+{
+  \cleardoublepage
+  \thispagestyle{plain}
+  \phantomsection
+  \addcontentsline{toc}{chapter}{Abstract}
+  {
+    \bgroup
+    \fontsize{12pt}{14pt}\selectfont
+    \begin{center}
+    \fontsize{12pt}{12pt}\selectfont
+    \l_@@_info_title_tl \\
+    by~\l_@@_info_author_tl \\
+    \l_@@_info_department_tl \\
+    The Hong Kong University of Science and Technology
+    Abstract
+    \end{center}
+    \egroup
+  }
+  \fontsize{12pt}{14pt}\selectfont\par%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\NewDocumentEnvironment{abstract} {}
+{%
+  \@@_print_abstractg:}{\@@_print_keywords:\cleardoublepage
+}
+%    \end{macrocode}
+%
+% \subsection{Authorization}
+% \begin{macro}{\@@_print_authorization_g:}
+% Output authorization
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_print_authorization_g:
+{
+  \thispagestyle{plain}
+  \phantomsection
+  \addcontentsline{toc}{chapter}{Authorization}
+  {
+    \fontsize{12}{18}\selectfont
+    {
+    \begin{center}
+    \bf\uline{Authorization}
+    \end{center}
+    }
+    I~hereby~declare~that~I~am~the~sole~author~of~the~thesis.\\
+
+    I~authorize~the~Hong~Kong~University~of~Science~and~Technology~to~lend~this~thesis~to~other~institutions~or~individuals~for~the~purpose~of~scholarly~research.\\
+
+    I~further~authorize~the~Hong~Kong~University~of~Science~and~Technology~to~reproduce~the~thesis~by~photocopying~or~by~other~means,~in~total~or~in~part,~at~the~request~of~other~institutions~or~individuals~for~the~purpose~of~scholarly~research.
+    {
+    \begin{center}
+    \uline{\phantom{Author signature}}\\
+    \l_@@_info_author_tl \\
+    \l_@@_submit_date_long_tl
+    \end{center}
+    }
+ }
+  \fontsize{12pt}{14pt}\selectfont\par%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\NewDocumentCommand\authorization{}{\@@_print_authorization_g:\cleardoublepage}
+%    \end{macrocode}
+%
+% \subsection{Signature~Page}
+% \begin{macro}{\@@_print_signaturepage_g:}
+% Output signature page
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_print_signaturepage_g:
+{
+  \thispagestyle{plain}
+  \phantomsection
+  \addcontentsline{toc}{chapter}{Signature~Page}
+  {
+    {
+    \begin{center}
+    \fontsize{12}{18}\selectfont
+    \l_@@_info_title_tl \\
+    by \\
+    \l_@@_info_author_tl \\
+    This~is~to~certify~that~I~have~examined~the~above~{\l_@@_info_degree_tl~}~thesis\\
+    and~have~found~that~it~is~complete~and~satisfactory~in~all~respects,\\
+    and~that~any~and~all~revisions~required~by\\
+    the~thesis~examination~committee~have~been~made.\\
+    \uline{\phantom{Supervisor name}} \\
+    \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor \\
+    \tl_if_empty:NTF \l_@@_info_co_supervisor_tl
+    {}
+    { \uline{\phantom{Co-Supervisor name}} \\
+      \l_@@_info_co_supervisor_title_name_tl,~Co~Supervisor \\
+    }
+    \uline{\phantom{Department Head name}} \\
+    \l_@@_info_depthead_tl,~Head~of~Department\\
+    \l_@@_info_department_tl \\
+    \l_@@_submit_date_long_tl
+    \end{center}
+    }
+  }
+  \fontsize{12pt}{14pt}\selectfont\par%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\NewDocumentCommand\signaturepage{}{\@@_print_signaturepage_g:\cleardoublepage}
+%</class>
+%    \end{macrocode}
+%%
+% \end{implementation}
+%

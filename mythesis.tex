@@ -1,0 +1,124 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NJU Thesis
+% 南京大学毕业论文LaTeX模板
+% Version 0.10.1 (2021-09-26)
+%
+% 请关注项目地址以获取最新变化
+% https://github.com/nju-lug/NJUThesis
+% https://git.nju.edu.cn/nju-lug/nju-latex-templates/njuthesis
+% https://ctan.org/pkg/njuthesis
+%
+% 贡献者
+% Yu XIONG @atxy-blip   Yichen ZHAO @FengChendian   
+% Song GAO @myandeg     Chang MA @glatavento   
+% Yilun SUN @HermitSun  Yinfeng LIN @linyinfeng
+% 
+% 许可证
+% LaTeX Project Public License（版本 1.3c 或更高）
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[
+    %degree=phd,% 默认本科(ug), mg: 学硕, mf: 专硕, phd: 博士
+    % type=design,% 默认毕业论文(thesis)，design: 毕业设计
+    %nlcover,% 需要国家图书馆封面，对本科无效
+    % 若以下两项不设置则自动调用系统预装字体
+    customlatinfont=windows,% 设置英文字符集
+    ]{hkustthesis}
+
+% 设置个人信息
+\hkustsetup {
+    % 本科生无需填写的项目已被特别标注
+    % 为防止歧义，有空格的内容请用花括号包裹
+    % 2021/10/01的版本对变量名进行了大幅度的修改
+    % 注意不要有空行，否则可能报错
+    info = {
+        degree = {MPhil},
+        % Thesis Title
+        title = {A Brief Introduction to Writing Thesis with This \hologo{LaTeX} Template}, 
+        % 关键词
+        keywords = {Neon, Genesis, Evangelion},
+        % 姓名学号
+        grade = 2021,
+        student-id = 20112233, % dz18114514,
+        author = {Cruel Angel},
+        % 院系专业
+        %school = {School of Engineering},
+        department = {Department of NERV},
+        major = {Human Instrumentality Project},
+        field = {Nanophotonics},
+        % 导师
+        supervisor = Adams,
+        supervisor-title = {Prof.},
+        % 第二导师，如无则留空
+        co-supervisor = {Lilith},
+        co-supervisor-title = {Prof.},
+        % 提交日期
+        submit-date = {October 2021}, % Only <month year>
+        submit-date-long = {31 October 2021}, % <date month year>
+        % 答辩，均为研究生项
+        defend-date = {December 31 2021},
+        chairman = {Prof. Ikari Gendo},
+        depthead = {Prof. Ikari Yui},
+        reviewer = {Prof. A, Prof. B, Prof. C, Prof. D (External Examiner)},
+        city = {Geo~Front},
+    }
+}
+
+% 设置图片存储位置
+\graphicspath{{figure/}}
+
+% 导入参考文献数据
+\addbibresource{mythesis.bib}
+
+\begin{document}
+
+%-------------------------------------------------
+% Titlepage, Authorization, Signature
+% (Preface), Acknowledgement
+% TOC, List of Figures, List of Tables
+% Abstract
+%-------------------------------------------------
+
+\frontmatter
+\maketitle 
+\authorization
+\signaturepage
+
+%\input{chapters/Preface.tex}
+\input{chapters/Acknowledgements.tex}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\input{chapters/Abstract.tex}
+
+%-------------------------------------------------
+% Main body
+%-------------------------------------------------
+\mainmatter
+
+\input{chapters/Introduction.tex}
+\input{chapters/Environments.tex}
+\input{chapters/Layout.tex}
+\input{chapters/FigTabCode.tex}
+\input{chapters/Mathematics.tex}
+\input{chapters/Conclusions.tex}
+
+%-------------------------------------------------
+%	参考文献
+%-------------------------------------------------
+
+\printbibliography[
+    heading=bibintoc,% 插入目录条目
+    title=References]
+
+%-------------------------------------------------
+%	附录部分
+%-------------------------------------------------
+\appendix
+
+\input{chapters/Publications.tex}
+\input{chapters/Standard.tex}
+
+\end{document}

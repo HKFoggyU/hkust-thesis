@@ -2,6 +2,10 @@
 
 temp/
 
+# Generated LaTeX style and class files
+*.cls
+*.sty
+
 # commitizen
 .cz.yaml
 .pre-commit-config.yaml

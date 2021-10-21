@@ -1,0 +1,29 @@
+\chapter{Environments}
+
+\section{Compile locally}
+
+\subsection{Install \hologo{TeX} distribution}
+
+\begin{table}[ht]
+    \caption{Environments tested}
+    % \label{tab:1}
+    \begin{tabular}{ccc}
+        \toprule
+        OS & TeX & Test \\
+        \midrule
+        Windows 10 & \hologo{TeX}\,Live 2021 & Pass \\
+        Windows 10 & \hologo{MiKTeX} & Pass \\
+        Windows 10 & \hologo{TeX}\,Live 2020 & cref problem  \\
+        macOS 10.15 & \hologo{TeX}\,Live 2021 & Pass \\
+        Ubuntu 20.04 & \hologo{TeX}\,Live 2021 & Pass \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Editor}
+
+\verb|vscode| with \verb|LaTeX Workshop| is recommended.
+
+\subsection{Compile toolchain}
+
+\verb|latexmk -xelatex mythesis.tex|
