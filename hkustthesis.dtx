@@ -117,7 +117,7 @@ through XeTeX.
 \definecolor{hkustyellow}{RGB}{255, 212, 0}
 \begin{document}
   \DocInput{hkustthesis.dtx}  
-  %\PrintChanges
+  \PrintChanges
   %\PrintIndex
 \end{document}
 %</driver>
@@ -125,31 +125,39 @@ through XeTeX.
 %
 % \title{\color{hkustblue}{The \textsc{HkustThesis} class\\ A \hologo{LaTeX}\textcolor{hkustred}{3} template}}
 % 
-% \author{HKFoggyU
-% \thanks{GitHub: \href{HKFoggyU}{https://github.com/HKFoggyU/hkust-thesis/}}}
+% \author{
+%   \href{https://github.com/HKFoggyU/hkust-thesis/}{HKFoggyU}
+% }
 %
-% \date{v0.1 \\ Released 2021-10-21}
+% \date{v0.2 \\ Released 2021-10-24}
 %
-% \changes{v0.1}{2021/10/21}{Start development based on \textsc{NjuThesis} class}
+% \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
+% \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
 %
 % \maketitle
 %
 % \def\abstractname{Abstract}
 % \begin{abstract}
-% The \textsc{HkustThesis} class is intended for 
+% The \href{https://github.com/HKFoggyU/hkust-thesis/}{\textsc{HkustThesis}} class is intended for 
 % typesetting dissertations with \hologo{LaTeX} for MPhil and PhD students in
 % The Hong Kong University of Science and Technology (HKUST).
 % \end{abstract}
 %
-% \vspace{2cm}
-% \def\abstractname{Statement}
+% \vspace{2\baselineskip}
+% \def\abstractname{Disclaimer}
 % \begin{abstract}
-% This template is not officially related with HKUST.
-% This template takes absolutely no responsibilty for any inconsistencies compared with the requirements by HKUST or department.
+% This template is NOT an official template.
+% This template takes absolutely NO responsibilty for any inconsistencies compared with the requirements by HKUST or department.
 %
-% This template is under development. Bugs or inconsistencies may happen. Issues and PRs are welcomed.
+% This template is under development. Issues and PRs are welcomed.
 % \end{abstract}
 %
+% \vspace{2\baselineskip}
+% \def\abstractname{Acknowledgements}
+% \begin{abstract}
+% The \textsc{HkustThesis} class is modified from the \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class by the \href{https://github.com/nju-lug}{NJU LUG} organization.
+% \end{abstract}
+%%
 % \clearpage
 %
 % \setcounter{tocdepth}{4}
@@ -163,9 +171,9 @@ through XeTeX.
 %
 % \section{使用方法}
 %
-% \subsection{File tree}
+% \subsection{\hologo{TeX} file struture}
 %
-% \cls{hkustthesis} should have the following file tree:
+% A \hologo{TeX} file using \cls{hkustthesis} should have the following struture:
 %
 % \begin{ctexexam}
 %   \documentclass[<options>]{hkustthesis}
@@ -187,6 +195,8 @@ through XeTeX.
 %   <appendix>
 %   \end{document}
 % \end{ctexexam}
+%
+% \subsection{Under~construction\ldots}
 %
 % \end{documentation}
 %
@@ -651,22 +661,34 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % 使用\pkg{tocloft}定制目录文字格式。
 %    \begin{macrocode}
 \cftsetpnumwidth{2em}
-\renewcommand{\cftchapleader}{\cftdotfill{\cftchapdotsep}}
+\renewcommand{\cftchapfont}{\rmfamily\selectfont}
+\renewcommand{\cftchappagefont}{\rmfamily\selectfont}
 \renewcommand{\cftchapdotsep}{\cftdotsep}
-\renewcommand{\cftchapfont}{\fontsize{12pt}{14pt}\bfseries\rmfamily\selectfont}
-\setlength{\cftsecindent}{2em}
-\setlength{\cftsubsecindent}{52pt}
-\setlength{\cftsubsecnumwidth}{2em}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftchapdotsep}}
+\renewcommand{\cftchappresnum}{Chapter~}
+\renewcommand{\cftdot}{}
+\setlength{\cftsecindent}{6em}
+\setlength{\cftsubsecindent}{8em}
+\setlength{\cftchapnumwidth}{6em}
+\setlength{\cftsecnumwidth}{2em}
+\setlength{\cftsubsecnumwidth}{3em}
+\g@addto@macro\appendix{%
+  \addtocontents{toc}{%
+    \protect\renewcommand{\protect\cftchappresnum}{\appendixname\space}%
+  }%
+}
 %    \end{macrocode}
 %
 % \begin{macro}{\tableofcontents}
   % 重定义目录命令，修改标题格式并插入书签。
 %    \begin{macrocode}
+\tl_new:N \l_@@_toc_title_text
+\tl_set:Nn \l_@@_toc_title_text {Table~of~Contents}
 \renewcommand\tableofcontents{%
   \cleardoublepage
   \raggedbottom
-  \chapter*{\MakeUppercase{Table~of~Contents}}%
-  \addcontentsline{toc}{chapter}{Table~of~Contents}
+  \chapter*{\MakeUppercase{\l_@@_toc_title_text}}%
+  \addcontentsline{toc}{chapter}{\l_@@_toc_title_text}
   \@starttoc{toc}%
 }
 %    \end{macrocode}
@@ -675,10 +697,12 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % \begin{macro}{\listoffigures}
 % 重定义插图目录命令，修改标题格式并插入书签。
 %    \begin{macrocode}
+\tl_new:N \l_@@_lof_title_text
+\tl_set:Nn \l_@@_lof_title_text {List~of~Figures}
 \renewcommand\listoffigures{%
   \cleardoublepage
-  \chapter*{\MakeUppercase{List~of~Figures}}%
-  \addcontentsline{toc}{chapter}{List~of~Figures}
+  \chapter*{\MakeUppercase{\l_@@_lof_title_text}}%
+  \addcontentsline{toc}{chapter}{\l_@@_lof_title_text}
   \@starttoc{lof}%
 }
 %    \end{macrocode}
@@ -687,11 +711,13 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % \begin{macro}{\listoftables}
 % 重定义表格目录命令，修改标题格式并插入书签。
 %    \begin{macrocode}
+\tl_new:N \l_@@_lot_title_text
+\tl_set:Nn \l_@@_lot_title_text {List~of~Tables}
 \renewcommand\listoftables{%
   \cleardoublepage
   \begingroup
-  \chapter*{\MakeUppercase{List~of~Tables}}%
-  \addcontentsline{toc}{chapter}{List~of~Tables}
+  \chapter*{\MakeUppercase{\l_@@_lot_title_text}}%
+  \addcontentsline{toc}{chapter}{\l_@@_lot_title_text}
   \@starttoc{lot}%
 }
 %    \end{macrocode}
@@ -852,7 +878,9 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % 
 % 图表标题样式
 %    \begin{macrocode}
-\DeclareCaptionFont{capfont}{\fontsize{12pt}{14pt}\bfseries\rmfamily\selectfont}
+\DeclareCaptionFont{capfont}{
+  \fontsize{12pt}{14pt}\bfseries\rmfamily\selectfont
+}
 \captionsetup{
   font=small,%
   labelfont=capfont,
@@ -1119,14 +1147,10 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
   \thispagestyle{plain}
   \addcontentsline{toc}{chapter}{Title~Page}
   \begin{center}
-    %^^A \onehalfspacing\selectfont
-    %^^A \fontsize{12}{18}\selectfont
-    [SMAPLE~TITLE~PAGE]\\[1\baselineskip]
-    [Thesis~Title~with~the~first~letter~of~all~words~capitalized,~except~for\\
-    prepositions,~articles~and~coordinate~conjunctions~that~do~not~appear~as~the~first~word]\\[5\baselineskip]
-    %^^A \l_@@_info_title_tl\\[5\baselineskip]
+    \phantom{[SMAPLE~TITLE~PAGE]}\\[1\baselineskip]
+    \l_@@_info_title_tl\\[5\baselineskip]
     by\\[1\baselineskip]
-    \l_@@_info_author_tl\\[4\baselineskip]
+    \l_@@_info_author_tl\\[5\baselineskip]
     \@@_print_degree_name:
     {
       A~Thesis~Submitted~to\\
@@ -1134,7 +1158,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
       in~Partial~Fulfilment~of~the~Requirements~for\\
       the~Degree~of~{\l_@@_name_degree_tl}\\
       in~{\l_@@_major_tl}
-    }\\[2\baselineskip]
+    }\\[3\baselineskip]
     \l_@@_submit_date_tl,~\l_@@_info_city_tl\par%
   \end{center}
   \normalfont
@@ -1179,11 +1203,11 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
   \addcontentsline{toc}{chapter}{Abstract}
   {
     \begin{center}
-    \onehalfspacing\selectfont
-    \l_@@_info_title_tl \\[2\baselineskip]
+    \phantom{[SAMPLE~ABSTRACT~PAGE]}\\[1\baselineskip]
+    \l_@@_info_title_tl \\[1\baselineskip]
     by~\l_@@_info_author_tl \\[2\baselineskip]
     \l_@@_info_department_tl \\[1\baselineskip]
-    The~Hong~Kong~University~of~Science~and~Technology\\[3\baselineskip]
+    The~Hong~Kong~University~of~Science~and~Technology\\[2\baselineskip]
     Abstract
     \end{center}
   }
@@ -1207,31 +1231,33 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
   \phantomsection
   \addcontentsline{toc}{chapter}{Authorization}
   {
-    \fontsize{12}{18}\selectfont
     {
     \begin{center}
-    \bfseries\uline{Authorization}
+    \phantom{[SAMPLE~AUTHORIZATION~PAGE]}\\
+    \bfseries\selectfont\uline{Authorization}\\[2\baselineskip]
     \end{center}
     }
+    {\setlength{\parindent}{3em}
     I~hereby~declare~that~I~am~the~sole~author~of~the~thesis.\\
 
-    I~authorize~the~Hong~Kong~University~of~Science~and~Technology~to~lend~
-    this~thesis~to~other~institutions~or~individuals~for~the~purpose~of~
-    scholarly~research.\\
-
-    I~further~authorize~the~Hong~Kong~University~of~Science~and~Technology~to~
-    reproduce~the~thesis~by~photocopying~or~by~other~means,~in~total~or~
-    in~part,~at~the~request~of~other~institutions~or~individuals~for~the~
-    purpose~of~scholarly~research.
+    \par I~authorize~the~Hong~Kong~University~of~Science~and~Technology~
+    to~lend~this~thesis~to~other~institutions~or~individuals~for~the~
+    purpose~of~scholarly~research.\\
+    
+    \par I~further~authorize~the~Hong~Kong~University~of~Science~and~
+    Technology~to~reproduce~the~thesis~by~photocopying~or~by~other~means,~
+    in~total~or~in~part,~at~the~request~of~other~institutions~or~
+    individuals~for~the~purpose~of~scholarly~research.
+    \\[5\baselineskip]
+    }
     {
     \begin{center}
-    \uline{\phantom{Author signature}}\\
-    \l_@@_info_author_tl \\
+    \makebox[3.5in]{\hrulefill}\\
+    \l_@@_info_author_tl \\[1\baselineskip]
     \l_@@_submit_date_long_tl
     \end{center}
     }
  }
-  \fontsize{12pt}{14pt}\selectfont\par%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1253,24 +1279,26 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
   {
     {
     \begin{center}
-    \fontsize{12}{18}\selectfont
-    \l_@@_info_title_tl \\
-    by \\
-    \l_@@_info_author_tl \\
+    \phantom{[SAMPLE~SIGNATURE~PAGE]}\\[1\baselineskip]
+    \l_@@_info_title_tl \\[5\baselineskip]
+    by \\[1\baselineskip]
+    \l_@@_info_author_tl \\[2\baselineskip]
     This~is~to~certify~that~I~have~examined~the~
     above~{\l_@@_info_degree_tl}~thesis\\
     and~have~found~that~it~is~complete~and~satisfactory~in~all~respects,\\
     and~that~any~and~all~revisions~required~by\\
-    the~thesis~examination~committee~have~been~made.\\
-    \uline{\phantom{Supervisor name}} \\
-    \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor \\
-    \tl_if_empty:NTF \l_@@_info_co_supervisor_tl
+    the~thesis~examination~committee~have~been~made.\\[5\baselineskip]
+    \makebox[3.5in]{\hrulefill}\\
+    \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor
+    \\[3\baselineskip]
     {}
-    { \uline{\phantom{Co-Supervisor name}} \\
-      \l_@@_info_co_supervisor_title_name_tl,~Co~Supervisor \\
+    {
+      \makebox[3.5in]{\hrulefill}\\
+      \l_@@_info_co_supervisor_title_name_tl,~Co~Supervisor
+      \\[3\baselineskip]
     }
-    \uline{\phantom{Department Head name}} \\
-    \l_@@_info_depthead_tl,~Head~of~Department\\
+    \makebox[3.5in]{\hrulefill}\\
+    \l_@@_info_depthead_tl,~Head~of~Department\\[1\baselineskip]
     \l_@@_info_department_tl \\
     \l_@@_submit_date_long_tl
     \end{center}
