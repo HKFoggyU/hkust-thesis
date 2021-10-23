@@ -1081,11 +1081,15 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \begin{macrocode}
 \tl_const:Nn \l_@@_name_diploma_tl { RPG }
 % 研究生学位名称
-\str_if_eq:NNTF { \l_@@_info_degree_tl } { PhD }
-{ \tl_set:Nn \l_@@_name_degree_tl { Doctor~of~Philosophy } }
-{ \str_if_eq:NNTF { \l_@@_info_degree_tl } { MPhil }
-  {\tl_set:Nn \l_@@_name_degree_tl { Master~of~Philosophy } }
-  {\tl_set:Nn \l_@@_name_degree_tl { Degree~Unspported } }
+\msg_new:nnn { hkustthesis }{ degree-wrongly-defined }{ Please~ checkout~ degree~ spelling. }
+\cs_new_protected:Npn \@@_print_degree:
+{
+  \str_if_eq:NNTF { \l_@@_info_degree_tl } { PhD }
+  { \tl_set:Nn \l_@@_name_degree_tl { Doctor~of~Philosophy } }
+  { \str_if_eq:NNTF { \l_@@_info_degree_tl } { MPhil }
+    { \tl_set:Nn \l_@@_name_degree_tl { Master~of~Philosophy } }
+    { \msg_warning:nn { hkustthesis } { degree-wrongly-defined } }
+  }
 }
 %    \end{macrocode}
 %
@@ -1096,7 +1100,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 { \tl_const:Nn \l_@@_info_type_tl_name 
     { \l_@@_name_diploma_tl~thesis~paper } }
 { \tl_const:Nn \l_@@_info_type_tl_name 
-    { \l_@@_name_diploma_tl~thesis~design }}
+    { \l_@@_name_diploma_tl~thesis~design } }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1124,6 +1128,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
     \phantom{3}\\
     \phantom{4}\\
     \phantom{5}\\
+    \@@_print_degree:
     \normalsize\rmfamily{%
       A~Thesis~Submitted~to\\
       The~Hong~Kong~University~of~Science~and~Technology\\
