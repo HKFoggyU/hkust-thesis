@@ -1,3 +1,6 @@
+# adpated from https://github.com/nju-lug/NJUThesis/blob/master/.github/workflows/build.yml
+# more tests needed, including differenet versions of LaTeX and different platform.
+# add manual trigger, you can compile your thesis on Github.
 name: Build LaTeX document
 on: 
   push:
@@ -10,6 +13,7 @@ on:
   pull_request:
     branches:
       - master
+
   workflow_dispatch:
 
 jobs:
