@@ -2,9 +2,10 @@
 
 temp/
 
-# Generated LaTeX style and class files
+# LaTeX files generated from .dtx file
 *.cls
 *.sty
+*.ins
 
 # commitizen
 .cz.yaml
@@ -22,6 +23,7 @@ svg-inkscape/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
+*.hd
 *.lof
 *.log
 *.lot

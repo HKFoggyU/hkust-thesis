@@ -23,19 +23,17 @@
 
 % 设置个人信息
 \hkustsetup {
-    % 本科生无需填写的项目已被特别标注
-    % 为防止歧义，有空格的内容请用花括号包裹
-    % 2021/10/01的版本对变量名进行了大幅度的修改
+    % 有空格的内容请用 {} 包裹
     % 注意不要有空行，否则可能报错
     info = {
-        degree = MPhil,
+        degree = {MPhil},
         % Thesis Title
         title = {A Brief Introduction to Writing Thesis with This \hologo{LaTeX} Template}, 
         % 关键词
         keywords = {Neon, Genesis, Evangelion},
         % 姓名学号
-        grade = 2021,
-        student-id = 20112233, % dz18114514,
+        grade = {2021},
+        student-id = {20112233},
         author = {Cruel Angel},
         % 院系专业
         %school = {School of Engineering},
@@ -43,7 +41,7 @@
         major = {Human Instrumentality Project},
         field = {Nanophotonics},
         % 导师
-        supervisor = Adams,
+        supervisor = {Adams},
         supervisor-title = {Prof.},
         % 第二导师，如无则留空
         co-supervisor = {Lilith},
@@ -56,7 +54,7 @@
         chairman = {Prof. Ikari Gendo},
         depthead = {Prof. Ikari Yui},
         reviewer = {Prof. A, Prof. B, Prof. C, Prof. D (External Examiner)},
-        city = {Geo~Front},
+        city = {Geo Front},
     }
 }
 

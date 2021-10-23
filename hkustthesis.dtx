@@ -290,17 +290,17 @@ through XeTeX.
 % \begin{macro}{info/degree}
 % Degree: <PhD> or MPhil
 %    \begin{macrocode}
-  degree.tl_set:N = \l_@@_info_degree_tl,
+  degree            .tl_set:N = \l_@@_info_degree_tl,
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{info/type}
 % Thesis Type: <thesis> or design
 %    \begin{macrocode}
-  type.tl_set:N = \l_@@_info_type_tl,
+  type              .tl_set:N = \l_@@_info_type_tl,
 %    \end{macrocode}
 % \end{macro}
-%% \begin{macro}{info/title}
+% \begin{macro}{info/title}
 % Thesis title
 %    \begin{macrocode}
   title             .tl_set:N = \l_@@_info_title_tl,
@@ -389,7 +389,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % TODO: For HKUST, the "line space" is set to 1.0 for abstract, footnote and quotations.
 %    \begin{macrocode}
 %  linespread=1.625,
-  fontset=none,12pt]{book}
+  12pt]{book}
 %    \end{macrocode}
 %
 % \subsection{载入宏包}
@@ -407,6 +407,10 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
   emptypage,
   fancyhdr,
 }
+\onehalfspacing
+%^^A \linespread{1.625}
+%^^A \setstretch{1.5}
+%^^A \setlength{\baselineskip}{18pt}
 \RequirePackage[explicit]{titlesec} % For typesetting titles of chap/sec/...
 \RequirePackage[titles]{tocloft}
 \RequirePackage[hyphens]{url} % generate better linebreaks in the url
@@ -649,7 +653,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 \cftsetpnumwidth{2em}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftchapdotsep}}
 \renewcommand{\cftchapdotsep}{\cftdotsep}
-\renewcommand{\cftchapfont}{\fontsize{12pt}{14pt}\bf\rmfamily\selectfont}
+\renewcommand{\cftchapfont}{\fontsize{12pt}{14pt}\bfseries\rmfamily\selectfont}
 \setlength{\cftsecindent}{2em}
 \setlength{\cftsubsecindent}{52pt}
 \setlength{\cftsubsecnumwidth}{2em}
@@ -848,7 +852,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % 
 % 图表标题样式
 %    \begin{macrocode}
-\DeclareCaptionFont{capfont}{\fontsize{12pt}{14pt}\bf\rmfamily\selectfont}
+\DeclareCaptionFont{capfont}{\fontsize{12pt}{14pt}\bfseries\rmfamily\selectfont}
 \captionsetup{
   font=small,%
   labelfont=capfont,
@@ -923,7 +927,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 \declaretheoremstyle[
   %spaceabove=.5\thm@preskip,
   %spacebelow=.5\thm@postskip,
-  headfont=\fontsize{12pt}{14pt}\bf\rmfamily\selectfont,%\scshape,
+  headfont=\fontsize{12pt}{14pt}\bfseries\rmfamily\selectfont,%\scshape,
   notefont=\fontsize{12pt}{14pt}\rmfamily\selectfont,% notebraces={ (}{)},
   bodyfont=\fontsize{12pt}{14pt}\rmfamily\selectfont,
   %headformat={\NAME\space\NUMBER\space\NOTE},
@@ -1081,14 +1085,15 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \begin{macrocode}
 \tl_const:Nn \l_@@_name_diploma_tl { RPG }
 % 研究生学位名称
-\msg_new:nnn { hkustthesis }{ degree-wrongly-defined }{ Please~ checkout~ degree~ spelling. }
-\cs_new_protected:Npn \@@_print_degree:
+\msg_new:nnn { hkustthesis }{ unknown-degree }{ Unknown~ degree:~ \l_@@_info_degree_tl.\\ Please~ check~ spelling.}
+\cs_new_protected:Npn \@@_print_degree_name:
 {
-  \str_if_eq:NNTF { \l_@@_info_degree_tl } { PhD }
+\str_if_eq:NNTF { \l_@@_info_degree_tl } { PhD }
   { \tl_set:Nn \l_@@_name_degree_tl { Doctor~of~Philosophy } }
-  { \str_if_eq:NNTF { \l_@@_info_degree_tl } { MPhil }
+  {
+    \str_if_eq:NNTF { \l_@@_info_degree_tl } { MPhil }
     { \tl_set:Nn \l_@@_name_degree_tl { Master~of~Philosophy } }
-    { \msg_warning:nn { hkustthesis } { degree-wrongly-defined } }
+    { \msg_error:nn { hkustthesis } { unknown-degree } }
   }
 }
 %    \end{macrocode}
@@ -1106,42 +1111,32 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %
 % \subsubsection{绘制封面}
 % 
-% \begin{macro}{\@@_print_cover:}
+% \begin{macro}{\@@_print_titlepage:}
 % Title page for thesis
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_print_cover:
+\cs_new_protected:Npn \@@_print_titlepage:
 {
   \thispagestyle{plain}
+  \addcontentsline{toc}{chapter}{Title~Page}
   \begin{center}
-    \rmfamily\fontsize{12pt}{18pt}\selectfont\l_@@_info_title_tl \\
-    \setlength{\parskip}{18pt plus 1pt minus 1pt}
-    \phantom{1}\\
-    \phantom{2}\\
-    \phantom{3}\\
-    \phantom{4}\\
-    \phantom{5}\\
-    \rmfamily\fontsize{12pt}{18pt}\selectfont{by} \\
-    \phantom{1}\\
-    \rmfamily\fontsize{12pt}{14pt}\selectfont\l_@@_info_author_tl
-    \phantom{1}\\
-    \phantom{2}\\
-    \phantom{3}\\
-    \phantom{4}\\
-    \phantom{5}\\
-    \@@_print_degree:
-    \normalsize\rmfamily{%
+    %^^A \onehalfspacing\selectfont
+    %^^A \fontsize{12}{18}\selectfont
+    [SMAPLE~TITLE~PAGE]\\[1\baselineskip]
+    [Thesis~Title~with~the~first~letter~of~all~words~capitalized,~except~for\\
+    prepositions,~articles~and~coordinate~conjunctions~that~do~not~appear~as~the~first~word]\\[5\baselineskip]
+    %^^A \l_@@_info_title_tl\\[5\baselineskip]
+    by\\[1\baselineskip]
+    \l_@@_info_author_tl\\[4\baselineskip]
+    \@@_print_degree_name:
+    {
       A~Thesis~Submitted~to\\
       The~Hong~Kong~University~of~Science~and~Technology\\
       in~Partial~Fulfilment~of~the~Requirements~for\\
       the~Degree~of~{\l_@@_name_degree_tl}\\
       in~{\l_@@_major_tl}
-    }
-    \phantom{1}\\
-    \phantom{2}\\
-    \phantom{3}\\
-    \normalfont\normalsize\l_@@_submit_date_tl,~\l_@@_info_city_tl
+    }\\[2\baselineskip]
+    \l_@@_submit_date_tl,~\l_@@_info_city_tl\par%
   \end{center}
-  \addcontentsline{toc}{chapter}{Title~Page}
   \normalfont
   \cleardoublepage
 }
@@ -1151,7 +1146,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % \begin{macro}{\maketitle}
 % 重定义maketitle生成封面
 %    \begin{macrocode}
-\tl_set:Nn \maketitle {\@@_print_cover:}
+\tl_set:Nn \maketitle {\@@_print_titlepage:}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1165,7 +1160,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
   \par\vspace{2ex}
   \bgroup
     \noindent
-    \c_@@_name_keywords_tl
+    {\bfseries\c_@@_name_keywords_tl}
     \clist_use:Nn \l_@@_info_keywords_clist {,~} 
     \par
   \egroup
@@ -1173,38 +1168,33 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 % \end{macro}
 %   
-% \begin{macro}{\@@_print_abstractg:}
+% \begin{macro}{\@@_print_abstract:}
 % Output Abstract
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_print_abstractg:
+\cs_new_protected:Npn \@@_print_abstract:
 {
   \cleardoublepage
   \thispagestyle{plain}
   \phantomsection
   \addcontentsline{toc}{chapter}{Abstract}
   {
-    \bgroup
-    \fontsize{12pt}{14pt}\selectfont
     \begin{center}
-    \fontsize{12pt}{12pt}\selectfont
-    \l_@@_info_title_tl \\
-    by~\l_@@_info_author_tl \\
-    \l_@@_info_department_tl \\
-    The Hong Kong University of Science and Technology
+    \onehalfspacing\selectfont
+    \l_@@_info_title_tl \\[2\baselineskip]
+    by~\l_@@_info_author_tl \\[2\baselineskip]
+    \l_@@_info_department_tl \\[1\baselineskip]
+    The~Hong~Kong~University~of~Science~and~Technology\\[3\baselineskip]
     Abstract
     \end{center}
-    \egroup
   }
-  \fontsize{12pt}{14pt}\selectfont\par%
+  \singlespacing\selectfont
 }
 %    \end{macrocode}
 % \end{macro}
 %
 %    \begin{macrocode}
 \NewDocumentEnvironment{abstract} {}
-{%
-  \@@_print_abstractg:}{\@@_print_keywords:\cleardoublepage
-}
+{ \@@_print_abstract: }{ \cleardoublepage }
 %    \end{macrocode}
 %
 % \subsection{Authorization}
@@ -1220,14 +1210,19 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
     \fontsize{12}{18}\selectfont
     {
     \begin{center}
-    \bf\uline{Authorization}
+    \bfseries\uline{Authorization}
     \end{center}
     }
     I~hereby~declare~that~I~am~the~sole~author~of~the~thesis.\\
 
-    I~authorize~the~Hong~Kong~University~of~Science~and~Technology~to~lend~this~thesis~to~other~institutions~or~individuals~for~the~purpose~of~scholarly~research.\\
+    I~authorize~the~Hong~Kong~University~of~Science~and~Technology~to~lend~
+    this~thesis~to~other~institutions~or~individuals~for~the~purpose~of~
+    scholarly~research.\\
 
-    I~further~authorize~the~Hong~Kong~University~of~Science~and~Technology~to~reproduce~the~thesis~by~photocopying~or~by~other~means,~in~total~or~in~part,~at~the~request~of~other~institutions~or~individuals~for~the~purpose~of~scholarly~research.
+    I~further~authorize~the~Hong~Kong~University~of~Science~and~Technology~to~
+    reproduce~the~thesis~by~photocopying~or~by~other~means,~in~total~or~
+    in~part,~at~the~request~of~other~institutions~or~individuals~for~the~
+    purpose~of~scholarly~research.
     {
     \begin{center}
     \uline{\phantom{Author signature}}\\
@@ -1242,7 +1237,8 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % \end{macro}
 %
 %    \begin{macrocode}
-\NewDocumentCommand\authorization{}{\@@_print_authorization_g:\cleardoublepage}
+\NewDocumentCommand\authorization{}
+  {\@@_print_authorization_g:\cleardoublepage}
 %    \end{macrocode}
 %
 % \subsection{Signature~Page}
@@ -1261,7 +1257,8 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
     \l_@@_info_title_tl \\
     by \\
     \l_@@_info_author_tl \\
-    This~is~to~certify~that~I~have~examined~the~above~{\l_@@_info_degree_tl~}~thesis\\
+    This~is~to~certify~that~I~have~examined~the~
+    above~{\l_@@_info_degree_tl}~thesis\\
     and~have~found~that~it~is~complete~and~satisfactory~in~all~respects,\\
     and~that~any~and~all~revisions~required~by\\
     the~thesis~examination~committee~have~been~made.\\
@@ -1285,7 +1282,8 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % \end{macro}
 %
 %    \begin{macrocode}
-\NewDocumentCommand\signaturepage{}{\@@_print_signaturepage_g:\cleardoublepage}
+\NewDocumentCommand\signaturepage{}
+  {\@@_print_signaturepage_g:\cleardoublepage}
 %</class>
 %    \end{macrocode}
 %%
