@@ -1,0 +1,46 @@
+# adpated from https://github.com/nju-lug/NJUThesis/blob/master/.github/workflows/build.yml
+# more tests needed, including differenet versions of LaTeX and different platform.
+# add manual trigger, you can compile your thesis on Github.
+name: Build LaTeX document
+on: 
+  push:
+    branches:
+      - master
+
+    tags:
+      - v*
+
+  pull_request:
+    branches:
+      - master
+
+  workflow_dispatch:
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        latex: [xelatex, lualatex]
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+
+      - name: Github Action for LaTeX dtx to cls
+        uses: FengChendian/latex-dtx2cls-action@4.0.1
+        with:
+          root_file: hkustthesis.dtx
+          working_directory: ./
+
+      - name: Compile to PDF
+        uses: HermitSun/latex-action@v3
+        with:
+          root_file: mythesis.tex
+          latexmk_use_${{ matrix.latex }}: true
+          args: "-bibtex"
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v2
+        with:
+          name: PDF_${{ matrix.latex }}
+          path: mythesis.pdf
