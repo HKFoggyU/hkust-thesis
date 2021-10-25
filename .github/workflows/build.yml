@@ -42,5 +42,4 @@ jobs:
       - name: Upload PDF
         uses: actions/upload-artifact@v2
         with:
-          name: PDF_${{ matrix.latex }}
-          path: mythesis.pdf
+          path: mythesis_${{ matrix.latex }}.pdf
