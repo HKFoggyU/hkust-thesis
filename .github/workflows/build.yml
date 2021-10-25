@@ -39,11 +39,8 @@ jobs:
           latexmk_use_${{ matrix.latex }}: true
           args: "-bibtex"
 
-      - run: cp mythesis.pdf mythesis_xelatex.pdf
-      
-      - run: mv mythesis.pdf mythesis_lualatex.pdf
-      
       - name: Upload PDF
         uses: actions/upload-artifact@v2
         with:
-          path: mythesis_${{ matrix.latex }}.pdf
+          name: PDF_${{ matrix.latex }}
+          path: mythesis.pdf
