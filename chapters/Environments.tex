@@ -4,26 +4,32 @@
 
 \subsection{Install \hologo{TeX} distribution}
 
+Install \hologo{TeX}\,Live 2021 or latest \hologo{MiKTeX}.
+
 \begin{table}[ht]
     \caption{Environments tested}
-    % \label{tab:1}
+    \label{tab:1}
     \begin{tabular}{ccc}
         \toprule
         OS & TeX & Test \\
         \midrule
         Windows 10 & \hologo{TeX}\,Live 2021 & Pass \\
         Windows 10 & \hologo{MiKTeX} & Pass \\
-        Windows 10 & \hologo{TeX}\,Live 2020 & cref problem  \\
+        Windows 10 & \hologo{TeX}\,Live 2020 & \lstinline|cref| problem  \\
         macOS 10.15 & \hologo{TeX}\,Live 2021 & Pass \\
         Ubuntu 20.04 & \hologo{TeX}\,Live 2021 & Pass \\
+        Ubuntu 20.04 & \hologo{MiKTeX} & Pass \\
+        Andriod 9 (Termux) & \hologo{TeX}\,Live 2021 & Pass \\
         \bottomrule
     \end{tabular}
 \end{table}
 
 \subsection{Editor}
 
-\verb|vscode| with \verb|LaTeX Workshop| is recommended.
+\lstinline|visual-studio-code| with \lstinline|LaTeX Workshop| extension is recommended.
 
 \subsection{Compile toolchain}
 
-\verb|latexmk -xelatex mythesis.tex|
+\lstinline|latexmk -xelatex mythesis.tex|
+
+From \cref{tab:1}, we can see...

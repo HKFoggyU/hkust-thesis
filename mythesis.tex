@@ -1,25 +1,22 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% NJU Thesis
-% 南京大学毕业论文LaTeX模板
-% Version 0.10.1 (2021-09-26)
-%
-% 请关注项目地址以获取最新变化
-% https://github.com/nju-lug/NJUThesis
-% https://git.nju.edu.cn/nju-lug/nju-latex-templates/njuthesis
-% https://ctan.org/pkg/njuthesis
-%
-% 贡献者
-% Yu XIONG @atxy-blip   Yichen ZHAO @FengChendian   
-% Song GAO @myandeg     Chang MA @glatavento   
-% Yilun SUN @HermitSun  Yinfeng LIN @linyinfeng
-% 
-% 许可证
-% LaTeX Project Public License（版本 1.3c 或更高）
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HKUST Thesis LaTeX Template
+%% Version 0.0.3 (2021-10-26)
+%%
+%% Check the project website for latest updates:
+%% https://github.com/HKFoggyU/hkust-thesis
+%%
+%% Contributors:
+%% https://github.com/HKFoggyU/hkust-thesis/graphs/contributors
+%% 
+%% License:
+%% LaTeX Project Public License (version 1.3c)
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[
-    customlatinfont=windows,% 设置英文字符集
+    %customlatinfont=windows,% 设置英文字符集
     ]{hkustthesis}
+
+\usepackage{tikz}
 
 % 设置个人信息
 \hkustsetup {
@@ -64,28 +61,38 @@
 % 导入参考文献数据
 \addbibresource{mythesis.bib}
 
+
 \begin{document}
 
-%-------------------------------------------------
-% Titlepage, Authorization, Signature
-% (Preface), Acknowledgement
-% TOC, List of Figures, List of Tables
-% Abstract
-%-------------------------------------------------
+%% -------------------------------------------------
+%% Thesis structure: In the order of
+%% -------------------------------------------------
+%% Titlepage  -> Authorization -> Signature ->
+%% Acknowledgements ->
+%% TOC -> List of Figures -> List of Tables ->
+%% Abstract -> 
+%% -------------------------------------------------
+%% <Main body> -> 
+%% -------------------------------------------------
+%% References -> (Appendices)
+%% -------------------------------------------------
 
 \frontmatter
 \maketitle 
+
 \authorization
 \signaturepage
 
-%\input{chapters/Preface.tex}
-\input{chapters/Acknowledgements.tex}
+\input{chapters/Pre_Acknowledgements.tex}
 
 \tableofcontents
 \listoffigures
 \listoftables
 
-\input{chapters/Abstract.tex}
+%% Dedication and Preface are optional
+%\input{chapters/Pre_Dedication.tex}
+%\input{chapters/Pre_Preface.tex}
+\input{chapters/Pre_Abstract.tex}
 
 %-------------------------------------------------
 % Main body
@@ -100,7 +107,7 @@
 \input{chapters/Conclusions.tex}
 
 %-------------------------------------------------
-%	参考文献
+% References
 %-------------------------------------------------
 
 \printbibliography[
@@ -108,11 +115,11 @@
     title=References]
 
 %-------------------------------------------------
-%	附录部分
+% Appendices
 %-------------------------------------------------
 \appendix
 
-\input{chapters/Publications.tex}
-\input{chapters/Standard.tex}
+\input{chapters/Appendix_Publications.tex}
+\input{chapters/Appendix_Standard.tex}
 
 \end{document}
