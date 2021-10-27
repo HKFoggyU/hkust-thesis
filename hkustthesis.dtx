@@ -95,7 +95,7 @@ through XeTeX.
 %
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\RequirePackage{expl3}
-%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.1 2021-10-21 00:00:00 +0800  HKFoggyU$
+%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.4 2021-10-28 00:00:00 +0800  HKFoggyU$
 %<class>  { Thesis template for HKUST }
 %<class>\ProvidesExplClass{hkustthesis}
 %<class>{\ExplFileDate}{\ExplFileVersion}{\ExplFileDescription}
@@ -134,6 +134,7 @@ through XeTeX.
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
 % \changes{v0.3}{2021/10/26}{Change \pkg{cref} settings; add some doc}
+% \changes{v0.4}{2021/10/27}{Change theorem environment; make the title name of paperlist customizable}
 %
 % \maketitle
 %
@@ -646,7 +647,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 \AtBeginDocument{\pagestyle{hkustplain}\flushbottom}
 %    \end{macrocode}
 %
-% \subsection{章节标题格式}
+% \subsection{章节标题}
 % 
 %    \begin{macrocode}
 % from the \pkg{titlesec} package.
@@ -659,7 +660,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
   {\MakeUppercase{#1}}
 %    \end{macrocode}
 %
-% \subsection{目录格式}
+% \subsection{目录}
 % 使用\pkg{tocloft}定制目录文字格式。
 %    \begin{macrocode}
 \cftsetpnumwidth{2em}
@@ -756,7 +757,6 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \begin{macrocode}
 \NewDocumentEnvironment{dedication}{}
 {%
-  %^^A \chapter*{Dedication}
   \cleardoublepage
   \phantomsection
   \addcontentsline{toc}{chapter}{Dedication}
@@ -769,324 +769,6 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 % \end{environment}
 %%
-% \begin{macro}{\paperlist}
-% 发表文章目录与合作文章目录。
-%    \begin{macrocode}
-\NewDocumentCommand\paperlist { t* m }
-{  
-  \begin{refsection} 
-    \nocite{#2}
-    \IfBooleanTF {#1}
-    { \printbibliography[heading=subbibliography,title=Conference~Publications] }
-    { \printbibliography[heading=subbibliography,title=Journal~Publications] }
-  \end{refsection}
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \subsection{参考文献}
-% 
-% biblatex设置
-%    \begin{macrocode}
-\RequirePackage[
-    style=ieee,
-    %style=numeric-comp,
-    %citestyle=authortitle-icomp,
-    % citestyle=numeric-comp,
-    %bibstyle=authoryear,
-    % bibstyle=numeric,
-    sorting=none,
-    %sorting=nyt,
-    %sortcites=true,
-    %autocite=footnote,
-    backend=biber, % Compile the bibliography with biber
-    hyperref=true,
-    backref=false,
-    citecounter=true,
-    pagetracker=true,
-    citetracker=true,
-    ibidtracker=context,
-    autopunct=true,
-    autocite=plain,
-    % gbpub=false,         % Uncomment if you do NOT want '[S.l. : s.n.]' 
-                           % in reference entries, GitHub Issue (#47)
-    % gbnamefmt=lowercase, % Uncomment if you do NOT want uppercase author 
-                           % names in reference entries, GitHub Issue (#23)
-]{biblatex}
-%    \end{macrocode}
-%
-% 忽略不需要的文献信息。
-%    \begin{macrocode}
-\AtEveryBibitem{
-    \clearfield{abstract}
-    \clearfield{issn}
-    \clearfield{isbn}
-    \clearfield{archivePrefix}
-    \clearfield{arxivId}
-    \clearfield{pmid}
-    \clearfield{eprint}
-    \ifentrytype{online}{}{\ifentrytype{misc}{}{\clearfield{url}}}
-    % \ifentrytype{book}{\clearfield{doi}}{}
-}
-%    \end{macrocode}
-%
-% \subsection{引用}
-% 
-% 修改标签名称。默认在名称后面添加空格，删除公式编号的括号
-%    \begin{macrocode}
-\crefdefaultlabelformat{(#2#1#3)}
-\crefname{figure}{Figure}{Figures}
-\crefname{table}{Table}{Tables}
-\crefname{equation}{Equation}{Equations}
-\crefformat{chapter}{Chapter}
-\crefformat{section}{Section}
-\crefformat{subsection}{Subsection}
-\crefformat{subsubsection}{Subsubsection}
-\crefname{appendix}{Appendix}{Appendices}
-% \crefname{definition}{Definition}{Definitions}
-% \crefname{axiom}{axiom}{Axioms}
-% \crefname{property}{Property}{Properties}
-% \crefname{proposition}{Proposition}{Propositions}
-% \crefname{lemma}{Lemma}{Lemmas}
-% \crefname{corollary}{Corollary}{Corollaries}
-% \crefname{remark}{Remark}{Remarks}
-% \crefname{condition}{Condition}{Conditions}
-% \crefname{conclusion}{Conclusion}{Conclusions}
-% \crefname{assumption}{Assumption}{Assumptions}
-%    \end{macrocode}
-%
-% CHANGELOG: Get rid of all ctex packages
-% \pkg{hyperref} 
-%    \begin{macrocode}
-\cs_new_protected:Npx \@@_gadd_ltxhook:nn #1
-  { \hook_gput_code:nnn {#1} { \c_novalue_tl } }
-\cs_new_protected:Npn \@@_at_end_preamble:n
-  { \@@_gadd_ltxhook:nn { begindocument/before } }
-\@@_at_end_preamble:n
-{
-  \hypersetup
-    {
-      pdftitle    = \l_@@_info_title_tl,
-      pdfauthor   = \l_@@_info_author_tl,
-      pdfkeywords = \l_@@_info_keywords_clist,
-      pdfcreator  = \c_@@_name_pdf_creator_tl,
-      pdfsubject  = to~her,
-      pdfproducer = love
-    }
-}
-%    \end{macrocode}
-%
-% \subsection{图表浮动体}
-% 
-% \subsubsection{图片表格}
-% 
-% 图表位置调整
-%    \begin{macrocode}
-\floatsetup[figure]{ % Captions for figures
-    capposition=bottom,%
-    margins=centering,%
-    floatwidth=\textwidth%
-}
-\floatsetup[table]{ % Captions for tables
-    capposition=above,%
-    margins=centering,%
-    floatwidth=\textwidth%
-}
-%    \end{macrocode}
-% 
-% 图表标题样式
-%    \begin{macrocode}
-\DeclareCaptionFont{capfont}{
-  \fontsize{12pt}{14pt}\bfseries\rmfamily\selectfont
-}
-\captionsetup{
-  font=small,%
-  labelfont=capfont,
-    textfont=capfont,
-    strut=no,%
-    hypcap=true, % Links point to the top of the figure
-    % indention=0pt, % Suppress indentation
-    % % parindent=0pt, % Suppress space between paragraphs
-    aboveskip=6pt, % Increase the space between the figure and the caption
-    belowskip=6pt, % Increase the space between the caption and the table
-}
-%    \end{macrocode}
-%
-% \subsubsection{代码}
-% 
-% 代码样式
-%    \begin{macrocode}
-\floatsetup[lstlisting]{ % Captions for lstlistings
-    capposition=above,%
-    margins=centering,%
-    floatwidth=\textwidth%
-}
-\lstset{
-    basicstyle=\ttfamily\linespread{1}\small\selectfont,
-    keywordstyle=\bfseries,% use bold style for keywords
-    commentstyle=\rmfamily\itshape,% use italic style for comments
-    stringstyle=\ttfamily,% 字符串风格
-    flexiblecolumns,% ?
-    numbers=left,% left-aligned numbering
-    showspaces=false,% hide markers for spaces
-    showstringspaces=false,
-    captionpos=t,% place the caption at the top
-    % frame=lrtb,% show all four sides of the frame
-    % linewidth=.8\textwidth,
-    % breakatwhitespace=true,
-    breaklines=true,
-    xleftmargin=2em,xrightmargin=2em,% set the width of the code environment
-}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\lstdefinestyle{LaTeX}{
-  language=TeX,
-  morekeywords={
-    begin, caption, label, mathrm, frac, 
-    toprule, midrule, bottomrule, includegraphics}
-}
-%    \end{macrocode}
-%
-% \subsubsection{列表}
-% 
-% 列表环境
-%    \begin{macrocode}
-\renewcommand{\labelitemi}{\tiny$\blacktriangleright$}
-\renewcommand{\labelitemii}{\textbullet}
-
-\setlist[itemize]{noitemsep}
-\setlist[enumerate]{noitemsep}
-\setlist[description]{noitemsep}
-%    \end{macrocode}
-% 
-% \subsection{定理环境}
-%
-% \begin{macro}{\mathbi}
-% Math bold italic letters
-%    \begin{macrocode}
-\NewDocumentCommand\mathbi{m}{\textbf{\em #1}}
-%    \end{macrocode}
-% \end{macro}
-%
-%    \begin{macrocode}
-\declaretheoremstyle[
-  %spaceabove=.5\thm@preskip,
-  %spacebelow=.5\thm@postskip,
-  headfont=\fontsize{12pt}{14pt}\bfseries\rmfamily\selectfont,%\scshape,
-  notefont=\fontsize{12pt}{14pt}\rmfamily\selectfont,% notebraces={ (}{)},
-  bodyfont=\fontsize{12pt}{14pt}\rmfamily\selectfont,
-  %headformat={\NAME\space\NUMBER\space\NOTE},
-  headpunct={},
-  %postheadspace={.5em plus .1em minus .1em},
-  %prefoothook={\hfill\qedsymbol}
-]{hkustthm}
-
-\theoremstyle{hkustthm}
-%    \end{macrocode}
-%
-% 修改证明环境标题 
-%    \begin{macrocode}
-\let\oldproofname=\proofname
-\renewcommand*{\proofname}
-  {\fontsize{12pt}{14pt}\rmfamily\selectfont{\oldproofname}} 
-%    \end{macrocode}
-%
-% 
-%    \begin{macrocode}
-\declaretheorem[
-    name=算法,
-    style=hkustthm,
-    refname={算法,算法},
-    Refname={算法,算法},
-    % numberwithin=section,
-]{algorithm}
-\declaretheorem[
-    name=假设,
-    style=hkustthm,
-    refname={假设,假设},
-    Refname={假设,假设},
-    % numberwithin=section,
-]{assumption}
-\declaretheorem[
-    name=公理,
-    style=hkustthm,
-    refname={公理,公理},
-    Refname={公理,公理},
-    % numberwithin=section,
-]{axiom}
-\declaretheorem[
-    name=结论,
-    style=hkustthm,
-    refname={结论,结论},
-    Refname={结论,结论},
-    % numberwithin=section,
-]{conclusion}
-\declaretheorem[
-    name=条件,
-    style=hkustthm,
-    refname={条件,条件},
-    Refname={条件,条件},
-    % numberwithin=section,
-]{condition}
-\declaretheorem[
-    name=推论,
-    style=hkustthm,
-    refname={推论,推论},
-    Refname={推论,推论},
-    % numberwithin=section,
-]{corollary}
-\declaretheorem[
-    name=定义,
-    style=hkustthm,
-    refname={定义,定义},
-    Refname={定义,定义},
-    % numberwithin=section,
-]{definition}
-\declaretheorem[
-        name=例,
-        style=hkustthm,
-        refname={例,例},
-        Refname={例,例},
-        % numberwithin=section,
-]{example}
-\declaretheorem[
-    name=引理,
-    style=hkustthm,
-    refname={引理,引理},
-    Refname={引理,引理},
-    % numberwithin=section,
-]{lemma}
-\declaretheorem[
-    name=性质,
-    style=hkustthm,
-    refname={性质,性质},
-    Refname={性质,性质},
-    % numberwithin=section,
-]{property}
-\declaretheorem[
-    name=命题,
-    style=hkustthm,
-    refname={命题,命题},
-    Refname={命题,命题},
-    % numberwithin=section,
-]{proposition}
-\declaretheorem[
-    name=注解,
-    style=hkustthm,
-    refname={注解,注解},
-    Refname={注解,注解},
-    % numberwithin=section,
-]{remark}
-\declaretheorem[
-    name=定理,
-    style=hkustthm,
-    refname={定理,定理},
-    Refname={定理,定理},
-    numberwithin=section,
-]{theorem}
-%    \end{macrocode}
-%
 % \subsection{封面}
 %
 % \subsubsection{内部命令}
@@ -1145,7 +827,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 %
 % \begin{macro}{\l_@@_name_diploma_tl}
-% Thesis paper or design
+% Thesis paper or design [Abandoned]
 %    \begin{macrocode}
 \str_if_eq:NNTF { \l_@@_info_type_tl } { thesis } 
 { \tl_const:Nn \l_@@_info_type_tl_name 
@@ -1193,10 +875,10 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{摘要绘制}
+% \subsection{摘要}
 %
 % \begin{macro}{\@@_print_keywords:}
-% Keywords
+% Keywords [Abandoned]
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_print_keywords:
 {
@@ -1331,8 +1013,324 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \begin{macrocode}
 \NewDocumentCommand\signaturepage{}
   {\@@_print_signaturepage_g:\cleardoublepage}
+%    \end{macrocode}
+%
+% \subsection{参考文献}
+% 
+% biblatex设置
+%    \begin{macrocode}
+\RequirePackage[
+    style=ieee,
+    %style=numeric-comp,
+    %citestyle=authortitle-icomp,
+    % citestyle=numeric-comp,
+    %bibstyle=authoryear,
+    % bibstyle=numeric,
+    sorting=none,
+    %sorting=nyt,
+    %sortcites=true,
+    %autocite=footnote,
+    backend=biber, % Compile the bibliography with biber
+    hyperref=true,
+    backref=false,
+    citecounter=true,
+    pagetracker=true,
+    citetracker=true,
+    ibidtracker=context,
+    autopunct=true,
+    autocite=plain,
+    % gbpub=false,         % Uncomment if you do NOT want '[S.l. : s.n.]' 
+                           % in reference entries, GitHub Issue (#47)
+    % gbnamefmt=lowercase, % Uncomment if you do NOT want uppercase author 
+                           % names in reference entries, GitHub Issue (#23)
+]{biblatex}
+%    \end{macrocode}
+%
+% 忽略不需要的文献信息。
+%    \begin{macrocode}
+\AtEveryBibitem{
+    \clearfield{abstract}
+    \clearfield{issn}
+    \clearfield{isbn}
+    \clearfield{archivePrefix}
+    \clearfield{arxivId}
+    \clearfield{pmid}
+    \clearfield{eprint}
+    \ifentrytype{online}{}{\ifentrytype{misc}{}{\clearfield{url}}}
+    % \ifentrytype{book}{\clearfield{doi}}{}
+}
+%    \end{macrocode}
+%
+% \subsection{List~of~Publications}
+% \begin{macro}{\paperlist}
+% 发表文章目录与合作文章目录。\\
+% CHANGELOG: Add an optional argument to paperlist for customization.
+%    \begin{macrocode}
+\NewDocumentCommand\paperlist { o m }
+{  
+  \begin{refsection} 
+    \nocite{#2}
+    \printbibliography[heading=subbibliography,title=#1]
+  \end{refsection}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Cross~Reference}
+% \pkg{cref}\\
+% 修改标签名称。默认在名称后面添加空格，删除公式编号的括号
+%    \begin{macrocode}
+\crefdefaultlabelformat{(#2#1#3)}
+\crefname{figure}{Figure}{Figures}
+\crefname{table}{Table}{Tables}
+\crefname{equation}{Equation}{Equations}
+\crefformat{chapter}{Chapter}
+\crefformat{section}{Section}
+\crefformat{subsection}{Subsection}
+\crefformat{subsubsection}{Subsubsection}
+\crefname{appendix}{Appendix}{Appendices}
+\crefname{definition}{Definition}{Definitions}
+\crefname{axiom}{axiom}{Axioms}
+\crefname{property}{Property}{Properties}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{remark}{Remark}{Remarks}
+\crefname{condition}{Condition}{Conditions}
+\crefname{conclusion}{Conclusion}{Conclusions}
+\crefname{assumption}{Assumption}{Assumptions}
+%    \end{macrocode}
+%
+% CHANGELOG: Get rid of all ctex packages
+% \pkg{hyperref} 
+%    \begin{macrocode}
+\cs_new_protected:Npx \@@_gadd_ltxhook:nn #1
+  { \hook_gput_code:nnn {#1} { \c_novalue_tl } }
+\cs_new_protected:Npn \@@_at_end_preamble:n
+  { \@@_gadd_ltxhook:nn { begindocument/before } }
+\@@_at_end_preamble:n
+{
+  \hypersetup
+    {
+      pdftitle    = \l_@@_info_title_tl,
+      pdfauthor   = \l_@@_info_author_tl,
+      pdfkeywords = \l_@@_info_keywords_clist,
+      pdfcreator  = \c_@@_name_pdf_creator_tl,
+      pdfsubject  = to~her
+    }
+}
+%    \end{macrocode}
+%
+% \subsection{图表浮动体}
+% 
+% \subsubsection{图片表格}
+% 
+% 图表位置调整
+%    \begin{macrocode}
+\floatsetup[figure]{ % Captions for figures
+    capposition=bottom,%
+    margins=centering,%
+    floatwidth=\textwidth%
+}
+\floatsetup[table]{ % Captions for tables
+    capposition=above,%
+    margins=centering,%
+    floatwidth=\textwidth%
+}
+%    \end{macrocode}
+% 
+% 图表标题样式
+%    \begin{macrocode}
+\DeclareCaptionFont{capfont}{
+  \rmfamily\selectfont
+}
+\captionsetup{
+  font=normal,%
+  labelfont=capfont,
+    textfont=capfont,
+    strut=no,%
+    hypcap=true, % Links point to the top of the figure
+    % indention=0pt, % Suppress indentation
+    % % parindent=0pt, % Suppress space between paragraphs
+    aboveskip=6pt, % Increase the space between the figure and the caption
+    belowskip=6pt, % Increase the space between the caption and the table
+}
+%    \end{macrocode}
+%
+% \subsubsection{代码}
+% 
+% 代码样式
+%    \begin{macrocode}
+\floatsetup[lstlisting]{ % Captions for lstlistings
+    capposition=above,%
+    margins=centering,%
+    floatwidth=\textwidth%
+}
+\lstset{
+    basicstyle=\ttfamily\linespread{1}\small\selectfont,
+    keywordstyle=\bfseries,% use bold style for keywords
+    commentstyle=\rmfamily\itshape,% use italic style for comments
+    stringstyle=\ttfamily,% 字符串风格
+    flexiblecolumns,% ?
+    numbers=left,% left-aligned numbering
+    showspaces=false,% hide markers for spaces
+    showstringspaces=false,
+    % captionpos=t,% place the caption at the top ??repeated??
+    frame=tb,% show top & bottom sides of the frame
+    % linewidth=.8\textwidth,
+    % breakatwhitespace=true,
+    breaklines=true,
+    xleftmargin=1em,xrightmargin=1em,% set the width of the code environment
+}
+%    \end{macrocode}
+% Defining the code style for specific language
+% should be done by user so I removed it.
+%
+% \subsubsection{列表}
+% 
+% 列表环境
+%    \begin{macrocode}
+\renewcommand{\labelitemi}{\large\textbullet}
+\renewcommand{\labelitemii}{\normalsize\textbullet}
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\renewcommand{\labelenumii}{\alph{enumii}.}
+%    \end{macrocode}
+% Remove separation between items
+%    \begin{macrocode}
+\setlist[itemize]{noitemsep}
+\setlist[enumerate]{noitemsep}
+\setlist[description]{noitemsep}
+%    \end{macrocode}
+% 
+% \subsection{定理环境}
+%
+% \begin{macro}{\mathbi}
+% Math bold italic letters\\
+% Note: \pkg{unicode-math} conflicts with \pkg{bm}. Do not use the latter.
+%    \begin{macrocode}
+\NewDocumentCommand\mathbi{m}{\symbfit{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\declaretheoremstyle[
+  %spaceabove=.5\thm@preskip,
+  %spacebelow=.5\thm@postskip,
+  headfont=\bfseries\rmfamily\selectfont,% \scshape,
+  notefont=\rmfamily\selectfont,% notebraces={ (}{)},
+  bodyfont=\rmfamily\selectfont,
+  %headformat={\NAME\space\NUMBER\space\NOTE},
+  headpunct={},
+  %postheadspace={.5em plus .1em minus .1em},
+  %prefoothook={\hfill\qedsymbol}
+]{hkustthm}
+
+\theoremstyle{hkustthm}
+%    \end{macrocode}
+%
+% 修改证明环境标题 
+%    \begin{macrocode}
+\let\oldproofname=\proofname
+\renewcommand*{\proofname}
+  {\rmfamily\selectfont{\oldproofname}} 
+%    \end{macrocode}
+%
+% 
+%    \begin{macrocode}
+\declaretheorem[
+    name=Algorithm,
+    style=hkustthm,
+    refname={algorithm,algorithms},
+    Refname={Algorithm,Algorithms},
+    % numberwithin=section,
+]{algorithm}
+\declaretheorem[
+    name=Assumption,
+    style=hkustthm,
+    refname={assumption,assumptions},
+    Refname={Assumption,Assumptions},
+    % numberwithin=section,
+]{assumption}
+\declaretheorem[
+    name=Axiom,
+    style=hkustthm,
+    refname={axiom,axioms},
+    Refname={Axiom,Axioms},
+    % numberwithin=section,
+]{axiom}
+\declaretheorem[
+    name=Conclusion,
+    style=hkustthm,
+    refname={conclusion,conclusions},
+    Refname={Conclusion,Conclusions},
+    % numberwithin=section,
+]{conclusion}
+\declaretheorem[
+    name=Condition,
+    style=hkustthm,
+    refname={condition,conditions},
+    Refname={Condition,Conditions},
+    % numberwithin=section,
+]{condition}
+\declaretheorem[
+    name=Corollary,
+    style=hkustthm,
+    refname={corollary,corollaries},
+    Refname={Corollary,Corollaries},
+    % numberwithin=section,
+]{corollary}
+\declaretheorem[
+    name=Definition,
+    style=hkustthm,
+    refname={definition,definitions},
+    Refname={Definition,Definitions},
+    % numberwithin=section,
+]{definition}
+\declaretheorem[
+        name=Example,
+        style=hkustthm,
+        refname={example,examples},
+        Refname={Example,Examples},
+        % numberwithin=section,
+]{example}
+\declaretheorem[
+    name=Lemma,
+    style=hkustthm,
+    refname={lemma,lemmas},
+    Refname={Lemma,Lemmas},
+    % numberwithin=section,
+]{lemma}
+\declaretheorem[
+    name=Property,
+    style=hkustthm,
+    refname={property,properties},
+    Refname={Property,Properties},
+    % numberwithin=section,
+]{property}
+\declaretheorem[
+    name=Proposition,
+    style=hkustthm,
+    refname={proposition,propositions},
+    Refname={Proposition,Propositions},
+    % numberwithin=section,
+]{proposition}
+\declaretheorem[
+    name=Remark,
+    style=hkustthm,
+    refname={remark,remarks},
+    Refname={Remark,Remarks},
+    % numberwithin=section,
+]{remark}
+\declaretheorem[
+    name=Theorem,
+    style=hkustthm,
+    refname={theorem,theorems},
+    Refname={Theorem,Theorems},
+    numberwithin=section,
+]{theorem}
 %</class>
 %    \end{macrocode}
+%
 %%
-% \end{implementation}
+%% \end{implementation}
 %
