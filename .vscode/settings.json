@@ -1,0 +1,92 @@
+{
+    "latex-workshop.latex.autoBuild.run": "never",
+    "latex-workshop.latex.tools": [
+        {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-xelatex"
+            ]
+        },
+        {
+            "name": "biber",
+            "command": "biber",
+            "args": [
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "makedoc",
+            "command": "latexmk",
+            "args": [
+                "-xelatex",
+                "hkustthesis.dtx"
+            ]
+        },
+        {
+            "name": "extract_dtx",
+            "command": "xetex",
+            "args": [
+                "hkustthesis.dtx"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "build_mythesis",
+            "tools": [
+                "latexmk"
+            ]
+        },
+        {
+            "name": "build_dtx",
+            "tools": [
+                "makedoc"
+            ]
+        },
+        {
+            "name": "extract_dtx",
+            "tools": [
+                "extract_dtx"
+            ]
+        }
+    ],
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.acn",
+        "*.acr",
+        "*.alg",
+        "*.aux",
+        "*.bbl",
+        "*.blg",
+        "*.bcf",
+        "*.fdb_latexmk",
+        "*.fls",
+        "*.glg",
+        "*.glo",
+        "*.gls",
+        "*.gz",
+        "*.hd",
+        "*.idx",
+        "*.ind",
+        "*.ins",
+        "*.ist",
+        "*.lof",
+        "*.log",
+        "*.lot",
+        "*.nav",
+        "*.out",
+        "*.run.xml",
+        "*.snm",
+        "*.toc"
+    ]
+}
