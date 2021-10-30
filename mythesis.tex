@@ -13,54 +13,47 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[
-    %customlatinfont=windows,% 设置英文字符集
-    ]{hkustthesis}
+  %customlatinfont=windows,%% windows|macos|gyre|none
+]{hkustthesis}
 
-\usepackage{tikz}
-
-% 设置个人信息
+%% Thesis information
 \hkustsetup {
-    % 有空格的内容请用 {} 包裹
-    % 注意不要有空行，否则可能报错
-    info = {
-        degree = {MPhil},
-        % Thesis Title
-        title = {A Brief Introduction to Writing Thesis with This \hologo{LaTeX} Template}, 
-        % 关键词
-        keywords = {Neon, Genesis, Evangelion},
-        % 姓名学号
-        grade = {2021},
-        student-id = {20112233},
-        author = {Cruel Angel},
-        % 院系专业
-        %school = {School of Engineering},
-        department = {Department of NERV},
-        major = {Human Instrumentality Project},
-        field = {Nanophotonics},
-        % 导师
-        supervisor = {Adams},
-        supervisor-title = {Prof.},
-        % 第二导师，如无则留空
-        co-supervisor = {Lilith},
-        co-supervisor-title = {Prof.},
-        % 提交日期
-        submit-date = {October 2021}, % Only <month year>
-        submit-date-long = {31 October 2021}, % <date month year>
-        % 答辩，均为研究生项
-        defend-date = {December 31 2021},
-        chairman = {Prof. Ikari Gendo},
-        depthead = {Prof. Ikari Yui},
-        reviewer = {Prof. A, Prof. B, Prof. C, Prof. D (External Examiner)},
-        city = {Geo Front},
-    }
+  %% Please wrap the items with {}.
+  %% If one item is not applicable, just leave it {}.
+  %% Please do not leave any blank lines.
+  info = {
+    degree = {PhD},
+    title = {Triggering the Forth Impact}, 
+    keywords = {Neon, Genesis, Evangelion},
+    grade = {},
+    student-id = {},
+    author = {Cruel Angel},
+    school = {School of SEELE},
+    department = {Department of NERV},
+    program = {Human Instrumentality Project},
+    major = {},
+    supervisor = {Adams},
+    supervisor-title = {Prof.},
+    %% Co-supervisor, if any
+    co-supervisor = {Lilith},
+    co-supervisor-title = {Prof.},
+    %% Thesis submit date. Please fill in both items
+    submit-date = {March 2021}, % Only <month year>
+    submit-date-long = {8 March 2021}, % <date month year>
+    %% thesis defend date.
+    defend-date = {13 August 2021},
+    chairman = {Prof. Ikari Gendo},
+    depthead = {Prof. Ikari Yui, Head of Department},
+    reviewer = {},
+    city = {Geo Front},
+  }
 }
 
-% 设置图片存储位置
-\graphicspath{{figure/}}
+%% Import extra packages
+\usepackage{tikz}
 
-% 导入参考文献数据
+%% Import bib file for bibliography
 \addbibresource{mythesis.bib}
-
 
 \begin{document}
 
@@ -94,9 +87,9 @@
 %\input{chapters/Pre_Preface.tex}
 \input{chapters/Pre_Abstract.tex}
 
-%-------------------------------------------------
-% Main body
-%-------------------------------------------------
+%% -------------------------------------------------
+%% Main body
+%% -------------------------------------------------
 \mainmatter
 
 \input{chapters/Introduction.tex}
@@ -106,17 +99,15 @@
 \input{chapters/Mathematics.tex}
 \input{chapters/Conclusions.tex}
 
-%-------------------------------------------------
-% References
-%-------------------------------------------------
+%% -------------------------------------------------
+%% References
+%% -------------------------------------------------
 
-\printbibliography[
-    heading=bibintoc,% 插入目录条目
-    title=References]
+\printbibliography[heading=bibintoc,title=References]
 
-%-------------------------------------------------
-% Appendices
-%-------------------------------------------------
+%% -------------------------------------------------
+%% Appendices
+%% -------------------------------------------------
 \appendix
 
 \input{chapters/Appendix_Publications.tex}

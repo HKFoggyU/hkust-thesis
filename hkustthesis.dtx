@@ -125,16 +125,15 @@ through XeTeX.
 %
 % \title{\color{hkustblue}{The \textsc{HkustThesis} class\\ A \hologo{LaTeX}\textcolor{hkustred}{3} template}}
 % 
-% \author{
-%   \href{https://github.com/HKFoggyU/hkust-thesis/}{HKFoggyU}
-% }
+% \author{\href{https://github.com/HKFoggyU/hkust-thesis/}{HKFoggyU}}
 %
-% \date{v0.2 \\ Released 2021-10-24}
+% \date{v0.4.1 \\ Released 2021-10-29}
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
 % \changes{v0.3}{2021/10/26}{Change \pkg{cref} settings; add some doc}
 % \changes{v0.4}{2021/10/27}{Change theorem environment; make the title name of paperlist customizable}
+% \changes{v0.4.1}{2021/10/29}{Add more documentation}
 %
 % \maketitle
 %
@@ -171,34 +170,338 @@ through XeTeX.
 % 
 % \begin{documentation}
 %
-% \section{使用方法}
+% \section{模板介绍}
+% \textsc{HkustThesis}是由GitHub组织 HKFoggyU 维护的用于香港科技大学研究型硕士和博士生毕业论文排版的\hologo{LaTeX}模板。
 %
-% \subsection{\hologo{TeX} file struture}
+% \subsection{动机}
+% GitHub上已有数个由热心校友（包括但不限于@wenbinf、@onlytailei、@fcyu、@cheedoong）制作的毕业论文\hologo{LaTeX}模板。这些模板大部分编写时间久远，托管于个人仓库，鲜有后续更新和维护；且这些模板均由\hologo{LaTeX2e}语法编写。
 %
-% A \hologo{TeX} file using \cls{hkustthesis} should have the following struture:
+%随着时代的进步，更加清晰简明的\hologo{LaTeX3}大大提高了模板的易读性与可维护性。因此，HKFoggyU的成员决定通过\hologo{LaTeX3}语法、参考已有的优秀项目、以团队的力量，编写并维护一个全新的香港科技大学毕业论文模板。
 %
+% \subsection{文档结构}
+% 本文档的前半部分为使用该模板的文字说明，供使用本模板撰写毕业论文的同学们参考；后半部分为代码实现，供有意了解或贡献源码的同学参考。
+%
+% \section{工欲善其事，必先利其器}
+% 有\hologo{LaTeX}基础的用户可以跳过本节。
+%
+% \subsection{\hologo{LaTeX}入门}
+% 本节不会从\hologo{LaTeX}是什么开始讲起。授人以鱼不如授人以渔，本节将更侧重从0入门\hologo{LaTeX}的方法而非具体实现。
+% 
+% \begin{quote}
+% ``吾生也有涯，而知也无涯。''
+% \end{quote}
+%
+% 作为一个已经被广泛应用数十年的排版工具，\hologo{LaTeX}的学习、参考资料可以说是浩如烟海。因此，掌握在繁杂的资料中找到问题解决方案的能力比通读各种\hologo{LaTeX}教程更加重要。
+%
+% 学会使用搜索引擎和技术论坛（如Stack Overflow、LaTeX.org）将大大减少耗费在debug上的时间。
+%
+% 在中文资料中，北京大学刘海洋的《\hologo{LaTeX}入门》、复旦大学曾祥东的《现代\hologo{LaTeX}入门讲座》都是非常优秀的。本项目的 \file{README} 中提及了刘海洋的视频讲座，如果觉得书籍难以下咽，不妨抽出3个小时看完\href{https://www.bilibili.com/video/BV1s7411U7Pr}{该视频}。
+%
+% 结合以上两点，一个初学者就已经具备使用本模板的能力。
+%
+% \subsection{\hologo{LaTeX}环境}
+% 本模板要求的\hologo{LaTeX}发行版为最新版的\hologo{TeXLive} (2021) 或\hologo{MiKTeX}。低版本的发行版可能导致潜在的问题或者无法编译。
+% 
+% 本模板在各平台、各\hologo{LaTeX}发行版上的编译情况如表 (\ref{tab:environment}) 所示。
+%
+% \begin{table}[ht]
+%   \caption{不同平台测试结果}
+%   \label{tab:environment}
+%   \centering
+%   \begin{tabular}{ccc}
+%     \toprule
+%     OS & TeX & Test \\
+%     \midrule
+%     Windows 10    & \hologo{TeX}\,Live 2021    & Pass \\
+%     Windows 10    & \hologo{MiKTeX}            & Pass \\
+%     Windows 10    & \hologo{TeX}\,Live 2020    & \lstinline|cref| problem  \\
+%     macOS 10.15   & \hologo{TeX}\,Live 2021    & Pass \\
+%     Ubuntu 20.04  & \hologo{TeX}\,Live 2021    & Pass \\
+%     Ubuntu 20.04  & \hologo{MiKTeX}            & Pass \\
+%     Termux        & \hologo{TeX}\,Live 2021    & Pass \\
+%     Overleaf      & \hologo{TeX}\,Live 2021    & Pass \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
+%
+% 如果本地尚未安装任何\hologo{LaTeX}发行版，那么 \href{https://www.overleaf.com/}{Overleaf} 是作为入门的很好选择。当然，如果希望离线也可以工作，请在上述发行版中选择一个，到其官网下载最新版本的安装程序并安装。
+% \begin{itemize}
+% \item \href{https://www.tug.org/texlive/}{\hologo{TeXLive}}
+% \item \href{https://miktex.org/download}{\hologo{MiKTeX}}
+% \end{itemize}
+% macOS 用户请下载 \href{https://www.tug.org/mactex/mactex-download.html}{Mac\hologo{TeX}}。
+%
+% \subsection{获取本模板}
+% \begin{itemize}
+% \item (推荐) 请在本项目的 \href{https://github.com/HKFoggyU/hkust-thesis/releases/latest}{GitHub Release} 页面下载本模板最新版本，名为 \file{hkustthesis-v*.*.zip} 的压缩文件。
+% \item (不推荐) 如果希望获取第一时间的更新，可以克隆本项目仓库，并运行
+%  \begin{ctexexam}
+%    xetex hkustthesis.dtx
+%  \end{ctexexam}
+% 生成 \file{hkustthesis.cls} 文件，用于编译。
+% \end{itemize}
+%
+% \subsection{编辑器}
+% 本小节针对本地编译的用户。Overleaf 用户可以在浏览器内完成工作。
+%
+% 本文档无意参与 ``什么是世界上最好的编辑器'' 这类争论。对于初学者，强烈建议建议使用 Visual Studio Code 配合 LaTeX Workshop 插件以获得良好的编辑体验。你可以在\href{https://itxia.github.io/soft/post/ConfigVSCode/}{这里}找到一份 (年久失修但问题不大的) 安装和配置教程。
+%
+% 除此之外，支持热重载的 PDF 阅读器如 \href{https://www.sumatrapdfreader.org/download-free-pdf-viewer}{Sumatra PDF} 也是一个常用的工具。
+%
+% \section{编译}
+%
+% \subsection{在线编译：使用 Overleaf}
+% \begin{enumerate}
+%  \item 注册一个 Overleaf 帐号。
+%  \item 将下载得到的 \file{hkustthesis-v*.*.zip} 文件上传到 Overleaf 网站。上传完毕后将自动进入该项目页面。
+%  \item 在左上方 ``Menu/菜单'' 按钮，在 ``settings/设置'' 中选择如下设置：
+%   \begin{itemize}
+%    \item Compiler: XeLaTeX
+%    \item TeX Live version: 2021
+%   \end{itemize}
+%  \item 编辑 \file{tex} 文件。关于 \file{tex} 文件内容的介绍请参考第 \ref{sec:fileContents} 节。
+% \end{enumerate}
+%
+% \subsection{本地编译}
+% \subsubsection{VSCode}
+% 本项目提供了 VSCode 的一个配置文件 \file{.vscode/settings.json}。在 VSCode 中的 \hologo{TeX} 侧栏选择 ``build recipe'' 为 ``build_mythesis'' 即可进行编译。
+%
+% 下文提及的 ``运行'' 指在命令行中运行该命令。如果不知道如何打开命令行，推荐使用 VSCode 的编译方式。
+%
+% \subsubsection{latexmk}
+% 本项目提供了一个定制的 \file{latexmkrc} 配置文件以供 \verb|latexmk| 进行自动化构建。分别运行
 % \begin{ctexexam}
-%   \documentclass[<options>]{hkustthesis}
-%   \hkustsetup { info = {<info>} }
-%   \graphicspath{{figure/}}
-%   \addbibresource{hkustthesis.bib}
-%   \begin{document}
-%   \maketitle
-%   <abstract>
-%   <preface>
-%   \tableofcontents
-%   \listoffigures
-%   \listoftables
-%   \mainmatter
-%   <text>
-%   \printbibliography[heading=bibintoc,title=References]
-%   <acknowledgements>
-%   \appendix
-%   <appendix>
-%   \end{document}
+%   latexmk
+%   latexmk -c
+% \end{ctexexam}
+% 以进行编译和删除编译中间产物。
+%
+% \subsubsection{\hologo{XeLaTeX}手动编译}
+% \begin{ctexexam}
+%   xelatex mythesis.tex
+%   biber mythesis
+%   xelatex mythesis.tex
+%   xelatex mythesis.tex
 % \end{ctexexam}
 %
-% \subsection{Under~construction\ldots}
+% \subsubsection{Make}
+% 本项目提供了一个 \file{Makefile}。分别运行
+% \begin{ctexexam}
+%   make
+%   make clean
+% \end{ctexexam}
+% 以进行编译和删除编译中间产物。
+%
+%
+% \section{撰写论文}\label{sec:fileContents}
+%
+% \subsection{文件结构}
+%
+% 下载得到的压缩文件内部的文件结构应如表 (\ref{tab:fileStruture}) 所示。
+%
+% \begin{table}[ht]
+%   \caption{\cls{hkustthesis}文件结构}
+%   \label{tab:fileStruture}
+%   \centering
+%   \begin{tabular}{cc}
+%     \toprule
+%     文件名                                  & 说明                 \\
+%     \midrule
+%     \file{.vscode}                          & VSCode 配置文件夹    \\
+%     \color{hkustgold}\file{chapters}        & 存放论文各章节       \\
+%     \color{hkustgold}\file{figure}          & 存放论文所用图片     \\
+%     \file{hkustthesis.cls}                  & 模板文档类           \\
+%     \file{latexmkrc}                        & latexmk 配置文件     \\
+%     \file{LICENSE}                          & 许可证文件           \\
+%     \color{hkustgold}\file{mythesis.bib}    & 存放论文所用参考文献 \\
+%     \color{hkustgold}\file{mythesis.tex}    & 论文主文件           \\
+%     \file{README(.zh).md}                   & 自述文件(中/英文)    \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
+%
+% 其中各文件(夹)的作用已经给出。对于使用本模板撰写毕业论文的用户，只需要修改表 (\ref{tab:fileStruture}) 中\textcolor{hkustgold}{金色的文件}。如果有其它需求，可以按需修改文件结构，只需在主文件 \file{mythesis.tex} 中作出相应的修改即可。
+%
+% \subsection{主文件介绍}
+% \file{mythesis.tex}是本模板的 \hologo{TeX} 主文件。下面将给出主文件内容的解释。
+%
+% \subsubsection{模板选项}
+% 模板选项是位于\tn{documentclass}后的方括号内的选项。在本模板中，只定义了一个模板选项：
+%
+% \begin{function}{customlatinfont}
+%  \begin{syntax}
+%   customlatinfont = <windows|macos|gyre|none>
+%  \end{syntax}
+% 自定义字体。
+% \end{function}
+% \begin{table}[htbp]
+%   \centering
+%   \caption{西文字体清单}
+%   \label{tab:latinfontset}
+%   \begin{tabular}{cccc}
+%     \toprule
+%     选项     & 衬线体 & 无衬线体 & 等宽字体 \\
+%     \midrule
+%     Windows  & Times~New~Roman           & Arial                   & Courier~New \\
+%     macOS    & Times~New~Roman           & Arial                   & Menlo \\
+%     gyre     & \Hologo{TeX}~Gyre~Termes  & \Hologo{TeX}~Gyre~Heros & \Hologo{TeX}~Gyre~Cursor \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
+%
+% 该选项默认被 \verb|%| 注释掉，即不发挥作用，使模板可以在不同操作系统上自动选择对应的字体；当然，如果用户希望该模板在所有操作系统上都使用同样的字体（前提是所用到的字体存在），那么也可以取消注释，并将后面的选项修改为希望使用的选项。其中，如果设置为 \opt{none}，则需要通过 \pkg{fontspec} 宏包手动设置字体。前三种选项使用的字体如表 (\ref{tab:latinfontset}) 所示。
+%
+% \subsubsection{论文信息}
+%
+% \begin{function}{\hkustsetup}
+%  \begin{syntax}
+%   \tn{hkustsetup}\Arg{键值列表}
+%  \end{syntax}
+% 论文必要信息。
+% \end{function}
+% 此选项的内容是以英文逗号 ``,'' 分隔的键值列表，定义了该论文的必要信息。每一项等号左边为变量名，右边为由花括号包裹的变量值。如果某一项的值不需要填，可以留空。
+%
+% 其中标为\textcolor{hkustblue}{蓝色的选项}已经过时或者暂不适配，无论是留空还是填写内容都不会对论文造成影响，如果没有特别需求，建议留空。
+%
+% \begin{function}{degree}
+%  \begin{syntax}
+%   degree = \Arg{(PhD)|MPhil}
+%  \end{syntax}
+% 学位。请注意参数的大小写。形如 ``phd'' 的参数不会得到正确的结果。
+% \end{function}
+%
+% \begin{function}{title}
+%  \begin{syntax}
+%   title               = \Arg{论文标题}
+%  \end{syntax}
+% 论文标题。
+% \end{function}
+%
+% \begin{function}{keywords, grade, student-id}
+%  \begin{syntax}
+%   \textcolor{hkustblue}{keywords}            = \Arg{关键词}
+%   \textcolor{hkustblue}{grade}               = \Arg{年级}
+%   \textcolor{hkustblue}{student-id}          = \Arg{学号}
+%  \end{syntax}
+% 关键词列表、年级、学号。
+% \end{function}
+%
+% \begin{function}{author}
+%  \begin{syntax}
+%   author              = \Arg{作者}
+%  \end{syntax}
+% 作者。
+% \end{function}
+%
+% \begin{function}{school}
+%  \begin{syntax}
+%   \textcolor{hkustblue}{school}              = \Arg{学院}
+%  \end{syntax}
+% 学院。
+% \end{function}
+%
+% \begin{function}{department}
+%  \begin{syntax}
+%   department          = \Arg{系/部门}
+%  \end{syntax}
+% 系/部门的全称。不要忘记开头的 ``Department/Division of''。
+% \end{function}
+%
+% \begin{function}{program}
+%  \begin{syntax}
+%   program             = \Arg{项目名称}
+%  \end{syntax}
+% 项目名称。请参考 SIS 中的 ``name of program''。大多数情况下应和系/部门名相同。
+% \end{function}
+%
+% \begin{function}{major}
+%  \begin{syntax}
+%   \textcolor{hkustblue}{major}               = \Arg{专业}
+%  \end{syntax}
+% 专业方向。请参考 SIS 中的 ``major''。
+% \end{function}
+%
+% \begin{function}{supervisor, supervisor-title, co-supervisor, co-supervisor-title}
+%  \begin{syntax}
+%   supervisor          = \Arg{导师姓名}
+%   supervisor-title    = \Arg{导师头衔}
+%   co-supervisor       = \Arg{Co导师姓名}
+%   co-supervisor-title = \Arg{Co导师头衔}
+%  \end{syntax}
+% 导师信息。导师头衔可以写 ``Prof.'' 也可以写 ``Professor''，且无需留出末尾空格。
+% \end{function}
+%
+% \begin{function}{submit-date, submit-date-long, defend-date}
+%  \begin{syntax}
+%   submit-date         = \Arg{论文提交日期}
+%   submit-date-long    = \Arg{论文提交确切日期}
+%   defend-date         = \Arg{论文答辩日期}
+%  \end{syntax}
+% 其中，\opt{submit-date} 和 \opt{defend-date} 请只填写 ``月 年''，而 \opt{submit-date-long} 请填写 ``日 月 年''。
+% \end{function}
+%
+% \begin{function}{chairman, depthead, reviewer}
+%  \begin{syntax}
+%   chairman            = \Arg{答辩委员会主席}
+%   depthead            = \Arg{系/部门主任}
+%   \textcolor{hkustblue}{reviewer}            = \Arg{答辩委员会成员}
+%  \end{syntax}
+% 其中，\opt{depthead} 的值需要包括 ``, Head of Department/Division''，\\
+% 如 \verb|depthead = {Prof. XXX, Head of Department}|。\\
+% 另外，答辩委员会成员是否需要列举在论文中还未得到确认。RPG Handbook 给出的官方示例文件中没有体现。\\
+% TODO: add TEC name list in signature page?
+% \end{function}
+%
+% \begin{function}{city}
+%  \begin{syntax}
+%   city                = \Arg{地点}
+%  \end{syntax}
+% \end{function}
+%
+% 一个示例如下：
+%
+% \begin{ctexexam}
+%   \hkustsetup {
+%     info = {
+%       degree = {PhD},
+%       title = {Triggering the Forth Impact},
+%       keywords = {Neon, Genesis, Evangelion},
+%       grade = {},
+%       student-id = {},
+%       author = {Cruel Angel},
+%       school = {School of SEELE},
+%       department = {Department of NERV},
+%       program = {Human Instrumentality Project},
+%       major = {},
+%       supervisor = {Adams},
+%       supervisor-title = {Prof.},
+%       co-supervisor = {Lilith},
+%       co-supervisor-title = {Prof.},
+%       submit-date = {March 2021},
+%       submit-date-long = {8 October 2021},
+%       defend-date = {13 August 2021},
+%       chairman = {Prof. Ikari Gendo},
+%       depthead = {Prof. Ikari Yui, Head of Department},
+%       reviewer = {},
+%       city = {Geo Front},
+%     }
+%   }
+% \end{ctexexam}
+%
+% \subsubsection{导言区剩余部分}
+% \begin{itemize}
+%  \item 用户可以自行添加所需的宏包以及设置。
+%  \item \verb|\addbibresource{mythesis.bib}| 定义了存放引用文献的 bib 文件。见下文。
+% \end{itemize}
+%
+% \subsubsection{正文区}
+% 正文区按顺序定义或插入了组成论文的各个组件、章节；用户在修改 \verb|chapters| 文件夹下的各章节文件后，需要通过 \verb|\input{}| 命令将其插入到主文件中。
+%
+% 这样设置文件结构的优点是使得主文件结构清晰可见、各章节便于修改；但如果用户有自己的喜好，也不必拘泥于本模板提供的结构，可以自由发挥。
+%
+% \subsection{各章节功能简述}
+%
+%
 %
 % \end{documentation}
 %
@@ -336,13 +639,13 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 % \end{macro}
 % 
-% \begin{macro}{info/school,info/department,info/major,info/field}
+% \begin{macro}{info/school,info/department,info/program,info/major}
 % 院系、专业、方向。
 %    \begin{macrocode}
   school            .tl_set:N = \l_@@_info_school_tl,
   department        .tl_set:N = \l_@@_info_department_tl,
+  program           .tl_set:N = \l_@@_name_of_program_tl,
   major             .tl_set:N = \l_@@_major_tl,
-  field             .tl_set:N = \l_@@_field_tl,
 %    \end{macrocode}
 % \end{macro}
 %  
@@ -858,7 +1161,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
       The~Hong~Kong~University~of~Science~and~Technology\\
       in~Partial~Fulfilment~of~the~Requirements~for\\
       the~Degree~of~{\l_@@_name_degree_tl}\\
-      in~{\l_@@_major_tl}
+      in~{\l_@@_name_of_program_tl}
     }\\[3\baselineskip]
     \l_@@_submit_date_tl,~\l_@@_info_city_tl\par%
   \end{center}
@@ -999,7 +1302,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
       \\[3\baselineskip]
     }
     \makebox[3.5in]{\hrulefill}\\
-    \l_@@_info_depthead_tl,~Head~of~Department\\[1\baselineskip]
+    \l_@@_info_depthead_tl\\[1\baselineskip]
     \l_@@_info_department_tl \\
     \l_@@_submit_date_long_tl
     \end{center}
@@ -1114,7 +1417,6 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
     {
       pdftitle    = \l_@@_info_title_tl,
       pdfauthor   = \l_@@_info_author_tl,
-      pdfkeywords = \l_@@_info_keywords_clist,
       pdfcreator  = \c_@@_name_pdf_creator_tl,
       pdfsubject  = to~her
     }
