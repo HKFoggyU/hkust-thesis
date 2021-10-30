@@ -1,5 +1,7 @@
 {
     "latex-workshop.latex.autoBuild.run": "never",
+    "latex-workshop.message.error.show": false,
+    "latex-workshop.message.warning.show": false,
     "latex-workshop.latex.tools": [
         {
             "name": "xelatex",
@@ -26,11 +28,10 @@
             ]
         },
         {
-            "name": "makedoc",
+            "name": "build_dtx",
             "command": "latexmk",
             "args": [
-                "-xelatex",
-                "hkustthesis.dtx"
+                "-xelatex"
             ]
         },
         {
@@ -51,7 +52,8 @@
         {
             "name": "build_dtx",
             "tools": [
-                "makedoc"
+                "build_dtx",
+                "hkustthesis.dtx"
             ]
         },
         {
@@ -67,8 +69,8 @@
         "*.alg",
         "*.aux",
         "*.bbl",
-        "*.blg",
         "*.bcf",
+        "*.blg",
         "*.fdb_latexmk",
         "*.fls",
         "*.glg",
@@ -77,6 +79,7 @@
         "*.gz",
         "*.hd",
         "*.idx",
+        "*.ilg",
         "*.ind",
         "*.ins",
         "*.ist",
