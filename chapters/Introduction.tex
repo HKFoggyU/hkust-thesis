@@ -1,25 +1,40 @@
 \chapter{Introduction}
 
-\section{Directory tree}
-\label{sec:directory}
+\section{Background}\label{chap:intro:sec:background}
 
-\begin{lstlisting}[language=bash]
---- chapters
-|   |-- Abstract.tex
-|   |-- Acknowledgements.tex
-|   |-- Authorization.tex
-|   |-- Introduction.tex
-|   |-- ...
-|   [-- Conclusions.tex
-|-- hkustthesis.cls
-|-- hkustthesis.dtx
-|-- hkustthesis.pdf
-|-- latexmkrc
-|-- mythesis.bib
-|-- mythesis.pdf
-[-- mythesis.tex
-\end{lstlisting}
+\blindtext
 
-The \lstinline|Courier New| font cannot display the symbol used by \lstinline|tree|.
+Cite a paper \cite{test}.
 
-Cite some paper \cite{test}.
+\subsection{Enumitem}
+
+Itemize.
+
+\begin{itemize}
+  \item Test test.
+  \item Test test.
+  \item Test test.
+  \begin{itemize}
+    \item test test
+    \item test test\footnote{\blindtext}
+    \item test test
+    \item test test
+  \end{itemize}
+  \item Test test.
+\end{itemize}
+
+Enumerate.
+
+\begin{enumerate}
+  \item Test test.
+  \item Test test.
+  \item Test test.
+  \begin{enumerate}
+    \item test test
+    \item test test\footnote{\blindtext}
+    \item test test
+    \item test test
+  \end{enumerate}
+  \item Test test.
+\end{enumerate}
+

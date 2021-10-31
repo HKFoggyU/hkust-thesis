@@ -19,9 +19,6 @@ on:
 jobs:
   build_latex:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        latex: [xelatex, lualatex]
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v2
@@ -32,15 +29,22 @@ jobs:
           root_file: hkustthesis.dtx
           working_directory: ./
 
-      - name: Compile to PDF
+      - name: Compile sample PDF
         uses: HermitSun/latex-action@v3
         with:
           root_file: mythesis.tex
-          latexmk_use_${{ matrix.latex }}: true
+          latexmk_use_xelatex: true
           args: "-bibtex"
+
+      - name: Compile documentation PDF
+        uses: HermitSun/latex-action@v3
+        with:
+          root_file: hkustthesis.tex
+          latexmk_use_xelatex: true
+          args: ""
 
       - name: Upload PDF
         uses: actions/upload-artifact@v2
         with:
-          name: PDF_${{ matrix.latex }}
-          path: mythesis.pdf
+          name: PDF
+          path: mythesis.pdf hkustthesis.pdf
