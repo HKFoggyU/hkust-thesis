@@ -1,0 +1,7 @@
+title: HKUST-Thesis
+description: LaTeX3 Template for HKUST Thesis (Ph.D. or MPhil.)
+theme: jekyll-theme-slate
+show_downloads: true
+github:
+  zip_url: https://github.com/HKFoggyU/hkust-thesis/releases/latest
+  tar_url: https://github.com/HKFoggyU/hkust-thesis/releases/latest
