@@ -39,7 +39,7 @@ jobs:
       - name: Compile documentation PDF
         uses: HermitSun/latex-action@v3
         with:
-          root_file: hkustthesis.tex
+          root_file: hkustthesis.dtx
           latexmk_use_xelatex: true
           args: ""
 
