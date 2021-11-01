@@ -67,9 +67,12 @@ jobs:
       - name: Set Version
         run: echo "VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
-      - name: Extract dtx to cls
-        run: xetex hkustthesis.dtx
-      
+      - name: Github Action for LaTeX dtx to cls
+        uses: FengChendian/latex-dtx2cls-action@4.0.1
+        with:
+          root_file: hkustthesis.dtx
+          working_directory: ./
+
       - name: Rename PDF with version
         run: mv hkustthesis.pdf hkustthesis-$VERSION.pdf
       
