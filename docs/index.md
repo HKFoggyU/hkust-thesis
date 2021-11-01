@@ -3,6 +3,7 @@ layout: default
 ---
 
 # LaTeX3 Template for HKUST Thesis
+
 ## Introduction 
 
 This project provides a LaTeX3 template for HKUST-Thesis to fulfill the requirement for Ph.D. and MPhil. graduation.
@@ -25,7 +26,6 @@ This project provides a LaTeX3 template for HKUST-Thesis to fulfill the requirem
 *For General Users*
 1. If you use VS Code as your editor and we recommend `LaTeX Workshop` extention. Then, run the `build_mythesis` command we pre-defined.
 2. If you like TeXing in Vim, Emacs etc. We prepared a `Makefile`.
-
 ```bash
 # complie TeX file
 make all
