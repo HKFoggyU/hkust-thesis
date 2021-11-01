@@ -48,3 +48,33 @@ jobs:
         with:
           name: PDF
           path: ./*.pdf
+
+  release:
+    needs: build_latex
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: PDF
+
+      - name: Set Version
+        run: echo "VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: Rename PDF with version
+        run: mv hkustthesis.pdf hkustthesis-$VERSION.pdf
+      
+      - name: Zip Release Source
+        run: |
+          zip -r hkust-thesis-$VERSION.zip .vscode/ chapters/ hkustthesis.cls latexmkrc LICENSE Makefile mythesis.bib mythesis.tex README.md README.zh.md
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: true
+          files: |
+            hkustthesis-v*.pdf
+            hkust-thesis-v*.zip

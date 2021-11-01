@@ -127,7 +127,7 @@ through XeTeX.
 % 
 % \author{HKFoggyU}
 %
-% \date{v0.4.2 \\ Released 2021-10-31}
+% \date{v0.4.3 \\ Released 2021-11-01}
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
@@ -135,6 +135,7 @@ through XeTeX.
 % \changes{v0.4}{2021/10/27}{Change theorem environment; make the title name of paperlist customizable}
 % \changes{v0.4.1}{2021/10/29}{Add documentation for preamble}
 % \changes{v0.4.2}{2021/10/31}{Complete documentation}
+% \changes{v0.4.3}{2021/11/01}{Fix typos in documentation}
 %
 % \maketitle
 %
@@ -247,7 +248,7 @@ through XeTeX.
 % \subsection{在线编译：使用 Overleaf}
 % \begin{enumerate}
 %  \item 将下载得到的 \file{hkust-thesis-v*.*.zip} 文件上传到 Overleaf 网站。上传完毕后将自动进入该项目页面。
-%  \item 在左上方 ``Menu/菜单'' 按钮，在 ``settings/设置'' 中选择如下设置：
+%  \item 点击左上方 ``Menu/菜单'' 按钮，在 ``settings/设置'' 中选择如下设置：
 %   \begin{itemize}
 %    \item Compiler: XeLaTeX
 %    \item TeX Live version: 2021
@@ -257,15 +258,23 @@ through XeTeX.
 %
 % \subsection{本地编译}
 % \subsubsection{VSCode}
-% 本项目提供了一份 VSCode 配置文件 \file{.vscode/settings.json}。在 VSCode 中的 \hologo{TeX} 侧栏选择 ``build recipe'' 为 ``build_mythesis'' 即可进行编译。
+% 本项目提供了一份 VSCode 配置文件 \file{.vscode/settings.json}。在安装了 LaTeX Workshop 插件的 VSCode 中的 \hologo{TeX} 侧栏选择 ``build recipe'' 为 ``build_mythesis'' 即可进行编译。
 %
-% 下面提供了几种其它编译方式。对于初学者，推荐使用上述 VSCode 编译方式。
+% 下面提供了几种其它编译方式。对于初学者，推荐使用 VSCode 编译。
 %
 % \subsubsection{latexmk}
 % 本项目提供了一个定制的 \file{latexmkrc} 配置文件以进行自动化构建。分别运行
 % \begin{ctexexam}
 %   latexmk
 %   latexmk -c
+% \end{ctexexam}
+% 以进行编译和删除编译中间产物。
+%
+% \subsubsection{Make}
+% 本项目提供了一个 \file{Makefile}。分别运行
+% \begin{ctexexam}
+%   make
+%   make clean
 % \end{ctexexam}
 % 以进行编译和删除编译中间产物。
 %
@@ -276,15 +285,6 @@ through XeTeX.
 %   xelatex mythesis.tex
 %   xelatex mythesis.tex
 % \end{ctexexam}
-%
-% \subsubsection{Make}
-% 本项目提供了一个 \file{Makefile}。分别运行
-% \begin{ctexexam}
-%   make
-%   make clean
-% \end{ctexexam}
-% 以进行编译和删除编译中间产物。
-%
 %
 % \section{撰写论文}\label{sec:fileContents}
 %
@@ -321,7 +321,7 @@ through XeTeX.
 % \subsubsection{模板选项}
 % 模板选项是 \verb|\documentclass[]{hkustthesis}| 中方括号内的选项。
 %
-% 本模板只定义了一个模板选项：
+% 本模板定义了两个模板选项：
 %
 % \begin{function}{customlatinfont}
 %  \begin{syntax}
@@ -348,6 +348,15 @@ through XeTeX.
 %
 % 该选项默认被 \verb|%| 注释掉，使模板可以在不同平台上自动选择对应的字体；如果用户希望该模板在所有平台上都使用同样的字体（前提是所用字体存在），那么也可以取消注释，将后面的选项修改为希望使用的平台。如果用户希望完全由自己设定字体，则可以填 \opt{none}，再通过 \pkg{fontspec} 宏包手动设置字体。
 %
+% \begin{function}{custombibstyle}
+%  \begin{syntax}
+%   custombibstyle = <(ieee)|nature|science|apa|mla|phys|chem-acs|nejm>
+%  \end{syntax}
+% 自定义参考文献条目样式。
+%
+% 该选项默认被 \verb|%| 注释掉。\opt{ieee} 为默认样式。如果希望使用的样式不在此列表，可以阅读 \pkg{biblatex} 的文档并自行修改模板代码。
+% \end{function}
+%
 % \subsubsection{论文信息}
 %
 % \begin{function}{\hkustsetup}
@@ -362,9 +371,9 @@ through XeTeX.
 %
 % \begin{function}{degree}
 %  \begin{syntax}
-%   degree = \Arg{(PhD)|MPhil}
+%   degree = \Arg{phd|mphil}
 %  \end{syntax}
-% 学位。请注意参数的大小写。形如 ``phd'' 的参数不会得到正确的结果。
+% 学位。
 % \end{function}
 %
 % \begin{function}{title}
@@ -428,13 +437,13 @@ through XeTeX.
 % 导师信息。导师头衔可以写 ``Prof.'' 也可以写 ``Professor''，且无需留出末尾空格。
 % \end{function}
 %
-% \begin{function}{submit-date, submit-date-long, defend-date}
+% \begin{function}{submit-month, submit-date, defend-date}
 %  \begin{syntax}
-%   submit-date         = \Arg{论文提交简略日期}
-%   submit-date-long    = \Arg{论文提交确切日期}
+%   submit-month        = \Arg{论文提交简略日期}
+%   submit-date         = \Arg{论文提交确切日期}
 %   defend-date         = \Arg{论文答辩日期}
 %  \end{syntax}
-% 其中，\opt{submit-date} 请只填写 ``月~年''，而 \opt{submit-date-long} 和 \opt{defend-date} 请填写 ``日~月~年''。
+% 其中，\opt{submit-month} 请只填写 ``月~年''，而 \opt{submit-date} 和 \opt{defend-date} 请填写 ``日~月~年''。
 % \end{function}
 %
 % \begin{function}{chairman, depthead, reviewer}
@@ -461,7 +470,7 @@ through XeTeX.
 % \begin{ctexexam}
 %   \hkustsetup {
 %     info = {
-%       degree = {PhD},
+%       degree = {phd},
 %       title = {Triggering the Forth Impact},
 %       keywords = {Neon, Genesis, Evangelion},
 %       grade = {},
@@ -475,8 +484,8 @@ through XeTeX.
 %       supervisor-title = {Prof.},
 %       co-supervisor = {Lilith},
 %       co-supervisor-title = {Prof.},
-%       submit-date = {August 2021},
-%       submit-date-long = {13 August 2021},
+%       submit-month = {August 2021},
+%       submit-date = {13 August 2021},
 %       defend-date = {8 March 2021},
 %       chairman = {Prof. Ikari Gendo},
 %       depthead = {Prof. Ikari Yui, Head of Department},
@@ -493,13 +502,13 @@ through XeTeX.
 % \end{itemize}
 %
 % \subsubsection{正文区}
-% 正文区按顺序定义或插入 (通过 \verb|\input{...}|) 了组成论文的各个组件、章节；用户在 \file{chapters} 文件夹下修改或新增章节文件后，需要检查主文件中对应的部分是否正确。
+% 正文区按顺序定义或插入了组成论文的各个组件、章节；用户在 \file{chapters} 文件夹下修改或新增章节文件后，需要检查主文件中对应的部分是否正确。
 %
 % 这样设置文件结构的优点是使得主文件结构清晰可见、各章节便于修改；但如果用户有自己的喜好，也不必拘泥于本模板提供的结构，可以自由发挥。
 %
 % \subsection{各章节}
 %
-% 在 \verb|\mainmatter| 之后的内容是论文的正文和附录部分，一般以 Introduction、中间各章节、Conclusion、 References 和 Appendix 的顺序组织文字。用户可以根据自己的实际情况修改、增加、删除、重命名对应的章节文件，并确保主文件中使用 \verb|\input{}| 的部分
+% 在 \verb|\mainmatter| 之后的内容是以章节的形式呈现的论文正文和附录部分，一般以 Introduction、Chapters、Conclusions、 References 和 Appendix 的顺序组织文字。用户可以根据自己的实际情况修改、增加、删除、重命名对应的章节文件，并确保主文件中使用 \verb|\input{}| 的部分
 % \begin{ctexexam}
 %   \input{chapters/Introduction.tex}
 %   \input{chapters/...}
@@ -564,10 +573,11 @@ through XeTeX.
 %    \end{macrocode}
 % \end{variable}
 %
-% \begin{variable}{\g_@@_latin_fontset_tl}
-% 用于存储所使用字体名称的全局变量
+% \begin{variable}{\g_@@_latin_fontset_tl, \g_@@_bib_style_tl}
+% 用于存储所用字体名称和参考文献样式的全局变量
 %    \begin{macrocode}
 \tl_new:N \g_@@_latin_fontset_tl
+\tl_new:N \g_@@_bib_style_tl
 %    \end{macrocode}
 % \end{variable}
 %
@@ -583,6 +593,16 @@ through XeTeX.
   customlatinfont   .choices:nn   =
   { gyre, macos, windows, none }
   { \tl_set_eq:NN \g_@@_latin_fontset_tl \l_keys_choice_tl },  
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{custombibstyle}
+% 定义参考文献样式
+%    \begin{macrocode}
+  custombibstyle    .choices:nn   =
+  { ieee, nature, science, apa, mla, phys, chem-acs, nejm }
+  { \tl_set_eq:NN \g_@@_bib_style_tl \l_keys_choice_tl },  
+  custombibstyle    .initial:n    = ieee,
 }
 %    \end{macrocode}
 % \end{macro}
@@ -607,7 +627,7 @@ through XeTeX.
 %    \end{macrocode}
 %
 % \begin{macro}{info/degree}
-% 学位名称：PhD 或 MPhil
+% 学位名称：phd 或 mphil
 %    \begin{macrocode}
   degree            .tl_set:N = \l_@@_info_degree_tl,
 %    \end{macrocode}
@@ -656,11 +676,11 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{info/submit-date,info/submit-date-long,info/defend-date,info/chairman,info/depthead,info/reviewer,info/city}
+% \begin{macro}{info/submit-month,info/submit-date,info/defend-date,info/chairman,info/depthead,info/reviewer,info/city}
 % 提交和答辩
 %    \begin{macrocode}
+  submit-month      .tl_set:N = \l_@@_submit_month_tl,
   submit-date       .tl_set:N = \l_@@_submit_date_tl,
-  submit-date-long  .tl_set:N = \l_@@_submit_date_long_tl,
   defend-date       .tl_set:N = \l_@@_defend_date_tl,
   chairman          .tl_set:N = \l_@@_info_chairman_tl,
   depthead          .tl_set:N = \l_@@_info_depthead_tl,
@@ -682,7 +702,9 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 % 
 % 使用\pkg{book}文档类。
 %    \begin{macrocode}
-\LoadClass[a4paper,12pt,twoside,UTF8,linespread=1.625]{book}
+\LoadClass[a4paper,12pt,twoside,UTF8,
+% linespread=1.625
+]{book}
 %    \end{macrocode}
 % 关于行距，\hologo{LaTeX}默认1.2行距，word默认行距是1.3，要求1.5倍word行距，故
 % \[ 1.5\times\frac{1.3}{1.2} = 1.625\]
@@ -928,8 +950,8 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %
 % \subsection{章节标题}
 % 
-%    \begin{macrocode}
 % 由\pkg{titlesec}设置。
+%    \begin{macrocode}
 \titleformat
   {\chapter}
   [display]
@@ -1073,7 +1095,10 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
   \l_@@_info_co_supervisor_title_tl\ 
   \l_@@_info_co_supervisor_tl
 }
-% 拼合双导师的姓名和职称。
+%    \end{macrocode}
+%
+% 拼合双导师的职称和姓名。
+%    \begin{macrocode}
 \tl_set:Nn \l_@@_info_supervisor_title_name_full_tl
 {
   \l_@@_info_supervisor_title_name_tl \
@@ -1081,24 +1106,30 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 }
 %    \end{macrocode}
 %
-% \begin{variable}{\l_@@_name_degree_tl}
+% \begin{variable}{\l_@@_name_degree_tl,\l_@@_abbr_degree_tl}
 % 用于存储学位名称的变量
 %    \begin{macrocode}
 \tl_new:N \l_@@_name_degree_tl
+\tl_new:N \l_@@_abbr_degree_tl
 %    \end{macrocode}
 % \end{variable}
 %
 % 判断学位进行命令定义
 %    \begin{macrocode}
-\tl_const:Nn \l_@@_name_diploma_tl { RPG }
 \msg_new:nnn { hkustthesis }{ unknown-degree }{ Unknown~ degree:~ \l_@@_info_degree_tl.\\ Please~ check~ spelling.}
 \cs_new_protected:Npn \@@_print_degree_name:
 {
-\str_if_eq:NNTF { \l_@@_info_degree_tl } { PhD }
-  { \tl_set:Nn \l_@@_name_degree_tl { Doctor~of~Philosophy } }
+\str_if_eq:NNTF { \l_@@_info_degree_tl } { phd }
   {
-    \str_if_eq:NNTF { \l_@@_info_degree_tl } { MPhil }
-    { \tl_set:Nn \l_@@_name_degree_tl { Master~of~Philosophy } }
+   \tl_set:Nn \l_@@_name_degree_tl { Doctor~of~Philosophy }
+   \tl_set:Nn \l_@@_abbr_degree_tl { PhD }
+  }
+  {
+    \str_if_eq:NNTF { \l_@@_info_degree_tl } { mphil }
+    {
+     \tl_set:Nn \l_@@_name_degree_tl { Master~of~Philosophy }
+     \tl_set:Nn \l_@@_abbr_degree_tl { MPhil }
+    }
     { \msg_error:nn { hkustthesis } { unknown-degree } }
   }
 }
@@ -1127,7 +1158,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
       the~Degree~of~{\l_@@_name_degree_tl}\\
       in~{\l_@@_name_of_program_tl}
     }\\[3\baselineskip]
-    \l_@@_submit_date_tl,~\l_@@_info_city_tl\par%
+    \l_@@_submit_month_tl,~\l_@@_info_city_tl\par%
   \end{center}
   \normalfont
   \cleardoublepage
@@ -1222,7 +1253,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
     \begin{center}
     \makebox[3.5in]{\hrulefill}\\
     \l_@@_info_author_tl \\[1\baselineskip]
-    \l_@@_submit_date_long_tl
+    \l_@@_submit_date_tl
     \end{center}
     }
  }
@@ -1252,7 +1283,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
     by \\[1\baselineskip]
     \l_@@_info_author_tl \\[2\baselineskip]
     This~is~to~certify~that~I~have~examined~the~
-    above~{\l_@@_info_degree_tl}~thesis\\
+    above~{\l_@@_abbr_degree_tl}~thesis\\
     and~have~found~that~it~is~complete~and~satisfactory~in~all~respects,\\
     and~that~any~and~all~revisions~required~by\\
     the~thesis~examination~committee~have~been~made.\\[5\baselineskip]
@@ -1268,7 +1299,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
     \makebox[3.5in]{\hrulefill}\\
     \l_@@_info_depthead_tl\\[1\baselineskip]
     \l_@@_info_department_tl \\
-    \l_@@_submit_date_long_tl
+    \l_@@_submit_date_tl
     \end{center}
     }
   }
@@ -1287,12 +1318,12 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 % TODO: Add an option for bib style.
 %    \begin{macrocode}
 \RequirePackage[
-    style=ieee,
+    style=\g_@@_bib_style_tl,
     %style=numeric-comp,
     %citestyle=authortitle-icomp,
-    % citestyle=numeric-comp,
+    %citestyle=numeric-comp,
     %bibstyle=authoryear,
-    % bibstyle=numeric,
+    %bibstyle=numeric,
     sorting=none,
     %sorting=nyt,
     %sortcites=true,
@@ -1344,8 +1375,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 % \end{macro}
 %
 % \subsection{Cross~Reference}
-% \pkg{cref}\\
-% 修改标签名称。
+% 由 \pkg{cref} 实现。修改标签名称。
 %    \begin{macrocode}
 \crefdefaultlabelformat{(#2#1#3)}
 \crefname{figure}{Figure}{Figures}
