@@ -103,7 +103,7 @@ through XeTeX.
 %<*driver>
 \ProvidesFile{hkustthesis.dtx}
 \documentclass[12pt]{ctxdoc}
-\usepackage{float,listings,xcolor,tabularray}
+\usepackage{float,footnote,listings,soul,xcolor,tabularray}
 \setlist[1]{labelindent=0.5em}
 \UseTblrLibrary{booktabs,siunitx,diagbox}
 \DefTblrTemplate{caption-tag}{default}{Table~\hspace{0.25em}\thetable}
@@ -228,7 +228,7 @@ through XeTeX.
 %
 % \subsection{获取本模板}
 % \begin{itemize}
-% \item (推荐) 请在本项目的 \href{https://github.com/HKFoggyU/hkust-thesis/releases/latest}{GitHub Release} 页面下载本模板最新版本，名为 \file{hkust-thesis-v*.*.zip} 的压缩文件。
+% \item (推荐) 请在本项目的 \href{https://github.com/HKFoggyU/hkust-thesis/releases/latest}{GitHub Release} 页面下载本模板最新版本，名为 \file{hkust-thesis-v*.zip} 的压缩文件。
 % \item (不推荐) 如果希望获取第一时间的更新，可以克隆本项目仓库，并运行
 %  \begin{ctexexam}
 %    xetex hkustthesis.dtx
@@ -247,7 +247,7 @@ through XeTeX.
 %
 % \subsection{在线编译：使用 Overleaf}
 % \begin{enumerate}
-%  \item 将下载得到的 \file{hkust-thesis-v*.*.zip} 文件上传到 Overleaf 网站。上传完毕后将自动进入该项目页面。
+%  \item 将下载得到的 \file{hkust-thesis-v*.zip} 文件上传到 Overleaf 网站。上传完毕后将自动进入该项目页面。
 %  \item 点击左上方 ``Menu/菜单'' 按钮，在 ``settings/设置'' 中选择如下设置：
 %   \begin{itemize}
 %    \item Compiler: XeLaTeX
@@ -290,7 +290,7 @@ through XeTeX.
 %
 % \subsection{文件结构}
 %
-% 下载得到的压缩文件内部的文件结构应如表 (\ref{tab:fileStruture}) 所示。
+% 下载得到的压缩文件内部的文件结构应如表 (\ref{tab:fileStruture}) 所示。其中 \file{figure/} 文件夹如不存在请自行创建。
 %
 % \begin{table}[H]
 %   \caption{\cls{hkustthesis}文件结构}
@@ -313,7 +313,7 @@ through XeTeX.
 %   \end{tabular}
 % \end{table}
 %
-% 其中各文件(夹)的作用已经给出。对于使用本模板撰写毕业论文的用户，只需要修改表 (\ref{tab:fileStruture}) 中\textcolor{hkustgold}{金色的文件}。
+% 各文件(夹)的作用已经给出。对于使用本模板撰写毕业论文的用户，只需要修改表 (\ref{tab:fileStruture}) 中\textcolor{hkustgold}{金色的文件}。
 %
 % \subsection{主文件介绍}
 % \file{mythesis.tex}是本模板的 \hologo{TeX} 主文件。下面将给出主文件内容的解释。
@@ -367,13 +367,13 @@ through XeTeX.
 % \end{function}
 % 此选项的内容是以英文逗号 ``,'' 分隔的键值列表，定义了该论文的必要信息。每一项等号左边为变量名，右边为由花括号包裹的变量值。如果某一项的值不需要填，可以留空。
 %
-% 其中标为\textcolor{hkustblue}{蓝色的选项}已经过时或者暂不适配，无论是留空还是填写内容都不会对论文造成影响，如果没有特别需求，建议留空。
+% 其中标为\textcolor{hkustblue}{蓝色的选项}已经过时或者暂未实现，无论是留空还是填写内容都不会对论文造成影响，如果没有特别需求，建议留空。
 %
 % \begin{function}{degree}
 %  \begin{syntax}
-%   degree = \Arg{PhD|MPhil}
+%   degree = \Arg{phd|mphil}
 %  \end{syntax}
-% 学位。请注意参数的大小写。形如 ``phd'' 的参数不会得到正确的结果。
+% 学位。
 % \end{function}
 %
 % \begin{function}{title}
@@ -439,8 +439,8 @@ through XeTeX.
 %
 % \begin{function}{submit-month, submit-date, defend-date}
 %  \begin{syntax}
-%   submit-month         = \Arg{论文提交简略日期}
-%   submit-date    = \Arg{论文提交确切日期}
+%   submit-month        = \Arg{论文提交日期-简略}
+%   submit-date         = \Arg{论文提交日期}
 %   defend-date         = \Arg{论文答辩日期}
 %  \end{syntax}
 % 其中，\opt{submit-month} 请只填写 ``月~年''，而 \opt{submit-date} 和 \opt{defend-date} 请填写 ``日~月~年''。
@@ -454,8 +454,7 @@ through XeTeX.
 %  \end{syntax}
 % 其中，\opt{depthead} 的值需要包括 ``, Head of Department/Division''，\\
 % 如 \verb|depthead = {Prof. XXX, Head of Department}|。\\
-% 另外，答辩委员会 (TEC) 成员是否需要列举在论文中还未得到确认。RPG Handbook 给出的官方示例文件中没有体现。\\
-% TODO: add TEC name list in signature page?
+% TODO: \st{add TEC name list in signature page?} No.
 % \end{function}
 %
 % \begin{function}{city}
@@ -470,7 +469,7 @@ through XeTeX.
 % \begin{ctexexam}
 %   \hkustsetup {
 %     info = {
-%       degree = {PhD},
+%       degree = {phd},
 %       title = {Triggering the Forth Impact},
 %       keywords = {Neon, Genesis, Evangelion},
 %       grade = {},
@@ -498,7 +497,7 @@ through XeTeX.
 % \subsubsection{导言区剩余部分}
 % \begin{itemize}
 %  \item 用户可以自行添加所需的宏包、设置和其它命令。
-%  \item \verb|\addbibresource{mythesis.bib}| 导入了存放引用文献的 bib 文件。见下文。
+%  \item \verb|\addbibresource{mythesis.bib}| 导入了存放引用文献的 bib 文件。
 % \end{itemize}
 %
 % \subsubsection{正文区}
@@ -543,12 +542,14 @@ through XeTeX.
 % \subsection{定义常量}
 %
 % \begin{macro}{\@@_define_name:nn}
+%
 % 用来定义默认名称的辅助函数。
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_define_name:nn #1#2
   { \tl_const:cn { c_@@_name_ #1 _tl } {#2} }
 %    \end{macrocode}
 % \end{macro}
+%
 % 默认名称。注意空格是忽略掉的。
 %    \begin{macrocode}
 \clist_map_inline:nn
@@ -567,28 +568,28 @@ through XeTeX.
 %    \end{macrocode}
 %
 % \begin{variable}{\l_@@_info_degree_tl}
-% 用于存储学位名称的变量，注意宏的命名，\verb|l|代表局部变量，\verb|g|代表全局变量
+% 用于存储学位名称的变量，注意宏的命名，\verb|l|代表局部变量，\verb|g|代表全局变量。
 %    \begin{macrocode}
 \tl_new:N \l_@@_info_degree_tl
 %    \end{macrocode}
 % \end{variable}
 %
 % \begin{variable}{\g_@@_latin_fontset_tl, \g_@@_bib_style_tl}
-% 用于存储所用字体名称和参考文献样式的全局变量
+% 用于存储所用字体名称和参考文献样式的全局变量。
 %    \begin{macrocode}
 \tl_new:N \g_@@_latin_fontset_tl
 \tl_new:N \g_@@_bib_style_tl
 %    \end{macrocode}
 % \end{variable}
 %
-% 学位信息的设置
+% 学位信息的设置。
 %    \begin{macrocode}
 \keys_define:nn { hkust }
 {
 %    \end{macrocode}
 %
 % \begin{macro}{customlatinfont}
-% 定义字体选项
+% 定义字体选项。
 %    \begin{macrocode}
   customlatinfont   .choices:nn   =
   { gyre, macos, windows, none }
@@ -597,7 +598,7 @@ through XeTeX.
 % \end{macro}
 %
 % \begin{macro}{custombibstyle}
-% 定义参考文献样式
+% 定义参考文献样式。
 %    \begin{macrocode}
   custombibstyle    .choices:nn   =
   { ieee, nature, science, apa, mla, phys, chem-acs, nejm }
@@ -608,14 +609,14 @@ through XeTeX.
 % \end{macro}
 %
 % \begin{macro}{\ProcessKeysOptions}
-% 在定义完全部设置以后从tex文件导言区输入参数
+% 在定义完全部设置以后从tex文件导言区输入参数。
 %    \begin{macrocode}
 \ProcessKeysOptions { hkust }
 %    \end{macrocode}
 % \end{macro}
 %
 % \subsection{论文信息}
-% 输入论文的必要信息
+% 输入论文的必要信息。
 %    \begin{macrocode}
 \keys_define:nn { hkust }
 { info              .meta:nn = { hkust / info } { #1 } }
@@ -627,14 +628,14 @@ through XeTeX.
 %    \end{macrocode}
 %
 % \begin{macro}{info/degree}
-% 学位名称：PhD 或 MPhil
+% 学位名称：phd 或 mphil。
 %    \begin{macrocode}
   degree            .tl_set:N = \l_@@_info_degree_tl,
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{info/title}
-% 论文标题
+% 论文标题。
 %    \begin{macrocode}
   title             .tl_set:N = \l_@@_info_title_tl,
 %    \end{macrocode}
@@ -648,7 +649,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 % \end{macro}
 % 
 % \begin{macro}{info/grade,info/student-id,info/author}
-% 年级、学号、姓名
+% 年级、学号、姓名。
 %    \begin{macrocode}
   grade             .tl_set:N = \l_@@_info_grade_tl,
   student-id        .tl_set:N = \l_@@_info_id_tl,
@@ -667,7 +668,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 % \end{macro}
 %  
 % \begin{macro}{info/supervisor,info/supervisor-title,info/co-supervisor,info/co-supervisor-title}
-% 导师
+% 导师。
 %    \begin{macrocode}
   supervisor         .tl_set:N = \l_@@_info_supervisor_tl,
   supervisor-title   .tl_set:N = \l_@@_info_supervisor_title_tl,
@@ -677,10 +678,10 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 % \end{macro}
 %
 % \begin{macro}{info/submit-month,info/submit-date,info/defend-date,info/chairman,info/depthead,info/reviewer,info/city}
-% 提交和答辩
+% 提交和答辩。
 %    \begin{macrocode}
-  submit-month       .tl_set:N = \l_@@_submit_month_tl,
-  submit-date  .tl_set:N = \l_@@_submit_date_tl,
+  submit-month      .tl_set:N = \l_@@_submit_month_tl,
+  submit-date       .tl_set:N = \l_@@_submit_date_tl,
   defend-date       .tl_set:N = \l_@@_defend_date_tl,
   chairman          .tl_set:N = \l_@@_info_chairman_tl,
   depthead          .tl_set:N = \l_@@_info_depthead_tl,
@@ -691,7 +692,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 % \end{macro}
 %
 % \begin{macro}{\hkustsetup}
-% 定义用于设置个人信息的命令
+% 定义用于设置个人信息的命令。
 %    \begin{macrocode}
 \NewDocumentCommand \hkustsetup { m }
 { \keys_set:nn { hkust } { #1 } }
@@ -736,7 +737,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %^^A \setlength{\baselineskip}{18pt}
 %    \end{macrocode}
 %
-% 标题、目录和链接
+% 标题、目录和链接。
 %    \begin{macrocode}
 \RequirePackage[explicit]{titlesec} % For typesetting titles of chap/sec/...
 \RequirePackage[titles]{tocloft}
@@ -751,7 +752,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 \RequirePackage{braket}             % for Dirac notation
 %    \end{macrocode}
 %
-% 用于生成可以被插入书签的LaTeX logo
+% 用于生成可以被插入书签的LaTeX logo。
 %    \begin{macrocode}
 \RequirePackage{hologo} 
 %    \end{macrocode}
@@ -771,7 +772,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 ]{unicode-math}
 %    \end{macrocode}
 %
-% 配置图片、表格、代码、列表环境
+% 配置图片、表格、代码、列表环境。
 %    \begin{macrocode}
 \RequirePackage{graphicx,subcaption,wrapfig,tikz}
 \DeclareGraphicsExtensions{.pdf,.eps,.jpg,.png}
@@ -794,14 +795,14 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 \RequirePackage[capitalise,nameinlink,noabbrev]{cleveref}
 %    \end{macrocode}
 %
-% 生成 ``Lorem ipsum'' 测试文字
+% 生成 ``Lorem ipsum'' 测试文字。
 %    \begin{macrocode}
 \RequirePackage{blindtext} 
 %    \end{macrocode}
 %
 % \subsection{字体设置}
 %
-% 导入 \pkg{fontspec} 宏包
+% 导入 \pkg{fontspec} 宏包。
 %    \begin{macrocode}
 \RequirePackage{fontspec} 
 %    \end{macrocode}
@@ -830,6 +831,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 \cs_new_protected:Npn \@@_if_platform_macos:TF
   { \file_if_exist:nTF { /System/Library/Fonts/Menlo.ttc } }
 %    \end{macrocode}
+%
 % 这两种情况外的系统被判断为 Linux，一律使用自由字体。
 %    \begin{macrocode}
 \bool_if:NT \g_@@_load_system_fontset_bool
@@ -849,7 +851,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 % 接下来逐个定义所需要使用的字库。
 %
 % \begin{macro}{\@@_load_latin_font_windows:}
-% Windows 西文字体
+% Windows 西文字体。
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_load_latin_font_windows:
 {
@@ -914,7 +916,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 \@@_load_font:
 %    \end{macrocode}
 %
-% 设置数学字体 (XITS, 或者 \href{https://www.stixfonts.org}{STIX}, 与 Times New Roman 最为相近)
+% 设置数学字体 (XITS, 或者 \href{https://www.stixfonts.org}{STIX}, 与 Times New Roman 最为相近)。
 %    \begin{macrocode}
 % \setmathfont{STIXTwoMath-Regular}[Extension = .otf]
 \setmathfont{XITSMath-Regular}[
@@ -1106,24 +1108,30 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 }
 %    \end{macrocode}
 %
-% \begin{variable}{\l_@@_name_degree_tl}
-% 用于存储学位名称的变量
+% \begin{variable}{\l_@@_name_degree_tl,\l_@@_abbr_degree_tl}
+% 用于存储学位名称的变量。
 %    \begin{macrocode}
 \tl_new:N \l_@@_name_degree_tl
+\tl_new:N \l_@@_abbr_degree_tl
 %    \end{macrocode}
 % \end{variable}
 %
-% 判断学位进行命令定义
+% 判断学位进行命令定义。
 %    \begin{macrocode}
-\tl_const:Nn \l_@@_name_diploma_tl { RPG }
 \msg_new:nnn { hkustthesis }{ unknown-degree }{ Unknown~ degree:~ \l_@@_info_degree_tl.\\ Please~ check~ spelling.}
 \cs_new_protected:Npn \@@_print_degree_name:
 {
-\str_if_eq:NNTF { \l_@@_info_degree_tl } { PhD }
-  { \tl_set:Nn \l_@@_name_degree_tl { Doctor~of~Philosophy } }
+\str_if_eq:NNTF { \l_@@_info_degree_tl } { phd }
   {
-    \str_if_eq:NNTF { \l_@@_info_degree_tl } { MPhil }
-    { \tl_set:Nn \l_@@_name_degree_tl { Master~of~Philosophy } }
+   \tl_set:Nn \l_@@_name_degree_tl { Doctor~of~Philosophy }
+   \tl_set:Nn \l_@@_abbr_degree_tl { PhD }
+  }
+  {
+    \str_if_eq:NNTF { \l_@@_info_degree_tl } { mphil }
+    {
+     \tl_set:Nn \l_@@_name_degree_tl { Master~of~Philosophy }
+     \tl_set:Nn \l_@@_abbr_degree_tl { MPhil }
+    }
     { \msg_error:nn { hkustthesis } { unknown-degree } }
   }
 }
@@ -1132,7 +1140,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 % \subsubsection{绘制封面}
 % 
 % \begin{macro}{\@@_print_titlepage:}
-% 封面页
+% 封面页。
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_print_titlepage:
 {
@@ -1144,11 +1152,11 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
     \l_@@_info_title_tl\\[5\baselineskip]
     by\\[1\baselineskip]
     \l_@@_info_author_tl\\[5\baselineskip]
-    \@@_print_degree_name:
     {
       A~Thesis~Submitted~to\\
       The~Hong~Kong~University~of~Science~and~Technology\\
       in~Partial~Fulfilment~of~the~Requirements~for\\
+      \@@_print_degree_name:
       the~Degree~of~{\l_@@_name_degree_tl}\\
       in~{\l_@@_name_of_program_tl}
     }\\[3\baselineskip]
@@ -1161,7 +1169,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 % \end{macro}
 % 
 % \begin{macro}{\maketitle}
-% 重定义maketitle生成封面
+% 重定义maketitle生成封面。
 %    \begin{macrocode}
 \tl_set:Nn \maketitle {\@@_print_titlepage:}
 %    \end{macrocode}
@@ -1277,7 +1285,8 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
     by \\[1\baselineskip]
     \l_@@_info_author_tl \\[2\baselineskip]
     This~is~to~certify~that~I~have~examined~the~
-    above~{\l_@@_info_degree_tl}~thesis\\
+    \@@_print_degree_name:
+    above~{\l_@@_abbr_degree_tl}~thesis\\
     and~have~found~that~it~is~complete~and~satisfactory~in~all~respects,\\
     and~that~any~and~all~revisions~required~by\\
     the~thesis~examination~committee~have~been~made.\\[5\baselineskip]
@@ -1308,8 +1317,8 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %
 % \subsection{参考文献}
 % 
-% biblatex设置\\
-% TODO: Add an option for bib style.
+% biblatex设置。\\
+% TODO: \st{Add an option for bib style.} Done.
 %    \begin{macrocode}
 \RequirePackage[
     style=\g_@@_bib_style_tl,
@@ -1369,7 +1378,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 % \end{macro}
 %
 % \subsection{Cross~Reference}
-% 由 \pkg{cref} 实现。修改标签名称。
+% 由 \pkg{cref} 实现自动化标签名称。
 %    \begin{macrocode}
 \crefdefaultlabelformat{(#2#1#3)}
 \crefname{figure}{Figure}{Figures}
@@ -1415,7 +1424,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 % 
 % \subsubsection{图片表格}
 % 
-% 图表位置调整
+% 图表位置调整。
 %    \begin{macrocode}
 \floatsetup[figure]{ % 图名在图下
     capposition=bottom,%
@@ -1429,7 +1438,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 }
 %    \end{macrocode}
 % 
-% 图表标题样式
+% 图表标题样式。
 %    \begin{macrocode}
 \DeclareCaptionFont{capfont}{
   \rmfamily\selectfont
@@ -1449,8 +1458,8 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %
 % \subsubsection{代码}
 % 
-% 代码样式
-% TODO: style settings: finer or remove anything?
+% 代码样式。\\
+% TODO: \st{style settings: finer or remove anything?} No plan. Removed
 %    \begin{macrocode}
 \floatsetup[lstlisting]{ % Captions for lstlistings
     capposition=above,%
@@ -1477,14 +1486,15 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %
 % \subsubsection{列表}
 % 
-% 列表环境
+% 列表环境。
 %    \begin{macrocode}
 \renewcommand{\labelitemi}{\large\textbullet}
 \renewcommand{\labelitemii}{\normalsize\textbullet}
 \renewcommand{\labelenumi}{\arabic{enumi}.}
 \renewcommand{\labelenumii}{\alph{enumii}.}
 %    \end{macrocode}
-% 取出 item 之前的间隔。
+%
+% 去除 item 之前的间隔。
 %    \begin{macrocode}
 \setlist[itemize]{noitemsep}
 \setlist[enumerate]{noitemsep}
@@ -1494,7 +1504,8 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 % \subsection{定理环境}
 %
 % \begin{macro}{\mathbi}
-% Math bold italic letters\\
+% Math bold italic letters
+%
 % 注：\pkg{unicode-math} 与 \pkg{bm} 冲突。请勿使用后者。
 %    \begin{macrocode}
 \NewDocumentCommand\mathbi{m}{\symbfit{#1}}
@@ -1517,7 +1528,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 \theoremstyle{hkustthm}
 %    \end{macrocode}
 %
-% 修改证明环境标题 
+% 修改证明环境标题 。
 %    \begin{macrocode}
 \let\oldproofname=\proofname
 \renewcommand*{\proofname}
