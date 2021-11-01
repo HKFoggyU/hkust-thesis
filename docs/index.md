@@ -13,7 +13,7 @@ This project provides a LaTeX3 template for HKUST-Thesis to fulfill the requirem
 *For General Users:*
 
 1. Download the zip file `hkust-thesis-v*.*.zip` from the [latest release](https://github.com/HKFoggyU/hkust-thesis/releases/latest/).
-2. Check PDF documentation -- `hkustthesis.pdf` and sample thesis -- `mythesis.pdf` in the zip file.
+2. Check PDF documentation -- `hkustthesis.pdf` and sample thesis -- `mythesis.pdf` in the release.
    
 *For Developers:*
 
