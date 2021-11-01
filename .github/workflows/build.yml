@@ -47,7 +47,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: PDF
-          path: ./*.pdf
+          path: |
+            mythesis.pdf
+            hkustthesis.pdf
 
   release:
     needs: build_latex
@@ -65,6 +67,9 @@ jobs:
       - name: Set Version
         run: echo "VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
+      - name: Extract dtx to cls
+        run: xetex hkustthesis.dtx
+      
       - name: Rename PDF with version
         run: mv hkustthesis.pdf hkustthesis-$VERSION.pdf
       
