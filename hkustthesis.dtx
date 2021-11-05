@@ -321,7 +321,7 @@ through XeTeX.
 % \subsubsection{模板选项}
 % 模板选项是 \verb|\documentclass[]{hkustthesis}| 中方括号内的选项。
 %
-% 本模板定义了两个模板选项：
+% 本模板定义了3个模板选项：
 %
 % \begin{function}{customlatinfont}
 %  \begin{syntax}
@@ -357,6 +357,15 @@ through XeTeX.
 % 该选项默认被 \verb|%| 注释掉。\opt{ieee} 为默认样式。如果希望使用的样式不在此列表，可以阅读 \pkg{biblatex} 的文档并自行修改模板代码。
 % \end{function}
 %
+% \begin{function}{displaycommittee}
+%  \begin{syntax}
+%   displaycommittee = <(false)|true>
+%  \end{syntax}
+% Set whether to display committee list.
+%
+% 该选项默认被 \verb|%| 注释掉。This option sets whether to display the committee list on the signature page. Some department may ask for this.
+% \end{function}
+%
 % \subsubsection{论文信息}
 %
 % \begin{function}{\hkustsetup}
@@ -367,7 +376,7 @@ through XeTeX.
 % \end{function}
 % 此选项的内容是以英文逗号 ``,'' 分隔的键值列表，定义了该论文的必要信息。每一项等号左边为变量名，右边为由花括号包裹的变量值。如果某一项的值不需要填，可以留空。
 %
-% 其中标为\textcolor{hkustblue}{蓝色的选项}已经过时或者暂未实现，无论是留空还是填写内容都不会对论文造成影响，如果没有特别需求，建议留空。
+% 其中标为\textcolor{hkustblue}{蓝色的选项} is optional. You do not have to fill in them all.
 %
 % \begin{function}{degree}
 %  \begin{syntax}
@@ -446,15 +455,17 @@ through XeTeX.
 % 其中，\opt{submit-month} 请只填写 ``月~年''，而 \opt{submit-date} 和 \opt{defend-date} 请填写 ``日~月~年''。
 % \end{function}
 %
-% \begin{function}{chairman, depthead, reviewer}
+% \begin{function}{chairman, depthead, reviewer, reviewerdept}
 %  \begin{syntax}
 %   chairman            = \Arg{答辩委员会主席}
 %   depthead            = \Arg{系/部门主任}
 %   \textcolor{hkustblue}{reviewer}            = \Arg{答辩委员会成员}
+%   \textcolor{hkustblue}{reviewerdept}            = \Arg{答辩委员会成员Department}
 %  \end{syntax}
 % 其中，\opt{depthead} 的值需要包括 ``, Head of Department/Division''，\\
 % 如 \verb|depthead = {Prof. XXX, Head of Department}|。\\
-% TODO: \st{add TEC name list in signature page?} No.
+% The \opt{reviewer} and \opt{reviewerdept} should be separatred by commas.\\
+% TODO: \st{add TEC name list in signature page?} Done.
 % \end{function}
 %
 % \begin{function}{city}
@@ -469,27 +480,37 @@ through XeTeX.
 % \begin{ctexexam}
 %   \hkustsetup {
 %     info = {
-%       degree = {phd},
-%       title = {Triggering the Forth Impact},
-%       keywords = {Neon, Genesis, Evangelion},
-%       grade = {},
-%       student-id = {},
-%       author = {Cruel Angel},
-%       school = {School of SEELE},
-%       department = {Department of NERV},
-%       program = {Human Instrumentality Project},
-%       major = {},
-%       supervisor = {Adams},
+%       degree        = {phd},
+%       title         = {Triggering the Forth Impact},
+%       keywords      = {Neon, Genesis, Evangelion},
+%       grade         = {},
+%       student-id    = {},
+%       author        = {Cruel Angel},
+%       school        = {School of SEELE},
+%       department    = {Department of NERV},
+%       program       = {Human Instrumentality Project},
+%       major         = {},
+%       supervisor    = {Adams},
 %       supervisor-title = {Prof.},
 %       co-supervisor = {Lilith},
 %       co-supervisor-title = {Prof.},
-%       submit-month = {August 2021},
-%       submit-date = {13 August 2021},
-%       defend-date = {8 March 2021},
-%       chairman = {Prof. Ikari Gendo},
-%       depthead = {Prof. Ikari Yui, Head of Department},
-%       reviewer = {},
-%       city = {Geo Front},
+%       submit-month  = {August 2021},
+%       submit-date   = {13 August 2021},
+%       defend-date   = {8 March 2021},
+%       chairman      = {Prof. Ikari Gendo},
+%       depthead      = {Prof. Ikari Yui, Head of Department},
+%       reviewer      = {Prof. AAA (Chairperson), 
+%                       Prof. BBB (Supervisor),
+%                       Prof. CCC (Co-Supervisor),
+%                       Prof. DDD, Prof. EEE,
+%                       Prof. FFF (External Examiner)},
+%       reviewerdept  = {Department of Electronic and Computer Engineering,
+%                       Department of ECE,
+%                       Department of ECE,
+%                       Department of xxx,
+%                       Department of yyy,
+%                       Department of zzz\\The University of UUU},
+%       city          = {Geo Front},
 %     }
 %   }
 % \end{ctexexam}
@@ -524,6 +545,7 @@ through XeTeX.
 %
 % \end{documentation}
 %
+% \textbf{The following section is for developers only. There is no need for general users to read it. Start your \hologo{TeX}ing now!}
 %
 % \clearpage
 %
@@ -579,6 +601,7 @@ through XeTeX.
 %    \begin{macrocode}
 \tl_new:N \g_@@_latin_fontset_tl
 \tl_new:N \g_@@_bib_style_tl
+\tl_new:N \g_@@_disp_committee_tl
 %    \end{macrocode}
 % \end{variable}
 %
@@ -604,6 +627,15 @@ through XeTeX.
   { ieee, nature, science, apa, mla, phys, chem-acs, nejm }
   { \tl_set_eq:NN \g_@@_bib_style_tl \l_keys_choice_tl },  
   custombibstyle    .initial:n    = ieee,
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{displaycommittee}
+% Display committee list
+%    \begin{macrocode}
+  displaycommittee    .choices:nn   = { true, flase }
+  { \tl_set_eq:NN \g_@@_disp_committee_tl \l_keys_choice_tl },  
+  displaycommittee    .initial:n    = flase,
 }
 %    \end{macrocode}
 % \end{macro}
@@ -677,7 +709,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{info/submit-month,info/submit-date,info/defend-date,info/chairman,info/depthead,info/reviewer,info/city}
+% \begin{macro}{info/submit-month,info/submit-date,info/defend-date,info/chairman,info/depthead,info/reviewer,info/reviewerdept,info/city}
 % 提交和答辩。
 %    \begin{macrocode}
   submit-month      .tl_set:N = \l_@@_submit_month_tl,
@@ -686,6 +718,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
   chairman          .tl_set:N = \l_@@_info_chairman_tl,
   depthead          .tl_set:N = \l_@@_info_depthead_tl,
   reviewer       .clist_set:N = \l_@@_info_reviewer_clist,
+  reviewerdept   .clist_set:N = \l_@@_info_reviewer_dept_clist,
   city              .tl_set:N = \l_@@_info_city_tl,
 }
 %    \end{macrocode}
@@ -726,6 +759,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
   lastpage,
   emptypage,
   fancyhdr,
+  makecell
 }
 %    \end{macrocode}
 %
@@ -1280,28 +1314,72 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
   {
     {
     \begin{center}
-    \phantom{[SAMPLE~SIGNATURE~PAGE]}\\[1\baselineskip]
-    \l_@@_info_title_tl \\[5\baselineskip]
-    by \\[1\baselineskip]
-    \l_@@_info_author_tl \\[2\baselineskip]
-    This~is~to~certify~that~I~have~examined~the~
-    \@@_print_degree_name:
-    above~{\l_@@_abbr_degree_tl}~thesis\\
-    and~have~found~that~it~is~complete~and~satisfactory~in~all~respects,\\
-    and~that~any~and~all~revisions~required~by\\
-    the~thesis~examination~committee~have~been~made.\\[5\baselineskip]
-    \makebox[3.5in]{\hrulefill}\\
-    \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor
-    \\[3\baselineskip]
-    \str_if_empty:NTF \l_@@_info_co_supervisor_tl
-    {}
-    {
+      \str_if_eq:NNTF { \g_@@_disp_committee_tl } { true }
+      {
+      \l_@@_info_title_tl \\[3\baselineskip]
+      by \\[1\baselineskip]
+      \l_@@_info_author_tl \\[2\baselineskip]
+      This~is~to~certify~that~I~have~examined~the~
+      \@@_print_degree_name:
+      above~{\l_@@_abbr_degree_tl}~thesis\\
+      and~have~found~that~it~is~complete~and~satisfactory~in~all~respects,\\
+      and~that~any~and~all~revisions~required~by\\
+      the~thesis~examination~committee~have~been~made.\\[3\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_co_supervisor_title_name_tl,~Co~Supervisor
-      \\[3\baselineskip]
+      \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor
+      \\[2\baselineskip]
+      \str_if_empty:NTF \l_@@_info_co_supervisor_tl
+      {}
+      {
+        \makebox[3.5in]{\hrulefill}\\
+        \l_@@_info_co_supervisor_title_name_tl,~Co~Supervisor
+        \\[2\baselineskip]
+      }
+      \makebox[3.5in]{\hrulefill}\\
+      \l_@@_info_depthead_tl\\[1\baselineskip]
+    \end{center}
+      \int_new:N \l_@@_reviewer_clist_len_int
+      \int_new:N \l_@@_reviewer_index_int
+      \int_set:Nn \l_@@_reviewer_clist_len_int {\clist_count:N \l_@@_info_reviewer_clist}
+      \int_set:Nn \l_@@_reviewer_index_int {1}
+      \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l}
+        Thesis~Examination~Committee & \\
+        \int_do_while:nNnn {\l_@@_reviewer_index_int} < {6} %^^A  {\l_@@_reviewer_clist_len_int}
+        {
+          \int_eval:n \l_@@_reviewer_index_int .~ 
+          \clist_item:Nn \l_@@_info_reviewer_clist {\l_@@_reviewer_index_int} &
+          \clist_item:Nn \l_@@_info_reviewer_dept_clist {\l_@@_reviewer_index_int} \\
+          \int_gincr:N \l_@@_reviewer_index_int
+        }
+        \makecell[l]{\int_eval:n \l_@@_reviewer_clist_len_int .~ \clist_item:Nn \l_@@_info_reviewer_clist {\l_@@_reviewer_clist_len_int} \\ \phantom{placeholder}} & \makecell[l]{\clist_item:Nn \l_@@_info_reviewer_dept_clist {\l_@@_reviewer_clist_len_int}}
+      \end{tabular*}
     }
-    \makebox[3.5in]{\hrulefill}\\
-    \l_@@_info_depthead_tl\\[1\baselineskip]
+    {
+      \phantom{SAMPLE~SIGNATURE~PAGE}\\[1\baselineskip]
+      \l_@@_info_title_tl \\[5\baselineskip]
+      by \\[1\baselineskip]
+      \l_@@_info_author_tl \\[2\baselineskip]
+      This~is~to~certify~that~I~have~examined~the~
+      \@@_print_degree_name:
+      above~{\l_@@_abbr_degree_tl}~thesis\\
+      and~have~found~that~it~is~complete~and~satisfactory~in~all~respects,\\
+      and~that~any~and~all~revisions~required~by\\
+      the~thesis~examination~committee~have~been~made.\\[5\baselineskip]
+      \makebox[3.5in]{\hrulefill}\\
+      \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor
+      \\[3\baselineskip]
+      \str_if_empty:NTF \l_@@_info_co_supervisor_tl
+      {}
+      {
+        \makebox[3.5in]{\hrulefill}\\
+        \l_@@_info_co_supervisor_title_name_tl,~Co~Supervisor
+        \\[3\baselineskip]
+      }
+      \makebox[3.5in]{\hrulefill}\\
+      \l_@@_info_depthead_tl\\[1\baselineskip]
+    \end{center}
+    }
+    \begin{center}
     \l_@@_info_department_tl \\
     \l_@@_submit_date_tl
     \end{center}
