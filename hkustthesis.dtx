@@ -127,7 +127,7 @@ through XeTeX.
 % 
 % \author{HKFoggyU}
 %
-% \date{v0.4.3 \\ Released 2021-11-01}
+% \date{v0.5 \\ Released 2021-11-05}
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
@@ -136,10 +136,11 @@ through XeTeX.
 % \changes{v0.4.1}{2021/10/29}{Add documentation for preamble}
 % \changes{v0.4.2}{2021/10/31}{Complete documentation}
 % \changes{v0.4.3}{2021/11/01}{Fix typos in documentation}
+% \changes{v0.5}{2021/11/05}{Add optional TEC list}
 %
 % \maketitle
 %
-% \def\abstractname{摘要}
+% \def\abstractname{简介}
 % \begin{abstract}
 % \textsc{HkustThesis} 文档类 (class) 意在为香港科技大学 (HKUST) 的研究型硕士 (MPhil) 和博士生 (PhD) 提供一个尽可能符合 \href{https://rpghandbook.hkust.edu.hk/}{RPG Handbook} 要求的毕业论文\hologo{LaTeX}模板，下称 ``本模板''。
 % \end{abstract}
@@ -178,25 +179,27 @@ through XeTeX.
 %随着时代的进步，更加清晰简明的\hologo{LaTeX3}大大提高了模板的易读性与可维护性。因此，HKFoggyU的成员决定通过\hologo{LaTeX3}语法、参考已有的优秀项目、以团队的力量，编写并维护一个全新的香港科技大学毕业论文模板。
 %
 % \subsection{文档结构}
-% 本文档的前半部分为使用该模板的文字说明，供使用本模板撰写毕业论文的同学们参考；后半部分为代码实现，供有意了解或贡献源码的同学参考。
+% 本文档的前半部分为用户手册，供使用本模板撰写毕业论文的同学们参考，请仔细阅读；后半部分为开发手册，供有意了解或贡献源码的同学参考，普通用户无需阅读。
 %
 % \section{工欲善其事，必先利其器}
 % 有\hologo{LaTeX}基础的用户可以跳过本节。
 %
 % \subsection{\hologo{LaTeX}入门}
 % 本节不会从\hologo{LaTeX}是什么开始讲起。授人以鱼不如授人以渔，本节将更侧重从0入门\hologo{LaTeX}的方法而非具体实现。
+%
+% 首先，尽量避免 ``写代码'' 这件事产生抗拒心理。对于绝大多数用户而言，\hologo{LaTeX} 就是一个排版工具，只是用代码来实现，它不比常见的 Word、Photoshop 更难入门。只要认真阅读本文档，一定可以学会的。
 % 
 % ``\emph{吾生也有涯，而知也无涯。}''
 % 作为一个已经被广泛应用数十年的排版工具，\hologo{LaTeX}的学习、参考资料可以说是浩如烟海。因此，掌握在繁杂的资料中找到问题解决方案的能力比通读各种\hologo{LaTeX}教程更加重要。
 %
 % 学会使用搜索引擎和技术论坛（如Stack Overflow、LaTeX.org）将大大减少耗费在debug上的时间。
 %
-% 在中文资料中，北京大学刘海洋的《\hologo{LaTeX}入门》、复旦大学曾祥东的\href{https://github.com/stone-zeng/latex-talk}{《现代\hologo{LaTeX}入门讲座》} 都是非常优秀的。如果觉得书籍难以下咽，不妨抽出3个小时看完本项目的 \file{README} 提及的刘海洋的\href{https://www.bilibili.com/video/BV1s7411U7Pr}{视频讲座}。
+% 在中文资料中，北京大学刘海洋的《\hologo{LaTeX}入门》、复旦大学曾祥东的\href{https://github.com/stone-zeng/latex-talk}{《现代\hologo{LaTeX}入门讲座》} 都是非常优秀的。如果觉得书籍难以下咽，不妨抽出3个小时看完本项目 \file{README} 提及的刘海洋的\href{https://www.bilibili.com/video/BV1s7411U7Pr}{视频讲座}。
 %
 % 结合以上两点，一个初学者就已经具备使用本模板的能力。
 %
 % \subsection{\hologo{LaTeX}环境}
-% 本模板要求的\hologo{LaTeX}发行版为最新版的\hologo{TeXLive} (2021) 或\hologo{MiKTeX}。低版本的发行版可能导致潜在的问题或者无法编译。
+% 本模板要求的\hologo{LaTeX}发行版为最新版的\hologo{TeXLive} (2021) 或\hologo{MiKTeX}。某些低版本的发行版可能存在潜在的问题。
 % 
 % 本模板在各平台、各\hologo{LaTeX}发行版上的编译情况如表 (\ref{tab:environment}) 所示。
 %
@@ -210,7 +213,7 @@ through XeTeX.
 %     \midrule
 %     Windows 10    & \hologo{TeX}\,Live 2021    & Pass \\
 %     Windows 10    & \hologo{MiKTeX}            & Pass \\
-%     Windows 10    & \hologo{TeX}\,Live 2020    & \lstinline|cref| problem  \\
+%     Windows 10    & \hologo{TeX}\,Live 2020    & Pass \\
 %     macOS 10.15   & \hologo{TeX}\,Live 2021    & Pass \\
 %     Ubuntu 20.04  & \hologo{TeX}\,Live 2021    & Pass \\
 %     Ubuntu 20.04  & \hologo{MiKTeX}            & Pass \\
@@ -220,7 +223,8 @@ through XeTeX.
 %   \end{tabular}
 % \end{table}
 %
-% 如果本地尚未安装任何\hologo{LaTeX}发行版，那么 \href{https://www.overleaf.com/}{Overleaf} 是作为入门的很好选择。当然，如果希望离线工作，请在上述发行版中选择一个，到其官网下载最新版本的安装程序并安装。
+% 如果本地尚未安装任何\hologo{LaTeX}发行版，那么 \href{https://www.overleaf.com/}{Overleaf} 是作为入门的很好选择。\textbf{强烈建议初学者从 Overleaf 入门，这样可以有效避免学习热情被安装配置环境所熄灭。}\\
+% 当然，如果希望离线工作，请在上述发行版中选择一个，到其官网下载最新版本的安装程序并安装。
 % \begin{itemize}
 % \item \href{https://www.tug.org/texlive/}{\hologo{TeXLive}} (macOS 用户请下载对应的 \href{https://www.tug.org/mactex/mactex-download.html}{Mac\hologo{TeX}})
 % \item \href{https://miktex.org/download}{\hologo{MiKTeX}}
@@ -237,13 +241,15 @@ through XeTeX.
 % \end{itemize}
 %
 % \subsection{编辑器}
-% 本小节针对本地编译的用户。Overleaf 用户可以在浏览器内完成工作。
+% 本小节仅针对本地编译的用户。Overleaf 用户可以在浏览器内完成工作，无需安装编辑器。
 %
 % 本文档无意参与 ``什么是世界上最好的编辑器'' 这类争论。对于初学者，强烈建议使用 Visual Studio Code 配合 LaTeX Workshop 插件以获得良好的编辑体验。你可以在\href{https://itxia.github.io/soft/post/ConfigVSCode/}{这里}找到一份 (年久失修但问题不大的) 安装和配置教程。
 %
 % 除此之外，支持热重载的 PDF 阅读器如 \href{https://www.sumatrapdfreader.org/download-free-pdf-viewer}{Sumatra PDF} 也是一个常用的工具。
 %
 % \section{编译}
+%
+% 复读：强烈建议初学者使用 Overleaf 入门。可以先试一次，如果觉得浏览器不方便，再本地安装也不迟。
 %
 % \subsection{在线编译：使用 Overleaf}
 % \begin{enumerate}
@@ -319,7 +325,7 @@ through XeTeX.
 % \file{mythesis.tex}是本模板的 \hologo{TeX} 主文件。下面将给出主文件内容的解释。
 %
 % \subsubsection{模板选项}
-% 模板选项是 \verb|\documentclass[]{hkustthesis}| 中方括号内的选项。
+% 模板选项是 \verb|\documentclass[]{hkustthesis}| 中方括号 \verb|[]| 内的选项。
 %
 % 本模板定义了3个模板选项：
 %
@@ -361,9 +367,9 @@ through XeTeX.
 %  \begin{syntax}
 %   displaycommittee = <(false)|true>
 %  \end{syntax}
-% Set whether to display committee list.
+% 设置是否在签名页显示答辩委员会成员列表。
 %
-% 该选项默认被 \verb|%| 注释掉。This option sets whether to display the committee list on the signature page. Some department may ask for this.
+% 该选项默认被 \verb|%| 注释掉。某些院系 (如 ECE) 要求在签名页显示答辩委员会成员列表。\textbf{注意：}如果设置此项为 \verb|true|，需要在下文提及的 \opt{reviewer} 和 \opt{reviewerdept} 选项中填写委员会成员信息。
 % \end{function}
 %
 % \subsubsection{论文信息}
@@ -376,11 +382,11 @@ through XeTeX.
 % \end{function}
 % 此选项的内容是以英文逗号 ``,'' 分隔的键值列表，定义了该论文的必要信息。每一项等号左边为变量名，右边为由花括号包裹的变量值。如果某一项的值不需要填，可以留空。
 %
-% 其中标为\textcolor{hkustblue}{蓝色的选项} is optional. You do not have to fill in them all.
+% 其中标为\textcolor{hkustblue}{蓝色的选项} 为可选填项。如果没有必要，可以留空。
 %
 % \begin{function}{degree}
 %  \begin{syntax}
-%   degree = \Arg{phd|mphil}
+%   degree              = \Arg{phd|mphil}
 %  \end{syntax}
 % 学位。
 % \end{function}
@@ -443,7 +449,7 @@ through XeTeX.
 %   co-supervisor       = \Arg{Co导师姓名}
 %   co-supervisor-title = \Arg{Co导师头衔}
 %  \end{syntax}
-% 导师信息。导师头衔可以写 ``Prof.'' 也可以写 ``Professor''，且无需留出末尾空格。
+% 导师信息。导师头衔可以写 ``Prof.'' 也可以写 ``Professor''，且无需留出末尾空格。如无Co-Supervisor，可以留空。
 % \end{function}
 %
 % \begin{function}{submit-month, submit-date, defend-date}
@@ -460,11 +466,11 @@ through XeTeX.
 %   chairman            = \Arg{答辩委员会主席}
 %   depthead            = \Arg{系/部门主任}
 %   \textcolor{hkustblue}{reviewer}            = \Arg{答辩委员会成员}
-%   \textcolor{hkustblue}{reviewerdept}            = \Arg{答辩委员会成员Department}
+%   \textcolor{hkustblue}{reviewerdept}        = \Arg{答辩委员会成员Department}
 %  \end{syntax}
 % 其中，\opt{depthead} 的值需要包括 ``, Head of Department/Division''，\\
 % 如 \verb|depthead = {Prof. XXX, Head of Department}|。\\
-% The \opt{reviewer} and \opt{reviewerdept} should be separatred by commas.\\
+% \textbf{注意：} \opt{reviewer} 和 \opt{reviewerdept} 中的内容需要使用英文逗号 ``,'' 分隔。详见下文给出的示例。
 % TODO: \st{add TEC name list in signature page?} Done.
 % \end{function}
 %
@@ -631,7 +637,7 @@ through XeTeX.
 % \end{macro}
 %
 % \begin{macro}{displaycommittee}
-% Display committee list
+% 显示委员会成员列表。
 %    \begin{macrocode}
   displaycommittee    .choices:nn   = { true, flase }
   { \tl_set_eq:NN \g_@@_disp_committee_tl \l_keys_choice_tl },  
