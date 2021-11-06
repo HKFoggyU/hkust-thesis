@@ -127,7 +127,7 @@ through XeTeX.
 % 
 % \author{HKFoggyU}
 %
-% \date{v0.5 \\ Released 2021-11-05}
+% \date{v0.5.3 \\ Released 2021-11-06}
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
@@ -137,6 +137,7 @@ through XeTeX.
 % \changes{v0.4.2}{2021/10/31}{Complete documentation}
 % \changes{v0.4.3}{2021/11/01}{Fix typos in documentation}
 % \changes{v0.5}{2021/11/05}{Add optional TEC list}
+% \changes{v0.5.3}{2021/11/06}{Update documentation about TEC list}
 %
 % \maketitle
 %
@@ -187,7 +188,7 @@ through XeTeX.
 % \subsection{\hologo{LaTeX}入门}
 % 本节不会从\hologo{LaTeX}是什么开始讲起。授人以鱼不如授人以渔，本节将更侧重从0入门\hologo{LaTeX}的方法而非具体实现。
 %
-% 首先，尽量避免 ``写代码'' 这件事产生抗拒心理。对于绝大多数用户而言，\hologo{LaTeX} 就是一个排版工具，只是用代码来实现，它不比常见的 Word、Photoshop 更难入门。只要认真阅读本文档，一定可以学会的。
+% 首先，尽量避免对 ``写代码'' 这件事产生抗拒心理。对于绝大多数用户而言，\hologo{LaTeX} 就是一个排版工具，只是用代码来实现，它不比常见的 Word、Photoshop 更难入门。只要认真阅读本文档，一定可以学会。
 % 
 % ``\emph{吾生也有涯，而知也无涯。}''
 % 作为一个已经被广泛应用数十年的排版工具，\hologo{LaTeX}的学习、参考资料可以说是浩如烟海。因此，掌握在繁杂的资料中找到问题解决方案的能力比通读各种\hologo{LaTeX}教程更加重要。
@@ -223,7 +224,7 @@ through XeTeX.
 %   \end{tabular}
 % \end{table}
 %
-% 如果本地尚未安装任何\hologo{LaTeX}发行版，那么 \href{https://www.overleaf.com/}{Overleaf} 是作为入门的很好选择。\textbf{强烈建议初学者从 Overleaf 入门，这样可以有效避免学习热情被安装配置环境所熄灭。}\\
+% 如果本地尚未安装任何\hologo{LaTeX}发行版，那么 \href{https://www.overleaf.com/}{Overleaf} 是作为入门的很好选择。\textbf{强烈建议初学者从 Overleaf 入门，这样可以避免学习热情被安装配置环境所熄灭。}\\
 % 当然，如果希望离线工作，请在上述发行版中选择一个，到其官网下载最新版本的安装程序并安装。
 % \begin{itemize}
 % \item \href{https://www.tug.org/texlive/}{\hologo{TeXLive}} (macOS 用户请下载对应的 \href{https://www.tug.org/mactex/mactex-download.html}{Mac\hologo{TeX}})
@@ -243,7 +244,7 @@ through XeTeX.
 % \subsection{编辑器}
 % 本小节仅针对本地编译的用户。Overleaf 用户可以在浏览器内完成工作，无需安装编辑器。
 %
-% 本文档无意参与 ``什么是世界上最好的编辑器'' 这类争论。对于初学者，强烈建议使用 Visual Studio Code 配合 LaTeX Workshop 插件以获得良好的编辑体验。你可以在\href{https://itxia.github.io/soft/post/ConfigVSCode/}{这里}找到一份 (年久失修但问题不大的) 安装和配置教程。
+% 本文档无意参与 ``什么是世界上最好的编辑器'' 这类争论。对于初学者，建议使用 Visual Studio Code 配合 LaTeX Workshop 插件以获得良好的编辑体验。你可以在\href{https://itxia.github.io/soft/post/ConfigVSCode/}{这里}找到一份 (年久失修但问题不大的) 安装和配置教程。
 %
 % 除此之外，支持热重载的 PDF 阅读器如 \href{https://www.sumatrapdfreader.org/download-free-pdf-viewer}{Sumatra PDF} 也是一个常用的工具。
 %
@@ -296,7 +297,7 @@ through XeTeX.
 %
 % \subsection{文件结构}
 %
-% 下载得到的压缩文件内部的文件结构应如表 (\ref{tab:fileStruture}) 所示。其中 \file{figure/} 文件夹如不存在请自行创建。
+% 下载得到的压缩文件内部的文件结构应如表 (\ref{tab:fileStruture}) 所示。其中 \file{figures/} 文件夹如不存在请自行创建。
 %
 % \begin{table}[H]
 %   \caption{\cls{hkustthesis}文件结构}
@@ -308,7 +309,7 @@ through XeTeX.
 %     \midrule
 %     \file{.vscode/}                      & 文件夹 & VSCode 配置文件夹    \\
 %     \color{hkustgold}\file{chapters/}    & 文件夹 & 存放论文各章节       \\
-%     \color{hkustgold}\file{figure/}      & 文件夹 & 存放论文所用图片     \\
+%     \color{hkustgold}\file{figures/}      & 文件夹 & 存放论文所用图片     \\
 %     \file{hkustthesis.cls}               & 文件   & 模板文档类           \\
 %     \file{latexmkrc}                     & 文件   & latexmk 配置文件     \\
 %     \file{LICENSE}                       & 文件   & 许可证               \\
@@ -382,7 +383,7 @@ through XeTeX.
 % \end{function}
 % 此选项的内容是以英文逗号 ``,'' 分隔的键值列表，定义了该论文的必要信息。每一项等号左边为变量名，右边为由花括号包裹的变量值。如果某一项的值不需要填，可以留空。
 %
-% 其中标为\textcolor{hkustblue}{蓝色的选项} 为可选填项。如果没有必要，可以留空。
+% 其中标为 \textcolor{hkustblue}{蓝色的选项} 为可选填项。如果没有必要，可以留空。
 %
 % \begin{function}{degree}
 %  \begin{syntax}
@@ -461,17 +462,17 @@ through XeTeX.
 % 其中，\opt{submit-month} 请只填写 ``月~年''，而 \opt{submit-date} 和 \opt{defend-date} 请填写 ``日~月~年''。
 % \end{function}
 %
-% \begin{function}{chairman, depthead, reviewer, reviewerdept}
+% \begin{function}{chairperson, depthead, reviewer, reviewerdept}
 %  \begin{syntax}
-%   chairman            = \Arg{答辩委员会主席}
+%   chairperson         = \Arg{答辩委员会主席}
 %   depthead            = \Arg{系/部门主任}
 %   \textcolor{hkustblue}{reviewer}            = \Arg{答辩委员会成员}
 %   \textcolor{hkustblue}{reviewerdept}        = \Arg{答辩委员会成员Department}
 %  \end{syntax}
 % 其中，\opt{depthead} 的值需要包括 ``, Head of Department/Division''，\\
 % 如 \verb|depthead = {Prof. XXX, Head of Department}|。\\
-% \textbf{注意：} \opt{reviewer} 和 \opt{reviewerdept} 中的内容需要使用英文逗号 ``,'' 分隔。详见下文给出的示例。
-% TODO: \st{add TEC name list in signature page?} Done.
+% \textbf{注意：} \opt{reviewer} 和 \opt{reviewerdept} 中的内容需要使用英文逗号 ``,'' 分隔。详见下文给出的示例。\\
+% TODO: \st{add TEC name list on signature page?} Done.
 % \end{function}
 %
 % \begin{function}{city}
@@ -503,7 +504,7 @@ through XeTeX.
 %       submit-month  = {August 2021},
 %       submit-date   = {13 August 2021},
 %       defend-date   = {8 March 2021},
-%       chairman      = {Prof. Ikari Gendo},
+%       chairperson   = {Prof. Ikari Gendo},
 %       depthead      = {Prof. Ikari Yui, Head of Department},
 %       reviewer      = {Prof. AAA (Chairperson), 
 %                       Prof. BBB (Supervisor),
@@ -545,13 +546,15 @@ through XeTeX.
 % \end{ctexexam}
 % 与之对应。
 %
-% 值得指出的是，\file{mythesis.tex} 文件所在的目录是编译时的根目录，因此即使在 \file{chapters/xxx.tex} 文件中插入图片，也应该使用 \verb|{figure/xxx.png}| 而非 \verb|{../figure/xxx.png}|。
+% 值得指出的是，\file{mythesis.tex} 文件所在的目录是编译时的根目录，因此即使在 \file{chapters/xxx.tex} 文件中插入图片，也应该使用 \verb|{figures/xxx.png}| 而非 \verb|{../figures/xxx.png}| 作为图片的路径。
 %
-% \file{mythesis.tex} 文件给出了一些示例，其中部分文件内的 \verb|\blindtext| 用来生成一段测试文字，正式撰写论文时请将其删去。
+% \file{mythesis.tex} 文件给出了一些示例，用户可以基于该文件撰写自己的毕业论文。其中部分章节文件内的 \verb|\blindtext| 命令用来生成一段用于测试排版效果的 ``乱数假文'' (lorem ipsum)，正式撰写论文时请将其删去。
+%
+% \vfill
+%
+% \textbf{下面的内容为开发手册，供开发者参考。普通用户无需阅读，请开始你的 \hologo{TeX} 之旅吧！}
 %
 % \end{documentation}
-%
-% \textbf{The following section is for developers only. There is no need for general users to read it. Start your \hologo{TeX}ing now!}
 %
 % \clearpage
 %
@@ -715,13 +718,13 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{info/submit-month,info/submit-date,info/defend-date,info/chairman,info/depthead,info/reviewer,info/reviewerdept,info/city}
+% \begin{macro}{info/submit-month,info/submit-date,info/defend-date,info/chairperson,info/depthead,info/reviewer,info/reviewerdept,info/city}
 % 提交和答辩。
 %    \begin{macrocode}
   submit-month      .tl_set:N = \l_@@_submit_month_tl,
   submit-date       .tl_set:N = \l_@@_submit_date_tl,
   defend-date       .tl_set:N = \l_@@_defend_date_tl,
-  chairman          .tl_set:N = \l_@@_info_chairman_tl,
+  chairperson       .tl_set:N = \l_@@_info_chairperson_tl,
   depthead          .tl_set:N = \l_@@_info_depthead_tl,
   reviewer       .clist_set:N = \l_@@_info_reviewer_clist,
   reviewerdept   .clist_set:N = \l_@@_info_reviewer_dept_clist,
