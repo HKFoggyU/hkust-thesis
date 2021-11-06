@@ -1,29 +1,18 @@
 # HKUST Thesis
 
-HKUST Thesis template for RPG implemented with LaTeX3. [中文版](README.zh.md).
+HKUST Thesis template for RPG implemented with LaTeX3.
 
 ## To save your time:
 
 - Do you know about LaTeX?
     - Yes: Please continue to use this template.
     - No: Do you want to learn it?
-        - Yes: Please find some [tutorials](https://www.bilibili.com/video/BV1s7411U7Pr) before using this template.
+        - Yes: Please read the PDF documentation before using this template.
         - No: Please use Microsoft Word.
 
----
+## Documentation
 
-## Getting started
-
-Please refer to the [online documentation](https://HKFoggyU.github.io/hkust-thesis/).
-
-## More details
-
-Please refer to the sample and documentation for more instructions and details.
-
-1. Sample (English): `` mythesis.pdf ``
-2. Documentation (Chinese): `` hkustthesis.pdf ``
-
-> The documentation tends to be more detailed.
+Please refer to the very detailed PDF documentation [``hkustthesis-v*.pdf``](https://github.com/HKFoggyU/hkust-thesis/releases/latest/) in the latest release, or the [online documentation](https://HKFoggyU.github.io/hkust-thesis/) as a quick start.
 
 ## Contributions
 
