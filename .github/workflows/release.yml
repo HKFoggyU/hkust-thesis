@@ -5,16 +5,10 @@ name: Build LaTeX document
 on: 
   push:
     branches:
-      - master
+      - main
 
     tags:
       - v*
-
-  pull_request:
-    branches:
-      - master
-
-  workflow_dispatch:
 
 jobs:
   build_latex:
