@@ -1,6 +1,8 @@
 # adpated from https://github.com/nju-lug/NJUThesis/blob/master/.github/workflows/build.yml
 # This workflow is triggered by push and pull request
-name: Test LaTeX document Compilation
+# Success when compilation is OK.
+name: Test Compilation
+
 on: 
   push:
     branches:

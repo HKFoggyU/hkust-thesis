@@ -2,8 +2,8 @@
 # This is a build workflow, it is manually triggered and provided for advanced users
 # You can fork the HKUST-Thesis Repo, write your thesis and organize through Github,
 # Compile your thesis through Github Action.
+name: Build Thesis
 
-name: Build Your Thesis
 on: 
   workflow_dispatch:
 
