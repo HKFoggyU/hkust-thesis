@@ -1,0 +1,36 @@
+# Adpated from https://github.com/nju-lug/NJUThesis/blob/master/.github/workflows/build.yml
+# This is a build workflow, it is manually triggered and provided for advanced users
+# You can fork the HKUST-Thesis Repo, write your thesis and organize through Github,
+# Compile your thesis through Github Action.
+name: Build Thesis
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+
+      - name: Github Action for LaTeX dtx to cls
+        uses: FengChendian/latex-dtx2cls-action@4.0.1
+        with:
+          root_file: hkustthesis.dtx
+          working_directory: ./
+
+      - name: Compile sample PDF
+        uses: HermitSun/latex-action@v3
+        with:
+          root_file: mythesis.tex
+          latexmk_use_xelatex: true
+          args: "-bibtex"
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v2
+        with:
+          name: PDF
+          path: |
+            mythesis.pdf
+

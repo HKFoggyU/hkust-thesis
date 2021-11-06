@@ -1,4 +1,9 @@
 # HKUST Thesis
+![LICENSE](https://img.shields.io/github/license/HKFoggyU/hkust-thesis)
+![STARS](https://img.shields.io/github/stars/HKFoggyU/hkust-thesis)
+![TEST](https://github.com/HKFoggyU/hkust-thesis/actions/workflows/test.yml/badge.svg)
+[![RELEASE](https://github.com/HKFoggyU/hkust-thesis/actions/workflows/release.yml/badge.svg)](https://github.com/HKFoggyU/hkust-thesis/releases)
+
 
 HKUST Thesis template for RPG implemented with LaTeX3.
 
