@@ -1353,7 +1353,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
       \int_set:Nn \l_@@_reviewer_index_int {1}
       \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l}
         Thesis~Examination~Committee & \\
-        \int_do_while:nNnn {\l_@@_reviewer_index_int} < {6} %^^A  {\l_@@_reviewer_clist_len_int}
+        \int_do_while:nNnn {\l_@@_reviewer_index_int} < {\l_@@_reviewer_clist_len_int}
         {
           \int_eval:n \l_@@_reviewer_index_int .~ 
           \clist_item:Nn \l_@@_info_reviewer_clist {\l_@@_reviewer_index_int} &
