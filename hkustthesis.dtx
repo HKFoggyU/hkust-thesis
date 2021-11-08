@@ -127,7 +127,7 @@ through XeTeX.
 % 
 % \author{HKFoggyU}
 %
-% \date{v0.5.3 \\ Released 2021-11-06}
+% \date{v0.5.4\\Released 2021-11-08\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
@@ -138,6 +138,7 @@ through XeTeX.
 % \changes{v0.4.3}{2021/11/01}{Fix typos in documentation}
 % \changes{v0.5}{2021/11/05}{Add optional TEC list}
 % \changes{v0.5.3}{2021/11/06}{Update documentation about TEC list}
+% \changes{v0.5.4}{2021/11/08}{Fix loop ending condition for TEC list}
 %
 % \maketitle
 %
@@ -180,7 +181,7 @@ through XeTeX.
 %随着时代的进步，更加清晰简明的\hologo{LaTeX3}大大提高了模板的易读性与可维护性。因此，HKFoggyU的成员决定通过\hologo{LaTeX3}语法、参考已有的优秀项目、以团队的力量，编写并维护一个全新的香港科技大学毕业论文模板。
 %
 % \subsection{文档结构}
-% 本文档的前半部分为用户手册，供使用本模板撰写毕业论文的同学们参考，请仔细阅读；后半部分为开发手册，供有意了解或贡献源码的同学参考，普通用户无需阅读。
+% 本文档的前半部分为用户手册，供使用本模板撰写毕业论文的同学们参考，请仔细阅读；后半部分 (第\ref{sec:implementation}节) 为开发手册，供有意了解或贡献源码的同学参考，普通用户无需阅读。
 %
 % \section{工欲善其事，必先利其器}
 % 有\hologo{LaTeX}基础的用户可以跳过本节。
@@ -560,7 +561,7 @@ through XeTeX.
 %
 % \begin{implementation}
 %
-% \section{Implementation}
+% \section{Implementation}\label{sec:implementation}
 %
 % \verb|@@| 在 \pkg{l3docstrip} 中表示名空间，在删除注释生成格式文件时会被等号后的字段替换，如在本模板\pkg{hkustthesis}中 |@@=hkust|。
 % 尖括号包裹的|<*class>||</class>|用来指定某段代码属于哪个文件。
