@@ -13,7 +13,7 @@ Do you know about LaTeX?
 - Yes: Please read the [online documentation](https://HKFoggyU.github.io/hkust-thesis/).
 - No: Do you want to learn it?
     - Yes: Please read the **very detailed [PDF documentation](https://github.com/HKFoggyU/hkust-thesis/releases/latest/)** (``hkustthesis-v*.pdf`` in `` Assets `` in the latest release).
-        - No: Please use Microsoft Word.
+    - No: Please use Microsoft Word.
 
 ## Contributions
 
