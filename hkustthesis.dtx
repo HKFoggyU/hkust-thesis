@@ -127,7 +127,7 @@ through XeTeX.
 % 
 % \author{HKFoggyU}
 %
-% \date{v0.6\\Released 2021-11-09\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
+% \date{v0.6.1\\Released 2021-11-09\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
@@ -140,6 +140,7 @@ through XeTeX.
 % \changes{v0.5.3}{2021/11/06}{Update documentation about TEC list}
 % \changes{v0.5.4}{2021/11/08}{Fix loop ending condition for TEC list}
 % \changes{v0.6}{2021/11/09}{Update line spacing according to GS, change to oneside, fine tune signature page for different cases}
+% \changes{v0.6.1}{2021/11/09}{Fix TEC external examiner problem}
 %
 % \maketitle
 %
@@ -372,7 +373,7 @@ through XeTeX.
 %  \end{syntax}
 % 设置是否在签名页显示答辩委员会成员列表。
 %
-% 该选项默认被 \verb|%| 注释掉。某些院系 (如 ECE) 要求在签名页显示答辩委员会成员列表。\textbf{注意：}如果设置此项为 \verb|true|，需要在下文提及的 \opt{reviewer} 和 \opt{reviewerdept} 选项中填写委员会成员信息。
+% 该选项默认被 \verb|%| 注释掉。某些院系 (如 ECE) 要求在签名页显示答辩委员会成员列表。\textbf{注意：}如果设置此项为 \verb|true|，需要在下文提及的 \opt{reviewer}、\opt{reviewerdept} 和 \opt{reviewerext} 选项中填写委员会成员信息。
 % \end{function}
 %
 % \subsubsection{论文信息}
@@ -464,16 +465,17 @@ through XeTeX.
 % 其中，\opt{submit-month} 请只填写 ``月~年''，而 \opt{submit-date} 和 \opt{defend-date} 请填写 ``日~月~年''。
 % \end{function}
 %
-% \begin{function}{depthead, reviewer, reviewerdept}
+% \begin{function}{depthead, reviewer, reviewerdept, reviewerext}
 %  \begin{syntax}
 %   depthead            = \Arg{系/部门主任}
 %   \textcolor{hkustblue}{reviewer}            = \Arg{答辩委员会成员}
 %   \textcolor{hkustblue}{reviewerdept}        = \Arg{答辩委员会成员所属机构}
+%   \textcolor{hkustblue}{reviewerext}         = \Arg{答辩委员会外部成员 (仅PhD需要)}
 %  \end{syntax}
-% 其中，\opt{depthead} 的值需要包括 ``, Head of Department/Division''，\\
-% 如 \verb|depthead = {Prof. XXX, Head of Department}|。\\
-% \textbf{注意：} \opt{reviewer} 和 \opt{reviewerdept} 中的内容需要使用英文逗号 ``,'' 分隔；如果某一项的内容里包含英文逗号 ``,''，比如某些大学名称，则需要用花括号将其包裹。详见下文给出的示例中的 \opt{reviewerdept} 的最后一项。\\
-% \textbf{注意：} 根据 ECE 系提供的签名页，\opt{reviewerdept} 的最后一项 ``External Examiner'' 所属机构的 ``Department'' 和 ``University'' 之间的 \verb|\\| 换行符不能删去。
+% 其中，\opt{depthead} 的值需要包括 ``, Head of Department/Division''，如 \verb|depthead = {Prof. XXX, Head of Department}|。\\
+% 某些院系会要求在签名页列出答辩委员会成员列表，此时需要填写 \opt{reviewer}、\opt{reviewerdept}，博士生还需要填写 \opt{reviewerext}。通常来讲，MPhil 答辩委员会需要4名成员，PhD 答辩委员会需要6名成员。\\
+% \textbf{注意：} \opt{reviewer} 和 \opt{reviewerdept} 中的每个条目之间需要使用英文逗号 ``,'' 分隔；但如果某一条目的内容里包含英文逗号 ``,''，比如 \opt{reviewerext} 中的外部大学名称，则需要用花括号将那一个条目包裹，否则 \hologo{LaTeX} 程序会在逗号处截断，将其当作两个条目。详见下文给出的示例中的 \opt{reviewerext} 的写法。\\
+% \textbf{注意：} 根据 ECE 系提供的签名页，PhD的答辩委员会中的 ``External Examiner'' (对应选项为 \opt{reviewerext}) 所属机构的 ``Department'' 和 ``University'' 之间的换行符 \verb|\\| 不能删去，否则会使得对齐出错。如果确实没有第二行内容，可以在 \verb|\\| 后使用 \verb|\phantom{xxx}| 作为占位 (这个命令会占据与 \verb|xxx| 同样大小的空间但不显示)。
 % TODO: \st{add TEC name list on signature page?} Done.
 % \end{function}
 %
@@ -511,14 +513,14 @@ through XeTeX.
 %                       Prof. BBB (Supervisor),
 %                       Prof. CCC (Co-Supervisor),
 %                       Prof. DDD,
-%                       Prof. EEE,
-%                       Prof. FFF (External Examiner)},
+%                       Prof. EEE},
 %       reviewerdept  = {Department of Electronic and Computer Engineering,
 %                       Department of ECE,
 %                       Department of ECE,
 %                       Department of ECE,
-%                       Department of Physics,
-%                       Department of EE\\{University of UU, at VV}},
+%                       Department of Physics},
+%       reviewerext   = {Prof. FFF (External Examiner),
+%                        Department of EE\\{University of UU, at VV}},
 %       city          = {Geo Front},
 %     }
 %   }
@@ -678,7 +680,7 @@ through XeTeX.
 % \end{macro}
 %
 % \begin{macro}{info/title}
-% 论文标题。
+% 论文标题。经测试，本模板最大支持3行标题，如果多于3行，有部分情况会出现溢出页面的问题。
 %    \begin{macrocode}
   title             .tl_set:N = \l_@@_info_title_tl,
 %    \end{macrocode}
@@ -720,7 +722,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{info/submit-month,info/submit-date,info/defend-date,info/depthead,info/reviewer,info/reviewerdept,info/city}
+% \begin{macro}{info/submit-month,info/submit-date,info/defend-date,info/depthead,info/reviewer,info/reviewerdept,info/reviewerext,info/city}
 % 提交和答辩。
 %    \begin{macrocode}
   submit-month      .tl_set:N = \l_@@_submit_month_tl,
@@ -729,6 +731,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
   depthead          .tl_set:N = \l_@@_info_depthead_tl,
   reviewer       .clist_set:N = \l_@@_info_reviewer_clist,
   reviewerdept   .clist_set:N = \l_@@_info_reviewer_dept_clist,
+  reviewerext    .clist_set:N = \l_@@_info_reviewer_ext_clist,
   city              .tl_set:N = \l_@@_info_city_tl,
 }
 %    \end{macrocode}
@@ -1331,14 +1334,16 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
       \int_set:Nn \l_@@_reviewer_index_int {1}
       \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l}
         Thesis~Examination~Committee & \\
-        \int_do_while:nNnn {\l_@@_reviewer_index_int} < {\l_@@_reviewer_clist_len_int}
+        \int_do_until:nNnn {\l_@@_reviewer_index_int} > {\l_@@_reviewer_clist_len_int}
         {
           \int_eval:n \l_@@_reviewer_index_int .~ 
           \clist_item:Nn \l_@@_info_reviewer_clist {\l_@@_reviewer_index_int} &
           \clist_item:Nn \l_@@_info_reviewer_dept_clist {\l_@@_reviewer_index_int} \\
           \int_gincr:N \l_@@_reviewer_index_int
         }
-        \makecell[l]{\int_eval:n \l_@@_reviewer_clist_len_int .~ \clist_item:Nn \l_@@_info_reviewer_clist {\l_@@_reviewer_clist_len_int} \\ \phantom{placeholder}} & \makecell[l]{\clist_item:Nn \l_@@_info_reviewer_dept_clist {\l_@@_reviewer_clist_len_int}}
+        \str_if_empty:NTF {\l_@@_info_reviewer_ext_clist}
+        { }
+        { \makecell[l]{\int_eval:n {\l_@@_reviewer_clist_len_int + 1} .~ \clist_item:Nn \l_@@_info_reviewer_ext_clist { 1 } \\ \phantom{placeholder}} & \makecell[l]{\clist_item:Nn \l_@@_info_reviewer_ext_clist { 2 }} }
       \end{tabular*}
     }
     {
@@ -1389,14 +1394,16 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
       \int_set:Nn \l_@@_reviewer_index_int {1}
       \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l}
         Thesis~Examination~Committee & \\
-        \int_do_while:nNnn {\l_@@_reviewer_index_int} < {\l_@@_reviewer_clist_len_int}
+        \int_do_until:nNnn {\l_@@_reviewer_index_int} > {\l_@@_reviewer_clist_len_int}
         {
           \int_eval:n \l_@@_reviewer_index_int .~ 
           \clist_item:Nn \l_@@_info_reviewer_clist {\l_@@_reviewer_index_int} &
           \clist_item:Nn \l_@@_info_reviewer_dept_clist {\l_@@_reviewer_index_int} \\
           \int_gincr:N \l_@@_reviewer_index_int
         }
-        \makecell[l]{\int_eval:n \l_@@_reviewer_clist_len_int .~ \clist_item:Nn \l_@@_info_reviewer_clist {\l_@@_reviewer_clist_len_int} \\ \phantom{placeholder}} & \makecell[l]{\clist_item:Nn \l_@@_info_reviewer_dept_clist {\l_@@_reviewer_clist_len_int}}
+        \str_if_empty:NTF {\l_@@_info_reviewer_ext_clist}
+        { }
+        { \makecell[l]{\int_eval:n {\l_@@_reviewer_clist_len_int + 1} .~ \clist_item:Nn \l_@@_info_reviewer_ext_clist { 1 } \\ \phantom{placeholder}} & \makecell[l]{\clist_item:Nn \l_@@_info_reviewer_ext_clist { 2 }} }
       \end{tabular*}
     }
     {
