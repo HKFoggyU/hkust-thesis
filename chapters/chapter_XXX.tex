@@ -10,10 +10,14 @@
   \item Mathfrak letters: $\mathfrak{A}$
   \item Math Sans serif letters: $\mathsf{A}$
   \item Math bold letters: $\mathbf{A}$
-  \item Math bold italic letters: $\mathbi{A}$
+  \item Math bold upright greek letters: $\mathbf{\alpha}$ (Not displaying! Use the following one.)
+  \item Math bold upright greek letters: $\symbfup{\alpha}$
+  \item Math bold italic greel letters: $\bm{\alpha}$
+  \item Math bold italic greek letters: $\mathbi{A}$
 \end{itemize}
 
-You can alias some commands to easily use these math symbols by \lstinline|\newcommand| or \lstinline|\renewcommand|.
+Avoid using \lstinline|bm| package as it conflicts with \lstinline|unicode-math| and it is outdated for \hologo{XeLaTeX}.
+You can alias some math commands by \lstinline|\newcommand| or \lstinline|\renewcommand| anyway.
 
 \subsection{Equations}
 

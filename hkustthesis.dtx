@@ -127,7 +127,7 @@ through XeTeX.
 % 
 % \author{HKFoggyU}
 %
-% \date{v0.6.1\\Released 2021-11-09\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
+% \date{v0.6.2\\Released 2021-11-09\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
@@ -141,6 +141,7 @@ through XeTeX.
 % \changes{v0.5.4}{2021/11/08}{Fix loop ending condition for TEC list}
 % \changes{v0.6}{2021/11/09}{Update line spacing according to GS, change to oneside, fine tune signature page for different cases}
 % \changes{v0.6.1}{2021/11/09}{Fix TEC external examiner problem}
+% \changes{v0.6.2}{2021/11/09}{Fix bm conflicts, merge supervisor title into name}
 %
 % \maketitle
 %
@@ -227,7 +228,7 @@ through XeTeX.
 %   \end{tabular}
 % \end{table}
 %
-% 如果本地尚未安装任何\hologo{LaTeX}发行版，那么 \href{https://www.overleaf.com/}{Overleaf} 是作为入门的很好选择。\textbf{强烈建议初学者从 Overleaf 入门，这样可以避免学习热情被安装配置环境所熄灭。}\\
+% 如果本地尚未安装任何\hologo{LaTeX}发行版，那么 \href{https://www.overleaf.com/}{Overleaf} 是作为入门的很好选择。\textbf{强烈建议初学者从 Overleaf 入门，可以避免学习热情被安装配置环境所熄灭。}\\
 % 当然，如果希望离线工作，请在上述发行版中选择一个，到其官网下载最新版本的安装程序并安装。
 % \begin{itemize}
 % \item \href{https://www.tug.org/texlive/}{\hologo{TeXLive}} (macOS 用户请下载对应的 \href{https://www.tug.org/mactex/mactex-download.html}{Mac\hologo{TeX}})
@@ -373,7 +374,7 @@ through XeTeX.
 %  \end{syntax}
 % 设置是否在签名页显示答辩委员会成员列表。
 %
-% 该选项默认被 \verb|%| 注释掉。某些院系 (如 ECE) 要求在签名页显示答辩委员会成员列表。\textbf{注意：}如果设置此项为 \verb|true|，需要在下文提及的 \opt{reviewer}、\opt{reviewerdept} 和 \opt{reviewerext} 选项中填写委员会成员信息。
+% 该选项默认被 \verb|%| 注释掉。某些院系 (如 ECE) 要求在签名页显示答辩委员会成员列表。\textcolor{hkustblue}{\textbf{注意：}}如果设置此项为 \verb|true|，需要在下文提及的 \opt{reviewer}、\opt{reviewerdept} 和 \opt{reviewerext} 选项中填写委员会成员信息。
 % \end{function}
 %
 % \subsubsection{论文信息}
@@ -386,7 +387,7 @@ through XeTeX.
 % \end{function}
 % 此选项的内容是以英文逗号 ``,'' 分隔的键值列表，定义了该论文的必要信息。每一项等号左边为变量名，右边为由花括号包裹的变量值。如果某一项的值不需要填，可以留空。
 %
-% 其中标为 \textcolor{hkustblue}{蓝色的选项} 为可选填项。如果没有必要，可以留空。
+% 其中标为\textcolor{hkustblue}{蓝色的选项}为可选填项。如果没有必要，可以留空。同理，标为\textcolor{hkustblue}{蓝色的文字}为可选阅读项，只有填写可选项的用户才需要阅读。
 %
 % \begin{function}{degree}
 %  \begin{syntax}
@@ -446,14 +447,12 @@ through XeTeX.
 % 专业方向。请参考 SIS 中的 ``major''。
 % \end{function}
 %
-% \begin{function}{supervisor, supervisor-title, co-supervisor, co-supervisor-title}
+% \begin{function}{supervisor, co-supervisor}
 %  \begin{syntax}
-%   supervisor          = \Arg{导师姓名}
-%   supervisor-title    = \Arg{导师头衔}
-%   co-supervisor       = \Arg{Co导师姓名}
-%   co-supervisor-title = \Arg{Co导师头衔}
+%   supervisor          = \Arg{导师职称姓名}
+%   co-supervisor       = \Arg{Co导师职称姓名}
 %  \end{syntax}
-% 导师信息。导师头衔可以写 ``Prof.'' 也可以写 ``Professor''，且无需留出末尾空格。如无Co-Supervisor，可以留空。
+% 导师信息。如无Co-Supervisor，可以留空。
 % \end{function}
 %
 % \begin{function}{submit-month, submit-date, defend-date}
@@ -462,7 +461,7 @@ through XeTeX.
 %   submit-date         = \Arg{论文提交日期}
 %   defend-date         = \Arg{论文答辩日期}
 %  \end{syntax}
-% 其中，\opt{submit-month} 请只填写 ``月~年''，而 \opt{submit-date} 和 \opt{defend-date} 请填写 ``日~月~年''。
+% 提交时间和答辩时间。其中，\opt{submit-month} 请只填写 ``月~年''，而 \opt{submit-date} 和 \opt{defend-date} 请填写 ``日~月~年''。
 % \end{function}
 %
 % \begin{function}{depthead, reviewer, reviewerdept, reviewerext}
@@ -470,12 +469,15 @@ through XeTeX.
 %   depthead            = \Arg{系/部门主任}
 %   \textcolor{hkustblue}{reviewer}            = \Arg{答辩委员会成员}
 %   \textcolor{hkustblue}{reviewerdept}        = \Arg{答辩委员会成员所属机构}
-%   \textcolor{hkustblue}{reviewerext}         = \Arg{答辩委员会外部成员 (仅PhD需要)}
+%   \textcolor{hkustblue}{reviewerext}         = \Arg{答辩委员会外部成员}
 %  \end{syntax}
-% 其中，\opt{depthead} 的值需要包括 ``, Head of Department/Division''，如 \verb|depthead = {Prof. XXX, Head of Department}|。\\
-% 某些院系会要求在签名页列出答辩委员会成员列表，此时需要填写 \opt{reviewer}、\opt{reviewerdept}，博士生还需要填写 \opt{reviewerext}。通常来讲，MPhil 答辩委员会需要4名成员，PhD 答辩委员会需要6名成员。\\
-% \textbf{注意：} \opt{reviewer} 和 \opt{reviewerdept} 中的每个条目之间需要使用英文逗号 ``,'' 分隔；但如果某一条目的内容里包含英文逗号 ``,''，比如 \opt{reviewerext} 中的外部大学名称，则需要用花括号将那一个条目包裹，否则 \hologo{LaTeX} 程序会在逗号处截断，将其当作两个条目。详见下文给出的示例中的 \opt{reviewerext} 的写法。\\
-% \textbf{注意：} 根据 ECE 系提供的签名页，PhD的答辩委员会中的 ``External Examiner'' (对应选项为 \opt{reviewerext}) 所属机构的 ``Department'' 和 ``University'' 之间的换行符 \verb|\\| 不能删去，否则会使得对齐出错。如果确实没有第二行内容，可以在 \verb|\\| 后使用 \verb|\phantom{xxx}| 作为占位 (这个命令会占据与 \verb|xxx| 同样大小的空间但不显示)。
+% 签名页信息。\\
+% 其中，\opt{depthead} 的值需要包括 ``, Head of Department/Division''，如\\
+% \verb|depthead = {Prof. XXX, Head of Department}|。\\
+% 关于\textcolor{hkustblue}{答辩委员会}：\\
+% 某些院系会要求在签名页列出答辩委员会成员列表，此时需要填写 \opt{reviewer}、\opt{reviewerdept}，PhD 还需要填写 \opt{reviewerext}。通常来讲，MPhil 答辩委员会需要4名成员，PhD 答辩委员会需要6名成员。\\
+% \textcolor{hkustblue}{\textbf{注意：}} \opt{reviewer} 和 \opt{reviewerdept} 中的每个条目之间需要使用英文逗号 ``,'' 分隔；但如果某一条目的内容里包含英文逗号 ``,''，比如 \opt{reviewerext} 中的外部大学名称，则需要用花括号将那一个条目包裹，否则 \hologo{LaTeX} 程序会在逗号处截断，将其当作两个条目。详见下文给出的示例中的 \opt{reviewerext} 的写法。\\
+% \textcolor{hkustblue}{\textbf{注意：}} 根据 ECE 系提供的签名页，PhD的答辩委员会中的 ``External Examiner'' (对应选项为 \opt{reviewerext}) 所属机构的 ``Department'' 和 ``University'' 之间的换行符 \verb|\\| 不能删去，否则会使得对齐出错。如果确实没有第二行内容，可以在 \verb|\\| 后使用 \verb|\phantom{xxx}| 作为占位 (这个命令会占据与 \verb|xxx| 同样大小的空间但不显示)。\\
 % TODO: \st{add TEC name list on signature page?} Done.
 % \end{function}
 %
@@ -502,9 +504,7 @@ through XeTeX.
 %       program       = {Human Instrumentality Project},
 %       major         = {},
 %       supervisor    = {Adams},
-%       supervisor-title = {Prof.},
 %       co-supervisor = {Lilith},
-%       co-supervisor-title = {Prof.},
 %       submit-month  = {August 2021},
 %       submit-date   = {13 August 2021},
 %       defend-date   = {8 March 2021},
@@ -532,6 +532,8 @@ through XeTeX.
 %  \item \verb|\addbibresource{mythesis.bib}| 导入了存放引用文献的 bib 文件。
 % \end{itemize}
 %
+% \textbf{注意：}本模板使用 \pkg{unicode-math} 设置数学环境字体，请不要使用会与之产生冲突的 \pkg{bm} 宏包，否则会报错。事实上，在 \hologo{XeTeX} 引擎下，\pkg{bm} 已经过时。对于 \pkg{bm} 宏包中的常用命令 \verb|\bm|，本模板已经设置了一个别名，用户可以在正文中直接使用 \verb|\bm|。除此之外，如果还有需要使用的 \pkg{bm} 宏包中的命令，请自行设置别名。
+%
 % \subsubsection{正文区}
 % 正文区按顺序定义或插入了组成论文的各个组件、章节；用户在 \file{chapters} 文件夹下修改或新增章节文件后，需要检查主文件中对应的部分是否正确。
 %
@@ -552,7 +554,7 @@ through XeTeX.
 %
 % 值得指出的是，\file{mythesis.tex} 文件所在的目录是编译时的根目录，因此即使在 \file{chapters/xxx.tex} 文件中插入图片，也应该使用 \verb|{figures/xxx.png}| 而非 \verb|{../figures/xxx.png}| 作为图片的路径。
 %
-% \file{mythesis.tex} 文件给出了一些示例，用户可以基于该文件撰写自己的毕业论文。其中部分章节文件内的 \verb|\blindtext| 命令用来生成一段用于测试排版效果的 ``乱数假文'' (lorem ipsum)，正式撰写论文时请将其删去。
+% \file{mythesis.tex} 文件和 \file{chapters} 文件夹内的文件给出了一些示例，用户可以基于这些文件撰写自己的毕业论文。其中部分章节文件内的 \verb|\blindtext| 命令用来生成一段用于测试排版效果的 ``乱数假文'' (lorem ipsum)，正式撰写论文时请将其删去。
 %
 % \vfill
 %
@@ -712,13 +714,11 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 % \end{macro}
 %  
-% \begin{macro}{info/supervisor,info/supervisor-title,info/co-supervisor,info/co-supervisor-title}
+% \begin{macro}{info/supervisor,info/co-supervisor}
 % 导师。
 %    \begin{macrocode}
   supervisor         .tl_set:N = \l_@@_info_supervisor_tl,
-  supervisor-title   .tl_set:N = \l_@@_info_supervisor_title_tl,
   co-supervisor      .tl_set:N = \l_@@_info_co_supervisor_tl,
-  co-supervisor-title.tl_set:N = \l_@@_info_co_supervisor_title_tl,
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1134,12 +1134,10 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %    \begin{macrocode}
 \tl_set:Nn \l_@@_info_supervisor_title_name_tl
 {
-  \l_@@_info_supervisor_title_tl\ 
   \l_@@_info_supervisor_tl
 }
 \tl_set:Nn \l_@@_info_co_supervisor_title_name_tl
 {
-  \l_@@_info_co_supervisor_title_tl\ 
   \l_@@_info_co_supervisor_tl
 }
 %    \end{macrocode}
@@ -1527,7 +1525,9 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 \crefname{assumption}{Assumption}{Assumptions}
 %    \end{macrocode}
 %
-% CHANGELOG: Get rid of all ctex packages
+% CHANGELOG: Get rid of all ctex packages.\\
+% \pkg{unicode-math} 与 \pkg{bm} 冲突。定义或重定义一些相关命令以规避后者带来的问题。\\
+% 注：实际上，使用 \hologo{XeLaTeX} 时已经不需要使用过时的 \pkg{bm} 宏包。
 % \pkg{hyperref} 
 %    \begin{macrocode}
 \cs_new_protected:Npx \@@_gadd_ltxhook:nn #1
@@ -1536,6 +1536,9 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
   { \@@_gadd_ltxhook:nn { begindocument/before } }
 \@@_at_end_preamble:n
 {
+  \NewDocumentCommand \mathbi {m} {\symbfit{#1}}
+  \ProvideDocumentCommand \bm {m} {\mathbi{#1}}
+  \RenewDocumentCommand \bm {m} {\mathbi{#1}}
   \hypersetup
     {
       pdftitle    = \l_@@_info_title_tl,
@@ -1628,15 +1631,6 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 % 
 % \subsection{定理环境}
-%
-% \begin{macro}{\mathbi}
-% Math bold italic letters
-%
-% 注：\pkg{unicode-math} 与 \pkg{bm} 冲突。请勿使用后者。
-%    \begin{macrocode}
-\NewDocumentCommand\mathbi{m}{\symbfit{#1}}
-%    \end{macrocode}
-% \end{macro}
 %
 %    \begin{macrocode}
 \declaretheoremstyle[
