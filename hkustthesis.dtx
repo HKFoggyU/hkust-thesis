@@ -127,7 +127,7 @@ through XeTeX.
 % 
 % \author{HKFoggyU}
 %
-% \date{v0.6.2\\Released 2021-11-09\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
+% \date{v0.6.2\\Released 2021-11-10\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
@@ -141,7 +141,7 @@ through XeTeX.
 % \changes{v0.5.4}{2021/11/08}{Fix loop ending condition for TEC list}
 % \changes{v0.6}{2021/11/09}{Update line spacing according to GS, change to oneside, fine tune signature page for different cases}
 % \changes{v0.6.1}{2021/11/09}{Fix TEC external examiner problem}
-% \changes{v0.6.2}{2021/11/09}{Fix bm conflicts, merge supervisor title into name}
+% \changes{v0.6.2}{2021/11/10}{Fix bm conflicts, merge supervisor title into name, update docs}
 %
 % \maketitle
 %
@@ -204,8 +204,8 @@ through XeTeX.
 % 结合以上两点，一个初学者就已经具备使用本模板的能力。
 %
 % \subsection{\hologo{LaTeX}环境}
-% 本模板要求的\hologo{LaTeX}发行版为最新版的\hologo{TeXLive} (2021) 或\hologo{MiKTeX}。某些低版本的发行版可能存在潜在的问题。
-% 
+% 本模板要求的\hologo{LaTeX}发行版为最新版的\hologo{TeXLive} (2021) 或\hologo{MiKTeX}。尽管某些低版本的发行版可以编译通过，但可能存在一些未被发现的问题。
+%
 % 本模板在各平台、各\hologo{LaTeX}发行版上的编译情况如表 (\ref{tab:environment}) 所示。
 %
 % \begin{table}[ht]
@@ -313,13 +313,13 @@ through XeTeX.
 %     \midrule
 %     \file{.vscode/}                      & 文件夹 & VSCode 配置文件夹    \\
 %     \color{hkustgold}\file{chapters/}    & 文件夹 & 存放论文各章节       \\
-%     \color{hkustgold}\file{figures/}      & 文件夹 & 存放论文所用图片     \\
+%     \color{hkustgold}\file{figures/}     & 文件夹 & 存放论文所用图片     \\
 %     \file{hkustthesis.cls}               & 文件   & 模板文档类           \\
 %     \file{latexmkrc}                     & 文件   & latexmk 配置文件     \\
 %     \file{LICENSE}                       & 文件   & 许可证               \\
 %     \color{hkustgold}\file{mythesis.bib} & 文件   & 存放论文所用参考文献 \\
 %     \color{hkustgold}\file{mythesis.tex} & 文件   & 论文主文件           \\
-%     \file{README(.zh).md}                & 文件   & 自述文件(中/英文)    \\
+%     \file{README.md}                     & 文件   & 自述文件             \\
 %     \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -340,8 +340,9 @@ through XeTeX.
 %  \end{syntax}
 % 自定义西文字体。
 % \end{function}
-% 前三种选项使用的字体如表 (\ref{tab:latinfontset}) 所示。
-%
+% 该选项默认被 \verb|%| 注释掉，使模板可以在不同平台上自动选择对应的字体 (不同选项使用的字体如表 (\ref{tab:latinfontset}) 所示)。
+% 如果用户希望该模板在所有平台上都使用同样的字体（前提是所用字体存在），可以取消该行注释并修改为希望使用的选项。
+% 如果用户希望完全由自己设定字体，则可以填 \opt{none}，再通过 \pkg{fontspec} 宏包手动设置字体。
 % \begin{table}[htbp]
 %   \centering
 %   \caption{西文字体清单}
@@ -357,25 +358,22 @@ through XeTeX.
 %   \end{tabular}
 % \end{table}
 %
-% 该选项默认被 \verb|%| 注释掉，使模板可以在不同平台上自动选择对应的字体；如果用户希望该模板在所有平台上都使用同样的字体（前提是所用字体存在），那么也可以取消注释，将后面的选项修改为希望使用的平台。如果用户希望完全由自己设定字体，则可以填 \opt{none}，再通过 \pkg{fontspec} 宏包手动设置字体。
-%
 % \begin{function}{custombibstyle}
 %  \begin{syntax}
 %   custombibstyle = <(ieee)|nature|science|apa|mla|phys|chem-acs|nejm>
 %  \end{syntax}
 % 自定义参考文献条目样式。
-%
-% 该选项默认被 \verb|%| 注释掉。\opt{ieee} 为默认样式。如果希望使用的样式不在此列表，可以阅读 \pkg{biblatex} 的文档并自行修改模板代码。
 % \end{function}
+% 该选项默认被 \verb|%| 注释掉。\opt{ieee} 为默认样式。如果希望使用的样式不在此列表，可以阅读 \pkg{biblatex} 的文档并自行修改模板代码。
 %
 % \begin{function}{displaycommittee}
 %  \begin{syntax}
 %   displaycommittee = <(false)|true>
 %  \end{syntax}
 % 设置是否在签名页显示答辩委员会成员列表。
-%
-% 该选项默认被 \verb|%| 注释掉。某些院系 (如 ECE) 要求在签名页显示答辩委员会成员列表。\textcolor{hkustblue}{\textbf{注意：}}如果设置此项为 \verb|true|，需要在下文提及的 \opt{reviewer}、\opt{reviewerdept} 和 \opt{reviewerext} 选项中填写委员会成员信息。
 % \end{function}
+% 该选项默认被 \verb|%| 注释掉，因为 RPG Handbook 提供的示例签名页没有要求列出答辩委员会成员。
+% 但某些院系 (如 ECE) 要求在签名页显示答辩委员会成员列表，则需要取消该行注释并设置为 \verb|true|，以及需要在下文提及的 \opt{reviewer}、\opt{reviewerdept} 和 \opt{reviewerext} 选项中填写委员会成员信息。
 %
 % \subsubsection{论文信息}
 %
@@ -385,7 +383,7 @@ through XeTeX.
 %  \end{syntax}
 % 论文必要信息。
 % \end{function}
-% 此选项的内容是以英文逗号 ``,'' 分隔的键值列表，定义了该论文的必要信息。每一项等号左边为变量名，右边为由花括号包裹的变量值。如果某一项的值不需要填，可以留空。
+% 此选项的内容是以英文逗号 \verb|,| 分隔的键值列表，定义了该论文的必要信息。每一项等号左边为变量名，右边为由花括号 \verb|{}| 包裹的变量值。如果某一项的值不需要填，可以留空，但花括号仍建议保留。
 %
 % 其中标为\textcolor{hkustblue}{蓝色的选项}为可选填项。如果没有必要，可以留空。同理，标为\textcolor{hkustblue}{蓝色的文字}为可选阅读项，只有填写可选项的用户才需要阅读。
 %
@@ -409,7 +407,7 @@ through XeTeX.
 %   \textcolor{hkustblue}{grade}               = \Arg{年级}
 %   \textcolor{hkustblue}{student-id}          = \Arg{学号}
 %  \end{syntax}
-% 关键词列表、年级、学号。
+% 关键词列表、年级、学号。关键词列表同样以英文逗号分隔。
 % \end{function}
 %
 % \begin{function}{author}
@@ -449,10 +447,10 @@ through XeTeX.
 %
 % \begin{function}{supervisor, co-supervisor}
 %  \begin{syntax}
-%   supervisor          = \Arg{导师职称姓名}
-%   co-supervisor       = \Arg{Co导师职称姓名}
+%   supervisor          = \Arg{导师头衔姓名}
+%   co-supervisor       = \Arg{联培导师头衔姓名}
 %  \end{syntax}
-% 导师信息。如无Co-Supervisor，可以留空。
+% 导师信息。如无Co-supervisor，可以留空。
 % \end{function}
 %
 % \begin{function}{submit-month, submit-date, defend-date}
@@ -475,9 +473,9 @@ through XeTeX.
 % 其中，\opt{depthead} 的值需要包括 ``, Head of Department/Division''，如\\
 % \verb|depthead = {Prof. XXX, Head of Department}|。\\
 % 关于\textcolor{hkustblue}{答辩委员会}：\\
-% 某些院系会要求在签名页列出答辩委员会成员列表，此时需要填写 \opt{reviewer}、\opt{reviewerdept}，PhD 还需要填写 \opt{reviewerext}。通常来讲，MPhil 答辩委员会需要4名成员，PhD 答辩委员会需要6名成员。\\
-% \textcolor{hkustblue}{\textbf{注意：}} \opt{reviewer} 和 \opt{reviewerdept} 中的每个条目之间需要使用英文逗号 ``,'' 分隔；但如果某一条目的内容里包含英文逗号 ``,''，比如 \opt{reviewerext} 中的外部大学名称，则需要用花括号将那一个条目包裹，否则 \hologo{LaTeX} 程序会在逗号处截断，将其当作两个条目。详见下文给出的示例中的 \opt{reviewerext} 的写法。\\
-% \textcolor{hkustblue}{\textbf{注意：}} 根据 ECE 系提供的签名页，PhD的答辩委员会中的 ``External Examiner'' (对应选项为 \opt{reviewerext}) 所属机构的 ``Department'' 和 ``University'' 之间的换行符 \verb|\\| 不能删去，否则会使得对齐出错。如果确实没有第二行内容，可以在 \verb|\\| 后使用 \verb|\phantom{xxx}| 作为占位 (这个命令会占据与 \verb|xxx| 同样大小的空间但不显示)。\\
+% 某些院系会要求在签名页列出答辩委员会成员列表，此时需要填写 \opt{reviewer}、\opt{reviewerdept}，PhD 还需要填写 \opt{reviewerext}。通常来讲，MPhil 答辩委员会需要4名成员，PhD 答辩委员会需要6名成员 (含1名外部成员)。\\
+% \textcolor{hkustblue}{\textbf{注意：}} \opt{reviewer} 和 \opt{reviewerdept} 中的每个条目之间需要使用英文逗号分隔；但如果某一条目的内容里包含英文逗号，比如 \opt{reviewerext} 中的外部大学名称，则需要用花括号将那一整个条目包裹，否则 \hologo{LaTeX} 程序会在逗号处截断，将其当作两个条目。详见下文给出的示例中的 \opt{reviewerext} 的写法。\\
+% \textcolor{hkustblue}{\textbf{注意：}} 根据 ECE 系提供的签名页，PhD的答辩委员会中的 ``External Examiner'' 所属机构的 ``Department'' 和 ``University'' 之间的换行符 \verb|\\| 不能删去，否则会使得对齐出错。如果确实没有第二行内容，可以在 \verb|\\| 后使用 \verb|\phantom{xxx}| 作为占位 (这个命令会占据与 \verb|xxx| 同样大小的空间但不实际显示)。\\
 % TODO: \st{add TEC name list on signature page?} Done.
 % \end{function}
 %
@@ -503,15 +501,15 @@ through XeTeX.
 %       department    = {Department of NERV},
 %       program       = {Human Instrumentality Project},
 %       major         = {},
-%       supervisor    = {Adams},
-%       co-supervisor = {Lilith},
+%       supervisor    = {Prof. Adams},
+%       co-supervisor = {Prof. Lilith},
 %       submit-month  = {August 2021},
 %       submit-date   = {13 August 2021},
 %       defend-date   = {8 March 2021},
 %       depthead      = {Prof. Ikari Yui, Head of Department},
 %       reviewer      = {Prof. AAA (Chairperson), 
 %                       Prof. BBB (Supervisor),
-%                       Prof. CCC (Co-Supervisor),
+%                       Prof. CCC (Co-supervisor),
 %                       Prof. DDD,
 %                       Prof. EEE},
 %       reviewerdept  = {Department of Electronic and Computer Engineering,
@@ -666,7 +664,7 @@ through XeTeX.
 % 输入论文的必要信息。
 %    \begin{macrocode}
 \keys_define:nn { hkust }
-{ info              .meta:nn = { hkust / info } { #1 } }
+{ info               .meta:nn = { hkust / info } { #1 } }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -691,7 +689,7 @@ through XeTeX.
 % \begin{macro}{info/keywords}
 % 关键词。
 %    \begin{macrocode}
-keywords            .clist_set:N = \l_@@_info_keywords_clist,
+keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 % \end{macro}
 % 
@@ -717,8 +715,8 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 % \begin{macro}{info/supervisor,info/co-supervisor}
 % 导师。
 %    \begin{macrocode}
-  supervisor         .tl_set:N = \l_@@_info_supervisor_tl,
-  co-supervisor      .tl_set:N = \l_@@_info_co_supervisor_tl,
+  supervisor        .tl_set:N = \l_@@_info_supervisor_tl,
+  co-supervisor     .tl_set:N = \l_@@_info_co_supervisor_tl,
 %    \end{macrocode}
 % \end{macro}
 %
@@ -771,9 +769,10 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 }
 %    \end{macrocode}
 %
-% 此处为行距设置，FYTGS的回复阐明是 Word 中的 1.5 倍行距。\\
+% 此处为行距设置，FYTGS的邮件确认是 Word 中的 1.5 倍行距。\\
 % 关于行距，12pt的 Times~New~Roman 文字在Word里的单倍行距对应的 PDF 行距是1.15，1.5倍 Word 行距对应的 PDF 行距是1.72；而在 \hologo{LaTeX} 中设置 linespread = 1 时生成的 PDF 的行距是 1.2。所以要想得到 1.5 倍 Word 行距 (即 1.72 倍 PDF 行距)，需要设置的 linespread 为：
 % \[ \frac{1.72}{1.2} = 1.433\]
+% 而由于单倍行距在 Word 和 \hologo{LaTeX}生成的PDF 中差别很小，故使用了 \verb|\singlespacing| 命令实现。
 %    \begin{macrocode}
 \linespread{1.43}
 %^^A \onehalfspacing
@@ -783,7 +782,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %
 % 标题、目录和链接。
 %    \begin{macrocode}
-\RequirePackage[explicit]{titlesec} % For typesetting titles of chap/sec/...
+\RequirePackage[explicit]{titlesec} % typesetting titles of chap/sec/...
 \RequirePackage[titles]{tocloft}
 \RequirePackage[hyphens]{url} % generate better linebreaks in the url
 %    \end{macrocode}
@@ -1130,7 +1129,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 % \end{variable}
 %
-% 拼合导师的职称和姓名。
+% 拼合导师的职称和姓名。[Unnecessary due to removal of \opt{supervisor-title}]
 %    \begin{macrocode}
 \tl_set:Nn \l_@@_info_supervisor_title_name_tl
 {
@@ -1161,7 +1160,8 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %
 % 判断学位进行命令定义。
 %    \begin{macrocode}
-\msg_new:nnn { hkustthesis }{ unknown-degree }{ Unknown~ degree:~ \l_@@_info_degree_tl.\\ Please~ check~ spelling.}
+\msg_new:nnn { hkustthesis }{ unknown-degree }
+  { Unknown~ degree:~ \l_@@_info_degree_tl.\\ Please~ check~ spelling.}
 \cs_new_protected:Npn \@@_print_degree_name:
 {
 \str_if_eq:NNTF { \l_@@_info_degree_tl } { phd }
@@ -1192,9 +1192,10 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
   \addcontentsline{toc}{chapter}{Title~Page}
   \begin{center}
     \phantom{[SMAPLE~TITLE~PAGE]}\\[1\baselineskip]
-    {\singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl}\\[5\baselineskip]
-    by\\[1\baselineskip]
-    \l_@@_info_author_tl\\[5\baselineskip]
+    { \singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl}
+      \\[5\baselineskip]
+      by\\[1\baselineskip]
+      \l_@@_info_author_tl\\[5\baselineskip]
     {
       A~Thesis~Submitted~to\\
       The~Hong~Kong~University~of~Science~and~Technology\\
@@ -1232,11 +1233,12 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
   {
     \begin{center}
     \phantom{[SAMPLE~ABSTRACT~PAGE]}\\[1\baselineskip]
-    {\singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl} \\[1\baselineskip]
-    by~\l_@@_info_author_tl \\[2\baselineskip]
-    \l_@@_info_department_tl \\[1\baselineskip]
-    The~Hong~Kong~University~of~Science~and~Technology\\[2\baselineskip]
-    Abstract
+    { \singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl}
+      \\[1\baselineskip]
+      by~\l_@@_info_author_tl \\[2\baselineskip]
+      \l_@@_info_department_tl \\[1\baselineskip]
+      The~Hong~Kong~University~of~Science~and~Technology\\[2\baselineskip]
+      Abstract
     \end{center}
   }
   \singlespacing\selectfont
@@ -1312,7 +1314,8 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
       {
       \phantom{SAMPLE~SIGNATURE~PAGE}\\
       \vspace{-20pt}
-      {\singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl} \\[1\baselineskip]
+      {\singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl}
+       \\[1\baselineskip]
       by \\[1\baselineskip]
       \l_@@_info_author_tl \\[1\baselineskip]
       This~is~to~certify~that~I~have~examined~the~
@@ -1322,31 +1325,40 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
       and~that~any~and~all~revisions~required~by\\
       the~thesis~examination~committee~have~been~made.\\[3\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor\\[3\baselineskip]
+      \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor
+       \\[3\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
       \l_@@_info_depthead_tl\\[1\baselineskip]
     \end{center}
       \int_new:N \l_@@_reviewer_clist_len_int
       \int_new:N \l_@@_reviewer_index_int
-      \int_set:Nn \l_@@_reviewer_clist_len_int {\clist_count:N \l_@@_info_reviewer_clist}
+      \int_set:Nn \l_@@_reviewer_clist_len_int
+                  {\clist_count:N \l_@@_info_reviewer_clist}
       \int_set:Nn \l_@@_reviewer_index_int {1}
       \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l}
         Thesis~Examination~Committee & \\
-        \int_do_until:nNnn {\l_@@_reviewer_index_int} > {\l_@@_reviewer_clist_len_int}
+        \int_do_until:nNnn {\l_@@_reviewer_index_int} > 
+                           {\l_@@_reviewer_clist_len_int}
         {
           \int_eval:n \l_@@_reviewer_index_int .~ 
-          \clist_item:Nn \l_@@_info_reviewer_clist {\l_@@_reviewer_index_int} &
-          \clist_item:Nn \l_@@_info_reviewer_dept_clist {\l_@@_reviewer_index_int} \\
+          \clist_item:Nn \l_@@_info_reviewer_clist
+                         {\l_@@_reviewer_index_int} &
+          \clist_item:Nn \l_@@_info_reviewer_dept_clist
+                         {\l_@@_reviewer_index_int} \\
           \int_gincr:N \l_@@_reviewer_index_int
         }
         \str_if_empty:NTF {\l_@@_info_reviewer_ext_clist}
         { }
-        { \makecell[l]{\int_eval:n {\l_@@_reviewer_clist_len_int + 1} .~ \clist_item:Nn \l_@@_info_reviewer_ext_clist { 1 } \\ \phantom{placeholder}} & \makecell[l]{\clist_item:Nn \l_@@_info_reviewer_ext_clist { 2 }} }
+        { \makecell[l]{\int_eval:n {\l_@@_reviewer_clist_len_int + 1} .~ 
+                       \clist_item:Nn \l_@@_info_reviewer_ext_clist { 1 } 
+                       \\ \phantom{placeholder}} & 
+          \makecell[l]{\clist_item:Nn \l_@@_info_reviewer_ext_clist { 2 }} }
       \end{tabular*}
     }
     {
       \phantom{SAMPLE~SIGNATURE~PAGE}\\[1\baselineskip]
-      {\singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl} \\[4\baselineskip]
+      {\singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl}
+        \\[4\baselineskip]
       by \\[1\baselineskip]
       \l_@@_info_author_tl \\[2\baselineskip]
       This~is~to~certify~that~I~have~examined~the~
@@ -1356,7 +1368,8 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
       and~that~any~and~all~revisions~required~by\\
       the~thesis~examination~committee~have~been~made.\\[4\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor\\[3\baselineskip]
+      \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor
+       \\[3\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
       \l_@@_info_depthead_tl\\[1\baselineskip]
     \end{center}
@@ -1370,7 +1383,8 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
     \begin{center}
       \str_if_eq:NNTF { \g_@@_disp_committee_tl } { true }
       {
-      {\singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl} \\[1\baselineskip]
+      {\singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl}
+        \\[1\baselineskip]
       by \\[1\baselineskip]
       \l_@@_info_author_tl \\[1\baselineskip]
       This~is~to~certify~that~I~have~examined~the~
@@ -1380,33 +1394,43 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
       and~that~any~and~all~revisions~required~by\\
       the~thesis~examination~committee~have~been~made.\\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor\\[2\baselineskip]
+      \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor
+       \\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_co_supervisor_title_name_tl,~Co~Supervisor\\[2\baselineskip]
+      \l_@@_info_co_supervisor_title_name_tl,~Co~supervisor
+       \\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
       \l_@@_info_depthead_tl\\[0\baselineskip]
     \end{center}
       \int_new:N \l_@@_reviewer_clist_len_int
       \int_new:N \l_@@_reviewer_index_int
-      \int_set:Nn \l_@@_reviewer_clist_len_int {\clist_count:N \l_@@_info_reviewer_clist}
+      \int_set:Nn \l_@@_reviewer_clist_len_int
+                  {\clist_count:N \l_@@_info_reviewer_clist}
       \int_set:Nn \l_@@_reviewer_index_int {1}
       \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l}
         Thesis~Examination~Committee & \\
-        \int_do_until:nNnn {\l_@@_reviewer_index_int} > {\l_@@_reviewer_clist_len_int}
+        \int_do_until:nNnn {\l_@@_reviewer_index_int} > 
+                           {\l_@@_reviewer_clist_len_int}
         {
           \int_eval:n \l_@@_reviewer_index_int .~ 
-          \clist_item:Nn \l_@@_info_reviewer_clist {\l_@@_reviewer_index_int} &
-          \clist_item:Nn \l_@@_info_reviewer_dept_clist {\l_@@_reviewer_index_int} \\
+          \clist_item:Nn \l_@@_info_reviewer_clist 
+                         {\l_@@_reviewer_index_int} &
+          \clist_item:Nn \l_@@_info_reviewer_dept_clist
+                         {\l_@@_reviewer_index_int} \\
           \int_gincr:N \l_@@_reviewer_index_int
         }
         \str_if_empty:NTF {\l_@@_info_reviewer_ext_clist}
         { }
-        { \makecell[l]{\int_eval:n {\l_@@_reviewer_clist_len_int + 1} .~ \clist_item:Nn \l_@@_info_reviewer_ext_clist { 1 } \\ \phantom{placeholder}} & \makecell[l]{\clist_item:Nn \l_@@_info_reviewer_ext_clist { 2 }} }
+        { \makecell[l]{\int_eval:n {\l_@@_reviewer_clist_len_int + 1} .~ 
+                       \clist_item:Nn \l_@@_info_reviewer_ext_clist { 1 }
+                       \\ \phantom{placeholder}} & 
+          \makecell[l]{\clist_item:Nn \l_@@_info_reviewer_ext_clist { 2 }} }
       \end{tabular*}
     }
     {
       \phantom{SMAPLE~SIGNATURE~PAGE}\\[1\baselineskip]
-      {\singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl} \\[4\baselineskip]
+      {\singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl}
+        \\[4\baselineskip]
       by \\[1\baselineskip]
       \l_@@_info_author_tl \\[2\baselineskip]
       This~is~to~certify~that~I~have~examined~the~
@@ -1416,9 +1440,11 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
       and~that~any~and~all~revisions~required~by\\
       the~thesis~examination~committee~have~been~made.\\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor\\[2\baselineskip]
+      \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor
+       \\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_co_supervisor_title_name_tl,~Co~Supervisor\\[2\baselineskip]
+      \l_@@_info_co_supervisor_title_name_tl,~Co~supervisor
+       \\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
       \l_@@_info_depthead_tl\\[1\baselineskip]
     \end{center}
@@ -1527,7 +1553,7 @@ keywords            .clist_set:N = \l_@@_info_keywords_clist,
 %
 % CHANGELOG: Get rid of all ctex packages.\\
 % \pkg{unicode-math} 与 \pkg{bm} 冲突。定义或重定义一些相关命令以规避后者带来的问题。\\
-% 注：实际上，使用 \hologo{XeLaTeX} 时已经不需要使用过时的 \pkg{bm} 宏包。
+% 注：实际上，使用 \hologo{XeLaTeX} 时已经不需要使用过时的 \pkg{bm} 宏包。\\
 % \pkg{hyperref} 
 %    \begin{macrocode}
 \cs_new_protected:Npx \@@_gadd_ltxhook:nn #1
