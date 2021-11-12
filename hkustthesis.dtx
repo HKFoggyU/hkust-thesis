@@ -127,7 +127,7 @@ through XeTeX.
 % 
 % \author{HKFoggyU}
 %
-% \date{v0.6.2\\Released 2021-11-10\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
+% \date{v0.6.3\\Released 2021-11-xx\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
@@ -142,12 +142,13 @@ through XeTeX.
 % \changes{v0.6}{2021/11/09}{Update line spacing according to GS, change to oneside, fine tune signature page for different cases}
 % \changes{v0.6.1}{2021/11/09}{Fix TEC external examiner problem}
 % \changes{v0.6.2}{2021/11/10}{Fix bm conflicts, merge supervisor title into name, update docs}
+% \changes{v0.6.3}{2021/11/xx}{Change Co-supervisor on signature page}
 %
 % \maketitle
 %
 % \def\abstractname{简介}
 % \begin{abstract}
-% \textsc{HkustThesis} 文档类 (class) 意在为香港科技大学 (HKUST) 的研究型硕士 (MPhil) 和博士生 (PhD) 提供一个尽可能符合 \href{https://rpghandbook.hkust.edu.hk/}{RPG Handbook} 要求的毕业论文\hologo{LaTeX}模板，下称 ``本模板''。
+% \textsc{HkustThesis} 文档类 (class) 意在为香港科技大学 (HKUST) 的研究型硕士 (MPhil) 和博士 (PhD) 生提供一个尽可能符合 \href{https://rpghandbook.hkust.edu.hk/}{RPG Handbook} 要求的毕业论文\hologo{LaTeX}模板，下称 ``本模板''。
 % \end{abstract}
 %
 % \vspace{2\baselineskip}
@@ -1397,7 +1398,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
       \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor
        \\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_co_supervisor_title_name_tl,~Co-supervisor
+      \l_@@_info_co_supervisor_title_name_tl,~Thesis~Co-supervisor
        \\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
       \l_@@_info_depthead_tl\\[0\baselineskip]
@@ -1443,7 +1444,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
       \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor
        \\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_co_supervisor_title_name_tl,~Co-supervisor
+      \l_@@_info_co_supervisor_title_name_tl,~Thesis~Co-supervisor
        \\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
       \l_@@_info_depthead_tl\\[1\baselineskip]
