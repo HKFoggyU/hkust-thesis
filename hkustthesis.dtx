@@ -123,11 +123,14 @@ through XeTeX.
 %</driver>
 % \fi
 %
+% \def\dashedtoday{\leavevmode\hbox{\the\year-\twodigits\month-\twodigits\day}}
+% \def\twodigits#1{\ifnum#1<10 0\fi\the#1}
+%
 % \title{\color{hkustblue}{The \textsc{HkustThesis} class\\ A \hologo{LaTeX}\textcolor{hkustred}{3} template}}
 % 
 % \author{HKFoggyU}
 %
-% \date{v0.6.3\\Released 2021-11-xx\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
+% \date{v0.6.3\\Released \dashedtoday\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
@@ -142,7 +145,7 @@ through XeTeX.
 % \changes{v0.6}{2021/11/09}{Update line spacing according to GS, change to oneside, fine tune signature page for different cases}
 % \changes{v0.6.1}{2021/11/09}{Fix TEC external examiner problem}
 % \changes{v0.6.2}{2021/11/10}{Fix bm conflicts, merge supervisor title into name, update docs}
-% \changes{v0.6.3}{2021/11/xx}{Change Co-supervisor on signature page}
+% \changes{v0.6.3}{2021/11/17}{Change to Co-supervisor, remove supervisor tile name, optimize code performance and style}
 %
 % \maketitle
 %
@@ -827,14 +830,14 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \begin{macrocode}
 \RequirePackage[
   hidelinks,
-  bookmarksnumbered=true,
-  psdextra=true,
-  unicode=true,
-  colorlinks = true,
-  linkcolor = black,
-  urlcolor  = blue,
-  citecolor = red,
-  anchorcolor = blue,
+  bookmarksnumbered = true,
+  psdextra          = true,
+  unicode           = true,
+  colorlinks        = true,
+  linkcolor         = black,
+  urlcolor          = blue,
+  citecolor         = red,
+  anchorcolor       = blue,
   ]{hyperref}
 \RequirePackage[capitalise,nameinlink,noabbrev]{cleveref}
 %    \end{macrocode}
@@ -1121,36 +1124,6 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %
 % \subsubsection{内部命令}
 %
-% \begin{variable}{\l_@@_info_supervisor_title_name_tl,l_@@_info_co_supervisor_title_name_tl,\l_@@_info_supervisor_title_name_full_tl}
-% 用于存储导师姓名加职称的变量，旧版编译器不支持字符串中含有\verb|\hspace{.5em}|这样的空白空间命令。
-%    \begin{macrocode}
-\tl_new:N \l_@@_info_supervisor_title_name_tl
-\tl_new:N \l_@@_info_co_supervisor_title_name_tl
-\tl_new:N \l_@@_info_supervisor_title_name_full_tl
-%    \end{macrocode}
-% \end{variable}
-%
-% 拼合导师的职称和姓名。[Unnecessary due to removal of \opt{supervisor-title}]
-%    \begin{macrocode}
-\tl_set:Nn \l_@@_info_supervisor_title_name_tl
-{
-  \l_@@_info_supervisor_tl
-}
-\tl_set:Nn \l_@@_info_co_supervisor_title_name_tl
-{
-  \l_@@_info_co_supervisor_tl
-}
-%    \end{macrocode}
-%
-% 拼合双导师的职称和姓名。
-%    \begin{macrocode}
-\tl_set:Nn \l_@@_info_supervisor_title_name_full_tl
-{
-  \l_@@_info_supervisor_title_name_tl \
-  \l_@@_info_co_supervisor_title_name_tl
-}
-%    \end{macrocode}
-%
 % \begin{variable}{\l_@@_name_degree_tl,\l_@@_abbr_degree_tl}
 % 用于存储学位名称的变量。
 %    \begin{macrocode}
@@ -1326,7 +1299,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
       and~that~any~and~all~revisions~required~by\\
       the~thesis~examination~committee~have~been~made.\\[3\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor
+      \l_@@_info_supervisor_tl,~Thesis~Supervisor
        \\[3\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
       \l_@@_info_depthead_tl\\[1\baselineskip]
@@ -1369,7 +1342,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
       and~that~any~and~all~revisions~required~by\\
       the~thesis~examination~committee~have~been~made.\\[4\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor
+      \l_@@_info_supervisor_tl,~Thesis~Supervisor
        \\[3\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
       \l_@@_info_depthead_tl\\[1\baselineskip]
@@ -1395,10 +1368,10 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
       and~that~any~and~all~revisions~required~by\\
       the~thesis~examination~committee~have~been~made.\\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor
+      \l_@@_info_supervisor_tl,~Thesis~Supervisor
        \\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_co_supervisor_title_name_tl,~Thesis~Co-supervisor
+      \l_@@_info_co_supervisor_tl,~Thesis~Co-supervisor
        \\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
       \l_@@_info_depthead_tl\\[0\baselineskip]
@@ -1441,10 +1414,10 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
       and~that~any~and~all~revisions~required~by\\
       the~thesis~examination~committee~have~been~made.\\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_supervisor_title_name_tl,~Thesis~Supervisor
+      \l_@@_info_supervisor_tl,~Thesis~Supervisor
        \\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
-      \l_@@_info_co_supervisor_title_name_tl,~Thesis~Co-supervisor
+      \l_@@_info_co_supervisor_tl,~Thesis~Co-supervisor
        \\[2\baselineskip]
       \makebox[3.5in]{\hrulefill}\\
       \l_@@_info_depthead_tl\\[1\baselineskip]
