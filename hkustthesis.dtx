@@ -115,16 +115,19 @@ through XeTeX.
 \definecolor{hkustgray}{RGB}{204, 204, 204}
 \definecolor{hkustviolet}{RGB}{124, 35, 72}
 \definecolor{hkustyellow}{RGB}{255, 212, 0}
+\DoNotIndex{\\}
 \begin{document}
   \DocInput{hkustthesis.dtx}  
+  \clearpage
   \PrintChanges
-  %\PrintIndex
+  \clearpage
+  \PrintIndex
 \end{document}
 %</driver>
 % \fi
 %
-% \def\dashedtoday{\leavevmode\hbox{\the\year-\twodigits\month-\twodigits\day}}
 % \def\twodigits#1{\ifnum#1<10 0\fi\the#1}
+% \def\dashedtoday{\leavevmode\hbox{\the\year-\twodigits\month-\twodigits\day}}
 %
 % \title{\color{hkustblue}{The \textsc{HkustThesis} class\\ A \hologo{LaTeX}\textcolor{hkustred}{3} template}}
 % 
@@ -147,7 +150,11 @@ through XeTeX.
 % \changes{v0.6.2}{2021/11/10}{Fix bm conflicts, merge supervisor title into name, update docs}
 % \changes{v0.6.3}{2021/11/17}{Change to Co-supervisor, remove supervisor tile name, optimize code performance and style}
 %
+% {
+% \phantomsection
+% \addcontentsline{toc}{section}{封面}
 % \maketitle
+% }
 %
 % \def\abstractname{简介}
 % \begin{abstract}
@@ -183,9 +190,9 @@ through XeTeX.
 % \textsc{HkustThesis}是由GitHub组织 \href{https://github.com/HKFoggyU}{@HKFoggyU} 维护的用于香港科技大学研究型硕士和博士生毕业论文排版的\hologo{LaTeX}模板。
 %
 % \subsection{动机}
-% GitHub上已有数个由热心校友（包括但不限于@wenbinf、@onlytailei、@fcyu、@cheedoong）制作的毕业论文\hologo{LaTeX}模板。这些模板大部分编写时间久远，托管于个人仓库，鲜有后续更新和维护；且这些模板均由\hologo{LaTeX2e}语法编写。
+% GitHub上已有数个由热心校友（包括但不限于@wenbinf、@onlytailei、@fcyu、@cheedoong）制作的毕业论文\hologo{LaTeX}模板。这些模板均由\hologo{LaTeX2e}语法编写，大部分编写时间久远，缺少必要的文档，鲜有后续更新和维护。
 %
-%随着时代的进步，更加清晰简明的\hologo{LaTeX3}大大提高了模板的易读性与可维护性。因此，HKFoggyU的成员决定通过\hologo{LaTeX3}语法、参考已有的优秀项目、以团队的力量，编写并维护一个全新的香港科技大学毕业论文模板。
+%随着时代的进步，更加清晰简明的\hologo{LaTeX3}大大提高了模板的易读性与可维护性。因此，HKFoggyU的成员决定通过\hologo{LaTeX3}语法、参考已有的优秀项目，合作编写并维护一个全新的毕业论文模板。
 %
 % \subsection{文档结构}
 % 本文档的前半部分为用户手册，供使用本模板撰写毕业论文的同学们参考，请仔细阅读；后半部分 (第\ref{sec:implementation}节) 为开发手册，供有意了解或贡献源码的同学参考，普通用户无需阅读。
@@ -218,8 +225,9 @@ through XeTeX.
 %   \centering
 %   \begin{tabular}{lll}
 %     \toprule
-%     OS & TeX & Test \\
+%     Platform & TeX & Test \\
 %     \midrule
+%     Overleaf      & \hologo{TeX}\,Live 2021    & Pass \\
 %     Windows 10    & \hologo{TeX}\,Live 2021    & Pass \\
 %     Windows 10    & \hologo{MiKTeX}            & Pass \\
 %     Windows 10    & \hologo{TeX}\,Live 2020    & \verb|ltxhook| problem \\
@@ -227,7 +235,6 @@ through XeTeX.
 %     Ubuntu 20.04  & \hologo{TeX}\,Live 2021    & Pass \\
 %     Ubuntu 20.04  & \hologo{MiKTeX}            & Pass \\
 %     Termux        & \hologo{TeX}\,Live 2021    & Pass \\
-%     Overleaf      & \hologo{TeX}\,Live 2021    & Pass \\
 %     \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -421,31 +428,16 @@ through XeTeX.
 % 作者。
 % \end{function}
 %
-% \begin{function}{school}
+% \begin{function}{school, department, program, major}
 %  \begin{syntax}
 %   \textcolor{hkustblue}{school}              = \Arg{学院}
-%  \end{syntax}
-% 学院。
-% \end{function}
-%
-% \begin{function}{department}
-%  \begin{syntax}
 %   department          = \Arg{系/部门}
-%  \end{syntax}
-% 系/部门的全称。不要忘记开头的 ``Department/Division of''。
-% \end{function}
-%
-% \begin{function}{program}
-%  \begin{syntax}
 %   program             = \Arg{项目名称}
-%  \end{syntax}
-% 项目名称。请参考 SIS 中的 ``name of program''。多数情况下应和系/部门名相同。
-% \end{function}
-%
-% \begin{function}{major}
-%  \begin{syntax}
 %   \textcolor{hkustblue}{major}               = \Arg{专业}
 %  \end{syntax}
+% 学院。\\
+% 系/部门的全名。需填写为 ``Department/Division of XXX''。\\
+% 项目名称。请参考 SIS 中的 ``name of program''。多数情况下应和系/部门名相同。\\
 % 专业方向。请参考 SIS 中的 ``major''。
 % \end{function}
 %
@@ -459,7 +451,7 @@ through XeTeX.
 %
 % \begin{function}{submit-month, submit-date, defend-date}
 %  \begin{syntax}
-%   submit-month        = \Arg{论文提交日期-简略}
+%   submit-month        = \Arg{论文提交年月}
 %   submit-date         = \Arg{论文提交日期}
 %   defend-date         = \Arg{论文答辩日期}
 %  \end{syntax}
@@ -477,8 +469,8 @@ through XeTeX.
 % 其中，\opt{depthead} 的值需要包括 ``, Head of Department/Division''，如\\
 % \verb|depthead = {Prof. XXX, Head of Department}|。\\
 % 关于\textcolor{hkustblue}{答辩委员会}：\\
-% 某些院系会要求在签名页列出答辩委员会成员列表，此时需要填写 \opt{reviewer}、\opt{reviewerdept}，PhD 还需要填写 \opt{reviewerext}。通常来讲，MPhil 答辩委员会需要4名成员，PhD 答辩委员会需要6名成员 (含1名外部成员)。\\
-% \textcolor{hkustblue}{\textbf{注意：}} \opt{reviewer} 和 \opt{reviewerdept} 中的每个条目之间需要使用英文逗号分隔；但如果某一条目的内容里包含英文逗号，比如 \opt{reviewerext} 中的外部大学名称，则需要用花括号将那一整个条目包裹，否则 \hologo{LaTeX} 程序会在逗号处截断，将其当作两个条目。详见下文给出的示例中的 \opt{reviewerext} 的写法。\\
+% 某些院系会要求在签名页列出答辩委员会成员列表，此时需要确保上文提及的 \opt{displaycommittee} 选项设置为 \opt{true}，然后填写 \opt{reviewer}、\opt{reviewerdept}选项，PhD 还需要填写 \opt{reviewerext}选项。通常来讲，MPhil 答辩委员会需要4名成员，PhD 答辩委员会需要6名成员 (含1名外部成员)。\\
+% \textcolor{hkustblue}{\textbf{注意：}} \opt{reviewer} 和 \opt{reviewerdept} 中的每个条目之间需要使用英文逗号分隔；但如果某一条目的部分内容里包含英文逗号，比如 \opt{reviewerext} 中的外部大学名称，则需要用花括号将那一整个部分包裹，否则 \hologo{LaTeX} 程序会在逗号处截断，将其当作两个条目。详见下文给出的示例中的 \opt{reviewerext} 的写法。\\
 % \textcolor{hkustblue}{\textbf{注意：}} 根据 ECE 系提供的签名页，PhD的答辩委员会中的 ``External Examiner'' 所属机构的 ``Department'' 和 ``University'' 之间的换行符 \verb|\\| 不能删去，否则会使得对齐出错。如果确实没有第二行内容，可以在 \verb|\\| 后使用 \verb|\phantom{xxx}| 作为占位 (这个命令会占据与 \verb|xxx| 同样大小的空间但不实际显示)。\\
 % TODO: \st{add TEC name list on signature page?} Done.
 % \end{function}
