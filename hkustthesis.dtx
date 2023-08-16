@@ -133,7 +133,7 @@ through XeTeX.
 % 
 % \author{HKFoggyU}
 %
-% \date{v0.7.0\\Released \dashedtoday\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
+% \date{v0.7.1\\Released \dashedtoday\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
@@ -150,6 +150,7 @@ through XeTeX.
 % \changes{v0.6.2}{2021/11/10}{Fix bm conflicts, merge supervisor title into name, update docs}
 % \changes{v0.6.3}{2021/11/17}{Change to Co-supervisor, remove supervisor tile name, optimize code performance and style}
 % \changes{v0.7.0}{2021/11/23}{cref format issue, bib style, docs and logo}
+% \changes{v0.7.1}{2023/08/17}{add presnum in lof and lot, fix typos}
 %
 % {
 % \phantomsection
@@ -1046,6 +1047,8 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \begin{macrocode}
 \tl_new:N \l_@@_lof_title_text
 \tl_set:Nn \l_@@_lof_title_text {List~of~Figures}
+\renewcommand{\cftfigpresnum}{Figure~}
+\setlength{\cftfignumwidth}{5em}
 \renewcommand\listoffigures{%
   \clearpage
   \chapter*{\MakeUppercase{\l_@@_lof_title_text}}%
@@ -1060,6 +1063,8 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \begin{macrocode}
 \tl_new:N \l_@@_lot_title_text
 \tl_set:Nn \l_@@_lot_title_text {List~of~Tables}
+\renewcommand{\cfttabpresnum}{Table~}
+\setlength{\cfttabnumwidth}{5em}
 \renewcommand\listoftables{%
   \clearpage
   \begingroup

@@ -39,7 +39,7 @@ You can use \lstinline|\cref{}| to automatically setup the cross reference name;
   They are both orange.
 \end{proof}
 
-Avaiable theorem environments are listed below:
+Available theorem environments are listed below:
 
 algorithm, assumption, axiom, conclusion, condition, corollary, definition, example, lemma, proof, property, proposition, remark, theorem.
 
@@ -50,7 +50,7 @@ algorithm, assumption, axiom, conclusion, condition, corollary, definition, exam
   \begin{tikzpicture}
     \draw (0,0) -- (1, 0) -- (1, 1) -- cycle;
   \end{tikzpicture}
-  \caption{An example tikz picture with long caption: \blindtext\\\blindtext}
+  \caption{An example tikz picture with long caption and breakline\\\blindtext}
   \label{fig:tikz example}
 \end{figure}
 
@@ -66,6 +66,7 @@ An example image is shown in \cref{fig:tikz example} or Figure (\ref{fig:tikz ex
     \toprule
     OS & TeX & Test \\
     \midrule
+    Windows 11    & \hologo{MiKTeX} 4.9        & Pass \\
     Windows 10    & \hologo{TeX}\,Live 2021    & Pass \\
     Windows 10    & \hologo{MiKTeX} 4.4        & Pass \\
     Windows 10    & \hologo{TeX}\,Live 2020    & \lstinline|ltxhook| problem  \\
