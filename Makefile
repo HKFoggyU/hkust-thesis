@@ -2,6 +2,7 @@
 # now the following Makefile can work on Linux, MacOS, Windows
 # Basename of thesis
 THESIS = mythesis
+TEMPLATE = hkustthesis
 
 # Option for latexmk
 LATEXMK_OPT = -quiet -file-line-error -halt-on-error -interaction=nonstopmode
@@ -11,8 +12,11 @@ LATEXMK_OPT_PVC = $(LATEXMK_OPT) -pvc
 
 all : $(THESIS).pdf
 
-$(THESIS).pdf : $(THESIS).tex FORCE_MAKE
+$(THESIS).pdf : $(THESIS).tex $(TEMPLATE).cls FORCE_MAKE
 	@latexmk $(LATEXMK_OPT) $<
+
+$(TEMPLATE).cls : $(TEMPLATE).dtx
+	xetex $(TEMPLATE).dtx
 
 clean :
 	@rm -f     \
@@ -42,5 +46,5 @@ clean :
         *.xdv  \
         *.snm  \
         *.toc  \
-		*.run.xml \
-	    *.fdb_latexmk \
+        *.run.xml \
+	    *.fdb_latexmk
