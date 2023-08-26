@@ -2,6 +2,7 @@
     "latex-workshop.latex.autoBuild.run": "never",
     "latex-workshop.message.error.show": false,
     "latex-workshop.message.warning.show": false,
+    "latex-workshop.latex.recipe.default": "lastUsed",
     "latex-workshop.latex.tools": [
         {
             "name": "xelatex",
@@ -31,7 +32,8 @@
             "name": "build_dtx",
             "command": "latexmk",
             "args": [
-                "-xelatex"
+                "-xelatex",
+                "hkustthesis.dtx"
             ]
         },
         {
@@ -52,8 +54,7 @@
         {
             "name": "build_dtx",
             "tools": [
-                "build_dtx",
-                "hkustthesis.dtx"
+                "build_dtx"
             ]
         },
         {
