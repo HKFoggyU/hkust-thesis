@@ -160,6 +160,7 @@ through XeTeX.
 % \changes{v0.6.3}{2021/11/17}{Change to Co-supervisor, remove supervisor tile name, optimize code performance and style}
 % \changes{v0.7.0}{2021/11/23}{cref format issue, bib style, docs and logo}
 % \changes{v0.7.1}{2023/08/17}{add presnum in lof and lot, fix typos}
+% \changes{v0.7.2}{2023/08/26}{fix vscode setting bug, fix qty conflicts, more friendly docs}
 %
 % {
 % \phantomsection
@@ -807,6 +808,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 \RequirePackage{siunitx}            % 用于书写单位符号
 \RequirePackage[version=4]{mhchem}  % 用于绘制分子式
 \RequirePackage{physics}            % Physics package
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
 \RequirePackage{braket}             % for Dirac notation
 %    \end{macrocode}
 %
