@@ -5,7 +5,7 @@
 [![TEST](https://github.com/HKFoggyU/hkust-thesis/actions/workflows/test.yml/badge.svg)](https://github.com/HKFoggyU/hkust-thesis/actions)
 [![RELEASE](https://github.com/HKFoggyU/hkust-thesis/actions/workflows/release.yml/badge.svg)](https://github.com/HKFoggyU/hkust-thesis/releases)
 
-HKUST Thesis template for RPG implemented with LaTeX3.
+HKUST Thesis template for RPG implemented with LaTeX3, following the guidelines from HKUST FYTGS [website](https://fytgs.hkust.edu.hk/academics/Academic-Regulations-and-Requirements/Handbook-for-Research-Postgraduate-Studies/guidelines-thesis-preparation).
 
 ## Documentation
 
