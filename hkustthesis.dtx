@@ -142,7 +142,7 @@ through XeTeX.
 % 
 % \author{HKFoggyU}
 %
-% \date{v0.7.1\\Released \dashedtoday\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
+% \date{v0.7.3\\Released \dashedtoday\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
@@ -161,6 +161,7 @@ through XeTeX.
 % \changes{v0.7.0}{2021/11/23}{cref format issue, bib style, docs and logo}
 % \changes{v0.7.1}{2023/08/17}{add presnum in lof and lot, fix typos}
 % \changes{v0.7.2}{2023/08/26}{fix vscode setting bug, fix qty conflicts, more friendly docs}
+% \changes{v0.7.3}{2023/11/23}{fix twoside bug, default to twoside, fix RPG Handbook link}
 %
 % {
 % \phantomsection
@@ -170,7 +171,7 @@ through XeTeX.
 %
 % \def\abstractname{简介}
 % \begin{abstract}
-% \textsc{HkustThesis} 文档类 (class) 意在为香港科技大学 (HKUST) 的研究型硕士 (MPhil) 和博士 (PhD) 生提供一个尽可能符合 \href{https://rpghandbook.hkust.edu.hk/}{RPG Handbook} 要求的毕业论文\hologo{LaTeX}模板。
+% \textsc{HkustThesis} 文档类 (class) 意在为香港科技大学 (HKUST) 的研究型硕士 (MPhil) 和博士 (PhD) 生提供一个尽可能符合 \href{https://fytgs.hkust.edu.hk/academics/Academic-Regulations-and-Requirements/Handbook-for-Research-Postgraduate-Studies/guidelines-thesis-preparation}{RPG Handbook} 要求的毕业论文\hologo{LaTeX}模板。
 % \end{abstract}
 %
 % \vspace{2\baselineskip}
@@ -763,7 +764,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % 
 % 使用\pkg{book}文档类。
 %    \begin{macrocode}
-\LoadClass[a4paper,12pt,oneside,UTF8]{book}
+\LoadClass[a4paper,12pt,twoside,UTF8]{book}
 %    \end{macrocode}
 %
 % \subsection{载入宏包}
@@ -1217,7 +1218,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_print_abstract:
 {
-  \clearpage
+  \cleardoublepage
   \thispagestyle{plain}
   \phantomsection
   \addcontentsline{toc}{chapter}{Abstract}
@@ -1248,6 +1249,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_print_authorization_g:
 {
+  \cleardoublepage
   \thispagestyle{plain}
   \phantomsection
   \addcontentsline{toc}{chapter}{Authorization}
@@ -1294,6 +1296,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_print_signaturepage_g:
 {
+  \cleardoublepage
   \thispagestyle{plain}
   \phantomsection
   \addcontentsline{toc}{chapter}{Signature~Page}

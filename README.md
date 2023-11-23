@@ -7,6 +7,10 @@
 
 HKUST Thesis template for RPG implemented with LaTeX3, following the guidelines from HKUST FYTGS [website](https://fytgs.hkust.edu.hk/academics/Academic-Regulations-and-Requirements/Handbook-for-Research-Postgraduate-Studies/guidelines-thesis-preparation).
 
+## Get started!
+
+Try this template online in [Overleaf](https://www.overleaf.com/latex/templates/hkustthesis/mstwvckmhmjg)!
+
 ## Documentation
 
 Are you very familiar with LaTeX?
