@@ -11,6 +11,8 @@ HKUST Thesis template for RPG implemented with LaTeX3, following the guidelines 
 
 Try this template online in [Overleaf](https://www.overleaf.com/latex/templates/hkustthesis/mstwvckmhmjg)!
 
+Remember to change the `Compiler` to **`XeLaTeX`** via the top left `Menu` button, otherwise it won't build.
+
 ## Documentation
 
 Are you very familiar with LaTeX?
