@@ -1,19 +1,19 @@
-\chapter{Sample chapter}\label{chap:sample}
+\chapter{Example chapter}\label{chap:sample}
 
 \section{Math}
 
 \subsection{Symbols}
 
 \begin{itemize}
-  \item Caligraphic letters: $\mathcal{A}$ 
+  \item Calligraphic letters: $\mathcal{A}$ 
   \item Mathbb letters: $\mathbb{A}$
   \item Mathfrak letters: $\mathfrak{A}$
   \item Math Sans serif letters: $\mathsf{A}$
   \item Math bold letters: $\mathbf{A}$
-  \item Math bold upright greek letters: $\mathbf{\alpha}$ (Not displaying! Use the following one.)
-  \item Math bold upright greek letters: $\symbfup{\alpha}$
-  \item Math bold italic greel letters: $\bm{\alpha}$
-  \item Math bold italic greek letters: $\mathbi{A}$
+  \item Math bold upright Greek letters: $\mathbf{\alpha}$ (Not displaying! Use the following one.)
+  \item Math bold upright Greek letters: $\symbfup{\alpha}$
+  \item Math bold italic Greek letters: $\bm{\alpha}$
+  \item Math bold italic Greek letters: $\mathbi{A}$
 \end{itemize}
 
 Avoid using \lstinline|bm| package as it conflicts with \lstinline|unicode-math| and it is outdated for \hologo{XeLaTeX}.
@@ -25,7 +25,7 @@ You can alias some math commands by \lstinline|\newcommand| or \lstinline|\renew
   E^2 = m^2 + p^2\label{eq:mass-energy}
 \end{equation}
 
-You can use \lstinline|\cref{}| to automatically setup the cross reference name; instead, you can always use \lstinline|\ref{}| to customize the appearence of the cross reference.
+You can use \lstinline|\cref{}| to automatically setup the cross reference name; instead, you can always use \lstinline|\ref{}| to customize the appearance of the cross reference.
 
 \cref{eq:mass-energy} or Equation (\ref{eq:mass-energy}) gives the mass-energy relationship.
 
@@ -67,15 +67,15 @@ An example image is shown in \cref{fig:tikz example} or Figure (\ref{fig:tikz ex
     OS & TeX & Test \\
     \midrule
     Overleaf                 & \hologo{TeX}\,Live 2021/2/3    & Pass \\
-    Arch Linux (2023.11)     & \hologo{TeX}\,Live           & Pass \\
-    Windows 10/11            & \hologo{TeX}\,Live 2021      & Pass \\
-    macOS 10.15              & \hologo{TeX}\,Live 2021      & Pass \\
-    Windows 10               & \hologo{TeX}\,Live 2020      & \color{red}{\verb|ltxhook| problem} \\
-    Ubuntu 20.04             & \hologo{TeX}\,Live 2021      & Pass \\
-    Termux                   & \hologo{TeX}\,Live 2021      & Pass \\
-    Windows 11               & \hologo{MiKTeX} 4.9          & Pass \\
-    Windows 10               & \hologo{MiKTeX} 4.4          & Pass \\
-    Ubuntu 20.04             & \hologo{MiKTeX} 4.2.1        & \color{red}{Failed} \\
+    Arch Linux (2023.11)     & \hologo{TeX}\,Live             & Pass \\
+    Windows 10/11            & \hologo{TeX}\,Live 2021        & Pass \\
+    macOS 10.15              & \hologo{TeX}\,Live 2021        & Pass \\
+    Windows 10               & \hologo{TeX}\,Live 2020        & \color{red}{\verb|ltxhook| problem} \\
+    Ubuntu 20.04             & \hologo{TeX}\,Live 2021        & Pass \\
+    Termux                   & \hologo{TeX}\,Live 2021        & Pass \\
+    Windows 11               & \hologo{MiKTeX} 4.9            & Pass \\
+    Windows 10               & \hologo{MiKTeX} 4.4            & Pass \\
+    Ubuntu 20.04             & \hologo{MiKTeX} 4.2.1          & \color{red}{Failed} \\
     \bottomrule
   \end{tabular}
 \end{table}

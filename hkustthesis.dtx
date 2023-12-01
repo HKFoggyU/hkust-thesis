@@ -142,7 +142,7 @@ through XeTeX.
 % 
 % \author{HKFoggyU}
 %
-% \date{v0.7.3\\Released \dashedtoday\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
+% \date{v0.7.4 @ \dashedtoday\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
@@ -162,6 +162,7 @@ through XeTeX.
 % \changes{v0.7.1}{2023/08/17}{add presnum in lof and lot, fix typos}
 % \changes{v0.7.2}{2023/08/26}{fix vscode setting bug, fix qty conflicts, more friendly docs}
 % \changes{v0.7.3}{2023/11/23}{fix twoside bug, default to twoside, fix RPG Handbook link}
+% \changes{v0.7.4}{2023/12/01}{fix false typo, add blankpage option, remove redundant setting items, update docs}
 %
 % {
 % \phantomsection
@@ -177,7 +178,7 @@ through XeTeX.
 % \vspace{2\baselineskip}
 % \def\abstractname{免责声明}
 % \begin{abstract}
-% 本模板并非官方模板。事实上，除极个别系外，由于 RPG Handbook 的要求，并不存在官方模板。
+% 本模板并非官方模板。事实上，除极个别系外，FYTGS 只提供 RPG Handbook 作为总体要求，并不存在官方模板。
 % 本模板对潜在的漏洞或与 RPG Handbook 的要求不符的情况不负任何责任。
 % 本模板仍在开发中，请从本项目的 \href{https://github.com/HKFoggyU/hkust-thesis/}{GitHub 仓库} 获取更新。
 % \end{abstract}
@@ -200,15 +201,15 @@ through XeTeX.
 % \begin{documentation}
 %
 % \section{模板介绍}\label{sec:introduction}
-% \textsc{HkustThesis}是由GitHub组织 \href{https://github.com/HKFoggyU}{@HKFoggyU} 维护的用于香港科技大学研究型硕士和博士生毕业论文排版的\hologo{LaTeX}模板。
+% \textsc{HkustThesis}是由GitHub组织 \href{https://github.com/HKFoggyU}{@HKFoggyU} 维护的用于香港科技大学研究型硕士 (MPhil) 和博士 (PhD) 生毕业论文排版的\hologo{LaTeX}模板。
 %
 % \subsection{动机}
-% GitHub上已有数个由热心校友（包括但不限于\href{https://github.com/wenbinf/hkust-mphil-thesis}{@wenbinf}、\href{https://github.com/onlytailei/HKUST_latex_thesis_2019}{@onlytailei}、\href{https://github.com/fcyu/HKUST_PhD_MPhil_thesis_Latex}{@fcyu}、\href{https://github.com/Cheedoong/hkust-latex-thesis}{@cheedoong}）制作的毕业论文\hologo{LaTeX}模板。这些模板均由\hologo{LaTeX2e}语法编写，有些编写时间久远，缺少必要的文档，鲜有后续更新和维护。
+% GitHub上已有数个由热心校友（包括但不限于\href{https://github.com/wenbinf/hkust-mphil-thesis}{@wenbinf}、\href{https://github.com/onlytailei/HKUST_latex_thesis_2019}{@onlytailei}、\href{https://github.com/fcyu/HKUST_PhD_MPhil_thesis_Latex}{@fcyu}、\href{https://github.com/Cheedoong/hkust-latex-thesis}{@cheedoong}）制作的毕业论文\hologo{LaTeX}模板。这些模板均使用\hologo{LaTeX2e}语法编写，有些编写时间久远，缺少必要的文档，鲜有后续更新和维护。
 %
-%随着时代的进步，更加清晰简明的\hologo{LaTeX3}大大提高了模板的易读性与可维护性。因此，HKFoggyU的成员决定通过\hologo{LaTeX3}语法、参考其它优秀项目，合作编写并维护一个全新的毕业论文模板。
+% 随着时代的进步，更加清晰简明的\hologo{LaTeX3}大大提高了模板的易读性与可维护性\footnote{相比于\hologo{LaTeX2e}；但体验过Typst之后：\hologo{LaTeX}真辣眼睛。}。因此，HKFoggyU的成员决定通过\hologo{LaTeX3}语法、参考其它优秀项目，合作编写并维护一个全新的毕业论文模板。
 %
 % \subsection{文档结构}
-% 本文档的前半部分（第\ref{sec:introduction}-\ref{sec:intro2thesis}节）为用户手册，供使用本模板撰写毕业论文的同学们参考。其中，第\ref{sec:introduction}-\ref{sec:compile}节介绍了\hologo{LaTeX}和本模板的工具，有\hologo{LaTeX}基础的用户可以跳过；第\ref{sec:intro2thesis}节详细介绍了如何使用本模板撰写毕业论文，建议仔细阅读。
+% 本文档的前半部分（第\ref{sec:introduction}-\ref{sec:intro2thesis}节）为用户手册，供使用本模板撰写毕业论文的同学们参考。其中，第\ref{sec:intro2latex}-\ref{sec:compile}节介绍了\hologo{LaTeX}和本模板的工具，有\hologo{LaTeX}基础的用户可以跳过；第\ref{sec:intro2thesis}节详细介绍了如何使用本模板撰写毕业论文，建议仔细阅读。
 %
 % 后半部分（第\ref{sec:implementation}节及以后）为开发手册，供有意了解或贡献源码的开发者参考，普通用户无需阅读。
 %
@@ -226,11 +227,9 @@ through XeTeX.
 % ``\emph{吾生也有涯，而知也无涯。}''
 % \hologo{LaTeX}的参考资料浩如烟海。没有人能把这些资料都看完才去开始使用\hologo{LaTeX}，因此，学会使用 Google/ChatGPT 等工具解决眼前的问题，比通读各种\hologo{LaTeX}教程更加重要。
 %
-% 如果已经看完上述任意一个入门教程，一个初学者就可以开始使用本模板了。
-%
 % \subsection{\hologo{LaTeX}版本}
 % \subsubsection{在线编译}
-% 如果本地尚未安装任何\hologo{LaTeX}发行版，那么\textbf{强烈建议}初学者使用 \href{https://www.overleaf.com/}{Overleaf} ，这是一个在线版\hologo{LaTeX}服务，可以避免学习热情被安装配置环境所熄灭。
+% 如果本地尚未安装任何\hologo{LaTeX}发行版，那么\textbf{强烈建议}初学者使用 \href{https://www.overleaf.com/}{Overleaf} ，这是一个在线版\hologo{LaTeX}服务，可以避免学习热情被安装配置环境所熄灭。可以直接跳转到第\ref{sec:intro2thesis}节继续阅读。
 %
 % \subsubsection{本地编译}
 % 如果仍希望离线工作，请选择 \href{https://www.tug.org/texlive/}{\hologo{TeXLive}} 或 \href{https://miktex.org/download}{\hologo{MiKTeX}}，下载并安装其最新版本。
@@ -253,7 +252,6 @@ through XeTeX.
 %     macOS 10.15              & \hologo{TeX}\,Live 2021      & Pass \\
 %     Windows 10               & \hologo{TeX}\,Live 2020      & \mywarning{\verb|ltxhook| problem} \\
 %     Ubuntu 20.04             & \hologo{TeX}\,Live 2021      & Pass \\
-%     Termux                   & \hologo{TeX}\,Live 2021      & Pass \\
 %     Windows 11               & \hologo{MiKTeX} 4.9          & Pass \\
 %     Windows 10               & \hologo{MiKTeX} 4.4          & Pass \\
 %     Ubuntu 20.04             & \hologo{MiKTeX} 4.2.1        & \mywarning{Failed} \\
@@ -263,7 +261,7 @@ through XeTeX.
 %
 % \subsection{获取本模板}
 % \begin{itemize}
-% \item (针对一般用户) 请在本项目的 \href{https://github.com/HKFoggyU/hkust-thesis/releases/latest}{GitHub Release} 页面下载本模板最新版本，名为 \file{hkust-thesis-v*.zip} 的压缩文件。
+% \item (针对用户) 请在本项目的 \href{https://github.com/HKFoggyU/hkust-thesis/releases/latest}{GitHub Release} 页面下载本模板最新版本，名为 \file{hkust-thesis-v*.zip} 的压缩文件。
 % \item (针对开发者) 如果希望第一时间获取更新，可以克隆本项目 \href{https://github.com/HKFoggyU/hkust-thesis.git}{仓库}，并运行 \colorbox{code-bg}{\lstinline|xetex hkustthesis.dtx|} 以生成 \file{hkustthesis.cls} 文件。
 % \end{itemize}
 %
@@ -284,7 +282,7 @@ through XeTeX.
 %  \item 点击左上方 ``Menu/菜单'' 按钮，在 ``settings/设置'' 中选择如下设置：
 %   \begin{itemize}
 %    \item Compiler: XeLaTeX
-%    \item TeX Live version: 2022
+%    \item TeX Live version: 2023
 %   \end{itemize}
 %  \item 返回项目页面，点击 `` Recompile/重新编译 '' 按钮进行编译。
 % \end{enumerate}
@@ -388,14 +386,22 @@ through XeTeX.
 % \end{function}
 % 该选项默认被 \verb|%| 注释掉。\opt{ieee} 为默认样式。如果希望使用的样式不在此列表，可以阅读 \pkg{biblatex} 的文档并自行修改模板代码。
 %
-% \begin{function}{displaycommittee}
+% \begin{function}{displaycommittee}\label{opt:displaycommittee}
 %  \begin{syntax}
 %   displaycommittee = <(false)|true>
 %  \end{syntax}
 % 设置是否在签名页显示答辩委员会成员列表。
 % \end{function}
-% 该选项默认被 \verb|%| 注释掉，因为 RPG Handbook 提供的示例签名页没有要求列出答辩委员会成员。
-% 但某些院系 (如 ECE) 要求在签名页显示答辩委员会成员列表，则需要取消该行注释并设置为 \verb|true|，以及需要在下文提及的 \opt{reviewer}、\opt{reviewerdept} 和 \opt{reviewerext} 选项中填写委员会成员信息。
+% 该选项默认值 \verb|false|，因为 RPG Handbook 提供的示例签名页没有要求列出答辩委员会成员。
+% 但某些院系 (如 ECE) 要求在签名页显示答辩委员会成员列表，则需要设置为 \verb|true|，以及需要在下文提及的 \opt{reviewer}、\opt{reviewerdept} 和 \opt{reviewerext} 选项中填写委员会成员信息。
+%
+% \begin{function}[added=2023-12-01]{blankpage}
+%  \begin{syntax}
+%   blankpage = <(true)|false>
+%  \end{syntax}
+% 设置是否插入空白页以确保章节标题位于奇数页。
+% \end{function}
+% RPG Handbook 要求章节 (Chapter) 标题应当位于新的一页；兼顾打印版本的美观，该选项默认开启，使得章节标题确保处于奇数页。但是在撰写论文的过程中，太多空白页不便于查看，因此可以设置为 \verb|false| 以便自己预览。在最终提交前，请将其改回 \verb|true|。
 %
 % \subsubsection{论文信息}
 %
@@ -405,9 +411,7 @@ through XeTeX.
 %  \end{syntax}
 % 论文必要信息。
 % \end{function}
-% 此选项的内容是以英文逗号 \verb|,| 分隔的键值列表，定义了该论文的必要信息。每一项等号左边为变量名，右边为由花括号 \verb|{}| 包裹的变量值。如果某一项的值不需要填，可以留空，但花括号仍建议保留。
-%
-% 其中标为\textcolor{hkustblue}{蓝色的选项}为可选填项。如果没有必要，可以留空。同理，标为\textcolor{hkustblue}{蓝色的文字}为可选阅读项，只有填写可选项的用户才需要阅读。
+% 此选项的内容是以英文逗号 \verb|,| 分隔的键值列表，定义了该论文的必要信息。每一项等号左边为变量名，右边为由花括号 \verb|{}| 包裹的变量值。其中标为\textcolor{hkustblue}{蓝色的选项}为可选填项。如果某一项的值不需要填，可以留空，但花括号 \verb|{}| 仍需要保留。同理，标为\textcolor{hkustblue}{蓝色的文字}为可选阅读项，只有填写可选项的用户才需要阅读。
 %
 % \begin{function}{degree}
 %  \begin{syntax}
@@ -420,40 +424,28 @@ through XeTeX.
 %  \begin{syntax}
 %   title               = \Arg{论文标题}
 %  \end{syntax}
-% 论文标题。
+% 论文标题。其中 \verb|\\| 用于换行，如不需要可以删去。
 % \end{function}
 %
-% \begin{function}{keywords, grade, student-id}
+% \begin{function}{keywords}
 %  \begin{syntax}
 %   \textcolor{hkustblue}{keywords}            = \Arg{关键词}
-%   \textcolor{hkustblue}{grade}               = \Arg{年级}
-%   \textcolor{hkustblue}{student-id}          = \Arg{学号}
 %  \end{syntax}
-% 关键词列表、年级、学号。关键词列表同样以英文逗号分隔。
-% \end{function}
-%
-% \begin{function}{author}
-%  \begin{syntax}
-%   author              = \Arg{作者}
-%  \end{syntax}
-% 作者。
+% 关键词列表。关键词列表以英文逗号分隔。
 % \end{function}
 %
 % \begin{function}{school, department, program, major}
 %  \begin{syntax}
+%   author              = \Arg{作者}
 %   \textcolor{hkustblue}{school}              = \Arg{学院}
 %   department          = \Arg{系/部门}
 %   program             = \Arg{项目名称}
 %   \textcolor{hkustblue}{major}               = \Arg{专业}
 %  \end{syntax}
-% 分别为：
-%
-% 学院信息。如 ``School of Engineering''。
-%
-% 系/部门的全名。需填写为 ``Department/Division of XXX''。
-%
-% 项目名称。参考 SIS 中的 ``name of program''。通常和系/部门同名。
-%
+% 作者。\\
+% 学院信息。如 ``School of Engineering''。\\
+% 系/部门的全名。需填写为 ``Department/Division of XXX''。\\
+% 项目名称。参考 SIS 中的 ``name of program''。通常和系/部门同名。\\
 % 专业方向。参考 SIS 中的 ``major''。
 % \end{function}
 %
@@ -482,17 +474,14 @@ through XeTeX.
 %   \textcolor{hkustblue}{reviewerext}         = \Arg{答辩委员会外部成员}
 %  \end{syntax}
 % 签名页信息。\\
-% 其中，\opt{depthead} 的值需要包括 ``, Head of Department/Division''，如
-% \begin{ctexexam}
-%   depthead = {Prof. XXX, Head of Department}
-% \end{ctexexam}
-% 关于\textcolor{hkustblue}{答辩委员会}：
+% 其中，\opt{depthead} 需填写完整信息，如 ``Prof. XXX, Head of Department/Division''。
+% 关于\textcolor{hkustblue}{答辩委员会 (TEC)}：
 %
-% 某些院系会要求在签名页列出答辩委员会成员列表，此时需要确保上文提及的 \opt{displaycommittee} 选项设置为 \opt{true}，然后填写 \opt{reviewer}、\opt{reviewerdept}选项，PhD 还需要填写 \opt{reviewerext}选项。通常来讲，MPhil 答辩委员会需要4名成员，PhD 答辩委员会需要6名成员 (含1名外部成员)。
+% 某些系要求在签名页列出TEC成员列表，则需要修改上文 (\ref{opt:displaycommittee}处) 提及的 \opt{displaycommittee} 选项为 \opt{true}，并填写 \opt{reviewer}、\opt{reviewerdept}项，PhD 还需填写 \opt{reviewerext}项。一般地，MPhil的TEC需要4名成员，PhD的TEC需要6名成员 (含1名外部成员)。可按需增删此处的内容。实测最大支持7名成员。
 %
 % \textcolor{hkustblue}{\textbf{注意：}} \opt{reviewer} 和 \opt{reviewerdept} 中的每个条目之间需要使用英文逗号分隔；但如果某一条目的部分内容里包含英文逗号，比如 \opt{reviewerext} 中的外部大学名称，则需要用花括号将那一整个部分包裹，否则 \hologo{LaTeX} 程序会在逗号处截断，将其当作两个条目。详见下文给出的示例中的 \opt{reviewerext} 的写法。
 %
-% \textcolor{hkustblue}{\textbf{注意：}} 根据 ECE 系提供的签名页，PhD的答辩委员会中的 ``External Examiner'' 所属机构的 ``Department'' 和 ``University'' 之间的换行符 \verb|\\| 不能删去，否则会使得对齐出错。如果确实没有第二行内容，可以在 \verb|\\| 后使用 \verb|\phantom{xxx}| 作为占位 (这个命令会占据与 \verb|xxx| 同样大小的空间但不实际显示)。
+% \textcolor{hkustblue}{\textbf{注意：}} 如果填写PhD的TEC内容，其中 ``External Examiner'' 的所属机构中的 ``Department'' 和 ``University'' 之间的换行符 \verb|\\| 不能删去，否则会使得对齐出错。如果确实没有第二行内容，可以在 \verb|\\| 后使用 \verb|\phantom{xxx}| 作为占位 (这个命令会占据与 \verb|xxx| 同样大小的空间但不实际显示)。
 %
 % \end{function}
 %
@@ -503,7 +492,7 @@ through XeTeX.
 % 城市。通常为 ``Hong Kong''。
 % \end{function}
 %
-% 本文档给出了一个如下的示例（此处使用了非真实信息以防用户忘了修改）以供参考：
+% 本文档给出一个示例（此处使用了非真实信息以防用户忘记修改）以供参考：
 %
 % \begin{ctexexam}
 %   \hkustsetup {
@@ -511,8 +500,6 @@ through XeTeX.
 %       degree        = {phd},
 %       title         = {Triggering\\the Forth Impact},
 %       keywords      = {Neon, Genesis, Evangelion},
-%       grade         = {},
-%       student-id    = {},
 %       author        = {Cruel Angel},
 %       school        = {School of SEELE},
 %       department    = {Department of NERV},
@@ -547,7 +534,7 @@ through XeTeX.
 %  \item \verb|\addbibresource{mythesis.bib}| 导入了存放引用文献的 bib 文件。
 % \end{itemize}
 %
-% \textbf{Known issue: }本模板使用 \pkg{unicode-math} 设置数学环境字体，请不要使用会与之产生冲突的 \pkg{bm} 宏包，否则会报错。事实上，在 \hologo{XeTeX} 引擎下，\pkg{bm} 已经过时。对于 \pkg{bm} 宏包中的常用命令 \verb|\bm|，本模板已经设置了一个别名，用户可以在正文中直接使用 \verb|\bm|。除此之外，如果还有需要使用的 \pkg{bm} 宏包中的命令，请自行设置别名。
+% \textcolor{hkustblue}{\textbf{注意：}} 本模板使用 \pkg{unicode-math} 设置数学环境字体，请不要使用会与之产生冲突的 \pkg{bm} 宏包，否则会报错。事实上，在 \hologo{XeTeX} 引擎下，\pkg{bm} 已经过时。对于 \pkg{bm} 宏包中的常用命令 \verb|\bm|，本模板已经设置了一个别名，用户可以在正文中直接使用 \verb|\bm|。除此之外，如果还有需要使用的 \pkg{bm} 宏包中的命令，请自行设置别名。
 %
 % \subsubsection{正文区}
 % 正文区按顺序定义或插入了组成论文的各个组件、章节；用户在 \file{chapters/} 文件夹下修改或新增章节文件后，需要检查主文件中对应的部分是否正确。
@@ -663,9 +650,18 @@ through XeTeX.
 % \begin{macro}{displaycommittee}
 % 显示委员会成员列表。
 %    \begin{macrocode}
-  displaycommittee    .choices:nn   = { true, flase }
+  displaycommittee    .choices:nn   = { true, false }
   { \tl_set_eq:NN \g_@@_disp_committee_tl \l_keys_choice_tl },  
-  displaycommittee    .initial:n    = flase,
+  displaycommittee    .initial:n    = false,
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{blankpage}
+% 是否增加空白页以确保章节标题在奇数页开始。
+%    \begin{macrocode}
+    blankpage    .choices:nn      = { true, false }
+    { \tl_set_eq:NN \g_@@_blankpage_tl \l_keys_choice_tl },  
+    blankpage    .initial:n       = true,
 }
 %    \end{macrocode}
 % \end{macro}
@@ -710,18 +706,10 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 % \end{macro}
 % 
-% \begin{macro}{info/grade,info/student-id,info/author}
-% 年级、学号、姓名。
+% \begin{macro}{info/author,info/school,info/department,info/program,info/major}
+% 作者、学院、系/部门、项目、专业。
 %    \begin{macrocode}
-  grade             .tl_set:N = \l_@@_info_grade_tl,
-  student-id        .tl_set:N = \l_@@_info_id_tl,
   author            .tl_set:N = \l_@@_info_author_tl,
-%    \end{macrocode}
-% \end{macro}
-% 
-% \begin{macro}{info/school,info/department,info/program,info/major}
-% 学院、系/部门、项目、专业。
-%    \begin{macrocode}
   school            .tl_set:N = \l_@@_info_school_tl,
   department        .tl_set:N = \l_@@_info_department_tl,
   program           .tl_set:N = \l_@@_name_of_program_tl,
@@ -764,7 +752,13 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % 
 % 使用\pkg{book}文档类。
 %    \begin{macrocode}
-\LoadClass[a4paper,12pt,twoside,UTF8]{book}
+\str_if_eq:NNTF { \g_@@_blankpage_tl } { true }
+{
+    \PassOptionsToClass{a4paper,12pt,UTF8,twoside}{book}
+}{
+    \PassOptionsToClass{a4paper,12pt,UTF8,oneside}{book}
+}
+\LoadClass{book}
 %    \end{macrocode}
 %
 % \subsection{载入宏包}
@@ -1057,7 +1051,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
   \raggedbottom
   \chapter*{\MakeUppercase{\l_@@_toc_title_text}}%
   \addcontentsline{toc}{chapter}{\l_@@_toc_title_text}
-  {\singlespacing\@starttoc{toc}}%
+  {\@starttoc{toc}}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1184,7 +1178,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
   \addcontentsline{toc}{chapter}{Title~Page}
   \begin{center}
     \phantom{[SMAPLE~TITLE~PAGE]}\\[1\baselineskip]
-    { \singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl}
+    { \LARGE\bfseries\selectfont\l_@@_info_title_tl}
       \\[5\baselineskip]
       by\\[1\baselineskip]
       \l_@@_info_author_tl\\[5\baselineskip]
@@ -1225,7 +1219,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
   {
     \begin{center}
     \phantom{[SAMPLE~ABSTRACT~PAGE]}\\[1\baselineskip]
-    { \singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl}
+    { \LARGE\bfseries\selectfont\l_@@_info_title_tl}
       \\[1\baselineskip]
       by~\l_@@_info_author_tl \\[2\baselineskip]
       \l_@@_info_department_tl \\[1\baselineskip]
@@ -1257,7 +1251,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
     {
     \begin{center}
     \phantom{[SAMPLE~AUTHORIZATION~PAGE]}\\
-    \bfseries\selectfont\underline{Authorization}\\[2\baselineskip]
+    \large\bfseries\selectfont\underline{Authorization}\\[2\baselineskip]
     \end{center}
     }
     {\setlength{\parindent}{3em}
@@ -1308,7 +1302,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
       {
       \phantom{SAMPLE~SIGNATURE~PAGE}\\
       \vspace{-20pt}
-      {\singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl}
+      {\LARGE\bfseries\selectfont\l_@@_info_title_tl}
        \\[1\baselineskip]
       by \\[1\baselineskip]
       \l_@@_info_author_tl \\[1\baselineskip]
@@ -1351,7 +1345,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
     }
     {
       \phantom{SAMPLE~SIGNATURE~PAGE}\\[1\baselineskip]
-      {\singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl}
+      {\LARGE\bfseries\selectfont\l_@@_info_title_tl}
         \\[4\baselineskip]
       by \\[1\baselineskip]
       \l_@@_info_author_tl \\[2\baselineskip]
@@ -1377,7 +1371,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
     \begin{center}
       \str_if_eq:NNTF { \g_@@_disp_committee_tl } { true }
       {
-      {\singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl}
+      {\LARGE\bfseries\selectfont\l_@@_info_title_tl}
         \\[1\baselineskip]
       by \\[1\baselineskip]
       \l_@@_info_author_tl \\[1\baselineskip]
@@ -1423,7 +1417,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
     }
     {
       \phantom{SMAPLE~SIGNATURE~PAGE}\\[1\baselineskip]
-      {\singlespacing\Large\bfseries\selectfont\l_@@_info_title_tl}
+      {\LARGE\bfseries\selectfont\l_@@_info_title_tl}
         \\[4\baselineskip]
       by \\[1\baselineskip]
       \l_@@_info_author_tl \\[2\baselineskip]
