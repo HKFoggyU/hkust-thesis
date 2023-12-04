@@ -7,25 +7,24 @@
 
 HKUST Thesis template for RPG students implemented with LaTeX3.
 
-This template follows the guidelines from HKUST FYTGS [website](https://fytgs.hkust.edu.hk/academics/Academic-Regulations-and-Requirements/Handbook-for-Research-Postgraduate-Studies/guidelines-thesis-preparation) and the formatting instructions of the sample pages ([MPhil](https://fytgs.hkust.edu.hk/sites/default/files/imce/thesis_sample_page_mphil.pdf)/[PhD](https://fytgs.hkust.edu.hk/sites/default/files/imce/thesis_sample_page_phd.pdf)) provided by FYTGS.
+## Getting started
 
-## Get started
+Try this template online on [Overleaf](https://www.overleaf.com/latex/templates/hkustthesis/mstwvckmhmjg) in 1 minute! You only need to do 2 things:
 
-Try this template online on [Overleaf](https://www.overleaf.com/latex/templates/hkustthesis/mstwvckmhmjg) in 1 mintue!
+1. Remember to change the `Compiler` to **`XeLaTeX`** via the top left `Menu` button, otherwise it won't compile.
+2. Download and read carefully the **[PDF documentation](https://github.com/HKFoggyU/hkust-thesis/releases/latest/download/hkustthesis.pdf)** before you edit your thesis.
 
-Remember to change the `Compiler` to **`XeLaTeX`** via the top left `Menu` button, otherwise it won't build.
-
-## Documentation
-
-Are you an experienced user of LaTeX?
-- Yes: Please read the [online documentation](https://HKFoggyU.github.io/hkust-thesis/) and the `` dtx `` document.
-- No: Are you a patient reader?
-    - Yes: Please read the **very detailed [PDF documentation](https://github.com/HKFoggyU/hkust-thesis/releases/latest/)** (``hkustthesis-v*.pdf`` in `` Assets `` in the latest release).
-    - No: Please use Microsoft Word.
+Alternatively, you can download the release file and try it on your local machine.
 
 ## Contributions
 
 If you find any problems or have any suggestions, please file an issue or PR.
+
+## Disclaimer
+
+FYTGS doesn't provide any template for thesis submission. They only emphasize that the submitted PDF file should meet the requirements in the [RPG Handbook](https://fytgs.hkust.edu.hk/academics/Academic-Regulations-and-Requirements/Handbook-for-Research-Postgraduate-Studies/guidelines-thesis-preparation).
+
+This template has tried its best to follow the above requirements in the RPG Handbook and also the formatting instructions of the sample pages ([MPhil](https://fytgs.hkust.edu.hk/sites/default/files/imce/thesis_sample_page_mphil.pdf)/[PhD](https://fytgs.hkust.edu.hk/sites/default/files/imce/thesis_sample_page_phd.pdf)) provided by the RPG Handbook. However, this template takes no responsibility for any potential inconsistency.
 
 ## License
 
