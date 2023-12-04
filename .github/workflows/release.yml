@@ -64,9 +64,6 @@ jobs:
         with:
           root_file: hkustthesis.dtx
           working_directory: ./
-
-      - name: Rename PDF with version
-        run: mv hkustthesis.pdf hkustthesis-$VERSION.pdf
       
       - name: Zip Release Source
         run: |
@@ -76,5 +73,5 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           files: |
-            hkustthesis-v*.pdf
+            hkustthesis.pdf
             hkust-thesis-v*.zip
