@@ -142,7 +142,7 @@ through XeTeX.
 % 
 % \author{HKFoggyU}
 %
-% \date{v0.7.4 @ \dashedtoday\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
+% \date{v0.8.0 @ \dashedtoday\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
@@ -163,6 +163,7 @@ through XeTeX.
 % \changes{v0.7.2}{2023/08/26}{fix vscode setting bug, fix qty conflicts, more friendly docs}
 % \changes{v0.7.3}{2023/11/23}{fix twoside bug, default to twoside, fix RPG Handbook link}
 % \changes{v0.7.4}{2023/12/01}{fix false typo, add blankpage option, remove redundant setting items, update docs}
+% \changes{v0.8.0}{2023/12/04}{update docs about Overleaf part, bump version due to blankpage}
 %
 % {
 % \phantomsection
@@ -206,7 +207,7 @@ through XeTeX.
 % \subsection{动机}
 % GitHub上已有数个由热心校友（包括但不限于\href{https://github.com/wenbinf/hkust-mphil-thesis}{@wenbinf}、\href{https://github.com/onlytailei/HKUST_latex_thesis_2019}{@onlytailei}、\href{https://github.com/fcyu/HKUST_PhD_MPhil_thesis_Latex}{@fcyu}、\href{https://github.com/Cheedoong/hkust-latex-thesis}{@cheedoong}）制作的毕业论文\hologo{LaTeX}模板。这些模板均使用\hologo{LaTeX2e}语法编写，有些编写时间久远，缺少必要的文档，鲜有后续更新和维护。
 %
-% 随着时代的进步，更加清晰简明的\hologo{LaTeX3}大大提高了模板的易读性与可维护性\footnote{相比于\hologo{LaTeX2e}；但体验过Typst之后：\hologo{LaTeX}真辣眼睛。}。因此，HKFoggyU的成员决定通过\hologo{LaTeX3}语法、参考其它优秀项目，合作编写并维护一个全新的毕业论文模板。
+% 随着时代的进步，更加清晰简明的\hologo{LaTeX3}大大提高了模板的易读性与可维护性\footnote{相比于\hologo{LaTeX2e}；但体验过Typst之后：Typst真香！}。因此，HKFoggyU的成员决定通过\hologo{LaTeX3}语法、参考其它优秀项目，合作编写并维护一个全新的毕业论文模板。
 %
 % \subsection{文档结构}
 % 本文档的前半部分（第\ref{sec:introduction}-\ref{sec:intro2thesis}节）为用户手册，供使用本模板撰写毕业论文的同学们参考。其中，第\ref{sec:intro2latex}-\ref{sec:compile}节介绍了\hologo{LaTeX}和本模板的工具，有\hologo{LaTeX}基础的用户可以跳过；第\ref{sec:intro2thesis}节详细介绍了如何使用本模板撰写毕业论文，建议仔细阅读。
@@ -214,25 +215,27 @@ through XeTeX.
 % 后半部分（第\ref{sec:implementation}节及以后）为开发手册，供有意了解或贡献源码的开发者参考，普通用户无需阅读。
 %
 % \section{工欲善其事，必先利其器}\label{sec:intro2latex}
-% 有\hologo{LaTeX}基础的用户可以跳过本节。
+% \mycomment{有\hologo{LaTeX}基础的用户可以跳过本节。}
 %
 % \subsection{\hologo{LaTeX}入门}
 % ``\emph{授人以鱼不如授人以渔。}''
 % 本节将更侧重入门\hologo{LaTeX}的方法而非具体步骤。
-%
-% \mycomment{首先，作为新手用户，需要尽量避免对 ``写代码'' 这件事产生畏难情绪。\hologo{LaTeX}和常用的 Word、Illustrator 类似，也是一个排版工具，只是呈现方式不同。}
 %
 % 对于新手，复旦大学曾祥东的\href{https://github.com/stone-zeng/latex-talk}{《现代\hologo{LaTeX}入门讲座》} 和北京大学刘海洋的 \href{https://www.bilibili.com/video/BV1s7411U7Pr}{\hologo{LaTeX}不快速的入门}（视频讲座）是两个非常优秀的入门教程；推荐先通读前者（内容较短），如果不喜欢文字内容，可以观看后者。另外，刘海洋的《\hologo{LaTeX}入门》内容详尽充实，可以作为日常写作时的工具书。
 % 
 % ``\emph{吾生也有涯，而知也无涯。}''
 % \hologo{LaTeX}的参考资料浩如烟海。没有人能把这些资料都看完才去开始使用\hologo{LaTeX}，因此，学会使用 Google/ChatGPT 等工具解决眼前的问题，比通读各种\hologo{LaTeX}教程更加重要。
 %
+% 作为新手用户，不要有 ``\hologo{LaTeX}要写代码'' 这种思想负担，也不要害怕编译报错，这些不影响之前输入的文字\footnote{比Word突然卡死崩溃不知道好到哪里去了（}，遇到问题去Google或者问ChatGPT即可。
+%
 % \subsection{\hologo{LaTeX}版本}
 % \subsubsection{在线编译}
-% 如果本地尚未安装任何\hologo{LaTeX}发行版，那么\textbf{强烈建议}初学者使用 \href{https://www.overleaf.com/}{Overleaf} ，这是一个在线版\hologo{LaTeX}服务，可以避免学习热情被安装配置环境所熄灭。可以直接跳转到第\ref{sec:intro2thesis}节继续阅读。
+% 如果电脑上还未安装任何\hologo{LaTeX}发行版，可以使用在线版\hologo{LaTeX}服务 \href{https://www.overleaf.com/}{Overleaf} 进行初步体验，以避免学习热情被安装配置环境所熄灭。可以直接跳转到第\ref{sec:intro2thesis}节继续阅读。
+%
+% \mywarning{注意：} Overleaf免费版开始对文章长度和项目大小逐渐施加限制，近期\footnote{2023年11月}毕业的同学反映，其 thesis 项目\footnote{95页，80MB大小}已经需要购买会员服务。因此建议准备一份本地安装的\hologo{LaTeX}发行版以防万一。
 %
 % \subsubsection{本地编译}
-% 如果仍希望离线工作，请选择 \href{https://www.tug.org/texlive/}{\hologo{TeXLive}} 或 \href{https://miktex.org/download}{\hologo{MiKTeX}}，下载并安装其最新版本。
+% 如果希望不依赖网络工作，请选择 \href{https://www.tug.org/texlive/}{\hologo{TeXLive}} \textbf{或} \href{https://miktex.org/download}{\hologo{MiKTeX}}，下载并安装其最新版本。前者安装体积较大（$\sim$ 5 GB）但是可以做到完全离线使用；后者体积较小但在第一次编译时需要联网下载宏包（后续编译无需联网）。
 %
 % 本模板要求的\hologo{LaTeX}版本为 \hologo{TeXLive} ($\geq$2021) 或 \hologo{MiKTeX} ($\geq$4.4)。尽管某些低版本的发行版可以编译通过，但可能存在一些未被发现的问题。
 %
@@ -254,27 +257,24 @@ through XeTeX.
 %     Ubuntu 20.04             & \hologo{TeX}\,Live 2021      & Pass \\
 %     Windows 11               & \hologo{MiKTeX} 4.9          & Pass \\
 %     Windows 10               & \hologo{MiKTeX} 4.4          & Pass \\
-%     Ubuntu 20.04             & \hologo{MiKTeX} 4.2.1        & \mywarning{Failed} \\
 %     \bottomrule
 %   \end{tabular}
 % \end{table}
 %
-% \subsection{获取本模板}
-% \begin{itemize}
-% \item (针对用户) 请在本项目的 \href{https://github.com/HKFoggyU/hkust-thesis/releases/latest}{GitHub Release} 页面下载本模板最新版本，名为 \file{hkust-thesis-v*.zip} 的压缩文件。
-% \item (针对开发者) 如果希望第一时间获取更新，可以克隆本项目 \href{https://github.com/HKFoggyU/hkust-thesis.git}{仓库}，并运行 \colorbox{code-bg}{\lstinline|xetex hkustthesis.dtx|} 以生成 \file{hkustthesis.cls} 文件。
-% \end{itemize}
-%
 % \subsection{编辑器}
 % \mycomment{本小节仅针对本地编译用户。Overleaf 用户使用浏览器，无需安装编辑器。}
 %
-% 本项目建议使用 \href{https://code.visualstudio.com/download}{Visual Studio Code} 编辑器搭配 \href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{LaTeX Workshop} 插件以获得良好的编辑体验。
+% 本项目建议使用 \href{https://code.visualstudio.com/download}{Visual Studio Code} 编辑器并安装 \href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{LaTeX Workshop} 插件以获得良好的编辑体验。
 %
 % 此外，建议使用支持热重载（热刷新）的 PDF 阅读器如 \href{https://www.sumatrapdfreader.org/download-free-pdf-viewer}{Sumatra PDF}。不支持热重载的 PDF 阅读器如 Adobe Acrobat 在打开 pdf 文件后就会锁定 pdf 修改权限，必须关闭才能更新 pdf，因此不便于此场景使用。
 %
 % \section{编译本项目}\label{sec:compile}
 %
-% \mycomment{复读：强烈建议初学者使用 Overleaf 入门。可以先试一次，如果觉得浏览器不方便，再本地安装也不迟。}
+% \subsection{获取本模板}
+% \begin{itemize}
+% \item (针对用户) 请在本项目的 \href{https://github.com/HKFoggyU/hkust-thesis/releases/latest}{GitHub Release} 页面下载名为 \file{hkust-thesis-v*.zip} 的压缩文件。
+% \item (针对开发者) 如果希望第一时间获取更新，可以克隆本项目\href{https://github.com/HKFoggyU/hkust-thesis.git}{仓库}，并运行 \colorbox{code-bg}{\lstinline|xetex hkustthesis.dtx|} 以生成 \file{hkustthesis.cls} 文件。
+% \end{itemize}
 %
 % \subsection{在线编译：使用 Overleaf}
 % \begin{enumerate}
@@ -289,7 +289,7 @@ through XeTeX.
 %
 % \subsection{本地编译}
 % \subsubsection{（推荐）VSCode}
-% 本项目提供了一份 配置好的 \file{.vscode/settings.json} 文件。在安装了 LaTeX Workshop 插件的 VSCode 中的 \hologo{TeX} 侧栏选择 ``build recipe'' 为 ``build_mythesis'' 即可进行编译。
+% 本项目提供了一份 配置好的 \file{.vscode/settings.json} 文件。在安装了 LaTeX Workshop 插件的 VSCode 中，点击 \hologo{TeX} 侧栏，在 ``COMMANDS'' 中 选择 ``build recipe'' 为 ``build_mythesis'' 即可进行编译。
 %
 % 下面提供了几种其它编译方式，供开发者或有其它偏好的用户使用。
 %
