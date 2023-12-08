@@ -1,5 +1,7 @@
 # HKUST Thesis
 
+[中文说明](README_CN.md)
+
 [![LICENSE](https://img.shields.io/github/license/HKFoggyU/hkust-thesis)](https://www.latex-project.org/lppl/lppl-1-3c/)
 [![STARS](https://img.shields.io/github/stars/HKFoggyU/hkust-thesis)](https://github.com/HKFoggyU/hkust-thesis/stargazers)
 [![TEST](https://github.com/HKFoggyU/hkust-thesis/actions/workflows/test.yml/badge.svg)](https://github.com/HKFoggyU/hkust-thesis/actions)
