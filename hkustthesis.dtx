@@ -103,7 +103,7 @@ through XeTeX.
 %<*driver>
 \ProvidesFile{hkustthesis.dtx}
 \documentclass[12pt]{ctxdoc}
-\usepackage{float,footnote,listings,soul,xcolor,tabularray}
+\usepackage{float,footnote,fontawesome,graphicx,listings,soul,xcolor,tabularray}
 \setlist[1]{labelindent=0.5em}
 \UseTblrLibrary{booktabs,siunitx,diagbox}
 \DefTblrTemplate{caption-tag}{default}{Table~\hspace{0.25em}\thetable}
@@ -117,10 +117,20 @@ through XeTeX.
 \definecolor{hkustgray}{RGB}{204, 204, 204}
 \definecolor{hkustviolet}{RGB}{124, 35, 72}
 \definecolor{hkustyellow}{RGB}{255, 212, 0}
-\definecolor{code-bg}{RGB}{220, 220, 220}
+\definecolor{code-bg}{RGB}{225, 225, 225}
+\definecolor{vsc-compile-failed}{RGB}{237, 136, 151}
 
+%% Self-defined helping macros
 \NewDocumentCommand\mycomment{m}{{\color{gray}#1}}
 \NewDocumentCommand\mywarning{m}{{\color{red}#1}}
+\NewDocumentCommand\myblock{m}{{\colorbox{code-bg}{#1}}}
+\NewDocumentCommand\myVee{}{\raisebox{1pt}{\scalebox{1.5}[0.7]{$\vee$}}}
+\NewDocumentCommand\VSCodeCompiling{}{\rlap{\rotatebox[origin=c]{90}{$\circlearrowright$}}\rotatebox[origin=c]{-90}{$\circlearrowright$}}
+\NewDocumentCommand\VSCodeCompileSucceed{}{\faCheck}
+\NewDocumentCommand\VSCodeCompileFailed{}{{\color{vsc-compile-failed}{\faTimes}}}
+\renewcommand\contentsname{目录 Contents}
+
+\pagestyle{plain}
 
 \lstset{basicstyle=\ttfamily, language=TeX, backgroundcolor=\color{code-bg}}
 
@@ -140,9 +150,12 @@ through XeTeX.
 %
 % \title{\color{hkustblue}{The \textsc{HkustThesis} class\\ A \hologo{LaTeX}\textcolor{hkustred}{3} template}}
 % 
-% \author{HKFoggyU}
+% \author{\href{https://github.com/HKFoggyU}{\color{black}{\faGithub~@HKFoggyU}}}
 %
-% \date{v0.8.0 @ \dashedtoday\\{\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}}
+% \date{v0.8.2 @ \dashedtoday\\
+% {\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}\\
+% {\footnotesize Please read the \href{https://github.com/HKFoggyU/hkust-thesis/releases}{latest version} of this documentation}
+% }
 %
 % \changes{v0.1}{2021/10/21}{Start development based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} class}
 % \changes{v0.2}{2021/10/24}{Typesett page stye before main body}
@@ -164,30 +177,36 @@ through XeTeX.
 % \changes{v0.7.3}{2023/11/23}{fix twoside bug, default to twoside, fix RPG Handbook link}
 % \changes{v0.7.4}{2023/12/01}{fix false typo, add blankpage option, remove redundant setting items, update docs}
 % \changes{v0.8.0}{2023/12/04}{update docs about Overleaf part, bump version due to blankpage}
+% \changes{v0.8.1}{2023/12/08}{add missing author term}
+% \changes{v0.8.2}{2023/12/09}{add English docs}
 %
 % {
 % \phantomsection
-% \addcontentsline{toc}{section}{封面}
+% \addcontentsline{toc}{section}{封面 Cover}
 % \maketitle
 % }
 %
-% \def\abstractname{简介}
+% \def\abstractname{简介 Introduction}
 % \begin{abstract}
 % \textsc{HkustThesis} 文档类 (class) 意在为香港科技大学 (HKUST) 的研究型硕士 (MPhil) 和博士 (PhD) 生提供一个尽可能符合 \href{https://fytgs.hkust.edu.hk/academics/Academic-Regulations-and-Requirements/Handbook-for-Research-Postgraduate-Studies/guidelines-thesis-preparation}{RPG Handbook} 要求的毕业论文\hologo{LaTeX}模板。
+%
+% \textsc{HkustThesis} class aims to provide a \hologo{LaTeX} thesis template that tries best to meet the requirements of the \href{https://fytgs.hkust.edu.hk/academics/Academic-Regulations-and-Requirements/Handbook-for-Research-Postgraduate-Studies/guidelines-thesis-preparation}{RPG Handbook} for the RPG students (MPhil/PhD) of HKUST.
 % \end{abstract}
 %
-% \vspace{2\baselineskip}
-% \def\abstractname{免责声明}
+% \vspace{1\baselineskip}
+% \def\abstractname{免责声明 Disclamer}
 % \begin{abstract}
-% 本模板并非官方模板。事实上，除极个别系外，FYTGS 只提供 RPG Handbook 作为总体要求，并不存在官方模板。
-% 本模板对潜在的漏洞或与 RPG Handbook 的要求不符的情况不负任何责任。
-% 本模板仍在开发中，请从本项目的 \href{https://github.com/HKFoggyU/hkust-thesis/}{GitHub 仓库} 获取更新。
+% 本模板并非官方模板。事实上，除极个别系外，FYTGS 只提供 RPG Handbook 作为总体要求，并不存在官方模板。本模板对潜在的漏洞或与 RPG Handbook 的要求不符的情况不负任何责任。本模板仍在开发中，请从本项目的 \href{https://github.com/HKFoggyU/hkust-thesis/}{GitHub 仓库} 获取更新。
+%
+% This template is not an official template. In fact, there is no official template except for some certain departments. The FYTGS only provide requirements in RPG Handbook as guidelines. This template takes no responsibility for any potential inconsistency. This template is under development, and please get the latest updates from the \href{https://github.com/HKFoggyU/hkust-thesis/}{GitHub repo} of this project.
 % \end{abstract}
 %
-% \vspace{2\baselineskip}
-% \def\abstractname{致谢}
+% \vspace{1\baselineskip}
+% \def\abstractname{致谢 Acknowledgements}
 % \begin{abstract}
-% 本项目由 \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} 项目修改而来，并得到了 \href{https://github.com/nju-lug}{NJU LUG} 的帮助。
+% 本项目基于 \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} 项目开发，并得到了 \href{https://github.com/nju-lug}{NJU LUG} 的帮助。
+%
+% This project is developed based on \href{https://github.com/nju-lug/NjuThesis}{\textsc{NjuThesis}} and received help from \href{https://github.com/nju-lug}{NJU LUG}.
 % \end{abstract}
 %%
 % \clearpage
@@ -201,48 +220,75 @@ through XeTeX.
 % 
 % \begin{documentation}
 %
-% \section{模板介绍}\label{sec:introduction}
+% \section{模板介绍 Introduction to this template}\label{sec:introduction}
 % \textsc{HkustThesis}是由GitHub组织 \href{https://github.com/HKFoggyU}{@HKFoggyU} 维护的用于香港科技大学研究型硕士 (MPhil) 和博士 (PhD) 生毕业论文排版的\hologo{LaTeX}模板。
 %
-% \subsection{动机}
+% \textsc{HkustThesis} is developed and maintained by GitHub organization \href{https://github.com/HKFoggyU}{@HKFoggyU} for typesetting thesis for the RPG (MPhil and PhD) in HKUST.
+%
+% \subsection{动机 Motivation}
 % GitHub上已有数个由热心校友（包括但不限于\href{https://github.com/wenbinf/hkust-mphil-thesis}{@wenbinf}、\href{https://github.com/onlytailei/HKUST_latex_thesis_2019}{@onlytailei}、\href{https://github.com/fcyu/HKUST_PhD_MPhil_thesis_Latex}{@fcyu}、\href{https://github.com/Cheedoong/hkust-latex-thesis}{@cheedoong}）制作的毕业论文\hologo{LaTeX}模板。这些模板均使用\hologo{LaTeX2e}语法编写，有些编写时间久远，缺少必要的文档，鲜有后续更新和维护。
 %
 % 随着时代的进步，更加清晰简明的\hologo{LaTeX3}大大提高了模板的易读性与可维护性\footnote{相比于\hologo{LaTeX2e}；但体验过Typst之后：Typst真香！}。因此，HKFoggyU的成员决定通过\hologo{LaTeX3}语法、参考其它优秀项目，合作编写并维护一个全新的毕业论文模板。
 %
-% \subsection{文档结构}
-% 本文档的前半部分（第\ref{sec:introduction}-\ref{sec:intro2thesis}节）为用户手册，供使用本模板撰写毕业论文的同学们参考。其中，第\ref{sec:intro2latex}-\ref{sec:compile}节介绍了\hologo{LaTeX}和本模板的工具，有\hologo{LaTeX}基础的用户可以跳过；第\ref{sec:intro2thesis}节详细介绍了如何使用本模板撰写毕业论文，建议仔细阅读。
+% There are several thesis templates developed by alumni of HKUST on GitHub, including but not limited in: \href{https://github.com/wenbinf/hkust-mphil-thesis}{@wenbinf}, \href{https://github.com/onlytailei/HKUST_latex_thesis_2019}{@onlytailei}, \href{https://github.com/fcyu/HKUST_PhD_MPhil_thesis_Latex}{@fcyu}, \href{https://github.com/Cheedoong/hkust-latex-thesis}{@cheedoong}. These templates are all developed with \hologo{LaTeX2e}, among which were developed at a long time ago and lacking necessary documentation and maintainance.
+%
+% The development of \hologo{LaTeX3} with clearer syntax improves the legibility and maintainability of \hologo{LaTeX} templates\footnote{compared to \hologo{LaTeX2e}. But Typst is another promising tool!}. @HKFoggyU decides to develop a new thesis template with \hologo{LaTeX3} with the help from previous good projects.
+%
+% \subsection{文档结构 Documentation structure}
+% 本文档的前半部分（第\ref{sec:introduction}-\ref{sec:intro2thesis}节）为用户手册，供使用本模板撰写毕业论文的同学们参考。其中，第\ref{sec:preparations}-\ref{sec:compile}节介绍了\hologo{LaTeX}和本模板的工具，有\hologo{LaTeX}基础的用户可以跳过；第\ref{sec:intro2thesis}节详细介绍了如何使用本模板撰写毕业论文，建议仔细阅读。
 %
 % 后半部分（第\ref{sec:implementation}节及以后）为开发手册，供有意了解或贡献源码的开发者参考，普通用户无需阅读。
 %
-% \section{工欲善其事，必先利其器}\label{sec:intro2latex}
+% Section \ref{sec:introduction}-\ref{sec:intro2thesis} of this document form the user manual as the reference for the users of this template for writing their thesis. Section \ref{sec:preparations}-\ref{sec:compile} introduce \hologo{LaTeX} and some tools related to this template, which can be skipped during reading if the reader is familiar with \hologo{LaTeX}. Section \ref{sec:intro2thesis} introduces in detail how to use this template for writing the thesis.
+%
+% The contents after Section \ref{sec:implementation} are the developing manual for interested developers. Normal users don't need to read them.
+%
+% \clearpage
+%
+% \section{工欲善其事，必先利其器 Preparations before start}\label{sec:preparations}
+%
+% 在使用本模板写作毕业论文前，你需要准备以下几点。
+%
 % \mycomment{有\hologo{LaTeX}基础的用户可以跳过本节。}
 %
-% \subsection{\hologo{LaTeX}入门}
+% You need to prepare the following things before composing thesis using this template.
+%
+% \mycomment{Users with \hologo{LaTeX} experiences can skip this section.}
+%
+% \subsection{\hologo{LaTeX}入门 Introduction to \hologo{LaTeX}}
 % ``\emph{授人以鱼不如授人以渔。}''
 % 本节将更侧重入门\hologo{LaTeX}的方法而非具体步骤。
 %
-% 对于新手，复旦大学曾祥东的\href{https://github.com/stone-zeng/latex-talk}{《现代\hologo{LaTeX}入门讲座》} 和北京大学刘海洋的 \href{https://www.bilibili.com/video/BV1s7411U7Pr}{\hologo{LaTeX}不快速的入门}（视频讲座）是两个非常优秀的入门教程；推荐先通读前者（内容较短），如果不喜欢文字内容，可以观看后者。另外，刘海洋的《\hologo{LaTeX}入门》内容详尽充实，可以作为日常写作时的工具书。
-% 
+% 对于新手，\href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{Overleaf的30分钟快速入门}已经是一个非常友好的入门教程。在此基础上，如果想更多了解一些，复旦大学曾祥东的\href{https://github.com/stone-zeng/latex-talk}{《现代\hologo{LaTeX}入门讲座》}（PPT，$\approx$ 1 小时）和北京大学刘海洋的 \href{https://www.bilibili.com/video/BV1s7411U7Pr}{\hologo{LaTeX}不快速的入门}（视频讲座，$\approx$ 3 小时）是两个非常优秀的入门教程；推荐先通读前者，如果不喜欢文字内容，可以观看后者。另外，刘海洋的《\hologo{LaTeX}入门》内容详尽充实，可以作为日常写作时的工具书。
+%
 % ``\emph{吾生也有涯，而知也无涯。}''
 % \hologo{LaTeX}的参考资料浩如烟海。没有人能把这些资料都看完才去开始使用\hologo{LaTeX}，因此，学会使用 Google/ChatGPT 等工具解决眼前的问题，比通读各种\hologo{LaTeX}教程更加重要。
 %
 % 作为新手用户，不要有 ``\hologo{LaTeX}要写代码'' 这种思想负担，也不要害怕编译报错，这些不影响之前输入的文字\footnote{比Word突然卡死崩溃不知道好到哪里去了（}，遇到问题去Google或者问ChatGPT即可。
 %
-% \subsection{\hologo{LaTeX}版本}
-% \subsubsection{在线编译}
+% This subsection will focus more on how to learn \hologo{LaTeX} by yourself instead of teaching you step by step.
+% For beginners, \href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{Learn LaTeX in 30 minutes from Overleaf} is already a very good introductory material. The book \emph{A short introduction to LaTeX: A book for beginners} is a also good and more comprehensive learning resource.
+% There are tons of learning materials for \hologo{LaTeX}, and they can be too overwhelming for beginners. But one can always turn to Google or ChatGPT for help when you encounter problems without reading through any learning materials.
+%
+% Never feel afraid of ``coding''. It is just another format of typing words into the computer.
+%
+% \subsection{选择\hologo{LaTeX}环境 Choose \hologo{LaTeX} environment}
+% \subsubsection{在线编译 Compile online}
 % 如果电脑上还未安装任何\hologo{LaTeX}发行版，可以使用在线版\hologo{LaTeX}服务 \href{https://www.overleaf.com/}{Overleaf} 进行初步体验，以避免学习热情被安装配置环境所熄灭。可以直接跳转到第\ref{sec:intro2thesis}节继续阅读。
 %
-% \mywarning{注意：} Overleaf免费版开始对文章长度和项目大小逐渐施加限制，近期\footnote{2023年11月}毕业的同学反映，其 thesis 项目\footnote{95页，80MB大小}已经需要购买会员服务。因此建议准备一份本地安装的\hologo{LaTeX}发行版以防万一。
+% \mywarning{注意：} Overleaf免费版开始对文章长度和项目大小逐渐施加限制，近期\footnote{2023年11月}毕业的同学反映，其 thesis 项目\footnote{95页，80 MB总大小}已经需要购买会员服务。因此建议准备一份本地安装的\hologo{LaTeX}发行版以防万一。
 %
-% \subsubsection{本地编译}
-% 如果希望不依赖网络工作，请选择 \href{https://www.tug.org/texlive/}{\hologo{TeXLive}} \textbf{或} \href{https://miktex.org/download}{\hologo{MiKTeX}}，下载并安装其最新版本。前者安装体积较大（$\sim$ 5 GB）但是可以做到完全离线使用；后者体积较小但在第一次编译时需要联网下载宏包（后续编译无需联网）。
+% If there is no \hologo{LaTeX} distribution (software) installed on the computer, you can try with the online \hologo{LaTeX} service \href{https://www.overleaf.com/}{Overleaf} to avoid the trouble of installing \hologo{LaTeX} on your local computer.
 %
-% 本模板要求的\hologo{LaTeX}版本为 \hologo{TeXLive} ($\geq$2021) 或 \hologo{MiKTeX} ($\geq$4.4)。尽管某些低版本的发行版可以编译通过，但可能存在一些未被发现的问题。
+% \mywarning{Attention: } Overleaf starts to post limit on the article pages and project size. According to a certain student graduated recently\footnote{November, 2023}, she needs to pay for the premium package for her thesis project \footnote{95 pages, 80 MB total size} otherwise she could not compile the project on Overleaf.
 %
-% 本模板在各平台、各\hologo{LaTeX}发行版上的编译情况如表 (\ref{tab:environment}) 所示。
+% \subsubsection{本地编译 Compile locally}
+% 如果希望不依赖网络工作，请选择 \href{https://www.tug.org/texlive/}{\hologo{TeXLive}} \textbf{或} \href{https://miktex.org/download}{\hologo{MiKTeX}}，点击下载并安装其最新版本。前者安装体积较大（$\approx$ 5 GB）但是可以做到完全离线使用；后者体积较小但在第一次编译时需要联网下载宏包（后续编译无需联网）。
+%
+% 本模板要求的\hologo{LaTeX}版本为 \hologo{TeXLive} ($\geq$2021) 或 \hologo{MiKTeX} ($\geq$4.4)。本模板在各平台、各\hologo{LaTeX}发行版上的编译情况如表 (\ref{tab:environment}) 所示。
 %
 % \begin{table}[ht]
-%   \caption{不同平台编译测试结果}
+%   \caption{不同平台编译测试结果\\Compiling tests results on different platforms}
 %   \label{tab:environment}
 %   \centering
 %   \begin{tabular}{lll}
@@ -261,55 +307,84 @@ through XeTeX.
 %   \end{tabular}
 % \end{table}
 %
-% \subsection{编辑器}
+% If you want to conduct the writing independent to Internet connection, please download and install one of the following choices (click to download): \href{https://www.tug.org/texlive/}{\hologo{TeXLive}} \textbf{or} \href{https://miktex.org/download}{\hologo{MiKTeX}}. The former takes much larger disk space ($\approx$ 5 GB) and can work totally independent to Internet connection while the latter takes less disk space but will need to download the packages at the first time run (can work offline the next time).
+%
+% This template require the version of \hologo{LaTeX} to be greater than or equal to: \hologo{TeXLive} ($\geq$2021) or \hologo{MiKTeX} ($\geq$4.4). The compiling tests with different distributions on different platforms are shown in Table (\ref{tab:environment}).
+%
+% \subsection{编辑器 Editors} \label{sec:editors}
 % \mycomment{本小节仅针对本地编译用户。Overleaf 用户使用浏览器，无需安装编辑器。}
 %
-% 本项目建议使用 \href{https://code.visualstudio.com/download}{Visual Studio Code} 编辑器并安装 \href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{LaTeX Workshop} 插件以获得良好的编辑体验。
+% \mycomment{This subsection is for local compilation only. Overleaf users don't need a local editor.}
 %
-% 此外，建议使用支持热重载（热刷新）的 PDF 阅读器如 \href{https://www.sumatrapdfreader.org/download-free-pdf-viewer}{Sumatra PDF}。不支持热重载的 PDF 阅读器如 Adobe Acrobat 在打开 pdf 文件后就会锁定 pdf 修改权限，必须关闭才能更新 pdf，因此不便于此场景使用。
+% 本项目建议使用的编辑器为 \href{https://code.visualstudio.com/download}{Visual Studio Code} （点击下载）并安装 \href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{LaTeX Workshop} 插件以获得良好的编辑体验。同时如有需求，可以安装\href{https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans}{中文语言包}。
 %
-% \section{编译本项目}\label{sec:compile}
+% 此外，建议使用支持热重载（热刷新）的 PDF 阅读器如 \href{https://www.sumatrapdfreader.org/download-free-pdf-viewer}{Sumatra PDF}（点击下载）。不支持热重载的 PDF 阅读器如 Adobe Acrobat 在打开 pdf 文件后就会锁定 pdf 修改权限，必须关闭才能更新 pdf，因此不便于此场景使用。
 %
-% \subsection{获取本模板}
-% \begin{itemize}
-% \item (针对用户) 请在本项目的 \href{https://github.com/HKFoggyU/hkust-thesis/releases/latest}{GitHub Release} 页面下载名为 \file{hkust-thesis-v*.zip} 的压缩文件。
-% \item (针对开发者) 如果希望第一时间获取更新，可以克隆本项目\href{https://github.com/HKFoggyU/hkust-thesis.git}{仓库}，并运行 \colorbox{code-bg}{\lstinline|xetex hkustthesis.dtx|} 以生成 \file{hkustthesis.cls} 文件。
-% \end{itemize}
+% This project suggests using \href{https://code.visualstudio.com/download}{Visual Studio Code} (click to download) as the editor. We also suggest installing the VSCode extension: \href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{LaTeX Workshop} to get good writing experience.
 %
-% \subsection{在线编译：使用 Overleaf}
+% In addition, we suggest using a PDF viewer that supports hot-reloading function, like \href{https://www.sumatrapdfreader.org/download-free-pdf-viewer}{Sumatra PDF} (click to download) to allow you to view the PDF file when editing the \hologo{TeX} files. If you use some PDF viewers that do not support hot-reloading, like Adobe Acrobat, the PDF file will be locked once openen, preventing it from being updated after compilation.
+%
+% \vfill
+%
+% \textbf{请确保已经完成上述准备，尤其是\hologo{LaTeX}环境。}
+%
+% \textbf{Please make sure you have done the above preparation items, especially the \hologo{LaTeX} environment.}
+%
+% \clearpage
+%
+% \section{编译本项目 Compile this project}\label{sec:compile}
+%
+% \subsection{在线编译 Compile online}
 % \begin{enumerate}
-%  \item 将下载得到的 \file{hkust-thesis-v*.zip} 文件上传到 Overleaf 网站。上传完毕后将自动进入该项目页面。
+%  \item 请先登录Overleaf，访问本模板的 \href{https://www.overleaf.com/latex/templates/hkustthesis/mstwvckmhmjg}{Overleaf 页面}，点击 ``Open as Template''，即可以此为模板创建你自己的thesis项目。
 %  \item 点击左上方 ``Menu/菜单'' 按钮，在 ``settings/设置'' 中选择如下设置：
 %   \begin{itemize}
 %    \item Compiler: XeLaTeX
-%    \item TeX Live version: 2023
 %   \end{itemize}
 %  \item 返回项目页面，点击 `` Recompile/重新编译 '' 按钮进行编译。
 % \end{enumerate}
 %
-% \subsection{本地编译}
-% \subsubsection{（推荐）VSCode}
-% 本项目提供了一份 配置好的 \file{.vscode/settings.json} 文件。在安装了 LaTeX Workshop 插件的 VSCode 中，点击 \hologo{TeX} 侧栏，在 ``COMMANDS'' 中 选择 ``build recipe'' 为 ``build_mythesis'' 即可进行编译。
+% \begin{enumerate}
+%  \item Please log into Overleaf; visit the \href{https://www.overleaf.com/latex/templates/hkustthesis/mstwvckmhmjg}{Overleaf page} of this template; click ``Open as Template'' to create your own thesis project based on this template.
+%  \item Click the  ``Menu'' button; go to ``settings'' and choose the following setting:
+%   \begin{itemize}
+%    \item Compiler: XeLaTeX
+%   \end{itemize}
+%  \item Go back to the project page; click `` Recompile '' button to compile the thesis paper.
+% \end{enumerate}
 %
-% 下面提供了几种其它编译方式，供开发者或有其它偏好的用户使用。
+% \subsection{本地编译 Compile locally}
+% \subsubsection{获取本模板 Obtain this template}
+% \begin{itemize}
+% \item (针对一般用户) 请在本项目的 \href{https://github.com/HKFoggyU/hkust-thesis/releases/latest}{GitHub Release} 页面下载名为 \file{hkust-thesis-v*.zip} 的压缩文件。将下载得到的 \file{hkust-thesis-v*.zip} 文件解压，得到一个文件夹，这将是未来写作毕业论文的文件夹。你可以将其重命名为你喜好的名字。
+% \item (针对开发者) 如果希望第一时间获取更新或参与开发，可以克隆本项目\href{https://github.com/HKFoggyU/hkust-thesis.git}{仓库}，并运行 \colorbox{code-bg}{\lstinline|xetex hkustthesis.dtx|} 以生成 \file{hkustthesis.cls} 文件。
+% \end{itemize}
+%
+% \begin{itemize}
+% \item (For normal users) Please download the \file{hkust-thesis-v*.zip} file from the \href{https://github.com/HKFoggyU/hkust-thesis/releases/latest}{GitHub Release} page. Unzip it and you will get a folder, which will be the working folder for you to work on your thesis from now on. You can rename the folder to your preferred name.
+% \item (For developers) If you want to get latest changes or to participate in the development, clone the \href{https://github.com/HKFoggyU/hkust-thesis.git}{GitHub repo}, and run \myblock{\lstinline|xetex hkustthesis.dtx|} to extract the \file{hkustthesis.cls}.
+% \end{itemize}
+%
+% \subsubsection{推荐编译方式 Recommended compile method}
+% 本项目推荐使用 VSCode 作为编辑器和编译前端。关于 VSCode 的安装和其必要插件\href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{LaTeX Workshop}，请参考\ref{sec:editors}节。本项目提供了一份 配置好的 \file{.vscode/settings.json} 文件。
+%
+% 使用 VSCode 打开刚刚解压得到的文件夹（快捷键：\myblock{Ctrl k + Ctrl o}），点击左侧栏的 \hologo{TeX} 图标（需要安装 LaTeX Workshop 插件） ，在 \myblock{\myVee~COMMANDS} 项目下的 \myblock{\myVee~~$\triangleright$~~Build LaTeX project} 项中选择 \myblock{{\color{green}$\triangleright$} Recipe: build_mythesis}，点击其左侧的绿色小三角形 \myblock{{\color{green}$\triangleright$}} 即可进行编译。编译通常要花费几秒到几十秒时间，编译期间，在 VSCode 的左下角可以看到类似 \myblock{\VSCodeCompiling~Build} 的提示信息，编译成功后会显示为 \myblock{\VSCodeCompileSucceed}，如果编译失败则会显示为 \myblock{\VSCodeCompileFailed}。
+%
+% This project recommends to use VSCode as the editor and compile frontend. You can refer section (\ref{sec:editors}) for the installation and configuration notes of VSCode and a necessary extension \href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{LaTeX Workshop}. This project provides a well-configured \file{.vscode/settings.json} file.
+%
+% Use VSCode to open the unzipped folder (Keyboard shortcuts: \myblock{Ctrl k + Ctrl o}); click the \hologo{TeX} icon on the left side panel (needs LaTeX Workshop installed beforehand); expand the \myblock{\myVee~COMMANDS} item and \myblock{\myVee~~$\triangleright$~~Build LaTeX project} item; click the green triangle \myblock{{\color{green}$\triangleright$}} in the \myblock{{\color{green}$\triangleright$} Recipe: build_mythesis} to compile the thesis. Usually it takes several second to a few tens of seconds to complete one compilation. During the compilation, you will see a label like \myblock{\VSCodeCompiling~Build} on the bottom left of the VSCode window. After a successful compilation, it will become \myblock{\VSCodeCompileSucceed}, but if the compilation fails, it will become \myblock{\VSCodeCompileFailed}.
+%
+% \vspace*{2\baselineskip}
+%
+% 本项目还提供了几种其它编译方式，供开发者或有其它偏好的用户使用。如果觉得上述编译方法不够直观，可以在 VSCode 中按 \myblock{Ctrl \~{}} 调出终端，然后运行下面的命令进行手动编译。
 %
 % \subsubsection{latexmk}
-% 本项目提供了一个定制的 \file{latexmkrc} 配置文件以进行自动化构建。分别运行
 % \begin{ctexexam}
 %   latexmk
 %   latexmk -c
 % \end{ctexexam}
-% 以进行编译和删除编译中间产物。
 %
-% \subsubsection{Make}
-% 本项目提供了一个 \file{Makefile}。分别运行
-% \begin{ctexexam}
-%   make
-%   make clean
-% \end{ctexexam}
-% 以进行编译和删除编译中间产物。
-%
-% \subsubsection{\hologo{XeLaTeX}手动编译}
+% \subsubsection{\hologo{XeLaTeX}}
 % \begin{ctexexam}
 %   xelatex mythesis.tex
 %   biber mythesis
@@ -317,59 +392,70 @@ through XeTeX.
 %   xelatex mythesis.tex
 % \end{ctexexam}
 %
-% \section{撰写论文}\label{sec:intro2thesis}
+% \clearpage
 %
-% \subsection{文件结构}
+% \section{撰写论文 Compose thesis}\label{sec:intro2thesis}
+%
+% \subsection{文件结构 File structure}
 %
 % 下载得到的压缩文件内部的文件结构应如表 (\ref{tab:fileStruture}) 所示。其中 \file{figures/} 文件夹如不存在请自行创建。
 %
+% The unzipped folder should have the following files as listed in Table (\ref{tab:fileStruture}). If the \file{figures/} folder does not exist, please create it by yourself.
+%
 % \begin{table}[H]
-%   \caption{\cls{hkustthesis}文件结构}
+%   \caption{\cls{hkustthesis}文件结构 file structure}
 %   \label{tab:fileStruture}
 %   \centering
 %   \begin{tabular}{lll}
 %     \toprule
-%     文件名                               & 类型   & 说明                 \\
+%     文件名 file name                      & 功能               & role     \\
 %     \midrule
-%     \file{.vscode/}                      & 文件夹 & VSCode 配置文件夹    \\
-%     \color{hkustgold}\file{chapters/}    & 文件夹 & 存放论文各章节       \\
-%     \color{hkustgold}\file{figures/}     & 文件夹 & 存放论文所用图片     \\
-%     \file{hkustthesis.cls}               & 文件   & 模板文档类           \\
-%     \file{latexmkrc}                     & 文件   & latexmk 配置文件     \\
-%     \file{LICENSE}                       & 文件   & 许可证               \\
-%     \color{hkustgold}\file{mythesis.bib} & 文件   & 存放论文所用参考文献 \\
-%     \color{hkustgold}\file{mythesis.tex} & 文件   & 论文主文件           \\
-%     \file{README.md}                     & 文件   & 自述文件             \\
+%     \file{.vscode/}                       & VSCode 配置文件夹   & VSCode config folder \\
+%     \color{hkustgold}\file{chapters/}     & 存放论文各章节      & storing chapter files for thesis  \\
+%     \color{hkustgold}\file{figures/}      & 存放论文所用图片     & storing figure files for thesis \\
+%     \file{hkustthesis.cls}                & 模板文档类          & class file   \\
+%     \file{latexmkrc}                      & latexmk 配置文件    & latexmkrc config file   \\
+%     \file{LICENSE}                        & 许可证              & LICENSE file   \\
+%     \color{hkustgold}\file{mythesis.bib}  & 论文所用参考文献 & reference database (\file{.bib} file)\\
+%     \color{hkustgold}\file{mythesis.tex}  & 论文\textbf{主文件} & \textbf{main} tex file          \\
+%     \file{README.md}                      & 自述文件            & notes \\
 %     \bottomrule
 %   \end{tabular}
 % \end{table}
 %
-% 各文件(夹)的作用已经给出。对于使用本模板撰写毕业论文的用户，只需要修改表 (\ref{tab:fileStruture}) 中\textcolor{hkustgold}{金色的文件（夹）}。
+% 对于使用本模板撰写毕业论文的用户，只需要修改表 (\ref{tab:fileStruture}) 中\textcolor{hkustgold}{金色}的文件（夹）。
 %
-% \subsection{主文件介绍}
+% For users using this template to compose thesis, they only need to edit the files (or folders) marked with \textcolor{hkustgold}{gold} color in Table (\ref{tab:fileStruture}).
+%
+% \subsection{主文件介绍 Introduction to main tex file}
 % \file{mythesis.tex}是本模板的 \hologo{TeX} 主文件。下面将给出主文件内容的解释。
 %
-% \subsubsection{模板选项}
-% 模板选项是 \verb|\documentclass[]{hkustthesis}| 中方括号 \verb|[]| 内的选项。
+% \file{mythesis.tex} is the main tex file for the whole thesis. Here comes the details of this main file.
 %
-% 本模板定义了3个模板选项：
+% \subsubsection{文档选项 Document options}
+% 文档选项是 \verb|\documentclass[]{hkustthesis}| 中方括号 \verb|[]| 内的选项。
+% 本模板定义了如下的文档选项：
+%
+% Document options are the options specified in the square brackets \verb|[]| in \verb|\documentclass[]{hkustthesis}|. This template defines the following document options.
 %
 % \begin{function}{customlatinfont}
 %  \begin{syntax}
 %   customlatinfont = <windows|macos|gyre|none>
 %  \end{syntax}
-% 自定义西文字体。
+% 自定义西文字体。Customize latin fonts.
 % \end{function}
 % 该选项默认被 \verb|%| 注释掉，使模板可以在不同平台上自动选择对应的字体 (不同选项使用的字体如表 (\ref{tab:latinfontset}) 所示)。
 % 如果用户希望该模板在所有平台上都使用同样的字体（前提是所用字体存在），可以取消该行注释并修改为希望使用的选项。
 % 如果用户希望完全由自己设定字体，则可以填 \opt{none}，再通过 \pkg{fontspec} 宏包手动设置字体。
+%
+% This option is commented by default to allow the template choose corresponding fonts on different platforms (listed in Table (\ref{tab:latinfontset})). If users want to keep the same font sets on all the platforms (the fonts should exist on that platform), they can uncomment this option and set it to one option. If users want to customize the font sets manually, they should set it to \opt{none} and then set the fonts via \pkg{fontspec}.
 % \begin{table}[htbp]
 %   \centering
 %   \caption{西文字体清单}
 %   \label{tab:latinfontset}
 %   \begin{tabular}{llll}
 %     \toprule
-%     选项     & 衬线体 & 无衬线体 & 等宽字体 \\
+%     选项 option     & 衬线体 serif & 无衬线体 sans-serif & 等宽字体 mono \\
 %     \midrule
 %     windows  & Times~New~Roman           & Arial                   & Courier~New \\
 %     macos    & Times~New~Roman           & Arial                   & Menlo \\
@@ -382,117 +468,140 @@ through XeTeX.
 %  \begin{syntax}
 %   custombibstyle = <(ieee)|nature|science|apa|mla|phys|chem-acs|nejm>
 %  \end{syntax}
-% 自定义参考文献条目样式。
+% 自定义参考文献条目样式。Customize bibliography style.
 % \end{function}
 % 该选项默认被 \verb|%| 注释掉。\opt{ieee} 为默认样式。如果希望使用的样式不在此列表，可以阅读 \pkg{biblatex} 的文档并自行修改模板代码。
+%
+% This option is commented by default. \opt{ieee} is the default style. If users want to use another style not in this list, they can modify the \file{.dtx} source code with the help of \pkg{biblatex}.
 %
 % \begin{function}{displaycommittee}\label{opt:displaycommittee}
 %  \begin{syntax}
 %   displaycommittee = <(false)|true>
 %  \end{syntax}
-% 设置是否在签名页显示答辩委员会成员列表。
+% 设置是否在签名页显示答辩委员会成员列表。Choose whether to display the thesis examination committee (TEC) members.
 % \end{function}
 % 该选项默认值 \verb|false|，因为 RPG Handbook 提供的示例签名页没有要求列出答辩委员会成员。
 % 但某些院系 (如 ECE) 要求在签名页显示答辩委员会成员列表，则需要设置为 \verb|true|，以及需要在下文提及的 \opt{reviewer}、\opt{reviewerdept} 和 \opt{reviewerext} 选项中填写委员会成员信息。
+%
+% This option is default to \verb|false| as RPG Handbook doesn't require the student to list the TEC members. However, in some departments, like ECE, it is required to list the TEC members. In this case, this option should be uncommented and the items \opt{reviewer}, \opt{reviewerdept} and \opt{reviewerext} should also be filled.
 %
 % \begin{function}[added=2023-12-01]{blankpage}
 %  \begin{syntax}
 %   blankpage = <(true)|false>
 %  \end{syntax}
-% 设置是否插入空白页以确保章节标题位于奇数页。
+% 设置是否插入空白页以确保章节标题位于奇数页。Choose whether to insert blank pages to make sure the title pages of chapters are always located on odd pages.
 % \end{function}
-% RPG Handbook 要求章节 (Chapter) 标题应当位于新的一页；兼顾打印版本的美观，该选项默认开启，使得章节标题确保处于奇数页。但是在撰写论文的过程中，太多空白页不便于查看，因此可以设置为 \verb|false| 以便自己预览。在最终提交前，请将其改回 \verb|true|。
+% RPG Handbook 要求章节 (Chapter) 标题应当位于新的一页；兼顾打印版本的美观，该选项默认开启，使得章节标题确保处于奇数页。但是在撰写论文的过程中，太多空白页不便于查看，因此可以设置为 \verb|false| 以便自己预览。用户可以自行决定该选项的值。
 %
-% \subsubsection{论文信息}
+% RPG Handbook requires the title page of chapters should start from a newpage; meanwhile, it is a common practice that all the title pages starts from odd pages for the convenience of printed copies. However, during thesis composing stage, it might be annoying to have many blank pages; so this option can be set to \verb|false| to disable the blank pages.
+%
+% \subsubsection{论文信息 Thesis information}
 %
 % \begin{function}{\hkustsetup}
 %  \begin{syntax}
-%   \tn{hkustsetup}\Arg{键值列表}
+%   \tn{hkustsetup}\Arg{键值列表 key value list}
 %  \end{syntax}
 % 论文必要信息。
 % \end{function}
 % 此选项的内容是以英文逗号 \verb|,| 分隔的键值列表，定义了该论文的必要信息。每一项等号左边为变量名，右边为由花括号 \verb|{}| 包裹的变量值。其中标为\textcolor{hkustblue}{蓝色的选项}为可选填项。如果某一项的值不需要填，可以留空，但花括号 \verb|{}| 仍需要保留。同理，标为\textcolor{hkustblue}{蓝色的文字}为可选阅读项，只有填写可选项的用户才需要阅读。
 %
+% This option is a key value list separated by comma \verb|,| encapsulated with curly brackets \verb|{}| to define necessary information for the thesis. The items marked with \textcolor{hkustblue}{blue} are optional. If one term is not necessarily to be filled, you can delete the inner connent but keep the curly brackets \verb|{}|.
+%
 % \begin{function}{degree}
 %  \begin{syntax}
 %   degree              = \Arg{phd|mphil}
 %  \end{syntax}
-% 学位。
+% 学位。Degree.
 % \end{function}
 %
 % \begin{function}{title}
 %  \begin{syntax}
-%   title               = \Arg{论文标题}
+%   title               = \Arg{论文标题 Thesis Title}
 %  \end{syntax}
-% 论文标题。其中 \verb|\\| 用于换行，如不需要可以删去。
+% 论文标题。其中 \verb|\\| 用于换行，如不需要可以删去。\\
+% Thesis title. The \verb|\\| is for line break; you can delete it if not necessary.
 % \end{function}
 %
 % \begin{function}{keywords}
 %  \begin{syntax}
-%   \textcolor{hkustblue}{keywords}            = \Arg{关键词}
+%   \textcolor{hkustblue}{keywords}            = \Arg{关键词 keywords}
 %  \end{syntax}
-% 关键词列表。关键词列表以英文逗号分隔。
+% 关键词列表。关键词列表以英文逗号分隔。\\
+% Keywords, separated by comma.
 % \end{function}
 %
 % \begin{function}{author, school, department, program, major}
 %  \begin{syntax}
-%   author              = \Arg{作者}
-%   \textcolor{hkustblue}{school}              = \Arg{学院}
-%   department          = \Arg{系/部门}
-%   program             = \Arg{项目名称}
-%   \textcolor{hkustblue}{major}               = \Arg{专业}
+%   author              = \Arg{作者 author}
+%   \textcolor{hkustblue}{school}              = \Arg{学院 school}
+%   department          = \Arg{系/部门 department or division}
+%   program             = \Arg{项目名称 program name}
+%   \textcolor{hkustblue}{major}               = \Arg{专业 major name}
 %  \end{syntax}
-% 作者。\\
-% 学院信息。如 ``School of Engineering''。\\
-% 系/部门的全名。需填写为 ``Department/Division of XXX''。\\
-% 项目名称。参考 SIS 中的 ``name of program''。通常和系/部门同名。\\
-% 专业方向。参考 SIS 中的 ``major''。
+% 作者。author.\\
+% 学院信息。School information, like ``School of Engineering''。\\
+% 系/部门的全名。The full name of department or division, like ``Department/Division of XXX''。\\
+% 项目名称。Please refer to SIS: ``name of program''。通常和系/部门同名。Usually it is the same as the department name.\\
+% 专业方向。Please refer to SIS: ``major''.
 % \end{function}
 %
 % \begin{function}{supervisor, co-supervisor}
 %  \begin{syntax}
-%   supervisor          = \Arg{导师 头衔 姓名}
-%   co-supervisor       = \Arg{联培导师 头衔 姓名}
+%   supervisor          = \Arg{导师 头衔 姓名 supervisor title and name}
+%   co-supervisor       = \Arg{联培导师 头衔 姓名 co-supervisor titl and name}
 %  \end{syntax}
-% 导师信息。如无Co-supervisor，可以留空。需填写为 ``Prof. XXX''。
+% 导师信息。如无Co-supervisor，可以留空。需填写为 ``Prof. XXX''。\\
+% supervisor information. Keep the \verb|{}| if there is no co-supervisor. You need to input the full title and name of supervisors, like ``Prof. XXX''.
 % \end{function}
 %
 % \begin{function}{submit-month, submit-date, defend-date}
 %  \begin{syntax}
-%   submit-month        = \Arg{论文提交年月}
-%   submit-date         = \Arg{论文提交日期}
-%   defend-date         = \Arg{论文答辩日期}
+%   submit-month        = \Arg{论文提交年月 submit month}
+%   submit-date         = \Arg{论文提交日期 submit date}
+%   defend-date         = \Arg{论文答辩日期 defend date}
 %  \end{syntax}
-% 提交时间和答辩时间。其中，\opt{submit-month} 请只填写 ``月~年''，而 \opt{submit-date} 和 \opt{defend-date} 请填写 ``日~月~年''。
+% 提交时间和答辩时间。其中，\opt{submit-month} 请只填写 ``月~年''，而 \opt{submit-date} 和 \opt{defend-date} 请填写 ``日~月~年''。\\
+% submit and defend time. For \opt{submit-month}, please input ``month~year''; for \opt{submit-date} and \opt{defend-date}, please input ``date~month~year''.
 % \end{function}
 %
 % \begin{function}{depthead, reviewer, reviewerdept, reviewerext}
 %  \begin{syntax}
-%   depthead            = \Arg{系/部门主任}
-%   \textcolor{hkustblue}{reviewer}            = \Arg{答辩委员会成员}
-%   \textcolor{hkustblue}{reviewerdept}        = \Arg{答辩委员会成员所属机构}
-%   \textcolor{hkustblue}{reviewerext}         = \Arg{答辩委员会外部成员}
+%   depthead            = \Arg{系/部门主任 department head}
+%   \textcolor{hkustblue}{reviewer}            = \Arg{答辩委员会成员 TEC members}
+%   \textcolor{hkustblue}{reviewerdept}        = \Arg{答辩委员会成员所属机构 TEC members affiliation}
+%   \textcolor{hkustblue}{reviewerext}         = \Arg{答辩委员会外部成员 TEC external member}
 %  \end{syntax}
-% 签名页信息。\\
-% 其中，\opt{depthead} 需填写完整信息，如 ``Prof. XXX, Head of Department/Division''。
+% 签名页信息。Signature page information.\\
+% 其中，\opt{depthead} 需填写完整信息。\opt{depthead} needs full information, like ``Prof. XXX, Head of Department/Division''.\\
 % 关于\textcolor{hkustblue}{答辩委员会 (TEC)}：
 %
-% 某些系要求在签名页列出TEC成员列表，则需要修改上文 (\ref{opt:displaycommittee}处) 提及的 \opt{displaycommittee} 选项为 \opt{true}，并填写 \opt{reviewer}、\opt{reviewerdept}项，PhD 还需填写 \opt{reviewerext}项。一般地，MPhil的TEC需要4名成员，PhD的TEC需要6名成员 (含1名外部成员)。可按需增删此处的内容。实测最大支持7名成员。
+% 某些系要求在签名页列出TEC成员列表，则需要修改上文 (\ref{opt:displaycommittee}处) 提及的 \opt{displaycommittee} 选项为 \verb|true|，并填写 \opt{reviewer}、\opt{reviewerdept}项，PhD 还需填写 \opt{reviewerext}项。一般地，MPhil的TEC需要4名成员，PhD的TEC需要6名成员 (含1名外部成员)。可按需增删此处的内容。实测最大支持7名成员。
 %
 % \textcolor{hkustblue}{\textbf{注意：}} \opt{reviewer} 和 \opt{reviewerdept} 中的每个条目之间需要使用英文逗号分隔；但如果某一条目的部分内容里包含英文逗号，比如 \opt{reviewerext} 中的外部大学名称，则需要用花括号将那一整个部分包裹，否则 \hologo{LaTeX} 程序会在逗号处截断，将其当作两个条目。详见下文给出的示例中的 \opt{reviewerext} 的写法。
 %
 % \textcolor{hkustblue}{\textbf{注意：}} 如果填写PhD的TEC内容，其中 ``External Examiner'' 的所属机构中的 ``Department'' 和 ``University'' 之间的换行符 \verb|\\| 不能删去，否则会使得对齐出错。如果确实没有第二行内容，可以在 \verb|\\| 后使用 \verb|\phantom{xxx}| 作为占位 (这个命令会占据与 \verb|xxx| 同样大小的空间但不实际显示)。
-%
 % \end{function}
+%
+% \noindent About \textcolor{hkustblue}{Thesis Examination Committee (TEC)}:
+%
+% Some departments requires to list the TEC members on the signature page; then the users need to change the document option \opt{displaycommittee} to be \verb|true|, and input the information for \opt{reviewer}, \opt{reviewerdept} and \opt{reviewerext} (only for PhD). Usually, the TEC for MPhil includes 4 members and that for PhD includes 6 members including on external member. Users can add or delete the members line here and the maximum supported number is 7.
+%
+% \textcolor{hkustblue}{\textbf{Note: }} Each item in \opt{reviewer} and \opt{reviewerdept} should be separated by comma \verb|,|; but if some items have comma in themselves, then this item should be encapsulated in an extra pair of curly brackets, otherwise \hologo{LaTeX} will truncate the text at the location of that comma. You can refer to the \opt{reviewerext} in the example given below.
+%
+% \textcolor{hkustblue}{\textbf{Note: }} For PhD inputting the ``External Examiner'', the line break mark \verb|\\| in between ``Department'' and ``University'' must be kept, otherwise it will cause some alignment problem. If there is indeed no content for the second line, please use \verb|\phantom{xxx}| as the placeholder.
 %
 % \begin{function}{city}
 %  \begin{syntax}
-%   city                = \Arg{地点}
+%   city                = \Arg{地点 location}
 %  \end{syntax}
-% 城市。通常为 ``Hong Kong''。
+% 城市。City. Usually it is ``Hong Kong''.
 % \end{function}
 %
+% \vspace*{2\baselineskip}
+%
 % 本文档给出一个示例（此处使用了非真实信息以防用户忘记修改）以供参考：
+%
+% This documentation gives an example for readers' reference.
 %
 % \begin{ctexexam}
 %   \hkustsetup {
@@ -528,20 +637,24 @@ through XeTeX.
 %   }
 % \end{ctexexam}
 %
-% \subsubsection{导言区剩余部分}
+% \subsubsection{导言区剩余部分 remaining parts in preamble}
 % \begin{itemize}
 %  \item 用户可以自行添加所需的宏包、设置和其它命令。
 %  \item \verb|\addbibresource{mythesis.bib}| 导入了存放引用文献的 bib 文件。
 % \end{itemize}
 %
+% \begin{itemize}
+%  \item Users can add necessary packages, define settings and commands by themselves.
+%  \item \verb|\addbibresource{mythesis.bib}| imports the \file{.bib} file for storing the citation database.
+% \end{itemize}
+%
 % \textcolor{hkustblue}{\textbf{注意：}} 本模板使用 \pkg{unicode-math} 设置数学环境字体，请不要使用会与之产生冲突的 \pkg{bm} 宏包，否则会报错。事实上，在 \hologo{XeTeX} 引擎下，\pkg{bm} 已经过时。对于 \pkg{bm} 宏包中的常用命令 \verb|\bm|，本模板已经设置了一个别名，用户可以在正文中直接使用 \verb|\bm|。除此之外，如果还有需要使用的 \pkg{bm} 宏包中的命令，请自行设置别名。
 %
-% \subsubsection{正文区}
+% \textcolor{hkustblue}{\textbf{Note: }} This template uses \pkg{unicode-math} to configure the math fonts. Please avoid using the \pkg{bm} package which is actually outdated under \hologo{XeTeX} engine. For commonly-used \verb|\bm| command in \pkg{bm} package, this template has defined an alias for it. You can define your preferred alias if necessary.
+%
+% \subsection{正文各章节 chapters in main text}
 % 正文区按顺序定义或插入了组成论文的各个组件、章节；用户在 \file{chapters/} 文件夹下修改或新增章节文件后，需要检查主文件中对应的部分是否正确。
-%
 % 这样设置文件结构的优点是使得主文件结构清晰可见、各章节便于修改；但如果用户有自己的喜好，也不必拘泥于本模板提供的结构，可以自由发挥。
-%
-% \subsection{各章节}
 %
 % 在 \verb|\mainmatter| 之后的内容是以章节的形式呈现的论文正文和附录部分，一般以 Introduction、Chapters、Conclusions、 References 和 Appendix 的顺序组织文字。用户可以根据自己的实际情况修改、增加、删除、重命名对应的章节文件，并确保主文件中使用 \verb|\input{}| 的部分
 % \begin{ctexexam}
@@ -554,21 +667,36 @@ through XeTeX.
 % \end{ctexexam}
 % 与之对应。
 %
-% 值得指出的是，\file{mythesis.tex} 文件所在的目录是编译时的根目录，因此即使在 \file{chapters/xxx.tex} 文件中插入图片，也应该使用 \verb|{figures/xxx.png}| 而非 \verb|{../figures/xxx.png}| 作为图片的路径。
+% \textcolor{hkustblue}{\textbf{注意：}} \file{mythesis.tex} 文件所在的目录是编译时的根目录，因此即使在 \file{chapters/xxx.tex} 文件中插入图片，也应该使用 \verb|{figures/xxx.png}| 而非 \verb|{../figures/xxx.png}| 作为图片的路径。
 %
 % \file{mythesis.tex} 文件和 \file{chapters} 文件夹内的文件给出了一些示例，用户可以基于这些文件撰写自己的毕业论文。其中部分章节文件内的 \verb|\blindtext| 命令用来生成一段用于测试排版效果的 ``乱数假文'' (lorem ipsum)，正式撰写论文时请将其删去。
+%
+% The main text (main matter) defines or inserts every important part, including Introduction, Chapters, Conclusions, References and Appendices, for the thesis in order. Users may modify the \file{chapters/} and \file{figures/} folders and update the main tex file to ensure the chapters are in accordance with the \verb|\input{}| parts in the main tex file, as shown in the above example.
+%
+% \textcolor{hkustblue}{\textbf{Note: }} The path of the \file{mythesis.tex} file is the root path for \hologo{LaTeX} compiler. Therefore, all the paths involved in any chapters should be based on the root path of the \file{mythesis.tex} file. In the template files, there are some ``lorem ipsum'' generated by \verb|\blindtext| to test the typesetting results. Please remember to delete these text when composing your thesis.
 %
 % \vfill
 %
 % \textbf{以下内容供开发者参考。普通用户无需阅读，可以开始撰写毕业论文了！}
 %
+% \textbf{The following parts are for developers. Normal users don't need to read them. You can start composing you thesis!}
+%
 % \end{documentation}
 %
-% \clearpage
+% \newpage
+% \thispagestyle{empty}
+% \ 
+% \cleardoublepage
 %
 % \begin{implementation}
 %
-% \section{Implementation}\label{sec:implementation}
+% \section{实现 Implementation}\label{sec:implementation}
+%
+% \textbf{以下内容供开发者参考。普通用户无需阅读，可以开始撰写毕业论文了！}
+%
+% \textbf{The following parts are for developers. Normal users don't need to read them. You can start composing you thesis!}
+%
+% \vspace*{1\baselineskip}
 %
 % \verb|@@| 在 \pkg{l3docstrip} 中表示名空间，在删除注释生成格式文件时会被等号后的字段替换，如在本模板\pkg{hkustthesis}中 |@@=hkust|。
 % 尖括号包裹的|<*class>||</class>|用来指定某段代码属于哪个文件。
