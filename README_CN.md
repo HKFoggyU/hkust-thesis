@@ -1,11 +1,11 @@
 # HKUST Thesis
 
-[English Readme](README.md)
-
 [![LICENSE](https://img.shields.io/github/license/HKFoggyU/hkust-thesis)](https://www.latex-project.org/lppl/lppl-1-3c/)
 [![STARS](https://img.shields.io/github/stars/HKFoggyU/hkust-thesis)](https://github.com/HKFoggyU/hkust-thesis/stargazers)
 [![TEST](https://github.com/HKFoggyU/hkust-thesis/actions/workflows/test.yml/badge.svg)](https://github.com/HKFoggyU/hkust-thesis/actions)
 [![RELEASE](https://github.com/HKFoggyU/hkust-thesis/actions/workflows/release.yml/badge.svg)](https://github.com/HKFoggyU/hkust-thesis/releases)
+
+[English Readme](README.md)
 
 以LaTeX3实现的香港科技大学研究型研究生(RPG)毕业论文模板。
 
