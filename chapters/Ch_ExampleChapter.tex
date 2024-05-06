@@ -13,11 +13,9 @@ Itemize.
 \begin{itemize}
   \item Test test.
   \item Test test.
-  \item Test test.
   \begin{itemize}
     \item test test
     \item test test\footnote{\blindtext}
-    \item test test
     \item test test
   \end{itemize}
   \item Test test.
@@ -28,11 +26,9 @@ Enumerate.
 \begin{enumerate}
   \item Test test.
   \item Test test.
-  \item Test test.
   \begin{enumerate}
     \item test test
     \item test test\footnote{\blindtext}
-    \item test test
     \item test test
   \end{enumerate}
   \item Test test.
@@ -77,14 +73,32 @@ You can use \lstinline|\cref{}| to automatically setup the cross reference name;
   They are both orange.
 \end{proof}
 
+\begin{algorithm}[htbp]
+  \caption{Temp}
+  \begin{algorithmic}[1]
+    \STATE Temp
+  \end{algorithmic}
+\end{algorithm}
+
 Available theorem environments are listed below:
 
 algorithm, assumption, axiom, conclusion, condition, corollary, definition, example, lemma, proof, property, proposition, remark, theorem.
 
 
 \section{Figure}
+An example image is shown in \cref{fig:tikz example} or Figure (\ref{fig:tikz example}).
 
 \begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \draw (0,0) -- (1, 0) -- (1, 1) -- cycle;
+  \end{tikzpicture}
+  \caption{An example tikz picture with a short caption.}
+  \label{fig:tikz example short}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
   \begin{tikzpicture}
     \draw (0,0) -- (1, 0) -- (1, 1) -- cycle;
   \end{tikzpicture}
@@ -92,14 +106,29 @@ algorithm, assumption, axiom, conclusion, condition, corollary, definition, exam
   \label{fig:tikz example}
 \end{figure}
 
-An example image is shown in \cref{fig:tikz example} or Figure (\ref{fig:tikz example}).
-
 \section{Table}
 
+An example table is shown in \cref{tab:environment} or Table (\ref{tab:environment}).
+
 \begin{table}[H]
-  \caption{Test result on different platforms}
-  \label{tab:environment}
   \centering
+  \caption{A table with a short caption.}
+  \label{tab:table_short}
+  \begin{tabular}{lll}
+    \toprule
+    OS & TeX & Test \\
+    \midrule
+    Overleaf                 & \hologo{TeX}\,Live 2021/2/3    & Pass \\
+    Windows 10               & \hologo{TeX}\,Live 2020        & \color{red}{\verb|ltxhook| problem} \\
+    Ubuntu 20.04             & \hologo{TeX}\,Live 2021        & Pass \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Test result on different platforms with long caption and breakline\\\blindtext}
+  \label{tab:environment}
   \begin{tabular}{lll}
     \toprule
     OS & TeX & Test \\

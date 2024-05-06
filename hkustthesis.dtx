@@ -404,7 +404,7 @@ through XeTeX.
 %
 % The thesis folder should have the following files as listed in Table (\ref{tab:fileStruture}). If the \file{figures/} folder does not exist, please create it by yourself.
 %
-% \begin{table}[H]
+% \begin{table}[ht]
 %   \caption{\cls{hkustthesis}文件结构 file structure}
 %   \label{tab:fileStruture}
 %   \centering
@@ -913,7 +913,6 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 {
   geometry,
   caption,
-  floatrow,
   float,
   setspace,
   lastpage,
@@ -974,7 +973,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \begin{macrocode}
 \RequirePackage{graphicx,subcaption,wrapfig,tikz}
 \DeclareGraphicsExtensions{.pdf,.eps,.jpg,.png}
-\RequirePackage{booktabs,multirow,multicol,listings,enumitem}
+\RequirePackage{booktabs,multirow,multicol,listings,algorithm,algorithmic,enumitem}
 %    \end{macrocode}
 %
 % 必须以该顺序加载以下两个关于引用的包。
@@ -1711,36 +1710,31 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % 
 % \subsubsection{图片表格}
 % 
-% 图表位置调整。
-%    \begin{macrocode}
-\floatsetup[figure]{ % 图名在图下
-    capposition=bottom,%
-    margins=centering,%
-    floatwidth=\textwidth%
-}
-\floatsetup[table]{ % 表名在表上
-    capposition=above,%
-    margins=centering,%
-    floatwidth=\textwidth%
-}
-%    \end{macrocode}
+% \change{v0.8.4}{2024/05/06}{Remove conflict-casuing \pkg{floatrow}}
 % 
 % 图表标题样式。
 %    \begin{macrocode}
 \DeclareCaptionFont{capfont}{
   \rmfamily\selectfont
 }
-\captionsetup{
-  font=normal,%
-  labelfont=capfont,
-    textfont=capfont,
-    strut=no,%
-    hypcap=true, % Links point to the top of the figure
-    % indention=0pt, % Suppress indentation
-    % % parindent=0pt, % Suppress space between paragraphs
-    aboveskip=6pt, % Increase the space between the figure and the caption
-    belowskip=6pt, % Increase the space between the caption and the table
+\DeclareCaptionStyle{figurecapstyle}{
+    font          = normal,
+    labelfont     = capfont,
+    textfont      = capfont,
+    strut         = no,
+    hypcap        = true,
+    justification = centerfirst
 }
+\DeclareCaptionStyle{tablecapstyle}{
+    font          = normal,
+    labelfont     = capfont,
+    textfont      = capfont,
+    strut         = no,
+    hypcap        = true,
+    justification = centerfirst
+}
+\captionsetup[ figure ]{ style = figurecapstyle }
+\captionsetup[ table  ]{ style = tablecapstyle  }
 %    \end{macrocode}
 %
 % \subsubsection{代码}
@@ -1748,26 +1742,22 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % 代码样式。\\
 % TODO: \st{style settings: finer or remove anything?} No plan. Removed
 %    \begin{macrocode}
-\floatsetup[lstlisting]{ % Captions for lstlistings
-    capposition=above,%
-    margins=centering,%
-    floatwidth=\textwidth%
-}
 \lstset{
     basicstyle=\ttfamily\linespread{1}\small\selectfont,
-    keywordstyle=\bfseries,% use bold style for keywords
-    commentstyle=\rmfamily\itshape,% use italic style for comments
+    keywordstyle=\bfseries,         % use bold style for keywords
+    commentstyle=\rmfamily\itshape, % use italic style for comments
     stringstyle=\ttfamily,
-    flexiblecolumns,% ?
-    numbers=left,% left-aligned numbering
-    showspaces=false,% hide markers for spaces
+    flexiblecolumns,                % ?
+    numbers=left,                   % left-aligned numbering
+    showspaces=false,               % hide markers for spaces
     showstringspaces=false,
-    % captionpos=t,% place the caption at the top ??repeated??
-    frame=tb,% show top & bottom sides of the frame
+    captionpos=t,                   % place the caption at the top
+    frame=tb,                       % show top & bottom sides of the frame
     % linewidth=.8\textwidth,
     % breakatwhitespace=true,
     breaklines=true,
-    xleftmargin=1em,xrightmargin=1em,% set the width of the code environment
+    xleftmargin=1em,
+    xrightmargin=1em,               % set the width of the code environment
 }
 %    \end{macrocode}
 %
@@ -1814,13 +1804,6 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 % 
 %    \begin{macrocode}
-\declaretheorem[
-    name=Algorithm,
-    style=hkustthm,
-    refname={algorithm,algorithms},
-    Refname={Algorithm,Algorithms},
-    % numberwithin=section,
-]{algorithm}
 \declaretheorem[
     name=Assumption,
     style=hkustthm,
