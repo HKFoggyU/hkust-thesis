@@ -38,8 +38,10 @@ clean :
         *.ind  \
         *.ins  \
         *.ist  \
+        *.loa  \
         *.lof  \
         *.log  \
+        *.lol  \
         *.lot  \
         *.nav  \
         *.out  \

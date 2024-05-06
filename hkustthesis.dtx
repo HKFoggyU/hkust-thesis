@@ -153,7 +153,7 @@ through XeTeX.
 % 
 % \author{\href{https://github.com/HKFoggyU}{\color{black}{\faGithub~@HKFoggyU}}}
 %
-% \date{v0.8.3 @ \dashedtoday\\
+% \date{v0.8.4 @ \dashedtoday\\
 % {\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}\\
 % {\footnotesize Please read the \href{https://github.com/HKFoggyU/hkust-thesis/releases}{latest version} of this documentation}
 % }
@@ -181,6 +181,7 @@ through XeTeX.
 % \changes{v0.8.1}{2023/12/08}{add missing author term}
 % \changes{v0.8.2}{2023/12/09}{add English docs}
 % \changes{v0.8.3}{2023/12/12}{add missing blankpage var, update typo in docs}
+% \changes{v0.8.4}{2024/05/06}{Remove conflict-casuing \pkg{floatrow}, try add list of algorithms}
 %
 % {
 % \phantomsection
@@ -1223,10 +1224,32 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 \setlength{\cfttabnumwidth}{5em}
 \renewcommand\listoftables{%
   \clearpage
-  \begingroup
   \chapter*{\MakeUppercase{\l_@@_lot_title_text}}%
   \addcontentsline{toc}{chapter}{\l_@@_lot_title_text}
   {\singlespacing\@starttoc{lot}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\listofalgorithms}
+% 重定义算法目录命令，修改标题格式并插入书签。
+% TODO: hack \cmd{\listofalgorithms} to \cmd{listoftables}
+% See \url{https://tex.stackexchange.com/questions/263778}
+%    \begin{macrocode}
+\begingroup
+  \let\newcounter\@gobble
+  \let\setcounter\@gobbletwo
+  \globaldefs\@ne
+  \let\c@loadepth\@ne
+  \newlistof{algorithms}{loa}{\listalgorithmname}
+\endgroup
+\let\l@algorithm\l@algorithms
+\renewcommand\cftalgorithmsaftersnum{}
+\renewcommand\cftalgorithmspresnum{Algorithm~}
+\cftsetindents{algorithms}{1.5em}{6em}
+\NewDocumentCommand\newlistofalgorithms{}{
+  \listofalgorithms
+  \addcontentsline{toc}{chapter}{List~of~Algorithms}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1709,9 +1732,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % \subsection{图表浮动体}
 % 
 % \subsubsection{图片表格}
-% 
-% \change{v0.8.4}{2024/05/06}{Remove conflict-casuing \pkg{floatrow}}
-% 
+%
 % 图表标题样式。
 %    \begin{macrocode}
 \DeclareCaptionFont{capfont}{
