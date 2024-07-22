@@ -39,7 +39,7 @@
 
 \preamble
 
-Copyright (C) 2021-2023
+Copyright (C) 2021-2024
 by <HKFoggyU> @ GitHub
 
 This file may be distributed and/or modified under the conditions of
@@ -153,7 +153,7 @@ through XeTeX.
 % 
 % \author{\href{https://github.com/HKFoggyU}{\color{black}{\faGithub~@HKFoggyU}}}
 %
-% \date{v0.8.4 @ \dashedtoday\\
+% \date{v0.8.6 @ \dashedtoday\\
 % {\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}\\
 % {\footnotesize Please read the \href{https://github.com/HKFoggyU/hkust-thesis/releases}{latest version} of this documentation}
 % }
@@ -182,6 +182,8 @@ through XeTeX.
 % \changes{v0.8.2}{2023/12/09}{add English docs}
 % \changes{v0.8.3}{2023/12/12}{add missing blankpage var, update typo in docs}
 % \changes{v0.8.4}{2024/05/06}{Remove conflict-casuing \pkg{floatrow}, try add list of algorithms}
+% \changes{v0.8.5}{2024/05/06}{Remove visited time in bibliography}
+% \changes{v0.8.6}{2024/07/22}{Remove obsolote dashed option in biblatex, add docs for figures}
 %
 % {
 % \phantomsection
@@ -402,8 +404,10 @@ through XeTeX.
 % \subsection{文件结构 File structure}
 %
 % 论文文件夹结构应如表 (\ref{tab:fileStruture}) 所示。其中 \file{figures/} 文件夹请自行按需创建。
+% \myoptional{\textbf{注意：}} 如果在 \file{figures/} 文件夹中存放图片，并在正文中插入该处的图片，需要在图片路径中包括 \file{figures/} 路径，比如 \verb|\includegraphics{figures/xxx.jpg}|。
 %
 % The thesis folder should have the following files as listed in Table (\ref{tab:fileStruture}). If the \file{figures/} folder does not exist, please create it by yourself.
+% \myoptional{\textbf{Note:}} If you put figures to be inserted into the main text in the \file{figures/} folder, you need to include the path \file{figures/} in the path to the figures, for example, \verb|\includegraphics{figures/xxx.jpg}|.
 %
 % \begin{table}[ht]
 %   \caption{\cls{hkustthesis}文件结构 file structure}
@@ -1630,7 +1634,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
     citestyle=numeric-comp,
     %bibstyle=authoryear,
     %bibstyle=numeric,
-    dashed=false,
+    %dashed=false,
     sorting=none,
     %sorting=nyt,
     %sortcites=true,
