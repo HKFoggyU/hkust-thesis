@@ -44,7 +44,7 @@ by <HKFoggyU> @ GitHub
 
 This file may be distributed and/or modified under the conditions of
 the LaTeX Project Public License, either version 1.3 of this license
-or (at your option) any later version.  The latest version of this
+or (at your option) any later version. The latest version of this
 license is in:
 
    http://www.latex-project.org/lppl.txt
@@ -95,7 +95,7 @@ through XeTeX.
 %
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\RequirePackage{expl3}
-%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.8.7 2024-09-06 00:00:00 +0800  HKFoggyU$
+%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.8.8 2024-10-04 00:00:00 +0800  HKFoggyU$
 %<class>  { Thesis template for HKUST }
 %<class>\ProvidesExplClass{hkustthesis}
 %<class>{\ExplFileDate}{\ExplFileVersion}{\ExplFileDescription}
@@ -153,7 +153,7 @@ through XeTeX.
 % 
 % \author{\href{https://github.com/HKFoggyU}{\color{black}{\faGithub~@HKFoggyU}}}
 %
-% \date{v0.8.7 @ \dashedtoday\\
+% \date{v0.8.8 @ \dashedtoday\\
 % {\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}\\
 % {\footnotesize Please read the \href{https://github.com/HKFoggyU/hkust-thesis/releases}{latest version} of this documentation}
 % }
@@ -185,6 +185,7 @@ through XeTeX.
 % \changes{v0.8.5}{2024/05/06}{Remove visited time in bibliography}
 % \changes{v0.8.6}{2024/07/22}{Remove obsolote dashed option in biblatex, add docs for figures}
 % \changes{v0.8.7}{2024/09/06}{Remove month in biblatex config, update version info to 2024}
+% \changes{v0.8.8}{2024/10/04}{Change Figure and Table caption align to centerlast}
 %
 % {
 % \phantomsection
@@ -1752,7 +1753,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
     textfont      = capfont,
     strut         = no,
     hypcap        = true,
-    justification = centerfirst
+    justification = centerlast
 }
 \DeclareCaptionStyle{tablecapstyle}{
     font          = normal,
@@ -1760,7 +1761,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
     textfont      = capfont,
     strut         = no,
     hypcap        = true,
-    justification = centerfirst
+    justification = centerlast
 }
 \captionsetup[ figure ]{ style = figurecapstyle }
 \captionsetup[ table  ]{ style = tablecapstyle  }
