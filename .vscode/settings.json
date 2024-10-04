@@ -3,6 +3,10 @@
     "latex-workshop.message.error.show": false,
     "latex-workshop.message.warning.show": false,
     "latex-workshop.latex.recipe.default": "lastUsed",
+    "latex-workshop.formatting.latex": "latexindent",
+    "[latex]": {
+        "editor.tabSize": 2
+    },
     "latex-workshop.latex.tools": [
         {
             "name": "xelatex",
@@ -91,6 +95,7 @@
         "*.out",
         "*.run.xml",
         "*.snm",
-        "*.toc"
+        "*.toc",
+        "*.xdv"
     ]
 }
