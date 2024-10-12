@@ -95,7 +95,7 @@ through XeTeX.
 %
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\RequirePackage{expl3}
-%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.8.8 2024-10-04 00:00:00 +0800  HKFoggyU$
+%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.9.0 2024-10-12 00:00:00 +0800  HKFoggyU$
 %<class>  { Thesis template for HKUST }
 %<class>\ProvidesExplClass{hkustthesis}
 %<class>{\ExplFileDate}{\ExplFileVersion}{\ExplFileDescription}
@@ -153,7 +153,7 @@ through XeTeX.
 % 
 % \author{\href{https://github.com/HKFoggyU}{\color{black}{\faGithub~@HKFoggyU}}}
 %
-% \date{v0.8.8 @ \dashedtoday\\
+% \date{v0.9.0 @ \dashedtoday\\
 % {\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}\\
 % {\footnotesize Please read the \href{https://github.com/HKFoggyU/hkust-thesis/releases}{latest version} of this documentation}
 % }
@@ -186,6 +186,7 @@ through XeTeX.
 % \changes{v0.8.6}{2024/07/22}{Remove obsolote dashed option in biblatex, add docs for figures}
 % \changes{v0.8.7}{2024/09/06}{Remove month in biblatex config, update version info to 2024}
 % \changes{v0.8.8}{2024/10/04}{Change Figure and Table caption align to centerlast}
+% \changes{v0.9.0}{2024/10/12}{Change bibliography items to single-spacing, add and refactor documentation in main and dtx}
 %
 % {
 % \phantomsection
@@ -254,13 +255,9 @@ through XeTeX.
 %
 % \section{工欲善其事，必先利其器 Preparations before start}\label{sec:preparations}
 %
-% 在使用本模板写作毕业论文前，你需要准备以下几点。
+% 在使用本模板写作毕业论文前，你需要准备以下几点。\mycomment{有\hologo{LaTeX}基础的用户可以跳过本节。}
 %
-% \mycomment{有\hologo{LaTeX}基础的用户可以跳过本节。}
-%
-% You need to prepare the following things before composing thesis using this template.
-%
-% \mycomment{Users with \hologo{LaTeX} experiences can skip this section.}
+% You need to prepare the following things before composing thesis using this template.\mycomment{Users with \hologo{LaTeX} experiences can skip this section.}
 %
 % \subsection{\hologo{LaTeX}入门 Introduction to \hologo{LaTeX}}
 % ``\emph{授人以鱼不如授人以渔。}''
@@ -269,28 +266,24 @@ through XeTeX.
 % 对于新手，\href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{Overleaf的30分钟快速入门}已经是一个非常友好的入门教程。在此基础上，如果想更多了解一些，复旦大学曾祥东的\href{https://github.com/stone-zeng/latex-talk}{《现代\hologo{LaTeX}入门讲座》}（PPT，$\approx$ 1 小时）和北京大学刘海洋的 \href{https://www.bilibili.com/video/BV1s7411U7Pr}{\hologo{LaTeX}不快速的入门}（视频讲座，$\approx$ 3 小时）是两个非常优秀的入门教程；推荐先通读前者，如果不喜欢文字内容，可以观看后者。另外，刘海洋的《\hologo{LaTeX}入门》内容详尽充实，可以作为日常写作时的工具书。
 %
 % ``\emph{吾生也有涯，而知也无涯。}''
-% \hologo{LaTeX}的参考资料浩如烟海。没有人能把这些资料都看完才去开始使用\hologo{LaTeX}，因此，学会使用 Google/ChatGPT 等工具解决眼前的问题，比通读各种\hologo{LaTeX}教程更加重要。
-%
-% 作为新手用户，不要有 ``\hologo{LaTeX}要写代码'' 这种思想负担，也不要害怕编译报错，这些不影响之前输入的文字\footnote{比Word突然卡死崩溃不知道好到哪里去了（}，遇到问题去Google或者问ChatGPT即可。
+% \hologo{LaTeX}的参考资料浩如烟海。没有人能把这些资料都看完才去开始使用\hologo{LaTeX}，因此，学会使用 Google/ChatGPT 等工具解决眼前的问题，比通读各种\hologo{LaTeX}教程更加重要。作为新手用户，不要有 ``\hologo{LaTeX}要写代码'' 这种思想负担，也不要害怕编译报错，这些不影响之前输入的文字\footnote{比Word突然卡死崩溃不知道好到哪里去了（}，遇到问题去Google或者问ChatGPT即可。
 %
 % This subsection will focus more on how to learn \hologo{LaTeX} by yourself instead of teaching you step by step.
 % For beginners, \href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{Learn LaTeX in 30 minutes from Overleaf} is already a very good introductory material. The book \emph{A short introduction to LaTeX: A book for beginners} is a also good and more comprehensive learning resource.
-% There are tons of learning materials for \hologo{LaTeX}, and they can be too overwhelming for beginners. But one can always turn to Google or ChatGPT for help when you encounter problems without reading through any learning materials.
-%
-% Never feel afraid of ``coding''. It is just another format of typing words into the computer.
+% There are tons of learning materials for \hologo{LaTeX}, and they can be too overwhelming for beginners. But one can always turn to Google or ChatGPT for help when you encounter problems without reading through any learning materials. Never feel afraid of ``coding''. It is just another format of typing words into the computer.
 %
 % \subsection{选择\hologo{LaTeX}环境 Choose \hologo{LaTeX} environment}
 % \subsubsection{在线编译 Compile online}
 % 如果电脑上还未安装任何\hologo{LaTeX}发行版，可以使用在线版\hologo{LaTeX}服务 \href{https://www.overleaf.com/}{Overleaf} 进行初步体验，以避免学习热情被安装配置环境所熄灭。可以直接跳转到第\ref{sec:intro2thesis}节继续阅读。
 %
-% \mywarning{注意：} Overleaf免费版开始对文章长度和项目大小逐渐施加限制，近期\footnote{2023年11月}毕业的同学反映，其 thesis 项目\footnote{95页，80 MB总大小}已经需要购买会员服务。因此建议准备一份本地安装的\hologo{LaTeX}发行版以防万一。
+% \mywarning{注意：} Overleaf免费版开始对文章长度和项目大小逐渐施加限制，根据某用户反映，其 thesis 项目\footnote{95页，80 MB总大小}在编译时被提示超时，要求购买会员服务。因此建议准备一份本地安装的\hologo{LaTeX}发行版以防万一。
 %
 % If there is no \hologo{LaTeX} distribution (software) installed on the computer, you can try with the online \hologo{LaTeX} service \href{https://www.overleaf.com/}{Overleaf} to avoid the trouble of installing \hologo{LaTeX} on your local computer.
 %
-% \mywarning{Attention: } Overleaf (free version) starts to post limit on the article pages and project size. According to a certain student graduated recently\footnote{November, 2023}, she needs to pay for the premium package for her thesis project \footnote{95 pages, 80 MB total size} otherwise she could not compile the project on Overleaf.
+% \mywarning{Attention: } Overleaf (free version) starts to post limit on the article pages and project size. According to a certain user, her thesis project \footnote{95 pages, 80 MB total size} was prompted overtime and was asked to buy the premium package of Overleaf.
 %
 % \subsubsection{本地编译 Compile locally}
-% 如果希望不依赖网络工作，请选择 \href{https://www.tug.org/texlive/}{\hologo{TeXLive}} \textbf{或} \href{https://miktex.org/download}{\hologo{MiKTeX}}，点击下载并安装其最新版本。前者安装体积较大（$\approx$ 5 GB）但是可以做到完全离线使用；后者体积较小（$\approx$ 1 GB）但在第一次编译时需要联网下载宏包（后续编译无需联网）。
+% 如果希望不依赖网络工作，请选择 \href{https://www.tug.org/texlive/}{\hologo{TeXLive}} \textbf{或} \href{https://miktex.org/download}{\hologo{MiKTeX}}（点击下载并安装其最新版本。前者安装体积较大（$\geq$ 5 GB）但是可以做到完全离线使用；后者体积较小（$\approx$ 1 GB）但在第一次编译时需要联网下载宏包（后续编译无需联网）。
 %
 % 本模板要求的\hologo{LaTeX}版本为 \hologo{TeXLive} ($\geq$2021) 或 \hologo{MiKTeX} ($\geq$4.4)。本模板在各平台、各\hologo{LaTeX}发行版上的编译情况如表 (\ref{tab:environment}) 所示。
 %
@@ -302,8 +295,8 @@ through XeTeX.
 %     \toprule
 %     Platform & TeX & Test \\
 %     \midrule
-%     Overleaf                 & \hologo{TeX}\,Live 2021/2/3  & Pass \\
-%     Arch Linux (2023.11)     & \hologo{TeX}\,Live           & Pass \\
+%     Overleaf                 & \hologo{TeX}\,Live 2021$\sim$4  & Pass \\
+%     Arch Linux (2024.10)     & \hologo{TeX}\,Live           & Pass \\
 %     Windows 10/11            & \hologo{TeX}\,Live 2021      & Pass \\
 %     macOS 10.15              & \hologo{TeX}\,Live 2021      & Pass \\
 %     Windows 10               & \hologo{TeX}\,Live 2020      & \mywarning{\verb|ltxhook| problem} \\
@@ -348,7 +341,7 @@ through XeTeX.
 %   \begin{itemize}
 %    \item Compiler: XeLaTeX
 %   \end{itemize}
-%  \item 返回项目页面，点击 `` Recompile/重新编译 '' 按钮进行编译。
+%  \item 返回项目页面，点击 `` Recompile/重新编译 '' 按钮进行编译。也可以使用 ``从头开始重新编译'' 来排除编译缓存导致的无法编译的问题。
 % \end{enumerate}
 %
 % \begin{enumerate}
@@ -357,13 +350,13 @@ through XeTeX.
 %   \begin{itemize}
 %    \item Compiler: XeLaTeX
 %   \end{itemize}
-%  \item Go back to the project page; click `` Recompile '' button to compile the thesis paper.
+%  \item Go back to the project page; click `` Recompile '' button to compile the thesis paper. You can also click ``Recompile from the scratch'' to avoid some failure bugs due to the compilation cache.
 % \end{enumerate}
 %
 % \subsection{本地编译 Compile locally}
 % \subsubsection{获取本模板 Obtain this template}
 % \begin{itemize}
-% \item (针对一般用户) 请在本项目的 \href{https://github.com/HKFoggyU/hkust-thesis/releases/latest}{GitHub Release} 页面下载名为 \file{hkust-thesis-v*.zip} 的压缩文件并解压，得到名为 \file{hkust-thesis-v*} 的文件夹，这是写作毕业论文的文件夹。可以根据喜好重命名。
+% \item (针对一般用户) 请在 \href{https://github.com/HKFoggyU/hkust-thesis/releases/latest}{GitHub Release} 页面下载名为 \file{hkust-thesis-v*.zip} 的压缩文件并解压，得到名为 \file{hkust-thesis-v*} 的文件夹，这是写作毕业论文的文件夹。可以根据喜好重命名。
 % \item (针对开发者) 如果希望第一时间获取更新或参与开发，可以克隆本项目\href{https://github.com/HKFoggyU/hkust-thesis.git}{仓库}，并运行 \colorbox{code-bg}{\lstinline|xetex hkustthesis.dtx|} 以生成 \file{hkustthesis.cls} 文件。
 % \end{itemize}
 %
@@ -379,7 +372,7 @@ through XeTeX.
 %
 % This project recommends to use VSCode as the editor and compile frontend. You can refer section (\ref{sec:editors}) for the installation and configuration notes of VSCode and a necessary extension \href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{LaTeX Workshop}. This project provides a well-configured \file{.vscode/settings.json} file.
 %
-% Use VSCode to open the unzipped folder (Keyboard shortcuts: \myblock{Ctrl k + Ctrl o}); click the \hologo{TeX} icon on the left side panel (needs LaTeX Workshop installed beforehand); expand the \myblock{\myVee~COMMANDS} item and \myblock{\myVee~~$\triangleright$~~Build LaTeX project} item; click the green triangle \myblock{{\color{green}$\triangleright$}} in the \myblock{{\color{green}$\triangleright$} Recipe: build_mythesis} to compile the thesis. Usually it takes several second to a few tens of seconds to complete one compilation. During the compilation, you will see a label like \myblock{\VSCodeCompiling~Build} on the bottom left of the VSCode window. After a successful compilation, it will become \myblock{\VSCodeCompileSucceed}, but if the compilation fails, it will become \myblock{\VSCodeCompileFailed}.
+% Use VSCode to open the unzipped folder (shortcuts: \myblock{Ctrl k + Ctrl o}); click the \hologo{TeX} icon on the left side panel (needs LaTeX Workshop installed beforehand); expand the \myblock{\myVee~COMMANDS} item and \myblock{\myVee~~$\triangleright$~~Build LaTeX project} item; click the green triangle \myblock{{\color{green}$\triangleright$}} in the \myblock{{\color{green}$\triangleright$} Recipe: build_mythesis} to compile the thesis. Usually it takes several second to a few tens of seconds to complete one compilation. During the compilation, you will see a label like \myblock{\VSCodeCompiling~Build} on the bottom left of the VSCode window. After a successful compilation, it will become \myblock{\VSCodeCompileSucceed}, but if the compilation fails, it will become \myblock{\VSCodeCompileFailed}.
 %
 % \vspace*{2\baselineskip}
 %
@@ -653,12 +646,21 @@ through XeTeX.
 % \subsubsection{导言区剩余部分 remaining parts in preamble}
 % \begin{itemize}
 %  \item 用户可以自行添加所需的宏包、设置和其它命令。
-%  \item \verb|\addbibresource{mythesis.bib}| 导入了存放引用文献的 bib 文件。
+%  \item \verb|\addbibresource{mythesis.bib}| 导入了存放引用文献的 \file{.bib} 文件。如有多个 \file{.bib} 文件，需要依次、每行一个输入文件名。
+%  \item 主文件 \file{mythesis.tex} 最开头处可以使用 \verb|\PassOptionsToPackage| 命令向某些已经在模板中导入的包传递参数。例如，修改 \pkg{siunitx} 宏包对正负误差量的显示样式：
 % \end{itemize}
 %
+% \begin{ctexexam}
+%   \PassOptionsToPackage{
+%     separate-uncertainty=true,
+%     separate-uncertainty-units=single
+%   }{siunitx}
+% \end{ctexexam}
+%
 % \begin{itemize}
+%  \item The command \verb|\PassOptionsToPackage| at the very beginning of the main file \file{mythesis.tex} can be used to pass custom options to the package that is already loaded in the thesis template. The above example is how to modify the display style of the uncertainty value in \pkg{siunitx}.
 %  \item Users can add necessary packages, define settings and commands by themselves.
-%  \item \verb|\addbibresource{mythesis.bib}| imports the \file{.bib} file for storing the citation database.
+%  \item \verb|\addbibresource{mythesis.bib}| imports the \file{.bib} file for storing the citation database. For multiple \file{.bib} files, please add their filenames one-by-one in multiple \verb|\addbibresource{}| commands.
 % \end{itemize}
 %
 % \myoptional{\textbf{注意：}} 本模板使用 \pkg{unicode-math} 设置数学环境字体，请不要使用会与之产生冲突的 \pkg{bm} 宏包，否则会报错。事实上，在 \hologo{XeTeX} 引擎下，\pkg{bm} 已经过时。对于 \pkg{bm} 宏包中的常用命令 \verb|\bm|，本模板已经设置了一个别名，用户可以在正文中直接使用 \verb|\bm|。除此之外，如果还有需要使用的 \pkg{bm} 宏包中的命令，请自行设置别名。
@@ -932,7 +934,9 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % 此处为行距设置，FYTGS的邮件确认是 Word 中的 1.5 倍行距。\\
 % 关于行距，12pt的 Times~New~Roman 文字在Word里的单倍行距对应的 PDF 行距是1.15，1.5倍 Word 行距对应的 PDF 行距是1.72；而在 \hologo{LaTeX} 中设置 linespread = 1 时生成的 PDF 的行距是 1.2。所以要想得到 1.5 倍 Word 行距 (即 1.72 倍 PDF 行距)，需要设置的 linespread 为：
 % \[ \frac{1.72}{1.2} = 1.433\]
-% 而由于单倍行距在 Word 和 \hologo{LaTeX}生成的PDF 中差别很小，故使用了 \verb|\singlespacing| 命令实现。
+% 而由于单倍行距在 Word 和 \hologo{LaTeX}生成的PDF 中差别很小，故使用了
+%
+% \verb|\singlespacing| 命令实现。
 %    \begin{macrocode}
 \linespread{1.43}
 %^^A \onehalfspacing
@@ -967,6 +971,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \end{macrocode}
 %
 % \pkg{amsmath}必须在\pkg{unicode-math}前加载。
+%
 % \pkg{unicode-math}指定了\hologo{XeTeX}和\hologo{LuaTeX}下所使用的数学字体。
 % 用于配置数学环境的\pkg{mathtools}会与\pkg{unicode-math}发生冲突，此处手动消除其警告。
 %    \begin{macrocode}
@@ -980,7 +985,15 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %    \begin{macrocode}
 \RequirePackage{graphicx,subcaption,wrapfig,tikz}
 \DeclareGraphicsExtensions{.pdf,.eps,.jpg,.png}
-\RequirePackage{booktabs,multirow,multicol,listings,algorithm,algorithmic,enumitem}
+\RequirePackage{
+    booktabs,
+    multirow,
+    multicol,
+    listings,
+    algorithm,
+    algorithmic,
+    enumitem
+}
 %    \end{macrocode}
 %
 % 必须以该顺序加载以下两个关于引用的包。
@@ -1239,7 +1252,9 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 %
 % \begin{macro}{\listofalgorithms}
 % 重定义算法目录命令，修改标题格式并插入书签。
-% TODO: hack \cmd{\listofalgorithms} to \cmd{listoftables}
+%
+% TODO: hack \cmd{\listofalgorithms} to \cmd{listoftables} Done.
+%
 % See \url{https://tex.stackexchange.com/questions/263778}
 %    \begin{macrocode}
 \begingroup
@@ -1318,7 +1333,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % 判断学位进行命令定义。
 %    \begin{macrocode}
 \msg_new:nnn { hkustthesis }{ unknown-degree }
-  { Unknown~ degree:~ \l_@@_info_degree_tl.\\ Please~ check~ spelling.}
+  { Unknown~ degree:~ \l_@@_info_degree_tl.}
 \cs_new_protected:Npn \@@_print_degree_name:
 {
 \str_if_eq:NNTF { \l_@@_info_degree_tl } { phd }
@@ -1733,8 +1748,10 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
       pdftitle    = \l_@@_info_title_tl,
       pdfauthor   = \l_@@_info_author_tl,
       pdfcreator  = \c_@@_name_pdf_creator_tl,
-      pdfsubject  = to~her
+      pdfsubject  = HKFoggyU
     }
+  \NewDocumentCommand \noskipsinglespacing {} {\setstretch{\setspace@singlespace}}
+  \RenewDocumentCommand \bibfont {} {\small\noskipsinglespacing}
 }
 %    \end{macrocode}
 %
