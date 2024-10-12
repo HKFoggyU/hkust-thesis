@@ -11,6 +11,10 @@
 %% LaTeX Project Public License (version 1.3c)
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Pass options to loaded packages in `.cls` file:
+% \PassOptionsToPackage{separate-uncertainty=true, separate-uncertainty-units=single}{siunitx}
+
 \documentclass[
   %customlatinfont = windows,
   %custombibstyle = nature,
@@ -25,7 +29,7 @@
   %% Please do not leave any blank lines without {}.
   info = {
     degree        = {phd},  %% phd / mphil
-    title         = {Triggering\\the Forth Impact}, 
+    title         = {Triggering\texorpdfstring{\\}{}the Forth Impact},
     keywords      = {Neon, Genesis, Evangelion},
     author        = {Cruel Angel},
     school        = {School of SEELE},
@@ -60,7 +64,12 @@
 }
 
 %% Import extra packages
-% \usepackage{indentfirst}
+% \usepackage{indentfirst, xspace, xcolor}
+
+%% Add custom command
+% \newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+\newcommand{\eg}{\textit{e.g.}, }
+\newcommand{\ie}{\textit{i.e.}, }
 
 %% Import bib file for bibliography
 \addbibresource{mythesis.bib}
