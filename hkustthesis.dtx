@@ -1698,6 +1698,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 \NewDocumentCommand\paperlist { o m }
 {  
   \begin{refsection} 
+    \AtNextBibliography{\defcounter{maxnames}{50}}
     \nocite{#2}
     \printbibliography[heading=subbibliography,title=#1]
   \end{refsection}
