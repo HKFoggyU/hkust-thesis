@@ -73,5 +73,6 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           files: |
+            mythesis.pdf
             hkustthesis.pdf
             hkust-thesis-v*.zip

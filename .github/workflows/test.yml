@@ -4,21 +4,24 @@
 name: Test Compilation
 
 on: 
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - '*.md'
-      - '.gitignore'
-      - 'docs/**'
+    workflow_dispatch:
 
-  pull_request:
-    branches:
-      - main
-    paths-ignore:
-      - '*.md'
-      - '.gitignore'
-      - 'docs/**'
+# on: 
+#   push:
+#     branches:
+#       - main
+#     paths-ignore:
+#       - '*.md'
+#       - '.gitignore'
+#       - 'docs/**'
+
+#   pull_request:
+#     branches:
+#       - main
+#     paths-ignore:
+#       - '*.md'
+#       - '.gitignore'
+#       - 'docs/**'
 
 
 jobs:
