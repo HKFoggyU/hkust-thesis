@@ -11,12 +11,14 @@ HKUST Thesis template for RPG students implemented with LaTeX3.
 
 ## Getting started
 
-Try this template online on [Overleaf](https://www.overleaf.com/latex/templates/hkustthesis/mstwvckmhmjg) in 1 minute! You only need to do 2 things:
+Try this template online on [Overleaf](https://www.overleaf.com/latex/templates/hkustthesis/mstwvckmhmjg) (or [TeXPage](https://www.texpage.com/template/373737be-dc33-4df2-a7d0-a512a92715ef)) in 1 minute! You only need to do 2 things:
 
-1. Remember to change the `Compiler` to **`XeLaTeX`** via the top left `Menu` button, otherwise it won't compile.
-2. Download and read carefully the **[PDF documentation](https://github.com/HKFoggyU/hkust-thesis/releases/latest/download/hkustthesis.pdf)** before you edit your thesis.
+1. Remember to change the `Compiler` to **`XeLaTeX`** in the settings, otherwise it may fail to compile.
+   - for Overleaf, via the top left `Menu` button
+   - for TeXPage, via the top right `Setting` button
+3. Download and read carefully the **[PDF documentation](https://github.com/HKFoggyU/hkust-thesis/releases/latest/download/hkustthesis.pdf)** before you edit your thesis.
 
-Alternatively, you can download the release file and try it on your local machine.
+Alternatively, you can download the [release zip file](https://github.com/HKFoggyU/hkust-thesis/releases/latest) and try it on your local machine.
 
 ## Contributions
 

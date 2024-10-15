@@ -11,12 +11,14 @@
 
 ## 快速上手
 
-在[Overleaf](https://www.overleaf.com/latex/templates/hkustthesis/mstwvckmhmjg)上体验本模板！你需要做以下两件事：
+在[Overleaf](https://www.overleaf.com/latex/templates/hkustthesis/mstwvckmhmjg) (或 [TeXPage](https://www.texpage.com/template/373737be-dc33-4df2-a7d0-a512a92715ef))上体验本模板！你需要做以下两件事：
 
-1. 在 `Open as template` 进入项目后，点击左上角的 `Menu` 按钮，选择 `Compiler` 为 **`XeLaTeX`**，否则会无法编译。
+1. 请记得在编辑器设置里，选择 `Compiler` 为 **`XeLaTeX`**，否则会无法编译。
+   - Overleaf：在左上角的 `Menu` 按钮里
+   - TeXPage：在右上角的 `设置` 按钮里
 2. 下载并仔细阅读 **[PDF文档](https://github.com/HKFoggyU/hkust-thesis/releases/latest/download/hkustthesis.pdf)**。
 
-当然，也可以从 Release 页面下载文件在本地工作。
+当然，也可以从 [Release](https://github.com/HKFoggyU/hkust-thesis/releases/latest) 页面下载 `zip` 文件在本地工作。
 
 ## 贡献
 
