@@ -2,7 +2,7 @@
 % !TeX program  = XeLaTeX
 % !TeX encoding = UTF-8
 %
-% Copyright (C) 2021-2024
+% Copyright (C) 2021-2025
 % by <HKFoggyU> @ GitHub
 % 
 % It may be distributed and/or modified under the conditions of the
@@ -39,7 +39,7 @@
 
 \preamble
 
-Copyright (C) 2021-2024
+Copyright (C) 2021-2025
 by <HKFoggyU> @ GitHub
 
 This file may be distributed and/or modified under the conditions of
@@ -95,7 +95,7 @@ through XeTeX.
 %
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\RequirePackage{expl3}
-%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.9.1 2024-10-14 00:00:00 +0800  HKFoggyU$
+%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.9.2 2024-12-25 00:00:00 +0800  HKFoggyU$
 %<class>  { Thesis template for HKUST }
 %<class>\ProvidesExplClass{hkustthesis}
 %<class>{\ExplFileDate}{\ExplFileVersion}{\ExplFileDescription}
@@ -153,7 +153,7 @@ through XeTeX.
 % 
 % \author{\href{https://github.com/HKFoggyU}{\color{black}{\faGithub~@HKFoggyU}}}
 %
-% \date{v0.9.1 @ \dashedtoday\\
+% \date{v0.9.2 @ \dashedtoday\\
 % {\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}\\
 % {\footnotesize Please read the \href{https://github.com/HKFoggyU/hkust-thesis/releases}{latest version} of this documentation}
 % }
@@ -188,6 +188,7 @@ through XeTeX.
 % \changes{v0.8.8}{2024/10/04}{Change Figure and Table caption align to centerlast}
 % \changes{v0.9.0}{2024/10/12}{Change bibliography items to single-spacing, add and refactor documentation in main and dtx}
 % \changes{v0.9.1}{2024/10/14}{Unset \pkg{hyperref} colors with switch added, let LoP to display full author list with switch for full name in main file}
+% \changes{v0.9.2}{2024/12/25}{Enable LoP n-th authorship bold font}
 %
 % {
 % \phantomsection
@@ -297,7 +298,7 @@ through XeTeX.
 %     Platform & TeX & Test \\
 %     \midrule
 %     Overleaf                 & \hologo{TeX}\,Live 2021$\sim$4  & Pass \\
-%     Arch Linux (2024.10)     & \hologo{TeX}\,Live           & Pass \\
+%     Arch Linux (2024.12)     & \hologo{TeX}\,Live           & Pass \\
 %     Windows 10/11            & \hologo{TeX}\,Live 2021      & Pass \\
 %     macOS 10.15              & \hologo{TeX}\,Live 2021      & Pass \\
 %     Windows 10               & \hologo{TeX}\,Live 2020      & \mywarning{\verb|ltxhook| problem} \\
@@ -697,6 +698,12 @@ through XeTeX.
 % 本模板在发表文章列表内使用全部作者列表，在正文参考文献内使用部分作者列表。另外在主文件中，加入一个开关，可以选择是否显示作者的全名。
 %
 % This template displays the full author list in the ``List of Publications'' chapter, but displays partial authors in the ``References'' in the main text. In addition, a switch for displaying the full names of the authors is added in the main file.
+%
+% \myoptional{作者名加粗：} 通常情况下，发表文章列表会将本毕业论文的作者名字加粗显示。此处参考 StackExchange 的\href{https://tex.stackexchange.com/a/304968}{一个回答}，实现此效果。
+% 在 \file{mythesis.tex} 的导言区可以看到相关的重新定义代码，并且导入了一个 \file{mythesis_LoP.bib} 文件作为示例。需要在此 \file{mythesis_LoP.bib} 文件中，将自己的作者顺序 \verb|n| 写在 \verb|author+an = {n=highlight}| 中 \verb|n| 的位置。这一行需要被添加在每一个文献条目内，用来标记需要加粗的作者的顺序。作为一个更加具体的例子，在 \file{Appendix_Publications.tex} 文件中，我们同时插入了未添加标记的原本条目和添加了标记的条目，可以从编译后的 PDF 文件中直观地看出它们的差别。
+%
+% \myoptional{Set the author name in bold: } Usually, the author of the thesis will set the name in the List of Publications. Here, we take \href{https://tex.stackexchange.com/a/304968}{one answer} from StackExchange as a reference to achieve this function.
+% Relavent code is inserted in the preamble of \file{mythesis.tex}, and one \file{mythesis_LoP.bib} file is loaded as an example. It is necessary to label the order number \verb|n| in the line \verb|author+an = {n=highlight}|. This line is added manually into each item in the \verb|bib| file. As a more detailed example, in the \file{Appendix_Publications.tex} file, we use a unlabelled pristine item and a labelled item together, and their differences can be directly seen from the compiled PDF file.
 %
 % \vfill
 %
