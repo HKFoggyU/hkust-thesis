@@ -67,7 +67,7 @@ jobs:
       
       - name: Zip Release Source
         run: |
-          zip -r hkust-thesis-$VERSION.zip .vscode/ chapters/ hkustthesis.cls latexmkrc LICENSE Makefile mythesis.bib mythesis.tex README.md README.zh.md
+          zip -r hkust-thesis-$VERSION.zip .vscode/ chapters/ hkustthesis.cls latexmkrc LICENSE Makefile mythesis.bib mythesis_LoP.bib mythesis.tex README.md README.zh.md
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
