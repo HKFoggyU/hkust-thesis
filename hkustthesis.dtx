@@ -95,7 +95,7 @@ through XeTeX.
 %
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\RequirePackage{expl3}
-%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.10.1 2024-12-31 00:00:00 +0800  HKFoggyU$
+%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.10.2 2025-01-01 00:00:00 +0800  HKFoggyU$
 %<class>  { Thesis template for HKUST }
 %<class>\ProvidesExplClass{hkustthesis}
 %<class>{\ExplFileDate}{\ExplFileVersion}{\ExplFileDescription}
@@ -153,7 +153,7 @@ through XeTeX.
 % 
 % \author{\href{https://github.com/HKFoggyU}{\color{black}{\faGithub~@HKFoggyU}}}
 %
-% \date{v0.10.1 @ \dashedtoday\\
+% \date{v0.10.2 @ \dashedtoday\\
 % {\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}\\
 % {\footnotesize Please read the \href{https://github.com/HKFoggyU/hkust-thesis/releases}{latest version} of this documentation}
 % }
@@ -193,6 +193,7 @@ through XeTeX.
 % \changes{v0.9.4}{2024/12/28}{set the min and max values for bibliography author list to 1}
 % \changes{v0.10.0}{2024/12/30}{fix authorization page indent bug, add one line vspace}
 % \changes{v0.10.1}{2024/12/31}{disable blankpage for Library requirements}
+% \changes{v0.10.2}{2025/01/01}{add TeXPage, fix minor typos}
 %
 % {
 % \phantomsection
@@ -263,7 +264,7 @@ through XeTeX.
 %
 % 在使用本模板写作毕业论文前，你需要准备以下几点。\mycomment{有\hologo{LaTeX}基础的用户可以跳过本节。}
 %
-% You need to prepare the following things before composing thesis using this template.\mycomment{Users with \hologo{LaTeX} experiences can skip this section.}
+% You need to prepare the following things before composing thesis using this template. \mycomment{Users with \hologo{LaTeX} experiences can skip this section.}
 %
 % \subsection{\hologo{LaTeX}入门 Introduction to \hologo{LaTeX}}
 % ``\emph{授人以鱼不如授人以渔。}''
@@ -276,15 +277,15 @@ through XeTeX.
 %
 % This subsection will focus more on how to learn \hologo{LaTeX} by yourself instead of teaching you step by step.
 % For beginners, \href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{Learn LaTeX in 30 minutes from Overleaf} is already a very good introductory material. The book \emph{A short introduction to LaTeX: A book for beginners} is a also good and more comprehensive learning resource.
-% There are tons of learning materials for \hologo{LaTeX}, and they can be too overwhelming for beginners. But one can always turn to Google or ChatGPT for help when you encounter problems without reading through any learning materials. Never feel afraid of ``coding''. It is just another format of typing words into the computer.
+% There are tons of learning materials for \hologo{LaTeX}, and they can be too overwhelming for beginners. But one can always turn to Google or ChatGPT for help when you encounter problems without reading through any learning materials. Don't be afraid of ``coding''. It is just another format of typing words into the computer.
 %
 % \subsection{选择\hologo{LaTeX}环境 Choose \hologo{LaTeX} environment}
 % \subsubsection{在线编译 Compile online}
-% 如果电脑上还未安装任何\hologo{LaTeX}发行版，可以使用在线版\hologo{LaTeX}服务 \href{https://www.overleaf.com/}{Overleaf} 进行初步体验，以避免学习热情被安装配置环境所熄灭。可以直接跳转到第\ref{sec:intro2thesis}节继续阅读。
+% 如果电脑上还未安装任何\hologo{LaTeX}发行版，可以使用在线版\hologo{LaTeX}服务 \href{https://www.overleaf.com/}{Overleaf} 或 \href{https://www.texpage.com/}{TexPage (仅中文界面)} 进行初步体验，以避免学习热情被安装配置环境所熄灭。可以直接跳转到第\ref{sec:intro2thesis}节继续阅读。
 %
 % \mywarning{注意：} Overleaf免费版开始对文章长度和项目大小逐渐施加限制，根据某用户反映，其 thesis 项目\footnote{95页，80 MB总大小}在编译时被提示超时，要求购买会员服务。因此建议准备一份本地安装的\hologo{LaTeX}发行版以防万一。
 %
-% If there is no \hologo{LaTeX} distribution (software) installed on the computer, you can try with the online \hologo{LaTeX} service \href{https://www.overleaf.com/}{Overleaf} to avoid the trouble of installing \hologo{LaTeX} on your local computer.
+% If there is no \hologo{LaTeX} distribution (software) installed on the computer, you can try with the online \hologo{LaTeX} service \href{https://www.overleaf.com/}{Overleaf} or \href{https://www.texpage.com/}{TexPage (Chinese website)} to avoid the trouble of installing \hologo{LaTeX} on your local computer.
 %
 % \mywarning{Attention: } Overleaf (free version) starts to post limit on the article pages and project size. According to a certain user, her thesis project \footnote{95 pages, 80 MB total size} was prompted overtime and was asked to buy the premium package of Overleaf.
 %
@@ -318,9 +319,9 @@ through XeTeX.
 % This template requires the version of \hologo{LaTeX} to be greater than or equal to: \hologo{TeXLive} ($\geq$2021) or \hologo{MiKTeX} ($\geq$4.4). The compiling tests with different distributions on different platforms are shown in Table (\ref{tab:environment}).
 %
 % \subsection{编辑器 Editors} \label{sec:editors}
-% \mycomment{本小节仅针对本地编译用户。Overleaf 用户使用浏览器，无需安装编辑器。}
+% \mycomment{本小节仅针对本地编译用户。在线版用户使用浏览器，无需安装编辑器。}
 %
-% \mycomment{This subsection is for local compilation only. Overleaf users don't need a local editor.}
+% \mycomment{This subsection is for local compilation only. Online users don't need a local editor.}
 %
 % 本项目建议使用的编辑器为 \href{https://code.visualstudio.com/download}{Visual Studio Code} （点击下载）并安装 \href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{LaTeX Workshop} 插件以获得良好的编辑体验。同时如有需求，可以安装\href{https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans}{中文语言包}。
 %
@@ -374,11 +375,11 @@ through XeTeX.
 % \subsubsection{推荐编译方式 Recommended compile method}
 % 本项目推荐使用 VSCode 作为编辑器和编译前端。关于 VSCode 的安装和其必要插件\href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{LaTeX Workshop}，请参考\ref{sec:editors}节。本项目提供了一份 配置好的 \file{.vscode/settings.json} 文件。
 %
-% 使用 VSCode 打开刚刚解压得到的文件夹（快捷键：\myblock{Ctrl k + Ctrl o}），点击左侧栏的 \hologo{TeX} 图标（需要安装 LaTeX Workshop 插件） ，在 \myblock{\myVee~COMMANDS} 项目下的 \myblock{\myVee~~$\triangleright$~~Build LaTeX project} 项中选择 \myblock{{\color{green}$\triangleright$} Recipe: build_mythesis}，点击其左侧的绿色三角形 \myblock{{\color{green}$\triangleright$}} 即可进行编译。编译通常要花费几秒到几十秒时间，编译期间，在 VSCode 的左下角可以看到类似 \myblock{\VSCodeCompiling~Build} 的提示信息，编译成功后会显示为 \myblock{\VSCodeCompileSucceed}，如果编译失败则会显示为 \myblock{\VSCodeCompileFailed}。
+% 使用 VSCode 打开刚刚解压得到的文件夹（快捷键：\myblock{Ctrl k + Ctrl o}），点击左侧栏的 \hologo{TeX} 图标（需要安装 LaTeX Workshop 插件） ，在 \myblock{\myVee~命令} 项目下的 \myblock{\myVee~~$\triangleright$~~构建 LaTeX 项目} 项中选择 \myblock{{\color{green}$\triangleright$} 配方: build_mythesis}，点击其左侧的绿色三角形 \myblock{{\color{green}$\triangleright$}} 即可进行编译。编译通常要花费几秒到几十秒时间，编译期间，在 VSCode 的左下角可以看到类似 \myblock{\VSCodeCompiling~build~mythesis} 的提示信息，编译成功后会显示为 \myblock{\VSCodeCompileSucceed}，如果编译失败则会显示为 \myblock{\VSCodeCompileFailed}。
 %
 % This project recommends to use VSCode as the editor and compile frontend. You can refer section (\ref{sec:editors}) for the installation and configuration notes of VSCode and a necessary extension \href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{LaTeX Workshop}. This project provides a well-configured \file{.vscode/settings.json} file.
 %
-% Use VSCode to open the unzipped folder (shortcuts: \myblock{Ctrl k + Ctrl o}); click the \hologo{TeX} icon on the left side panel (needs LaTeX Workshop installed beforehand); expand the \myblock{\myVee~COMMANDS} item and \myblock{\myVee~~$\triangleright$~~Build LaTeX project} item; click the green triangle \myblock{{\color{green}$\triangleright$}} in the \myblock{{\color{green}$\triangleright$} Recipe: build_mythesis} to compile the thesis. Usually it takes several second to a few tens of seconds to complete one compilation. During the compilation, you will see a label like \myblock{\VSCodeCompiling~Build} on the bottom left of the VSCode window. After a successful compilation, it will become \myblock{\VSCodeCompileSucceed}, but if the compilation fails, it will become \myblock{\VSCodeCompileFailed}.
+% Use VSCode to open the unzipped folder (shortcuts: \myblock{Ctrl k + Ctrl o}); click the \hologo{TeX} icon on the left side panel (needs LaTeX Workshop installed beforehand); expand the \myblock{\myVee~COMMANDS} item and \myblock{\myVee~~$\triangleright$~~Build LaTeX project} item; click the green triangle \myblock{{\color{green}$\triangleright$}} in the \myblock{{\color{green}$\triangleright$} Recipe: build_mythesis} to compile the thesis. Usually it takes several second to a few tens of seconds to complete one compilation. During the compilation, you will see a label like \myblock{\VSCodeCompiling~build~mythesis} on the bottom left of the VSCode window. After a successful compilation, it will become \myblock{\VSCodeCompileSucceed}, but if the compilation fails, it will become \myblock{\VSCodeCompileFailed}.
 %
 % \vspace*{2\baselineskip}
 %
@@ -499,9 +500,9 @@ through XeTeX.
 %  \end{syntax}
 % 设置是否插入空白页以确保章节标题位于奇数页。Choose whether to insert blank pages to make sure the title pages of chapters are always located on odd pages.
 % \end{function}
-% RPG Handbook 要求章节 (Chapter) 标题应当位于新的一页；兼顾打印版本的美观，该选项默认开启，使得章节标题确保处于奇数页。但是在撰写论文的过程中，太多空白页不便于查看，因此可以设置为 \verb|false| 以便自己预览。用户可以自行决定该选项的值。
+% \href{https://libguides.hkust.edu.hk/e-thesis/submission}{科大毕业论文提交向导}要求提交版本的毕业论文不应留有任何空白页，并且在撰写论文的过程中太多空白页不便于查看，因此该选项默认设置为 \verb|false|。但考虑到有打印纸质版本需求的情况，该选项可以设置为 \verb|true|，使打印版本的章节标题确保处于奇数页。用户可以自行决定该选项的值。
 %
-% RPG Handbook requires the title page of chapters should start from a newpage; meanwhile, it is a common practice that all the title pages starts from odd pages for the convenience of printed copies. However, during thesis composing stage, it might be annoying to have many blank pages; so this option can be set to \verb|false| to disable the blank pages.
+% \href{https://libguides.hkust.edu.hk/e-thesis/submission}{HKUST thesis submission guidelines} require that there must be no blank pages in the final thesis; considering it might be annoying to have blank pages during thesis composing stage, this option is default to \verb|false|. However, considering the need for printed version of thesis, this option can be set to \verb|true| so that all the chapter titles are located on odd pages. Users can decide which value it should be set.
 %
 % \subsubsection{论文信息 Thesis information}
 %
