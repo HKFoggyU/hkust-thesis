@@ -85,11 +85,12 @@
 %% See more examples in the PDF manual.
 \renewcommand*{\mkbibnamegiven}[1]{\ifitemannotation{highlight}{\textbf{#1}}{#1}}
 \renewcommand*{\mkbibnamefamily}[1]{\ifitemannotation{highlight}{\textbf{#1}}{#1}}
+
+%% Remember to generate valid `bib` files, e.g., proper treatment of special characters
 %% The bib file for `List of Publications`
 \addbibresource{mythesis_LoP.bib}
 
 %% Import bib file for bibliography
-%% Remember to change the special characters in the bib file to the LaTeX format
 \addbibresource{mythesis.bib}
 
 \begin{document}
