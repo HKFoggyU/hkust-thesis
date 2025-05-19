@@ -95,7 +95,7 @@ through XeTeX.
 %
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\RequirePackage{expl3}
-%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.11.0 2025-02-03 00:00:00 +0800  HKFoggyU$
+%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.11.1 2025-05-19 00:00:00 +0800  HKFoggyU$
 %<class>  { Thesis template for HKUST }
 %<class>\ProvidesExplClass{hkustthesis}
 %<class>{\ExplFileDate}{\ExplFileVersion}{\ExplFileDescription}
@@ -153,7 +153,7 @@ through XeTeX.
 % 
 % \author{\href{https://github.com/HKFoggyU}{\color{black}{\faGithub~@HKFoggyU}}}
 %
-% \date{v0.11.0 @ \dashedtoday\\
+% \date{v0.11.1 @ \dashedtoday\\
 % {\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}\\
 % {\footnotesize Please read the \href{https://github.com/HKFoggyU/hkust-thesis/releases}{latest version} of this documentation}
 % }
@@ -195,6 +195,7 @@ through XeTeX.
 % \changes{v0.10.1}{2024/12/31}{disable blankpage for Library requirements}
 % \changes{v0.10.2}{2025/01/01}{add TeXPage, fix minor typos}
 % \changes{v0.11.0}{2025/02/03}{Move Abstract page position}
+% \changes{v0.11.1}{2025/05/19}{Fix hyperref \opt{hidelinks} problem, disable \pkg{cref} \opt{nameinlink} to avoid color}
 %
 % {
 % \phantomsection
@@ -1024,17 +1025,12 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % 必须以该顺序加载以下两个关于引用的包。
 %    \begin{macrocode}
 \RequirePackage[
-  hidelinks,
   bookmarksnumbered = true,
   psdextra          = true,
   unicode           = true,
-  %colorlinks        = true,
-  %linkcolor         = black,
-  %urlcolor          = blue,
-  %citecolor         = red,
-  %anchorcolor       = blue,
+  %hidelinks,
   ]{hyperref}
-\RequirePackage[capitalise,nameinlink,noabbrev]{cleveref}
+\RequirePackage[capitalise,noabbrev]{cleveref}
 %    \end{macrocode}
 %
 % 生成 ``Lorem ipsum'' 测试文字。
