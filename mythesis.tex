@@ -15,10 +15,6 @@
 %% Pass options to loaded packages in `.cls` file:
 % \PassOptionsToPackage{separate-uncertainty=true, separate-uncertainty-units=single}{siunitx}
 
-%% The following option is to set hyperref colors for preview,
-%% but commented by default for submission and printing
-% \PassOptionsToPackage{colorlinks=true,linkcolor=red,urlcolor=blue,citecolor=red,anchorcolor=blue}{hyperref}
-
 %% The following option is to display the full name of the authors.
 %% It comes with the setting to display the full author names in the List of Publications
 \PassOptionsToPackage{giveninits=false}{biblatex}
@@ -73,6 +69,16 @@
 
 %% Import extra packages
 % \usepackage{indentfirst, xspace, xcolor}
+
+%% The following option is to set hyperref colors for preview,
+%% but commented by default for submission and printing
+% \hypersetup{
+%   colorlinks=true,
+%   linkcolor=black,
+%   urlcolor=blue,
+%   citecolor=red,
+%   anchorcolor=blue
+% }
 
 %% Add custom command
 % \newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
