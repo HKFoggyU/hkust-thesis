@@ -95,7 +95,7 @@ through XeTeX.
 %
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\RequirePackage{expl3}
-%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.11.2 2025-05-19 00:00:00 +0800  HKFoggyU$
+%<class>\GetIdInfo  $Id: hkustthesis.dtx 0.11.2 2025-07-22 00:00:00 +0800  HKFoggyU$
 %<class>  { Thesis template for HKUST }
 %<class>\ProvidesExplClass{hkustthesis}
 %<class>{\ExplFileDate}{\ExplFileVersion}{\ExplFileDescription}
@@ -153,7 +153,7 @@ through XeTeX.
 % 
 % \author{\href{https://github.com/HKFoggyU}{\color{black}{\faGithub~@HKFoggyU}}}
 %
-% \date{v0.11.2 @ \dashedtoday\\
+% \date{v0.11.3 @ \dashedtoday\\
 % {\footnotesize 请确保阅读本文档的\href{https://github.com/HKFoggyU/hkust-thesis/releases}{最新版本}}\\
 % {\footnotesize Please read the \href{https://github.com/HKFoggyU/hkust-thesis/releases}{latest version} of this documentation}
 % }
@@ -197,6 +197,7 @@ through XeTeX.
 % \changes{v0.11.0}{2025/02/03}{Move Abstract page position}
 % \changes{v0.11.1}{2025/05/19}{Disable \pkg{cref} \opt{nameinlink} to avoid color}
 % \changes{v0.11.2}{2025/05/19}{Fix hyperref color switch problem}
+% \changes{v0.11.3}{2025/07/22}{Add \opt{mathbf} option in \pkg{unicode-math}}
 %
 % {
 % \phantomsection
@@ -1000,7 +1001,7 @@ keywords         .clist_set:N = \l_@@_info_keywords_clist,
 % \pkg{amsmath}必须在\pkg{unicode-math}前加载。
 %
 % \pkg{unicode-math}指定了\hologo{XeTeX}和\hologo{LuaTeX}下所使用的数学字体。
-% 用于配置数学环境的\pkg{mathtools}会与\pkg{unicode-math}发生冲突，此处手动消除其警告。
+% 用于配置数学环境的\pkg{mathtools}会与\pkg{unicode-math}发生冲突，此处手动消除其警告。并启用 \verb|\mathbf| 支持。
 %    \begin{macrocode}
 \RequirePackage{amsmath,amsthm,mathtools,thmtools}
 \RequirePackage[
