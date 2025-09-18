@@ -754,8 +754,13 @@ through XeTeX.
 % About \verb|x| to \verb|e| type (currently only for dtx):
 %
 % See \url{https://github.com/CTeX-org/ctex-kit/pull/678}.
+% See \url{https://github.com/CTeX-org/ctex-kit/pull/703}.
 %
-% This issue happens on \hologo{MiKTeX} 23.10. My temporary solution is to modify the \file{ctxdoc.cls} file in \pkg{ctex} package: change the \verb|x| to \verb|e| and also the \verb|Non| to \verb|Nnn|.
+% This issue happens on newer releases of \hologo{TeX} distributions. It is due to the outdated \pkg{ctex-kit}.
+% My temporary solution is to modify the \file{ctxdoc.cls} file in \pkg{ctex} package (for example, on Arch Linux, it is located in \file{/usr/share/texmf-dist/tex/latex/ctex/ctxdoc.cls}):
+% change the \verb|x| to \verb|e|,
+% change the \verb|Non| to \verb|Nnn|,
+% change according to PR 703.
 %
 % \subsection{定义常量}
 %
