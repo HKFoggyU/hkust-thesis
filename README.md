@@ -11,14 +11,19 @@ HKUST Thesis template for RPG students implemented with LaTeX3.
 
 ## Getting started
 
-**Attention: Limited by Overleaf Free Plan, I cannot update this project on Overleaf anymore. Please try GitHub release for latest update and/or TeXPage for online compilation service.**
+**Please read the [PDF documentation](https://github.com/HKFoggyU/hkust-thesis/releases/latest/download/hkustthesis.pdf)** carefully before trial.<br/>
+**Please read the [PDF documentation](https://github.com/HKFoggyU/hkust-thesis/releases/latest/download/hkustthesis.pdf)** carefully before trial.<br/>
+**Please read the [PDF documentation](https://github.com/HKFoggyU/hkust-thesis/releases/latest/download/hkustthesis.pdf)** carefully before trial.
 
-Try this template online on [TeXPage](https://www.texpage.com/template/373737be-dc33-4df2-a7d0-a512a92715ef) (or [Overleaf](https://www.overleaf.com/latex/templates/hkustthesis/mstwvckmhmjg), but outdated) in 1 minute! You only need to do 2 things:
+### Online
 
-1. Remember to change the `Compiler` to **`XeLaTeX`** in the settings, otherwise it may fail to compile.
-   - for TeXPage, via the top right `Setting` button
-   - for Overleaf, via the top left `Menu` button
-3. Download and read carefully the **[PDF documentation](https://github.com/HKFoggyU/hkust-thesis/releases/latest/download/hkustthesis.pdf)** before you edit your thesis.
+Attention: Limited by Overleaf Free Plan, I cannot update this project on Overleaf anymore. Please try GitHub Release for latest update and/or TeXPage.
+
+Try this template on [TeXPage](https://www.texpage.com/template/373737be-dc33-4df2-a7d0-a512a92715ef) (or [Overleaf](https://www.overleaf.com/latex/templates/hkustthesis/mstwvckmhmjg), but outdated). Remember to change the `Compiler` to `XeLaTeX` in the settings, otherwise it may fail to compile.
+- for TeXPage, via the top right `Setting` button
+- for Overleaf, via the top left `Menu` button
+
+### Local
 
 Alternatively, you can download the [release zip file](https://github.com/HKFoggyU/hkust-thesis/releases/latest) and try it on your local machine.
 

@@ -11,16 +11,21 @@
 
 ## 快速上手
 
-**注意：由于Overleaf免费版限制，我已无法继续在Overleaf上更新此项目。请使用GitHub release获取最新更新，或使用TeXPage获取在线编译服务。**
+**请仔细阅读 [PDF文档](https://github.com/HKFoggyU/hkust-thesis/releases/latest/download/hkustthesis.pdf)。**<br/>
+**请仔细阅读 [PDF文档](https://github.com/HKFoggyU/hkust-thesis/releases/latest/download/hkustthesis.pdf)。**<br/>
+**请仔细阅读 [PDF文档](https://github.com/HKFoggyU/hkust-thesis/releases/latest/download/hkustthesis.pdf)。**
 
-在[TeXPage](https://www.texpage.com/template/373737be-dc33-4df2-a7d0-a512a92715ef) (或 [Overleaf](https://www.overleaf.com/latex/templates/hkustthesis/mstwvckmhmjg), 但未更新)上体验本模板！你需要做以下两件事：
+### 在线使用
 
-1. 请记得在编辑器设置里，选择 `Compiler` 为 **`XeLaTeX`**，否则会无法编译。
-   - TeXPage：在右上角的 `设置` 按钮里
-   - Overleaf：在左上角的 `Menu` 按钮里
-2. 下载并仔细阅读 **[PDF文档](https://github.com/HKFoggyU/hkust-thesis/releases/latest/download/hkustthesis.pdf)**。
+注意：由于Overleaf免费版限制，我已无法继续在Overleaf上更新此项目。请使用GitHub Release获取最新更新，或使用TeXPage。
 
-当然，也可以从 [Release](https://github.com/HKFoggyU/hkust-thesis/releases/latest) 页面下载 `zip` 文件在本地工作。
+在[TeXPage](https://www.texpage.com/template/373737be-dc33-4df2-a7d0-a512a92715ef) (或 [Overleaf](https://www.overleaf.com/latex/templates/hkustthesis/mstwvckmhmjg), 但未更新)上体验本模板。请在编辑器设置里选择 `Compiler` 为 `XeLaTeX`，否则会无法编译。
+- TeXPage：在右上角的 `设置` 按钮里
+- Overleaf：在左上角的 `Menu` 按钮里
+
+### 本地使用
+
+也可以从 [Release](https://github.com/HKFoggyU/hkust-thesis/releases/latest) 页面下载 `zip` 文件在本地工作。
 
 ## 贡献
 
