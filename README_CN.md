@@ -35,7 +35,7 @@
 
 香港科技大学研究生院并没有为毕业论文提供任何官方模板。他们强调最终提交的毕业论文应该符合 [RPG Handbook](https://fytgs.hkust.edu.hk/academics/Academic-Regulations-and-Requirements/Handbook-for-Research-Postgraduate-Studies/guidelines-thesis-preparation) 的相关要求。
 
-本模板尽可能地贴合上述 RPG Handbook 要求，并且参照 RPG Handbook 提供的示例页面 ([MPhil](https://fytgs.hkust.edu.hk/sites/default/files/imce/thesis_sample_page_mphil.pdf)/[PhD](https://fytgs.hkust.edu.hk/sites/default/files/imce/thesis_sample_page_phd.pdf))。但是本模板对潜在的不符合的情况不负责任。
+本模板尽可能地贴合上述 RPG Handbook 要求，并且参照 RPG Handbook 提供的示例页面 ([MPhil](https://fytgs.hkust.edu.hk/system/files/thesis_sample_page_mphil.pdf)/[PhD](https://fytgs.hkust.edu.hk/system/files/thesis_sample_page_phd.pdf)/[DBA](https://fytgs.hkust.edu.hk/system/files/thesis_sample_page_dba.pdf))。但是本模板对潜在的不符合的情况不负责任。
 
 
 ## 许可证

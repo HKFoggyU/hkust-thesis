@@ -35,7 +35,7 @@ If you find any problems or have any suggestions, please file an issue or PR.
 
 FYTGS doesn't provide any template for thesis submission. They only emphasize that the submitted PDF file should meet the requirements in the [RPG Handbook](https://fytgs.hkust.edu.hk/academics/Academic-Regulations-and-Requirements/Handbook-for-Research-Postgraduate-Studies/guidelines-thesis-preparation).
 
-This template has tried its best to follow the above requirements in the RPG Handbook and also the formatting instructions of the sample pages ([MPhil](https://fytgs.hkust.edu.hk/sites/default/files/imce/thesis_sample_page_mphil.pdf)/[PhD](https://fytgs.hkust.edu.hk/sites/default/files/imce/thesis_sample_page_phd.pdf)) provided by the RPG Handbook. However, this template takes no responsibility for any potential inconsistency.
+This template has tried its best to follow the above requirements in the RPG Handbook and also the formatting instructions of the sample pages ([MPhil](https://fytgs.hkust.edu.hk/system/files/thesis_sample_page_mphil.pdf)/[PhD](https://fytgs.hkust.edu.hk/system/files/thesis_sample_page_phd.pdf)/[DBA](https://fytgs.hkust.edu.hk/system/files/thesis_sample_page_dba.pdf)) provided by the RPG Handbook. However, this template takes no responsibility for any potential inconsistency.
 
 ## License
 
