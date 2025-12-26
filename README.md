@@ -9,6 +9,8 @@
 
 HKUST Thesis template for RPG students implemented with LaTeX3.
 
+> Check its Typst counterpart: [hkust-thesis-typst](https://github.com/HKFoggyU/hkust-thesis-typst).
+
 ## Getting started
 
 **Please read the [PDF documentation](https://github.com/HKFoggyU/hkust-thesis/releases/latest/download/hkustthesis.pdf)** carefully before trial.<br/>

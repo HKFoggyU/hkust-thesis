@@ -9,6 +9,8 @@
 
 以LaTeX3实现的香港科技大学研究型研究生(RPG)毕业论文模板。
 
+> 查看它的 Typst 同款: [hkust-thesis-typst](https://github.com/HKFoggyU/hkust-thesis-typst).
+
 ## 快速上手
 
 **请仔细阅读 [PDF文档](https://github.com/HKFoggyU/hkust-thesis/releases/latest/download/hkustthesis.pdf)。**<br/>
